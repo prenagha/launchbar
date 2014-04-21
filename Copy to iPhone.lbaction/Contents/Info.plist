@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleIdentifier</key>
+	<string>com.renaghan.launchbar.CopyToIPhone</string>
+	<key>CFBundleName</key>
+	<string>Copy to iPhone</string>
+	<key>CFBundleVersion</key>
+	<string>1.0</string>
+	<key>CFBundleIconFile</key>
+	<string>it.danilotorrisi.command-c-osx</string>
+	<key>LBDebugLogEnabled</key>
+	<true/>
+	<key>LBRequiredApplication</key>
+	<string>it.danilotorrisi.command-c-osx</string>
+	<key>LBAssociatedApplication</key>
+	<string>it.danilotorrisi.command-c-osx</string>
+	<key>LBTextInputTitle</key>
+	<string>iPhone</string>
+	<key>LBScripts</key>
+	<dict>
+		<key>LBDefaultScript</key>
+		<dict>
+			<key>LBScriptName</key>
+			<string>default.js</string>
+			<key>LBRunInBackground</key>
+			<true/>
+			<key>LBRequiresArgument</key>
+			<false/>
+			<key>LBAcceptedArgumentTypes</key>
+			<array>
+			  <string>string</string>
+			  <string>path</string>
+			</array>
+			<key>LBReturnsResult</key>
+			<false/>
+		</dict>
+	</dict>
+	<key>LBDescription</key>
+	<dict>
+		<key>LBSummary</key>
+		<string>Copy selected text, clipboard, or file contents to iPhone via Command-C application.</string>
+		<key>LBRequirements</key>
+		<string>Command-C application running on this Mac as well as your iPhone. http://danilo.to/command-c</string>
+		<key>LBAuthor</key>
+		<string>Padraic Renaghan</string>
+		<key>LBEmail</key>
+		<string>prenagha@renaghan.com</string>
+		<key>LBWebsite</key>
+		<string>https://github.com/prenagha/launchbar</string>
+		<key>LBTwitter</key>
+		<string>@prenagha</string>
+		<key>LBArgument</key>
+		<string>Selected text in LaunchBar, Selected file in LaunchBar, Contents of Clipboard</string>
+	</dict>
+</dict>
+</plist>
