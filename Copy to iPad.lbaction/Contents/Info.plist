@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleIdentifier</key>
-	<string>com.renaghan.launchbar.CopyToIPhone</string>
+	<string>com.renaghan.launchbar.CopyToIPad</string>
 	<key>CFBundleName</key>
-	<string>Copy to iPhone</string>
+	<string>Copy to iPad</string>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
 	<key>CFBundleIconFile</key>
@@ -17,7 +17,7 @@
 	<key>LBAssociatedApplication</key>
 	<string>it.danilotorrisi.command-c-osx</string>
 	<key>LBTextInputTitle</key>
-	<string>iPhone</string>
+	<string>iPad</string>
 	<key>LBScripts</key>
 	<dict>
 		<key>LBDefaultScript</key>
@@ -39,9 +39,9 @@
 	<key>LBDescription</key>
 	<dict>
 		<key>LBSummary</key>
-		<string>Copy selected text or clipboard to iPhone via Command-C application.</string>
+		<string>Copy selected text or clipboard to iPad via Command-C application.</string>
 		<key>LBRequirements</key>
-		<string>Command-C application running on this Mac as well as your iPhone. http://danilo.to/command-c</string>
+		<string>Command-C application running on this Mac as well as your iPad. http://danilo.to/command-c</string>
 		<key>LBAuthor</key>
 		<string>Padraic Renaghan</string>
 		<key>LBEmail</key>
