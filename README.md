@@ -3,7 +3,7 @@
 Requires at least [LaunchBar](http://www.obdev.at/products/launchbar/index.html) [Version 6 Beta 5](http://www.obdev.at/products/launchbar-beta/)
 
 To install any of these actions
-* click the [Download ZIP](https://github.com/prenagha/launchbar/archive/master.zip) button on the Github page
+* click the [Download ZIP](https://github.com/prenagha/launchbar/archive/master.zip) button on [Github](https://github.com/prenagha/launchbar]
 * unzip the downloaded file
 * double-click the `.lbaction` file for the action that you want to install
 * LaunchBar will show you basic information about the action and ask you to confirm the installation
