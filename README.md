@@ -5,7 +5,7 @@ Requires at least [LaunchBar](http://www.obdev.at/products/launchbar/index.html)
 To install any of these actions
 * click the [Download ZIP](https://github.com/prenagha/launchbar/archive/master.zip) button on the Github page
 * unzip the downloaded file
-* double-click each lbaction file that you want to install
+* double-click each `.lbaction` file that you want to install
 * LaunchBar will show you basic information about the action and ask you to confirm the installation
 
 ## Copy to iPhone
