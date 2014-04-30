@@ -16,6 +16,14 @@ function runWithPaths(paths) {
   go(text);
 }
 
+function runWithItem(item) {
+  if (item && item.url && item.url.length > 0) {
+    go(item.url);
+  } else {
+    go(item.title);
+  }
+}
+
 function run() {
   go(LaunchBar.getClipboardString());
 }
