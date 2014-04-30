@@ -1,10 +1,8 @@
-LaunchBar Actions
-==================
+# LaunchBar Actions
 
 Requires at least LaunchBar Version 6 (currently in beta)
 
-Copy to iPhone
---------------
+## Copy to iPhone
 
 Action that uses the [Command-C](http://danilo.to/command-c) application to send either the text or files selected in LaunchBar or your system clipboard to your iPhone. Requires that you have [Command-C](http://danilo.to/command-c) installed on your Mac and your iPhone.
 
