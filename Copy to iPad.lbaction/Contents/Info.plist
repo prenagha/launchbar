@@ -7,11 +7,11 @@
 	<key>CFBundleName</key>
 	<string>Copy to iPad</string>
 	<key>CFBundleVersion</key>
-	<string>1.0</string>
+	<string>2.0</string>
 	<key>CFBundleIconFile</key>
 	<string>it.danilotorrisi.command-c-osx</string>
 	<key>LBDebugLogEnabled</key>
-	<true/>
+	<false/>
 	<key>LBRequiredApplication</key>
 	<string>it.danilotorrisi.command-c-osx</string>
 	<key>LBAssociatedApplication</key>
@@ -31,6 +31,7 @@
 			<key>LBAcceptedArgumentTypes</key>
 			<array>
 			  <string>string</string>
+			  <string>path</string>
 			</array>
 			<key>LBReturnsResult</key>
 			<false/>
@@ -39,7 +40,7 @@
 	<key>LBDescription</key>
 	<dict>
 		<key>LBSummary</key>
-		<string>Copy selected text or clipboard to iPad via Command-C application.</string>
+		<string>Copy selected text, file, or clipboard to iPad via Command-C application.</string>
 		<key>LBRequirements</key>
 		<string>Command-C application running on this Mac as well as your iPad. http://danilo.to/command-c</string>
 		<key>LBAuthor</key>
@@ -51,7 +52,7 @@
 		<key>LBTwitter</key>
 		<string>@prenagha</string>
 		<key>LBArgument</key>
-		<string>Selected text in LaunchBar or Contents of Clipboard</string>
+		<string>Selected text or file in LaunchBar or contents of system clipboard</string>
 	</dict>
 </dict>
 </plist>
