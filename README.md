@@ -27,12 +27,11 @@ Action that gets the Title and URL of the currently selected tab in Safari and r
 ## Ack
 
 Action that takes a text search pattern and uses [Ack](http://beyondgrep.com) to search code files for that pattern and return the results back to LaunchBar.
-
 Make sure you have Ack [installed](http://beyondgrep.com/install/index.html)
 
 Run the action once to generate the default preferences. Then adjust the action preferences in `~/Library/Application Support/LaunchBar/Action Support/com.renaghan.launchbar.Ack/Preferences.plist`
 
-For example, my action preferences files looks like this:
+For example, my action preferences file looks like:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -42,7 +41,9 @@ For example, my action preferences files looks like this:
 	<key>ack</key>
 	<string>/usr/local/bin/ack</string>
 	<key>args</key>
-	<string>--max-count=1 --smart-case --ignore-dir=bin --ignore-dir=lib --ignore-dir=test --ignore-dir=logs --ignore-dir=.idea --ignore-dir=.settings --type-add=xml:ext:xsd,wsdl --java --xml --jsp --css --html --js --shell</string>
+	<string>--max-count=1 --smart-case --ignore-dir=bin --ignore-dir=lib --ignore-dir=test 
+	--ignore-dir=logs --ignore-dir=.idea --ignore-dir=.settings --type-add=xml:ext:xsd,wsdl 
+	--java --xml --jsp --css --html --js --shell</string>
 	<key>dir</key>
 	<string>/Users/prenagha/Dev/proj1</string>
 </dict>
