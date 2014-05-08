@@ -24,7 +24,7 @@ Note: if you don't use 'iPad' as the device name for your iPad in [Command-C](ht
 
 Action that gets the Title and URL of the currently selected tab in Safari and returns it back to LaunchBar for further sendTo processing. Making it easy to send a link to the current Safari page via email for example, or by using the Copy to iPhone action.
 
-## Ack
+## Ack Code Search
 
 Action that takes a text search pattern and uses [Ack](http://beyondgrep.com) to search code files for that pattern and return the results back to LaunchBar.
 Make sure you have Ack [installed](http://beyondgrep.com/install/index.html)
