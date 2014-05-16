@@ -16,8 +16,7 @@ Note: if you don't use 'iPhone' as the device name for your phone in [Command-C]
 
 ![Phone Action](img/phone1.png)
 ![Phone Text](img/phone2.png)
-![Phone Notification](img/phone3.jpg)
-![Phone Result](img/phone4.jpg)
+![Phone Notification](img/phone3.png) ![Phone Result](img/phone4.png)
 
 ## Copy to iPad
 
