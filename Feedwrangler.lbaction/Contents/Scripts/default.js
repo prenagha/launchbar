@@ -18,6 +18,9 @@ function auth() {
     if (Action.preferences.clientKey == undefined) {
       Action.preferences.clientKey = '';
     }
+    if (Action.preferences.quick == undefined) {
+      Action.preferences.quick = 'view';
+    }
     if (Action.preferences.email == ''
     || Action.preferences.password == ''
     || Action.preferences.clientKey == '' ) {
@@ -88,7 +91,7 @@ function run() {
               ,'action':'markread', 'actionArgument':item.feed_item_id.toString()});
           }
           items.push({'title':item.title, 'subtitle':item.feed_name, 'url':item.url
-            ,'action':'view'
+            ,'action':'quick'
             ,'actionArgument':{'id' : item.feed_item_id.toString(), 'url': item.url}
             ,'icon':'FeedWrangler512c', 'children':children});
         }
@@ -109,8 +112,18 @@ function run() {
     }
 }
 
+function quick(arg) {
+  if ((Action.preferences.quick == 'readlater' && !LaunchBar.options.controlKey)
+      || LaunchBar.options.controlKey) {
+	  readlater(arg.id);
+	  remainActive();
+  } else {
+    view(arg);
+  }
+}
+
 function view(arg) {
-  markread(arg.id);
+  updateItem(id, "read=true");
   LaunchBar.openURL(arg.url);
 }
 
