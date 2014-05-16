@@ -15,9 +15,14 @@ function go(pattern) {
     var myArgs = [];
     // The Action.preferences object is persistent across runs of the action. 
     // ~/Library/Application Support/LaunchBar/Action Support/com.renaghan.launchbar.Ack/Preferences.plist
+    var dirs = [];
     if (Action.preferences.dir == undefined) {
       Action.preferences.dir = '/Users/' + LaunchBar.userName + '/Documents';
+      dirs.push(Action.preferences.dir);
+    } else {
+      dirs = Action.preferences.dir.split(' ');
     }
+    
     if (Action.preferences.args == undefined) {
       myArgs.push('--max-count=1');
       myArgs.push('--smart-case');
@@ -28,7 +33,9 @@ function go(pattern) {
     if (Action.preferences.ack == undefined) {
       Action.preferences.ack = '/usr/local/bin/ack';
     }
-
+    if (Action.preferences.output == undefined) {
+      Action.preferences.output = 'reverse';
+    }
     var args = [];
     args.push(Action.preferences.ack);
     args.push('--nobreak');
@@ -36,7 +43,7 @@ function go(pattern) {
     args.push('--sort-files');
     args = args.concat(myArgs);
     args.push(pattern);
-    args.push(Action.preferences.dir);
+    args = args.concat(dirs);
     LaunchBar.debugLog('Cmd=' + Action.preferences.ack + ' ' + args.join(' '));
     var ackOut = LaunchBar.execute.apply(LaunchBar, args);
     var matches = ackOut.split('\n');
@@ -59,7 +66,19 @@ function go(pattern) {
       var ls = b.lastIndexOf('/');
       if (ls > 0 && ls < fileName.length)
         b = fileName.substring(ls+1);
-      r.title = b;
+
+      var n = fileName;
+      for (var d=0; d<dirs.length; ++d) {
+        n = n.replace(dirs[d], '');
+      }
+      if (Action.preferences.output == 'reverse') {
+        n = n.split('/').reverse().join('/');
+        n = n.substr(0, n.length - 1);
+      } else {
+        n = n.substr(1);
+      }
+      r.title = n;
+
       r.path = fileName;
       r.subtitle = column + ': ' + hit.trim();
       result.push(r);

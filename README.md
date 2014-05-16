@@ -36,6 +36,8 @@ Action that takes a text search pattern and uses [Ack](http://beyondgrep.com) to
 Make sure you have Ack [installed](http://beyondgrep.com/install/index.html)
 
 Run the action once to generate the default preferences. Then adjust the action preferences in `~/Library/Application Support/LaunchBar/Action Support/com.renaghan.launchbar.Ack/Preferences.plist`
+Note that dir can be one directory or a space separated list of directories.
+I prefer filenames reversed in the output, disable that by setting the `output` key to `forward`.
 
 For example, my action preferences file looks like:
 
@@ -52,9 +54,15 @@ For example, my action preferences file looks like:
 	--java --xml --jsp --css --html --js --shell</string>
 	<key>dir</key>
 	<string>/Users/prenagha/Dev/proj1</string>
+	<key>output</key>
+	<string>reverse</string>
 </dict>
 </plist>
 ```
+
+![Ack Action](img/ack1.png)
+![Ack Query](img/ack2.png)
+![Ack Result](img/ack3.png)
 
 ## Read News FeedWrangler
 
