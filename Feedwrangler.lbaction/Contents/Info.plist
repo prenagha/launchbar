@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleIdentifier</key>
+	<string>com.renaghan.launchbar.FeedWrangler</string>
+	<key>CFBundleName</key>
+	<string>Read News</string>
+	<key>LBAbbreviation</key>
+	<string>rss atom feedwrangler read</string> 
+	<key>CFBundleVersion</key>
+	<string>1.0</string>
+	<key>CFBundleIconFile</key>
+  <string>FeedWrangler512</string>
+	<key>LBDebugLogEnabled</key>
+	<true/>
+	<key>LBScripts</key>
+	<dict>
+		<key>LBDefaultScript</key>
+		<dict>
+			<key>LBScriptName</key>
+			<string>default.js</string>
+			<key>LBRunInBackground</key>
+			<false/>
+			<key>LBRequiresArgument</key>
+			<false/>
+			<key>LBReturnsResult</key>
+			<true/>
+		</dict>
+	</dict>
+	<key>LBDescription</key>
+	<dict>
+		<key>LBSummary</key>
+		<string>LaunchBar action integration with FeedWrangler. Requires active FeedWrangler account. Update the action preferences in ~/Library/Application Support/LaunchBar/Action Support/com.renaghan.launchbar.FeedWrangler/Preferences.plist to set your FeedWrangler email, password, and client_key. Get a FeedWrangler client_key free from https://feedwrangler.net/developers/clients</string>
+		<key>LBRequirements</key>
+		<string>FeedWrangler Account http://feedwrangler.net</string>
+		<key>LBAuthor</key>
+		<string>Padraic Renaghan</string>
+		<key>LBEmail</key>
+		<string>prenagha@renaghan.com</string>
+		<key>LBWebsite</key>
+		<string>https://github.com/prenagha/launchbar</string>
+		<key>LBTwitter</key>
+		<string>@prenagha</string>
+	</dict>
+</dict>
+</plist>
