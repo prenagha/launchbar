@@ -56,6 +56,9 @@ For example, my action preferences file looks like:
 </plist>
 ```
 
+## Read News FeedWrangler
+
+Action that lets you easily read unread items from [FeedWrangler](http://feedwrangler.net) and either View, Star, Read Later, or Mark as Read. Additionally a "Mark All Read" function is available. Download and install the action. Then run the first time and it will inform you that you need to update the action preferences. Edit the preferences file `~/Library/Application Support/LaunchBar/Action Support/com.renaghan.launchbar.FeedWrangler/Preferences.plist` and set the email, password, and clientKey elements. (Get a FeedWrangler client key from [here](https://feedwrangler.net/developers/clients)).
 
 ## MailMate
 

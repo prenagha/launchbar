@@ -2,9 +2,10 @@
 var baseAPI = 'https://feedwrangler.net/api/v2/';
 
 function auth() {
-    if (Action.preferences.token != undefined) {
+    if (Action.preferences.token != undefined && Action.preferences.token.length > 5) {
       return Action.preferences.token;
     }
+    Action.preferences.token = '';
     
     // The Action.preferences object is persistent across runs of the action. 
     // ~/Library/Application Support/LaunchBar/Action Support/com.renaghan.launchbar.FeedWrangler/Preferences.plist
@@ -70,21 +71,31 @@ function run() {
           var children = [];
           children.push({'title':'View', 'subtitle':item.title, 'url':item.url
             ,'action':'view', 'actionArgument':item.feed_item_id.toString() + ' ' + item.url});
-          children.push({'title':'Read Later', 'subtitle':item.title, 'url':item.url
-            ,'icon':'SharingServices_com.apple.share.System.add-to-safari-reading-list'
-            ,'action':'readlater', 'actionArgument':item.feed_item_id.toString()});
-          children.push({'title':'Star', 'subtitle':item.title, 'url':item.url
-            ,'icon':'PhotoAlbumFlagged'
-            ,'action':'star', 'actionArgument':item.feed_item_id.toString()});
-          children.push({'title':'Mark Read', 'subtitle':item.title, 'url':item.url
-            ,'icon':'ReminderChecked'
-            ,'action':'markread', 'actionArgument':item.feed_item_id.toString()});
+          if (!item.read_later) {
+            children.push({'title':'Read Later', 'subtitle':item.title, 'url':item.url
+              ,'icon':'SharingServices_com.apple.share.System.add-to-safari-reading-list'
+              ,'action':'readlater', 'actionArgument':item.feed_item_id.toString()});
+          }
+          if (!item.starred) {
+            children.push({'title':'Star', 'subtitle':item.title, 'url':item.url
+              ,'icon':'PhotoAlbumFlagged'
+              ,'action':'star', 'actionArgument':item.feed_item_id.toString()});
+          }
+          if (!item.read) {
+            children.push({'title':'Mark Read', 'subtitle':item.title, 'url':item.url
+              ,'icon':'ReminderChecked'
+              ,'action':'markread', 'actionArgument':item.feed_item_id.toString()});
+          }
           items.push({'title':item.title, 'subtitle':item.feed_name, 'url':item.url
             ,'action':'view', 'actionArgument':item.feed_item_id.toString() + ' ' + item.url           
             ,'icon':'FeedWrangler512c', 'children':children});
         }
-        items.push({'title':'** Mark All Read **', 'icon':'ReminderChecked',
-          'action':'markallread', 'actionArgument': readThru.toString()});
+        if (items.length > 0) {
+          items.push({'title':'** Mark All Read **', 'icon':'ReminderChecked',
+            'action':'markallread', 'actionArgument': readThru.toString()});
+        } else {
+          LaunchBar.displayInLargeType({'string':'FeedWrangler has no unread items'});        
+        }
         return items;
       } else if (result && result.data && result.data.error) {
         LaunchBar.alert('Error getting news from FeedWrangler: ' + result.data.error);
@@ -114,7 +125,7 @@ function star(id) {
 
 function markread(id) {
   updateItem(id, "read=true");
-  remainActive()
+  remainActive();
 }
 
 function remainActive() {
@@ -129,12 +140,12 @@ function updateItem(id, what) {
       return;
     }
     var url = baseAPI + 'feed_items/update?access_token=' + encodeURIComponent(token)
-      + "&feed_item_id=" + encodeURIComponent(id) + "&" + what
+      + "&feed_item_id=" + encodeURIComponent(id) + "&" + what;
     LaunchBar.debugLog('update: ' + url);
     try {
       var result = HTTP.getJSON(url, 5.0);
       if (result && result.data && result.data.feed_item) {
-        return null;
+        return;
       } else if (result && result.data && result.data.error) {
         LaunchBar.alert('Error updating FeedWrangler: ' + result.data.error);
       } else {
@@ -146,5 +157,24 @@ function updateItem(id, what) {
 }
 
 function markallread(readThru) {
-  LaunchBar.alert('mark all read ' + readThru);
+    var token = auth();
+    if (!token) {
+      LaunchBar.alert('Missing token for all read');
+      return;
+    }
+    var url = baseAPI + 'feed_items/mark_all_read?access_token=' + encodeURIComponent(token)
+      + "&created_on_before=" + encodeURIComponent(readThru);
+    LaunchBar.debugLog('allRead: ' + url);
+    try {
+      var result = HTTP.getJSON(url, 5.0);
+      if (result && result.data && result.data.count) {
+        return null;
+      } else if (result && result.data && result.data.error) {
+        LaunchBar.alert('Error all read FeedWrangler: ' + result.data.error);
+      } else {
+        LaunchBar.alert('Error all read FeedWrangler. Unknown error.');
+      }
+    } catch (ex) {
+      LaunchBar.alert('Error all read FeedWrangler. Exception.', ex);
+    }
 }
