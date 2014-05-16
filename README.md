@@ -14,6 +14,11 @@ Action that uses the [Command-C](http://danilo.to/command-c) application to send
 
 Note: if you don't use 'iPhone' as the device name for your phone in [Command-C](http://danilo.to/command-c) then after running this action once go to `~/Library/Application Support/LaunchBar/Action Support/com.renaghan.launchbar.CopyToIPhone/Preferences.plist` and adjust the setting to match your preferred name
 
+![Phone Action](img/phone1.png)
+![Phone Text](img/phone2.png)
+![Phone Notification](img/phone3.jpg)
+![Phone Result](img/phone4.jpg)
+
 ## Copy to iPad
 
 Action that uses the [Command-C](http://danilo.to/command-c) application to send either the text or files selected in LaunchBar or your system clipboard to your iPad. Requires that you have [Command-C](http://danilo.to/command-c) installed on your Mac and your iPad.
@@ -69,6 +74,10 @@ For example, my action preferences file looks like:
 Action that lets you easily read unread items from [FeedWrangler](http://feedwrangler.net) and either View, Star, Read Later, or Mark as Read. Additionally a "Mark All Read" function is available. Download and install the action. Then run the first time and it will inform you that you need to update the action preferences. Edit the preferences file `~/Library/Application Support/LaunchBar/Action Support/com.renaghan.launchbar.FeedWrangler/Preferences.plist` and set the email, password, and clientKey elements. Get a FeedWrangler client key from [here](https://feedwrangler.net/developers/clients). Re-run the action, it will
 authorize with FeedWrangler getting an access token, then it will blank out your
 password in the preferences file.
+
+![FeedWrangler Action](img/rss1.png)
+![FeedWrangler Result](img/rss2.png)
+![FeedWrangler Item Submenu](img/rss3.png)
 
 ## MailMate
 

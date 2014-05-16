@@ -70,7 +70,8 @@ function run() {
           }
           var children = [];
           children.push({'title':'View', 'subtitle':item.title, 'url':item.url
-            ,'action':'view', 'actionArgument':item.feed_item_id.toString() + ' ' + item.url});
+            ,'action':'view'
+            ,'actionArgument':{'id' : item.feed_item_id.toString(), 'url': item.url}});
           if (!item.read_later) {
             children.push({'title':'Read Later', 'subtitle':item.title, 'url':item.url
               ,'icon':'SharingServices_com.apple.share.System.add-to-safari-reading-list'
@@ -87,7 +88,8 @@ function run() {
               ,'action':'markread', 'actionArgument':item.feed_item_id.toString()});
           }
           items.push({'title':item.title, 'subtitle':item.feed_name, 'url':item.url
-            ,'action':'view', 'actionArgument':item.feed_item_id.toString() + ' ' + item.url           
+            ,'action':'view'
+            ,'actionArgument':{'id' : item.feed_item_id.toString(), 'url': item.url}
             ,'icon':'FeedWrangler512c', 'children':children});
         }
         if (items.length > 0) {
@@ -108,9 +110,8 @@ function run() {
 }
 
 function view(arg) {
-  var parts = arg.split(" ");
-  markread(parts[0]);
-  LaunchBar.openURL(parts[1]);
+  markread(arg.id);
+  LaunchBar.openURL(arg.url);
 }
 
 function readlater(id) {
@@ -130,6 +131,7 @@ function markread(id) {
 
 function remainActive() {
   //If I uncomment and run this line then it causes LB to hang and I have to force quit
+  //For now using LBKeepWindowActive=true globally in Info.plist
   //LaunchBar.executeAppleScript('tell application "LaunchBar"' , 'remain active' ,'end tell');
 }
 
