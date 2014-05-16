@@ -95,4 +95,7 @@ password in the preferences file.
 
 Implementation of LaunchBar's mail API for MailMate application. Install by going to LaunchBar setting, Actions, Options, and point "Create emails with" to this script.
 
+![Mail Action](img/mail1.png)
+![Mail Text](img/mail2.png)
+![Mail Message](img/mail3.png)
 
