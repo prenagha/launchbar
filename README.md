@@ -14,9 +14,10 @@ Action that uses the [Command-C](http://danilo.to/command-c) application to send
 
 Note: if you don't use 'iPhone' as the device name for your phone in [Command-C](http://danilo.to/command-c) then after running this action once go to `~/Library/Application Support/LaunchBar/Action Support/com.renaghan.launchbar.CopyToIPhone/Preferences.plist` and adjust the setting to match your preferred name
 
-![Phone Action](img/phone1.png)
-![Phone Text](img/phone2.png)
-![Phone Notification](img/phone3.png) ![Phone Result](img/phone4.png)
+![iPhone Action](img/phone1.png)
+![iPhone Text](img/phone2.png)
+![iPhone Notification](img/phone3.png)
+![iPhone Result](img/phone4.png)
 
 ## Copy to iPad
 
@@ -24,15 +25,27 @@ Action that uses the [Command-C](http://danilo.to/command-c) application to send
 
 Note: if you don't use 'iPad' as the device name for your iPad in [Command-C](http://danilo.to/command-c) then after running this action once go to `~/Library/Application Support/LaunchBar/Action Support/com.renaghan.launchbar.CopyToIPad/Preferences.plist` and adjust the setting to match your preferred name
 
+![iPad Action](img/ipad1.png)
+![iPad Text](img/ipad2.png)
+![iPad Notification](img/ipad3.png)
+![iPad Result](img/ipad4.png)
+
 ## Share Safari Link
 
 Action that gets the Title and URL of the currently selected tab in Safari and returns it back to LaunchBar for further sendTo processing. Making it easy to send a link to the current Safari page via email for example, or by using the Copy to iPhone action.
+
+![Share Action](img/share1.png)
+![Share Result](img/share2.png)
 
 ## Timer
 
 Action that takes an input like "Turn off oven 15m" and creates a timer in 
 LaunchBar. After the delay time has passed LaunchBar will show you your reminder
 message in a large type window with an accompanying sound.
+
+![Timer Action](img/timer1.png)
+![Timer Text](img/timer2.png)
+![Timer Reminder](img/timer3.png)
 
 ## Ack Code Search
 
