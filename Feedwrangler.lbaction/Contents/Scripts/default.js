@@ -123,7 +123,7 @@ function quick(arg) {
 }
 
 function view(arg) {
-  updateItem(id, "read=true");
+  updateItem(arg.id, "read=true");
   LaunchBar.openURL(arg.url);
 }
 

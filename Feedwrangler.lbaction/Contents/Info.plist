@@ -14,14 +14,14 @@
   <string>FeedWrangler512</string>
 	<key>LBDebugLogEnabled</key>
 	<true/>
-	<key>LBKeepWindowActive</key>
-	<true/>
 	<key>LBScripts</key>
 	<dict>
 		<key>LBDefaultScript</key>
 		<dict>
 			<key>LBScriptName</key>
 			<string>default.js</string>
+      <key>LBKeepWindowActive</key>
+      <true/>
 			<key>LBRunInBackground</key>
 			<false/>
 			<key>LBRequiresArgument</key>
