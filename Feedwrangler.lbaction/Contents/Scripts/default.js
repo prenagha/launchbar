@@ -93,6 +93,7 @@ function run() {
           items.push({'title':item.title, 'subtitle':item.feed_name, 'url':item.url
             ,'action':'quick'
             ,'actionArgument':{'id' : item.feed_item_id.toString(), 'url': item.url}
+            //,'path':'/Users/foo/Desktop/t.webloc'
             ,'icon':'FeedWrangler512c', 'children':children});
         }
         if (items.length > 0) {
