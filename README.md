@@ -91,6 +91,10 @@ password in the preferences file.
 ![FeedWrangler Result](img/rss2.png)
 ![FeedWrangler Item Submenu](img/rss3.png)
 
+## Generate Password
+
+Action that generates a random 12 character password with at least one number and one special character and avoids numbers/letters that look similar to the eye.
+
 ## MailMate
 
 Implementation of LaunchBar's mail API for MailMate application. Install by going to LaunchBar setting, Actions, Options, and point "Create emails with" to this script.
