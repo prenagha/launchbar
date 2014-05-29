@@ -95,6 +95,8 @@ password in the preferences file.
 
 Action that generates a random 12 character password with at least one number and one special character and avoids numbers/letters that look similar to the eye.
 
+![Generate Password Action](img/pwd.png)
+
 ## MailMate
 
 Implementation of LaunchBar's mail API for MailMate application. Install by going to LaunchBar setting, Actions, Options, and point "Create emails with" to this script.
