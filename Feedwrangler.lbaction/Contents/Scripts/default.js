@@ -72,7 +72,7 @@ function run() {
             readThru = item.created_at;
           }
           var children = [];
-          children.push({'title':'View', 'subtitle':item.title, 'url':item.url
+          children.push({'title':'View', 'subtitle':item.title, 'url':item.url, 'quickLookURL':item.url
             ,'action':'view'
             ,'actionArgument':{'id' : item.feed_item_id.toString(), 'url': item.url}});
           if (!item.read_later) {
@@ -81,19 +81,18 @@ function run() {
               ,'action':'readlater', 'actionArgument':item.feed_item_id.toString()});
           }
           if (!item.starred) {
-            children.push({'title':'Star', 'subtitle':item.title, 'url':item.url
+            children.push({'title':'Star', 'subtitle':item.title, 'url':item.url, 'quickLookURL':item.url
               ,'icon':'PhotoAlbumFlagged'
               ,'action':'star', 'actionArgument':item.feed_item_id.toString()});
           }
           if (!item.read) {
-            children.push({'title':'Mark Read', 'subtitle':item.title, 'url':item.url
+            children.push({'title':'Mark Read', 'subtitle':item.title, 'url':item.url, 'quickLookURL':item.url
               ,'icon':'ReminderChecked'
               ,'action':'markread', 'actionArgument':item.feed_item_id.toString()});
           }
-          items.push({'title':item.title, 'subtitle':item.feed_name, 'url':item.url
+          items.push({'title':item.title, 'subtitle':item.feed_name, 'url':item.url, 'quickLookURL':item.url
             ,'action':'quick'
             ,'actionArgument':{'id' : item.feed_item_id.toString(), 'url': item.url}
-            //,'path':'/Users/foo/Desktop/t.webloc'
             ,'icon':'FeedWrangler512c', 'children':children});
         }
         if (items.length > 0) {

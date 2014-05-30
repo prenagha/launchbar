@@ -5,6 +5,6 @@ on run
 		set theURL to URL of front document
 		set theTitle to name of front document
 		set theLink to "➤" & theTitle & "⬅︎" & theURL as string
-		return [{title:theLink, subtitle:theURL, icon:"URL.icns", |url|:theURL}]
+		return [{title:theLink, subtitle:theURL, icon:"URL.icns", |url|:theURL, quickLookURL:theURL}]
 	end tell
 end run
