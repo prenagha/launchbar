@@ -8,7 +8,7 @@ on run
 	set nbrs to {"2", "3", "4", "5", "6", "7", "8", "9"}
 	set specs to {"@", "#", "$", "%", "!", ".", "[", "]", "{", "}", "=", "+", "-", "_"}
 	
-	repeat while not hasNbr or not hasSpec
+	repeat while not hasNbr or not hasSpec or not hasChar
 		set hasChar to false
 		set hasNbr to false
 		set hasSpec to false
