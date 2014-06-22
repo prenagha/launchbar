@@ -17,7 +17,7 @@ function go(pattern) {
     // ~/Library/Application Support/LaunchBar/Action Support/com.renaghan.launchbar.Ack/Preferences.plist
     var dirs = [];
     if (Action.preferences.dir == undefined) {
-      Action.preferences.dir = '/Users/' + LaunchBar.userName + '/Documents';
+      Action.preferences.dir = LaunchBar.homeDirectory + '/Documents';
       dirs.push(Action.preferences.dir);
     } else {
       dirs = Action.preferences.dir.split(' ');
