@@ -97,6 +97,15 @@ Action that generates a random 12 character password with at least one number an
 
 ![Generate Password Action](img/pwd.png)
 
+## Expand URL
+
+Action that takes a string URL as input and expands it by resolving all redirects and returning the final result URL back to LaunchBar. Useful for 
+resolving t.co and bit.ly ... type "short" URLs into real URLs.
+
+![Expand URL Action](img/exp1.png)
+![Expand URL Input](img/exp2.png)
+![Expand URL Result](img/exp3.png)
+
 ## MailMate
 
 Implementation of LaunchBar's mail API for MailMate application. Install by going to LaunchBar setting, Actions, Options, and point "Create emails with" to this script.
