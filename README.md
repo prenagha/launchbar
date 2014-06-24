@@ -106,6 +106,16 @@ resolving t.co and bit.ly ... type "short" URLs into real URLs.
 ![Expand URL Input](img/exp2.png)
 ![Expand URL Result](img/exp3.png)
 
+## Screenshot
+
+Capture a screenshot by initiating selection capture, save to ~/Downloads, 
+optimize using [ImageAlpha](http://pngmini.com) if present (saving original
+as well), and send resulting screenshot file back to LaunchBar so it can
+be used in further action chains.
+
+![Screenshot Action](img/scr1.png)
+![Screenshot Result](img/scr2.png)
+
 ## MailMate
 
 Implementation of LaunchBar's mail API for MailMate application. Install by going to LaunchBar setting, Actions, Options, and point "Create emails with" to this script.
