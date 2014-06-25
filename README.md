@@ -113,8 +113,13 @@ optimize using [ImageAlpha](http://pngmini.com) if present (saving original
 as well), and send resulting screenshot file back to LaunchBar so it can
 be used in further action chains.
 
-![Screenshot Action](img/scr1.png)
-![Screenshot Result](img/scr2.png)
+## Caffeinate
+
+Keep your system awake using built-in `/usr/bin/caffeinate`. Give the action a string argument in the form of "2h" or "45m" or simply "2" (default in hours) to set the caffeinate/awake duration. Type enter without an argument on the action to see current caffeinate status and the option to stop the current caffeintation.
+
+![Caffeinate Action](img/caf1.png)
+![Caffeinate Argument](img/caf2.png)
+![Caffeinate Status](img/caf3.png)
 
 ## MailMate
 

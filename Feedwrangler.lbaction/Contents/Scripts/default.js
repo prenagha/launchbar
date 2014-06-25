@@ -99,7 +99,7 @@ function run() {
           items.push({'title':'** Mark All Read **', 'icon':'ReminderChecked',
             'action':'markallread', 'actionArgument': readThru.toString()});
         } else {
-          LaunchBar.displayInLargeType({'string':'FeedWrangler has no unread items'});        
+          return [{'title':'No unread items', 'icon':'NotFound.icns'}];
         }
         return items;
       } else if (result && result.data && result.data.error) {
