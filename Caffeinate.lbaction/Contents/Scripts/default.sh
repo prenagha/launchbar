@@ -1,8 +1,9 @@
 #!/bin/bash
 STP="/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/AlertStopIcon.icns"
-CLK="/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/Clock.icns"
+CLK="Coffee.icns"
 
 # orig idea and some code from https://github.com/shawnrice/alfred-2-caffeinate-workflow
+# Coffee.icns from http://www.everaldo.com
 
 toSeconds() {
   arg=$1

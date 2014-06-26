@@ -48,7 +48,7 @@ on basename(thePath) -- Requires POSIX path
 end basename
 
 on sendFiles(_files, _emailAddresses)
-  dlog("in sendFiles " & _files)
+	dlog("in sendFiles")
 	try
 		set _mailto to "mailto:?send-now=no" & makeTo(_emailAddresses)
 		set _names to ""
@@ -58,6 +58,7 @@ on sendFiles(_files, _emailAddresses)
 			set _mailto to _mailto & "&attachment-url=file://" & urlencode(_filePath)
 		end repeat
 		set _mailto to _mailto & "&subject=File:" & urlencode(_names) & "&body=" & urlencode("File attached")
+		dlog("sendFiles " & _mailto)
 		tell application "MailMate" to open location _mailto with trust
 		tell application "MailMate" to activate
 	on error error_message number error_number
@@ -68,7 +69,7 @@ on sendFiles(_files, _emailAddresses)
 end sendFiles
 
 on sendText(txt, _emailAddresses)
-  dlog("in sendText")
+	dlog("in sendText")
 	try
 		if txt starts with "➤" then
 			set myName to text 2 thru ((offset of "⬅︎" in txt) - 1) of txt
@@ -76,14 +77,17 @@ on sendText(txt, _emailAddresses)
 			set mySubj to "Link: " & myName
 			set myBody to myName & return & myURL & return & return & "Enjoy," & return & "P"
 			set _mailto to "mailto:?send-now=yes&subject=" & urlencode(mySubj) & makeTo(_emailAddresses) & "&body=" & urlencode(myBody)
+			dlog("sendText link " & _mailto)
 			tell application "MailMate" to open location _mailto with trust
 		else
 			set _mailto to "mailto:?send-now=no&" & makeTo(_emailAddresses) & "&body=" & urlencode(txt)
+			dlog("sendText " & _mailto)
 			tell application "MailMate" to open location _mailto
+			tell application "MailMate" to activate
 		end if
 	on error error_message number error_number
-	  set msg to "LaunchBar.MailMate.sendText ERROR: " & error_message & " #" & error_number
-	  dlog(msg)
+		set msg to "LaunchBar.MailMate.sendText ERROR: " & error_message & " #" & error_number
+		dlog(msg)
 		display dialog msg
 	end try
 end sendText

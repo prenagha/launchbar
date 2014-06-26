@@ -9,7 +9,7 @@
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
 	<key>CFBundleIconFile</key>
-	<string>/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/Clock.icns</string>
+	<string>Coffee.icns</string>
 	<key>LBDebugLogEnabled</key>
 	<true/>
 	<key>LBTextInputTitle</key>
