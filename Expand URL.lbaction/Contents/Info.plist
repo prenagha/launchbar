@@ -11,7 +11,7 @@
 	<key>CFBundleIconFile</key>
 	<string>URL.icns</string>
 	<key>LBDebugLogEnabled</key>
-	<true/>
+	<false/>
 	<key>LBTextInputTitle</key>
 	<string>URL</string>
 	<key>LBScripts</key>
