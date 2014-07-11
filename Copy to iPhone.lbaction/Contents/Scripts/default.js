@@ -7,7 +7,7 @@ function runWithPaths(paths) {
   var text = "";
   for (var i in paths) {
     try {
-      text = text + File.readText(paths[i]);
+      text = text + File.readText(paths[i]) + " ";
     } catch (exception) {
       LaunchBar.log('Error reading file ' + paths[i] + ' -- ' + exception);
       LaunchBar.alert('Error copying to iPhone, cannot read file ' + paths[i], exception);
@@ -22,6 +22,10 @@ function runWithItem(item) {
   } else {
     go(item.title);
   }
+}
+
+function runWithURL(url, details) {
+  go(url);
 }
 
 function run() {

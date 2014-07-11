@@ -13,7 +13,7 @@
 	<key>CFBundleIconFile</key>
   <string>FeedWrangler512</string>
 	<key>LBDebugLogEnabled</key>
-	<true/>
+	<false/>
 	<key>LBMinimumLaunchBarVersion</key>
 	<integer>6101</integer>
 	<key>LBScripts</key>

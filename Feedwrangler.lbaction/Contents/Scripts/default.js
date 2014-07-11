@@ -31,7 +31,7 @@ function auth() {
     var url = baseAPI + 'users/authorize?email=' + encodeURIComponent(Action.preferences.email)
       + '&password=' + encodeURIComponent(Action.preferences.password)
       + '&client_key=' + encodeURIComponent(Action.preferences.clientKey);
-    //LaunchBar.debugLog('authorize: ' + url);
+    LaunchBar.debugLog('authorize: ' + url);
     try {
       var result = HTTP.getJSON(url, 5.0);
       if (result && result.data && result.data.access_token) {
@@ -67,11 +67,11 @@ function run() {
     }
 
     var url = baseAPI + 'feed_items/list?read=false&access_token=' + encodeURIComponent(token);
-    //LaunchBar.debugLog('list: ' + url);
+    LaunchBar.debugLog('list: ' + url);
     try {
       var result = HTTP.getJSON(url, 5.0);
       if (result && result.data && result.data.feed_items) {
-        //LaunchBar.debugLog('unread count: ' + result.data.count);
+        LaunchBar.debugLog('unread count: ' + result.data.count);
         var items = [];
         var readThru = 0;
         for (var i = 0; i < result.data.feed_items.length; i++) { 
@@ -180,7 +180,7 @@ function updateItem(item, what) {
     }
     var url = baseAPI + 'feed_items/update?access_token=' + encodeURIComponent(token)
       + "&feed_item_id=" + encodeURIComponent(item.feedId) + "&" + what;
-    //LaunchBar.debugLog('update: ' + url);
+    LaunchBar.debugLog('update: ' + url);
     try {
       var result = HTTP.getJSON(url, 5.0);
       if (result && result.data && result.data.feed_item) {
@@ -203,7 +203,7 @@ function markallread(item) {
     }
     var url = baseAPI + 'feed_items/mark_all_read?access_token=' + encodeURIComponent(token)
       + "&created_on_before=" + encodeURIComponent(item.readThru);
-    //LaunchBar.debugLog('allRead: ' + url);
+    LaunchBar.debugLog('allRead: ' + url);
     try {
       var result = HTTP.getJSON(url, 5.0);
       if (result && result.data && result.data.count) {
