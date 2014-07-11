@@ -19,7 +19,7 @@ function auth() {
       Action.preferences.clientKey = '';
     }
     if (Action.preferences.quick == undefined) {
-      Action.preferences.quick = 'view';
+      Action.preferences.quick = 'quicklook';
     }
     if (Action.preferences.email == ''
     || Action.preferences.password == ''
@@ -31,7 +31,7 @@ function auth() {
     var url = baseAPI + 'users/authorize?email=' + encodeURIComponent(Action.preferences.email)
       + '&password=' + encodeURIComponent(Action.preferences.password)
       + '&client_key=' + encodeURIComponent(Action.preferences.clientKey);
-    LaunchBar.debugLog('authorize: ' + url);
+    //LaunchBar.debugLog('authorize: ' + url);
     try {
       var result = HTTP.getJSON(url, 5.0);
       if (result && result.data && result.data.access_token) {
@@ -57,13 +57,21 @@ function run() {
       LaunchBar.alert('Please add/update the preferences file with your FeedWrangler email, password, and clientKey ' + pref);
       return [{'title':'Please Update Preferences', 'subtitle': pref, 'path':pref}];
     }
-  
+
+    var quick = 'quicklook';  
+    var quickBg = false;
+    if ((Action.preferences.quick == 'readlater' && !LaunchBar.options.controlKey)
+      || LaunchBar.options.controlKey) {
+	    quick = 'readlater';
+	    quickBg = true;
+    }
+
     var url = baseAPI + 'feed_items/list?read=false&access_token=' + encodeURIComponent(token);
-    LaunchBar.debugLog('list: ' + url);
+    //LaunchBar.debugLog('list: ' + url);
     try {
       var result = HTTP.getJSON(url, 5.0);
       if (result && result.data && result.data.feed_items) {
-        LaunchBar.debugLog('unread count: ' + result.data.count);
+        //LaunchBar.debugLog('unread count: ' + result.data.count);
         var items = [];
         var readThru = 0;
         for (var i = 0; i < result.data.feed_items.length; i++) { 
@@ -72,36 +80,66 @@ function run() {
             readThru = item.created_at;
           }
           var children = [];
-          children.push({'title':'View', 'subtitle':item.title, 'url':item.url, 'quickLookURL':item.url
+          children.push({'title':'Quick Look'
+            ,'subtitle':item.title
+            ,'url':item.url
+            ,'quickLookURL':item.url
+            ,'action':'quicklook'
+            ,'feedId':item.feed_item_id});
+          children.push({'title':'View'
+            ,'subtitle':item.title
+            ,'url':item.url
+            ,'quickLookURL':item.url
             ,'action':'view'
-            ,'actionArgument':{'id' : item.feed_item_id.toString(), 'url': item.url}});
+            ,'feedId':item.feed_item_id});
           if (!item.read_later) {
-            children.push({'title':'Read Later', 'subtitle':item.title, 'url':item.url
+            children.push({'title':'Read Later'
+              ,'subtitle':item.title
+              ,'url':item.url
               ,'icon':'SharingServices_com.apple.share.System.add-to-safari-reading-list'
-              ,'action':'readlater', 'actionArgument':item.feed_item_id.toString()});
+              ,'actionRunsInBackground':true
+              ,'action':'readlater'
+              ,'feedId':item.feed_item_id});
           }
           if (!item.starred) {
-            children.push({'title':'Star', 'subtitle':item.title, 'url':item.url, 'quickLookURL':item.url
+            children.push({'title':'Star'
+              ,'subtitle':item.title
+              ,'url':item.url
+              ,'quickLookURL':item.url
               ,'icon':'PhotoAlbumFlagged'
-              ,'action':'star', 'actionArgument':item.feed_item_id.toString()});
+              ,'actionRunsInBackground':true
+              ,'action':'star'
+              ,'feedId':item.feed_item_id});
           }
           if (!item.read) {
-            children.push({'title':'Mark Read', 'subtitle':item.title, 'url':item.url, 'quickLookURL':item.url
+            children.push({'title':'Mark Read'
+              ,'subtitle':item.title
+              ,'url':item.url
+              ,'quickLookURL':item.url
               ,'icon':'ReminderChecked'
-              ,'action':'markread', 'actionArgument':item.feed_item_id.toString()});
+              ,'actionRunsInBackground':true
+              ,'action':'markread'
+              ,'feedId':item.feed_item_id});
           }
-          items.push({'title':item.title, 'subtitle':item.feed_name, 'url':item.url, 'quickLookURL':item.url
-            ,'action':'quick'
-            ,'actionArgument':{'id' : item.feed_item_id.toString(), 'url': item.url}
-            ,'icon':'FeedWrangler512c', 'children':children});
+          items.push({'title':item.title
+            ,'subtitle':item.feed_name
+            ,'url':item.url
+            ,'quickLookURL':item.url
+            ,'actionRunsInBackground':quickBg
+            ,'action':quick
+            ,'feedId':item.feed_item_id
+            ,'icon':'FeedWrangler512c'
+            ,'children':children});
         }
         if (items.length > 0) {
-          items.push({'title':'** Mark All Read **', 'icon':'ReminderChecked',
-            'action':'markallread', 'actionArgument': readThru.toString()});
+          items.push({'title':'** Mark All Read **'
+            ,'icon':'ReminderChecked'
+            ,'action':'markallread'
+            ,'readThru':readThru});
+          return items;
         } else {
           return [{'title':'No unread items', 'icon':'NotFound.icns'}];
         }
-        return items;
       } else if (result && result.data && result.data.error) {
         LaunchBar.alert('Error getting news from FeedWrangler: ' + result.data.error);
       } else {
@@ -112,51 +150,37 @@ function run() {
     }
 }
 
-function quick(arg) {
-  if ((Action.preferences.quick == 'readlater' && !LaunchBar.options.controlKey)
-      || LaunchBar.options.controlKey) {
-	  readlater(arg.id);
-	  remainActive();
-  } else {
-    view(arg);
-  }
+function view(item) {
+  updateItem(item, "read=true");
+  LaunchBar.openURL(item.url);
 }
 
-function view(arg) {
-  updateItem(arg.id, "read=true");
-  LaunchBar.openURL(arg.url);
+function quicklook(item) {
+  updateItem(item, "read=true");
+  LaunchBar.openQuickLook(item.url);
 }
 
-function readlater(id) {
-  updateItem(id, "read=true&read_later=true");
-  remainActive()
+function readlater(item) {
+  updateItem(item, "read=true&read_later=true");
 }
 
-function star(id) {
-  updateItem(id, "read=true&starred=true");
-  remainActive()
+function star(item) {
+  updateItem(item, "read=true&starred=true");
 }
 
-function markread(id) {
-  updateItem(id, "read=true");
-  remainActive();
+function markread(item) {
+  updateItem(item, "read=true");
 }
 
-function remainActive() {
-  //If I uncomment and run this line then it causes LB to hang and I have to force quit
-  //For now using LBKeepWindowActive=true globally in Info.plist
-  //LaunchBar.executeAppleScript('tell application "LaunchBar"' , 'remain active' ,'end tell');
-}
-
-function updateItem(id, what) {
+function updateItem(item, what) {
     var token = auth();
     if (!token) {
       LaunchBar.alert('Missing token for update');
       return;
     }
     var url = baseAPI + 'feed_items/update?access_token=' + encodeURIComponent(token)
-      + "&feed_item_id=" + encodeURIComponent(id) + "&" + what;
-    LaunchBar.debugLog('update: ' + url);
+      + "&feed_item_id=" + encodeURIComponent(item.feedId) + "&" + what;
+    //LaunchBar.debugLog('update: ' + url);
     try {
       var result = HTTP.getJSON(url, 5.0);
       if (result && result.data && result.data.feed_item) {
@@ -171,19 +195,19 @@ function updateItem(id, what) {
     }
 }
 
-function markallread(readThru) {
+function markallread(item) {
     var token = auth();
     if (!token) {
       LaunchBar.alert('Missing token for all read');
       return;
     }
     var url = baseAPI + 'feed_items/mark_all_read?access_token=' + encodeURIComponent(token)
-      + "&created_on_before=" + encodeURIComponent(readThru);
-    LaunchBar.debugLog('allRead: ' + url);
+      + "&created_on_before=" + encodeURIComponent(item.readThru);
+    //LaunchBar.debugLog('allRead: ' + url);
     try {
       var result = HTTP.getJSON(url, 5.0);
       if (result && result.data && result.data.count) {
-        return null;
+        return;
       } else if (result && result.data && result.data.error) {
         LaunchBar.alert('Error all read FeedWrangler: ' + result.data.error);
       } else {
