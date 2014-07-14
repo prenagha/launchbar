@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleIdentifier</key>
+	<string>com.renaghan.launchbar.Forecast</string>
+	<key>CFBundleName</key>
+	<string>Forecast</string>
+	<key>CFBundleVersion</key>
+	<string>1.0</string>
+	<key>CFBundleIconFile</key>
+	<string>Sun-Low.png</string>
+	<key>LBDebugLogEnabled</key>
+	<true/>
+	<key>LBTextInputTitle</key>
+	<string>Location</string>
+	<key>LBScripts</key>
+	<dict>
+		<key>LBDefaultScript</key>
+		<dict>
+			<key>LBScriptName</key>
+			<string>default.js</string>
+			<key>LBRunInBackground</key>
+			<false/>
+			<key>LBRequiresArgument</key>
+			<false/>
+			<key>LBAcceptedArgumentTypes</key>
+			<array>
+			  <string>string</string>
+			</array>
+			<key>LBReturnsResult</key>
+			<true/>
+		</dict>
+	</dict>
+	<key>LBDescription</key>
+	<dict>
+		<key>LBSummary</key>
+		<string>Forecast the weather for a location using Forecast.io forecast data</string>
+		<key>LBRequirements</key>
+		<string>curl</string>
+		<key>LBAuthor</key>
+		<string>Padraic Renaghan</string>
+		<key>LBEmail</key>
+		<string>prenagha@renaghan.com</string>
+		<key>LBWebsite</key>
+		<string>https://github.com/prenagha/launchbar</string>
+		<key>LBTwitter</key>
+		<string>@prenagha</string>
+		<key>LBArgument</key>
+		<string>Location</string>
+	</dict>
+</dict>
+</plist>

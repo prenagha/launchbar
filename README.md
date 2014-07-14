@@ -121,6 +121,22 @@ Keep your system awake using built-in `/usr/bin/caffeinate`. Give the action a s
 ![Caffeinate Argument](img/caf2.png)
 ![Caffeinate Status](img/caf3.png)
 
+## Forecast
+
+
+Forecast Uses:
+
+* Forecast data from [forecast.io](http://forecast.io). Makers of the great
+[Dark Sky](http://darkskyapp.com) iOS application.
+
+* Images from [Climacons](http://adamwhitcroft.com/climacons/) 
+
+* SVG to PNG image conversion and color change with [ImageMagick](http://www.imagemagick.org)
+`mogrify -path ../PNG -transparent white -fill "#F2AF00" -opaque black -density 800 -format png *.svg`
+
+* [Pixelmator](http://www.pixelmator.com) to trim canvas of images of transparent background
+
+
 ## MailMate
 
 Implementation of LaunchBar's mail API for MailMate application. Install by going to LaunchBar setting, Actions, Options, and point "Create emails with" to this script.
