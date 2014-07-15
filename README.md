@@ -132,9 +132,6 @@ Thanks to:
 * Forecast data from [forecast.io](http://forecast.io). Makers of the great
 [Dark Sky](http://darkskyapp.com) iOS application.
 
-* Gets current location using [Location Helper](http://www.mousedown.net/mouseware/LocationHelper.html). Free on 
-Mac App Store
-
 * Images from [Climacons](http://adamwhitcroft.com/climacons/) 
 
 * SVG to PNG image conversion and color change with [ImageMagick](http://www.imagemagick.org)
@@ -142,10 +139,10 @@ Mac App Store
 
 * [Pixelmator](http://www.pixelmator.com) to trim canvas of image transparent background
 
-* [Location Help for Applescript](http://www.mousedown.net/mouseware/LocationHelper.html), free in
+* [Location Helper for Applescript](http://www.mousedown.net/mouseware/LocationHelper.html), free in
 Mac App Store, to find your current location
 
-* [moment.js](http://momentjs.com) and [moment-timezone.js](http://momentjs.com/timezone/) for timezone handling. NEVER try and do this yourself, you will NOT get it right
+* [moment.js](http://momentjs.com) and [moment-timezone.js](http://momentjs.com/timezone/) for timezone handling. __NEVER__ try and do this yourself, you will __NOT__ get it right
 
 * Forecast action idea originally from [hlissner](https://github.com/hlissner/lb6-actions/tree/master/actions/Forecast.lbaction)
 
