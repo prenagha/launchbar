@@ -1,7 +1,5 @@
 # LaunchBar Actions
 
-Requires at least [LaunchBar](http://www.obdev.at/products/launchbar/index.html) [Version 6 Beta 5](http://www.obdev.at/products/launchbar-beta/)
-
 To install any of these actions
 * click the [Download ZIP](https://github.com/prenagha/launchbar/archive/master.zip) button on [Github](https://github.com/prenagha/launchbar)
 * unzip the downloaded file
