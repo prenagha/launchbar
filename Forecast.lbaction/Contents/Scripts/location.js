@@ -30,11 +30,12 @@ function getLocations() {
     admin.push({'title':'Rename ' + loc.name
       ,'name':loc.name,'latitude':loc.latitude,'longitude':loc.longitude,'ico':loc.icon
       ,'icon':'Text.icns'
-      ,'actionRunsInBackground':false
+      ,'actionRunsInBackground':true
       ,'action':'actionRename'});
     admin.push({'title':'Change Icon'
       ,'name':loc.name,'latitude':loc.latitude,'longitude':loc.longitude,'ico':loc.icon
       ,'icon':'Text.icns'
+      ,'actionRunsInBackground':true
       ,'action':'actionIcon'});
     admin.push({'title':'Set Home Icon'
       ,'name':loc.name,'latitude':loc.latitude,'longitude':loc.longitude,'ico':loc.icon
@@ -119,7 +120,7 @@ function actionForecast(item) {
 
 function actionRename(item) {
   var n = LaunchBar.executeAppleScript(
-    'return text returned of (display dialog "Name:" default answer "' + item.name + '" giving up after 15)');
+    'return text returned of (display dialog "Name:" default answer "' + item.name + '" giving up after 15 with icon note)');
   if (n && n.length > 0) {
     var locs = readLocations();
     for (var i=0; i < locs.length; i++) {
@@ -135,7 +136,7 @@ function actionRename(item) {
 
 function actionIcon(item) {
   var ico = LaunchBar.executeAppleScript(
-    'return text returned of (display dialog "Icon:" default answer "' + item.icon + '" giving up after 15)');
+    'return text returned of (display dialog "Icon:" default answer "' + item.icon + '" giving up after 15 with icon note)');
   if (ico && ico.length > 0) {
     var locs = readLocations();
     for (var i=0; i < locs.length; i++) {

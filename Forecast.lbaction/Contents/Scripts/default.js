@@ -12,6 +12,11 @@ function runWithItem(item) {
   return locationSearch(item.title);
 }
 
+function runWithURL(url, details) {
+  if (details && details.queryParameters && details.queryParameters.q)
+    return locationSearch(details.queryParameters.q);
+}
+
 function run() {
   var items = [];
   var loc = selectedLoc();

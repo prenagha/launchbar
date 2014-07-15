@@ -11,7 +11,7 @@
 	<key>CFBundleIconFile</key>
 	<string>Sun-Low.png</string>
 	<key>LBAbbreviation</key>
-	<string>weather</string>
+	<string>weather temperature precipitation</string>
 	<key>LBDebugLogEnabled</key>
 	<true/>
 	<key>LBMinimumLaunchBarVersion</key>
@@ -23,6 +23,8 @@
 		<key>LBDefaultScript</key>
 		<dict>
 			<key>LBScriptName</key>
+			<string>default.js</string>
+			<key>LBActionURLScript</key>
 			<string>default.js</string>
 			<key>LBRunInBackground</key>
 			<false/>
