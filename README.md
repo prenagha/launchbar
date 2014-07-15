@@ -123,6 +123,9 @@ Keep your system awake using built-in `/usr/bin/caffeinate`. Give the action a s
 
 ## Forecast
 
+Custom action that displays weather forecast for a location using forecast data from [forecast.io](http://forecast.io)
+
+Still under development...
 
 Thanks to:
 
