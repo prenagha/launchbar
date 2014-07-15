@@ -10,8 +10,12 @@
 	<string>1.0</string>
 	<key>CFBundleIconFile</key>
 	<string>Sun-Low.png</string>
+	<key>LBAbbreviation</key>
+	<string>weather</string>
 	<key>LBDebugLogEnabled</key>
 	<true/>
+	<key>LBMinimumLaunchBarVersion</key>
+	<integer>6101</integer>
 	<key>LBTextInputTitle</key>
 	<string>Location</string>
 	<key>LBScripts</key>
