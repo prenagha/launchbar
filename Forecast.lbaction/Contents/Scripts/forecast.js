@@ -105,8 +105,10 @@ function forecast(loc) {
             break;
           var d = result.data.hourly.data[i];
           hourDetails.push({
-             'title':moment.unix(d.time).tz(result.data.timezone).format('h a') + ' ' + d.summary
-               + ' ' + getTemps(d.temperature,d.apparentTemperature)
+             'title':moment.unix(d.time).tz(result.data.timezone).format('h a') 
+             + (d.precipProbability>0?' ' + Math.round(d.precipProbability*100)+'%':'')
+             + ' ' + d.summary
+             + ' ' + getTemps(d.temperature,d.apparentTemperature)
             ,'icon':getIcon(d.icon)});
         }
       } else {
@@ -125,8 +127,8 @@ function forecast(loc) {
           var d = result.data.daily.data[i];
           week.push({
             'title':moment.unix(d.time).tz(result.data.timezone).format('ddd') + ' '
+              + d.summary.substring(0, d.summary.length-1) + ' '
               + getTemps(d.temperatureMax,d.apparentTemperatureMax) 
-              + ' ' + d.summary
             ,'icon':getIcon(d.icon)
             ,'url':furl
             ,'children':dayDetail(result.data.timezone,d)
@@ -166,7 +168,7 @@ function forecast(loc) {
       items.push({
          'title':name + ' ' + moment().tz(result.data.timezone).format('h:mm a')
         ,'icon':loc.icon
-        ,'url':furl
+        ,'url':url
       });
       items = items.concat(week);      
     }
