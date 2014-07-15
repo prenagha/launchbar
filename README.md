@@ -131,7 +131,7 @@ Custom action that displays weather forecast for a location using forecast data 
 * Magic, "Follow Me", location shows location for wherever you are
 * Custom name and icons for locations
 
-###Installation:
+__Installation:__
 
 * Signup for a free [forecast.io developer account](https://developer.forecast.io) and have your API ready
 
@@ -152,7 +152,7 @@ to find and use your current location
 ![Location List](img/f6.png)
 ![Location Admin](img/f7.png)
 
-#Thanks to:
+__Thanks to:__
 
 * Forecast data from [forecast.io](http://forecast.io). Makers of the great
 [Dark Sky](http://darkskyapp.com) iOS application.
