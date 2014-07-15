@@ -24,7 +24,7 @@ function getAPIKey() {
     LaunchBar.alert('Please add your forecast.io API Key to the preferences file. Press enter to open the forecast.io website');
     LaunchBar.openURL('https://developer.forecast.io');
     var key = LaunchBar.executeAppleScript(
-      'return text returned of (display dialog "API Key:" default answer "" giving up after 30)');
+      'return text returned of (display dialog "forecast.io API Key:" default answer "" giving up after 120 with icon note)');
     Action.preferences.apiKey = key && key != undefined ? key.trim() : '';
   }
   return Action.preferences.apiKey;

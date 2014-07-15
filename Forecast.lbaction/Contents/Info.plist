@@ -13,7 +13,7 @@
 	<key>LBAbbreviation</key>
 	<string>weather temperature precipitation</string>
 	<key>LBDebugLogEnabled</key>
-	<true/>
+	<false/>
 	<key>LBMinimumLaunchBarVersion</key>
 	<integer>6101</integer>
 	<key>LBTextInputTitle</key>

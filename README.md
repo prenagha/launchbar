@@ -124,10 +124,35 @@ Keep your system awake using built-in `/usr/bin/caffeinate`. Give the action a s
 ## Forecast
 
 Custom action that displays weather forecast for a location using forecast data from [forecast.io](http://forecast.io)
+* Weather warnings/watches alerts
+* Now, Next Hour, Today, and Week forecasts
+* Sunrise, Sunset, High, Low, Wind, Precipitation
+* Manage multiple locations
+* Magic, "Follow Me", location shows location for wherever you are
+* Custom name and icons for locations
 
-Still under development...
+###Installation:
 
-Thanks to:
+# Signup for a free [forecast.io developer account](https://developer.forecast.io) and have your API ready
+
+# Install free [Location Helper for Applescript](http://www.mousedown.net/mouseware/LocationHelper.html) app from
+Mac App Store
+
+# Install the action by double clicking on the `Forecast.lbaction` file
+
+# Run the action by typing `Forecast` in LaunchBar, then hit space to
+enter a location search query, or hit enter and follow the Locations item
+to find and use your current location
+
+![Forecast Action](img/f1.png)
+![Location Query](img/f2.png)
+![Location Query](img/f3.png)
+![Location Query Result](img/f4.png)
+![Location Forecast](img/f5.png)
+![Location List](img/f6.png)
+![Location Admin](img/f7.png)
+
+###Thanks to:
 
 * Forecast data from [forecast.io](http://forecast.io). Makers of the great
 [Dark Sky](http://darkskyapp.com) iOS application.

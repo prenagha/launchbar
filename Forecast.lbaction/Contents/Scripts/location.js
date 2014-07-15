@@ -7,6 +7,7 @@ var FOLLOW_ICON = '/System/Library/CoreServices/CoreTypes.bundle/Contents/Resour
 var FOLLOW_NAME = 'Follow-Me';
 var FOLLOW_SUB = 'Dynamic location that follows your current whereabouts';
 var PLANE_ICON = 'airplane.png';
+var LOC_APP = '/Applications/Location Helper.app';
 
 function getLocations() {
   var kids = [];
@@ -59,7 +60,7 @@ function getLocations() {
       ,'children':admin});
   }  
   
-  if (File.exists('/Applications/Location Helper.app')) {
+  if (File.exists(LOC_APP)) {
     if (!followMe) {
       kids.push({'title':'Add Follow-Me Current Location'
         ,'subtitle':FOLLOW_SUB
@@ -199,10 +200,6 @@ function locationAdd(name, latitude, longitude, icon) {
   writeLocations(locs);
 }
 
-function locationSearch(query) {
-// search for a location, return results, enter calls location add
-}
-
 function readLocations() {
   // locations file is a json Array, of object containing name,latitude,longitude
   if (File.exists(LOC_FILE)) {
@@ -240,7 +237,7 @@ function writeLocations(locations) {
 }
 
 function getCurrentLocation() {
-  if (File.exists('/Applications/Location Helper.app')) {
+  if (File.exists(LOC_APP)) {
     try {
       var rslt = LaunchBar.execute('/usr/bin/osascript', 'current.applescript');
       // return object containing latitude and longitude properties
