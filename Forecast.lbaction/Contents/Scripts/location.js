@@ -17,7 +17,12 @@ function getLocations() {
     var admin = [];
     if (loc.latitude == FOLLOW_NBR)
       followMe = true;
-    admin.push({'title':'Select ' + loc.name
+    admin.push({'title':'Forecast'
+      ,'name':loc.name,'latitude':loc.latitude,'longitude':loc.longitude,'ico':loc.icon
+      ,'icon':'Sun-Low.png'
+      ,'actionReturnsItems':true
+      ,'action':'actionForecast'});
+    admin.push({'title':'Set as Default Location'
       ,'name':loc.name,'latitude':loc.latitude,'longitude':loc.longitude,'ico':loc.icon
       ,'icon':loc.icon
       ,'actionRunsInBackground':true
@@ -106,6 +111,10 @@ function selectedLoc() {
 
 function actionSelect(item) {
   locationAdd(item.name, item.latitude, item.longitude, item.ico);
+}
+
+function actionForecast(item) {
+  return forecast({'name':item.name, 'latitude':item.latitude, 'longitude':item.longitude, 'icon':item.ico});
 }
 
 function actionRename(item) {

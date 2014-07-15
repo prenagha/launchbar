@@ -1,4 +1,5 @@
 
+var ALERT_ICON = '/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/AlertStopIcon.icns';
 var imap = {};
 imap['clear-day'] = 'Sun.png';
 imap['clear-night'] = 'Moon.png';
@@ -32,8 +33,7 @@ function getAPIKey() {
 function getIcon(i) {
   var icon = imap[i];
   if (!icon || icon == undefined || icon.length == 0) {
-    LaunchBar.log('Need icon map for ' + i);
-    LaunchBar.alert('Need icon map for ' + i);
+    LaunchBar.log('Need weather icon map for ' + i);
     return 'NotFound.icns';
   }
   return icon;
@@ -79,14 +79,19 @@ function forecast(loc) {
     var url = 'https://api.forecast.io/forecast/' + apiKey + '/' + latitude + ',' + longitude;
     var furl = 'https://forecast.io/' + latitude + ',' + longitude;
     var result = HTTP.getJSON(url, 5.0);
-    if (result && result.data ) {
+    if (result && result.data && result.data.error)
+      items.push({'title':'Forecast Error: ' + result.data.error
+        ,'subtitle':url
+        ,'icon':ALERT_ICON
+        ,'url':url});
+    if (result && result.data && result.data.timezone ) {
       if (result.data.alerts) {
         for (var i = 0; i < result.data.alerts.length; i++) {
           var a = result.data.alerts[i];
           items.push({
              'title':a.title
             ,'subtitle': 'expires ' + moment.unix(a.expires).tz(result.data.timezone).format('h:mm a')
-            ,'icon':'/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/AlertStopIcon.icns'
+            ,'icon':ALERT_ICON
             ,'url':a.uri
             ,'text':a.description
           });
@@ -109,9 +114,13 @@ function forecast(loc) {
       }
 
       var todayDetails = [];
+      var todaySummary = '';
       var week = [];
       if (result.data.daily) {
-        todayDetails = dayDetail(result.data.timezone,result.data.daily.data[0]);
+        var t = result.data.daily.data[0];
+        todayDetails = dayDetail(result.data.timezone,t);
+        todaySummary = ', ' + t.summary.substring(0, t.summary.length-1)
+          + ' ' + getTemps(t.temperatureMax,t.apparentTemperatureMax) ;
         for (var i=1; i < result.data.daily.data.length; i++) {
           var d = result.data.daily.data[i];
           week.push({
@@ -142,14 +151,14 @@ function forecast(loc) {
       }
       if (result.data.minutely) {
         var minutely = result.data.minutely;
-        nowTitle = minutely.summary;
+        nowTitle = minutely.summary.substring(0, minutely.summary.length-1);
         nowIcon = minutely.icon;
       } else {
         LaunchBar.log('Next hour forecast not available');
       }
       var nowDetails = todayDetails.concat(hourDetails);
       items.push({
-         'title':nowTitle + ' ' + nowTemp
+         'title':nowTitle + ' ' + nowTemp + todaySummary
         ,'icon':getIcon(nowIcon)
         ,'url':furl
         ,'children':nowDetails
@@ -159,11 +168,12 @@ function forecast(loc) {
         ,'icon':loc.icon
         ,'url':furl
       });
-      items = items.concat(week);
-      
-      if (Action.debugLogEnabled) {
-        items.push({'title':'forecast.io API call','url':url,'icon':'forecastio.png'});
-      }
+      items = items.concat(week);      
+    }
+    if (items.length == 0)
+      items.push({'title':'Forecast not available','icon':'NotFound.icns','url':url});
+    if (Action.debugLogEnabled) {
+      items.push({'title':'forecast.io API call','url':url,'icon':'forecastio.png'});
     }
     return items;
   } catch (exception) {
