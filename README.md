@@ -131,7 +131,7 @@ Custom action that displays weather forecast for a location using forecast data 
 * Magic, "Follow Me", location shows location for wherever you are
 * Custom name and icons for locations
 
-#Installation:
+###Installation:
 
 * Signup for a free [forecast.io developer account](https://developer.forecast.io) and have your API ready
 
