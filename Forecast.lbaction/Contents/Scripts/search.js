@@ -24,8 +24,9 @@ function getNameForGeo(latitude, longitude) {
 }
 
 function locationSearch(query) {
-  var url = 'http://nominatim.openstreetmap.org/search?format=json&addressdetails=1&limit=25&countrycodes=us&q='
-    + encodeURIComponent(query);
+  var url = 'http://nominatim.openstreetmap.org/search?format=json&addressdetails=1&limit=50'
+   + '&countrycodes=' + encodeURIComponent(Action.preferences.country)
+   + '&q=' + encodeURIComponent(query);
   try {
     var items = [];
     var result = HTTP.getJSON(url, 5.0);
@@ -47,14 +48,15 @@ function locationSearch(query) {
         });
       }
     }
-    if (Action.debugLogEnabled) {
-      items.push({'title':'Search API call','url':url});
-    }
   } catch (exception) {
     LaunchBar.log('Error locationSearch ' + exception);
     LaunchBar.alert('Error locationSearch', exception);
   }
-  if (items.length == 0)
-    return {'title':'No location matches found','icon':'NotFound.icns'};
+  if (items.length == 0) {
+    items.push({'title':'No location matches found','icon':'NotFound.icns'});
+  }
+  if (Action.debugLogEnabled) {
+    items.push({'title':'Search API call','url':url});
+  }
   return items;
 }

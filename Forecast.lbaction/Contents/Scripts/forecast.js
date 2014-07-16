@@ -15,13 +15,18 @@ imap['hail'] = 'Cloud-Hail.png';
 imap['thunderstorm'] = 'Umbrella.png';
 imap['tornado'] = 'Tornado.png';
 
+var wmap = {};
+wmap['us'] = 'mph';
+wmap['si'] = 'm/s';
+wmap['ca'] = 'km/h';
+wmap['uk'] = 'mph';
+
 function getAPIKey() {
   if (Action.preferences.apiKey == undefined) {
     Action.preferences.apiKey = '';
   }
   if (Action.preferences.apiKey.length == 0) {
-    var pref = Action.supportPath + '/Preferences.plist';
-    LaunchBar.alert('Please add your forecast.io API Key to the preferences file. Press enter to open the forecast.io website');
+    LaunchBar.alert('addKey'.localize());
     LaunchBar.openURL('https://developer.forecast.io');
     var key = LaunchBar.executeAppleScript(
       'return text returned of (display dialog "forecast.io API Key:" default answer "" giving up after 120 with icon note)');
@@ -76,7 +81,10 @@ function forecast(loc) {
     if (apiKey.length == 0)
       return;
 
-    var url = 'https://api.forecast.io/forecast/' + apiKey + '/' + latitude + ',' + longitude;
+    var url = 'https://api.forecast.io/forecast/' + apiKey + '/' + latitude + ',' + longitude
+      + '?units=' + Action.preferences.units
+      + '&lang=' + Action.preferences.lang;
+      
     var furl = 'https://forecast.io/' + latitude + ',' + longitude;
     var result = HTTP.getJSON(url, 5.0);
     if (result && result.data && result.data.error)
@@ -84,6 +92,10 @@ function forecast(loc) {
         ,'subtitle':url
         ,'icon':ALERT_ICON
         ,'url':url});
+    var units = '';
+    if (result && result.data && result.data.flags && result.data.flags.units)
+      units = result.data.flags.units;
+      
     if (result && result.data && result.data.timezone ) {
       if (result.data.alerts) {
         for (var i = 0; i < result.data.alerts.length; i++) {
@@ -120,7 +132,7 @@ function forecast(loc) {
       var week = [];
       if (result.data.daily) {
         var t = result.data.daily.data[0];
-        todayDetails = dayDetail(result.data.timezone,t);
+        todayDetails = dayDetail(result.data.timezone,units,t);
         todaySummary = ', ' + t.summary.substring(0, t.summary.length-1)
           + ' ' + getTemps(t.temperatureMax,t.apparentTemperatureMax) ;
         for (var i=1; i < result.data.daily.data.length; i++) {
@@ -131,7 +143,7 @@ function forecast(loc) {
               + getTemps(d.temperatureMax,d.apparentTemperatureMax) 
             ,'icon':getIcon(d.icon)
             ,'url':furl
-            ,'children':dayDetail(result.data.timezone,d)
+            ,'children':dayDetail(result.data.timezone,units,d)
           });
         }        
       } else {
@@ -184,7 +196,7 @@ function forecast(loc) {
   }
 }
 
-function dayDetail(tz, d) {
+function dayDetail(tz, units, d) {
   var details = [];
   details.push({'title': 'Low ' + getTemps(d.temperatureMin,d.apparentTemperatureMin) 
      + ' at ' + moment.unix(d.temperatureMinTime).tz(tz).format('h a')
@@ -196,8 +208,9 @@ function dayDetail(tz, d) {
         + getPrecipLevel(d.precipIntensityMax) + ' ' + d.precipType
       ,'icon':getIcon(d.precipType)});
   }
-  if (d.windSpeed > 5) {
-    details.push({'title':'Wind ' + Math.round(d.windSpeed) + ' mph','icon':'Wind.png'});
+  if (d.windSpeed > 0) {
+    details.push({'title':'Wind ' + Math.round(d.windSpeed) + ' ' + wmap[units]
+      ,'icon':'Wind.png'});
   }
   details.push({'title': 'High ' + getTemps(d.temperatureMax,d.apparentTemperatureMax) 
      + ' at ' + moment.unix(d.temperatureMaxTime).tz(tz).format('h a')

@@ -128,6 +128,9 @@ Custom action that displays weather forecast for a location using forecast data 
 * Manage multiple locations
 * Magic, "Follow Me", location shows location for wherever you are
 * Custom name and icons for locations
+* Support for US and metric units, °F and °C
+* Support for country based location search
+* Limited non-English language support currently, but if anyone is interested in translating fully into a Forecast language (German, French, Spanish, Dutch, Tetum) let me know and I will localize if you can provide the translation
 
 __Installation:__
 
@@ -141,6 +144,14 @@ Mac App Store
 * Run the action by typing `Forecast` in LaunchBar, then hit space to
 enter a location search query, or hit enter and follow the Locations item
 to find and use your current location
+
+* Navigate to Locations -- Settings within the action to set
+
+** Forecast Units
+** Forecast Language
+** Location Search Country
+
+
 
 ![Forecast Action](img/f1.png)
 ![Location Query](img/f2.png)
@@ -166,6 +177,8 @@ __Thanks to:__
 Mac App Store, to find your current location
 
 * [moment.js](http://momentjs.com) and [moment-timezone.js](http://momentjs.com/timezone/) for timezone handling. __NEVER__ try and do this yourself, you will __NOT__ get it right
+
+* [Rounded World Flag Icons](http://kampongboy92.deviantart.com) from kampongboy92
 
 * Forecast action idea originally from [hlissner](https://github.com/hlissner/lb6-actions/tree/master/actions/Forecast.lbaction)
 
