@@ -166,6 +166,20 @@ function actionSettings() {
     ,'icon':'com.apple.systempreferences','action':'actionDebug'});
 
   items = items.concat(checkVersion());
+
+  var body = 'Forecast version: ' + Action.version 
+    + '\nLaunchBar version: ' + LaunchBar.shortVersion + ' (' + LaunchBar.version + ')' 
+    + '\nLocale: ' + LaunchBar.currentLocale
+    + '\nUnits: ' + Action.preferences.units
+    + '\nLanguage: ' + Action.preferences.lang
+    + '\nCountry: ' + Action.preferences.country
+    + '\n\n...\n';
+    
+  items.push({'title':'Send Forecast Feedback'
+    ,'subtitle':'Comments, Suggestions, Bug Reports always welcome'
+    ,'icon':'com.apple.Mail',
+    'url':'mailto:prenagha@renaghan.com?subject=Forecast%20Feedback&body=' 
+    + encodeURIComponent(body)});
   
   if (isDebug()) {
     items.push({'title':'Edit preferences file'.localize()

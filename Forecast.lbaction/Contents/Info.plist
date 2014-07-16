@@ -7,7 +7,7 @@
 	<key>CFBundleName</key>
 	<string>Forecast</string>
 	<key>CFBundleVersion</key>
-	<string>2.3</string>
+	<string>2.4</string>
 	<key>CFBundleIconFile</key>
 	<string>Sun-Low.png</string>
 	<key>LBAbbreviation</key>
