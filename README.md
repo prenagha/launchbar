@@ -128,9 +128,9 @@ Custom action that displays weather forecast for a location using forecast data 
 * Manage multiple locations
 * Magic, "Follow Me", location shows location for wherever you are
 * Custom name and icons for locations
-* Support for US and metric units, °F and °C
-* Support for country based location search
-* Limited non-English language support currently, but if anyone is interested in translating fully into a Forecast language (German, French, Spanish, Dutch, Tetum) let me know and I will localize if you can provide the translation
+* Support for [US, metric, Canada, and UK](https://developer.forecast.io/docs/v2) units, °F and °C
+* Support for [ISO](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country based location search
+* Limited non-English language support currently, but if anyone is interested in translating fully into a [Forecast language (German, French, Spanish, Dutch, Tetum)](https://developer.forecast.io/docs/v2) let me know and I will localize if you can provide the translation
 
 __Installation:__
 
@@ -160,6 +160,7 @@ to find and use your current location
 ![Location Forecast](img/f5.png)
 ![Location List](img/f6.png)
 ![Location Admin](img/f7.png)
+![Settings Admin](img/f8.png)
 
 __Thanks to:__
 
