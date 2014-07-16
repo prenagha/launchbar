@@ -142,9 +142,9 @@ Mac App Store
 enter a location search query, or hit enter and follow the Locations item
 to find and use your current location
 * Navigate to Locations -- Settings within the action to set
-* * Forecast Units
-* * Forecast Language
-* * Location Search Country
+  * Forecast Units
+  * Forecast Language
+  * Location Search Country
 
 
 ![Forecast Action](img/f1.png)
@@ -160,21 +160,14 @@ __Thanks to:__
 
 * Forecast data from [forecast.io](http://forecast.io). Makers of the great
 [Dark Sky](http://darkskyapp.com) iOS application.
-
 * Images from [Climacons](http://adamwhitcroft.com/climacons/) 
-
 * SVG to PNG image conversion and color change with [ImageMagick](http://www.imagemagick.org)
 `mogrify -path ../PNG -transparent white -fill "#F2AF00" -opaque black -density 800 -format png *.svg`
-
 * [Pixelmator](http://www.pixelmator.com) to trim canvas of image transparent background
-
 * [Location Helper for Applescript](http://www.mousedown.net/mouseware/LocationHelper.html), free in
 Mac App Store, to find your current location
-
 * [moment.js](http://momentjs.com) and [moment-timezone.js](http://momentjs.com/timezone/) for timezone handling. __NEVER__ try and do this yourself, you will __NOT__ get it right
-
 * [Rounded World Flag Icons](http://kampongboy92.deviantart.com) from kampongboy92
-
 * Forecast action idea originally from [hlissner](https://github.com/hlissner/lb6-actions/tree/master/actions/Forecast.lbaction)
 
 
