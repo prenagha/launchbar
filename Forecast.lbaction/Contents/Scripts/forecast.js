@@ -86,7 +86,7 @@ function forecast(loc) {
       + '&lang=' + Action.preferences.lang;
       
     var furl = 'https://forecast.io/' + latitude + ',' + longitude;
-    var result = HTTP.getJSON(url, 5.0);
+    var result = HTTP.getJSON(url, TIMEOUT);
     if (result && result.data && result.data.error)
       items.push({'title':'Forecast Error: ' + result.data.error
         ,'subtitle':url

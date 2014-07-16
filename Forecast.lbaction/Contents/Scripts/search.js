@@ -3,7 +3,7 @@ function getNameForGeo(latitude, longitude) {
   var url = 'https://nominatim.openstreetmap.org/reverse?format=json&zoom=12&addressdetails=1&lat='
     + latitude + '&lon=' + longitude;
   try {
-    var result = HTTP.getJSON(url, 5.0);
+    var result = HTTP.getJSON(url, TIMEOUT);
     if (result && result.data && result.data.address ) {
       if (result.data.address.village)
         return result.data.address.village + ', ' + result.data.address.state;
@@ -29,7 +29,7 @@ function locationSearch(query) {
    + '&q=' + encodeURIComponent(query);
   try {
     var items = [];
-    var result = HTTP.getJSON(url, 5.0);
+    var result = HTTP.getJSON(url, TIMEOUT);
     if (result && result.data) {
       for (var i = 0; i < result.data.length; i++) {
         var r = result.data[i];
