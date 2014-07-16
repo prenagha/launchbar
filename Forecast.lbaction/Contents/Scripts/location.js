@@ -73,10 +73,18 @@ function getLocations() {
     if (curr == null) {
       kids.push({'title':'Current Location not available','icon':'NotFound.icns'});
     } else {
+      var f = [];
+      f.push({'title':'Forecast'
+        ,'name':curr.name,'latitude':curr.latitude,'longitude':curr.longitude,'ico':curr.icon
+        ,'icon':'Sun-Low.png'
+        ,'actionReturnsItems':true
+        ,'action':'actionForecast'});
+
       kids.push({'title':'Add ' + curr.name + ' Location'
         ,'name':curr.name,'latitude':curr.latitude,'longitude':curr.longitude,'ico':curr.icon
         ,'icon':DEFAULT_ICON
         ,'actionRunsInBackground':true
+        ,'children':f
         ,'action':'actionSelect'});
     }
   } else {
