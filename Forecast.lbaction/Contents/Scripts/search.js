@@ -55,7 +55,7 @@ function locationSearch(query) {
   if (items.length == 0) {
     items.push({'title':'No location matches found','icon':'NotFound.icns'});
   }
-  if (Action.debugLogEnabled) {
+  if (isDebug()) {
     items.push({'title':'Search API call','url':url});
   }
   return items;

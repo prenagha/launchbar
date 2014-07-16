@@ -186,7 +186,7 @@ function forecast(loc) {
     }
     if (items.length == 0)
       items.push({'title':'Forecast not available','icon':'NotFound.icns','url':url});
-    if (Action.debugLogEnabled) {
+    if (isDebug()) {
       items.push({'title':'forecast.io API call','url':url,'icon':'forecastio.png'});
     }
     return items;

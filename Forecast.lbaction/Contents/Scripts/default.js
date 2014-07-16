@@ -7,6 +7,16 @@ include('settings.js');
 include('moment.js');
 include('moment-timezone.js');
 
+function isDebug() {
+  return Action.preferences.debug || Action.debugLogEnabled;
+}
+
+function debugLog(l) {
+  if (isDebug())
+    LaunchBar.log(l);
+}
+
+
 function runWithString(string) {
   return locationSearch(string);
 }

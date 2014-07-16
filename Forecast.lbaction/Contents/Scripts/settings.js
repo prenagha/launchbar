@@ -23,6 +23,10 @@ if (Action.preferences.country == undefined) {
   Action.preferences.country = 'US';
 }
 
+if (Action.preferences.debug == undefined) {
+  Action.preferences.debug = false;
+}
+
 function getSettings() {
   var items = [];
 
@@ -87,7 +91,17 @@ function getSettings() {
     ,'icon':FOLLOW_ICON
     ,'children':cty});
 
-  if (Action.debugLogEnabled) {
+  items.push({'title':'forecast.io API Key - ' + Action.preferences.apiKey
+    ,'subtitle':'https://developer.forecast.io'
+    ,'url':'https://developer.forecast.io'
+    ,'actionRunsInBackground':true
+    ,'icon':'Text.icns','action':'actionKey'});
+
+  items.push({'title':'Debug Mode - ' + Action.preferences.debug
+    ,'subtitle':'Toggle debug mode, adds items that link to API calls'
+    ,'icon':'com.apple.systempreferences','action':'actionDebug'});
+
+  if (isDebug()) {
     items.push({'title':'Edit preferences file'.localize()
       ,'actionRunsInBackground':true
       ,'path':PREF_FILE
@@ -113,12 +127,25 @@ function actionCountry(item) {
   Action.preferences.country = item.country;
 }
 
+function actionDebug(item) {
+  Action.preferences.debug = !Action.preferences.debug;
+}
+
 function actionCountryOther(item) {
   var c = LaunchBar.executeAppleScript(
     'return text returned of (display dialog "Country Code:" default answer "' 
     + Action.preferences.country + '" giving up after 15 with icon note)');
   if (c && c.length > 0) {
     Action.preferences.country = c.trim();
+  }
+}
+
+function actionKey(item) {
+  var k = LaunchBar.executeAppleScript(
+    'return text returned of (display dialog "forecast.io API Key:" default answer "' 
+    + Action.preferences.apiKey + '" giving up after 15 with icon note)');
+  if (k && k.length > 0) {
+    Action.preferences.apiKey = k.trim();
   }
 }
 

@@ -93,7 +93,7 @@ function getLocations() {
       ,'url':'http://www.mousedown.net/mouseware/LocationHelper.html'});
   }
 
-  if (Action.debugLogEnabled) {
+  if (isDebug()) {
     kids.push({'title':'Edit locations.json'
       ,'actionRunsInBackground':true
       ,'path':LOC_FILE
