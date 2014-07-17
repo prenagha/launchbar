@@ -7,7 +7,7 @@
 	<key>CFBundleName</key>
 	<string>Copy to iPhone</string>
 	<key>CFBundleVersion</key>
-	<string>2.1</string>
+	<string>2.2</string>
 	<key>CFBundleIconFile</key>
 	<string>it.danilotorrisi.command-c-osx</string>
 	<key>LBDebugLogEnabled</key>

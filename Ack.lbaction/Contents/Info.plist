@@ -7,7 +7,7 @@
 	<key>CFBundleName</key>
 	<string>Ack Code Search</string>
 	<key>CFBundleVersion</key>
-	<string>1.0</string>
+	<string>2.0</string>
 	<key>CFBundleIconFile</key>
 	<string>Glass.icns</string>
 	<key>LBDebugLogEnabled</key>

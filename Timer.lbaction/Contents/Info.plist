@@ -7,7 +7,7 @@
 	<key>CFBundleName</key>
 	<string>Set a Timer</string>
 	<key>CFBundleVersion</key>
-	<string>1.0</string>
+	<string>2.0</string>
 	<key>CFBundleIconFile</key>
 	<string>clock.pdf</string>
 	<key>LBDebugLogEnabled</key>

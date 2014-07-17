@@ -9,7 +9,7 @@
 	<key>LBAbbreviation</key>
 	<string>rss atom feedwrangler read</string> 
 	<key>CFBundleVersion</key>
-	<string>1.0</string>
+	<string>2.0</string>
 	<key>CFBundleIconFile</key>
   <string>FeedWrangler512</string>
 	<key>LBDebugLogEnabled</key>
