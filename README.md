@@ -1,29 +1,17 @@
 # LaunchBar Actions
 
-[Copy to iPhone](https://github.com/prenagha/launchbar#copy-to-iphone)
-
-[Copy to iPad](https://github.com/prenagha/launchbar#copy-to-ipad)
-
-[Share Safari Link](https://github.com/prenagha/launchbar#)
-
-[Timer](https://github.com/prenagha/launchbar#timer)
-
-[Ack Code Search](https://github.com/prenagha/launchbar#ack-code-search)
-
-[Read News 
-FeedWrangler](https://github.com/prenagha/launchbar#read-news-feedwrangler)
-
-[Generate Password](https://github.com/prenagha/launchbar#generate-password)
-
-[Expand URL](https://github.com/prenagha/launchbar#expand-url)
-
-[Screenshot](https://github.com/prenagha/launchbar#screenshot)
-
-[Caffeinate](https://github.com/prenagha/launchbar#caffeinate)
-
-[Forecast](https://github.com/prenagha/launchbar#forecast)
-
-[MailMate](https://github.com/prenagha/launchbar#mailmate)
+* [Forecast](https://github.com/prenagha/launchbar#forecast)
+* [Caffeinate](https://github.com/prenagha/launchbar#caffeinate)
+* [Copy to iPhone](https://github.com/prenagha/launchbar#copy-to-iphone)
+* [Copy to iPad](https://github.com/prenagha/launchbar#copy-to-ipad)
+* [Share Safari Link](https://github.com/prenagha/launchbar#)
+* [Timer](https://github.com/prenagha/launchbar#timer)
+* [Ack Code Search](https://github.com/prenagha/launchbar#ack-code-search)
+* [Read News FeedWrangler](https://github.com/prenagha/launchbar#read-news-feedwrangler)
+* [Generate Password](https://github.com/prenagha/launchbar#generate-password)
+* [Expand URL](https://github.com/prenagha/launchbar#expand-url)
+* [Screenshot](https://github.com/prenagha/launchbar#screenshot)
+* [MailMate](https://github.com/prenagha/launchbar#mailmate)
 
 ## Copy to iPhone
 
