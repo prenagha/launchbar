@@ -155,7 +155,7 @@ function actionSettings() {
     ,'icon':FOLLOW_ICON
     ,'children':cty});
 
-  items.push({'title':'forecast.io API Key - ' + Action.preferences.apiKey
+  items.push({'title':'forecast.io API Key'
     ,'subtitle':'https://developer.forecast.io'
     ,'url':'https://developer.forecast.io'
     ,'actionRunsInBackground':true
