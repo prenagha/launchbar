@@ -4,7 +4,7 @@
 * [Caffeinate](https://github.com/prenagha/launchbar#caffeinate)
 * [Copy to iPhone](https://github.com/prenagha/launchbar#copy-to-iphone)
 * [Copy to iPad](https://github.com/prenagha/launchbar#copy-to-ipad)
-* [Share Safari Link](https://github.com/prenagha/launchbar#)
+* [Share Safari Link](https://github.com/prenagha/launchbar#share-safari-link)
 * [Timer](https://github.com/prenagha/launchbar#timer)
 * [Ack Code Search](https://github.com/prenagha/launchbar#ack-code-search)
 * [Read News FeedWrangler](https://github.com/prenagha/launchbar#read-news-feedwrangler)
@@ -15,7 +15,7 @@
 
 ## Copy to iPhone
 
-[Signed Copy to iPhone.lbaction](https://dl.dropboxusercontent.com/u/1094926/lbdist/Copy%20to%20iPhone.lbaction)
+[Download signed Copy to iPhone.lbaction](https://dl.dropboxusercontent.com/u/1094926/lbdist/Copy%20to%20iPhone.lbaction)
 
 Action that uses the [Command-C](http://danilo.to/command-c) application to send either the text or files selected in LaunchBar or your system clipboard to your iPhone. Requires that you have [Command-C](http://danilo.to/command-c) installed on your Mac and your iPhone.
 
@@ -28,7 +28,7 @@ Note: if you don't use 'iPhone' as the device name for your phone in [Command-C]
 
 ## Copy to iPad
 
-[Signed Copy to iPad.lbaction](https://dl.dropboxusercontent.com/u/1094926/lbdist/Copy%20to%20iPad.lbaction)
+[Download signed Copy to iPad.lbaction](https://dl.dropboxusercontent.com/u/1094926/lbdist/Copy%20to%20iPad.lbaction)
 
 Action that uses the [Command-C](http://danilo.to/command-c) application to send either the text or files selected in LaunchBar or your system clipboard to your iPad. Requires that you have [Command-C](http://danilo.to/command-c) installed on your Mac and your iPad.
 
@@ -41,7 +41,7 @@ Note: if you don't use 'iPad' as the device name for your iPad in [Command-C](ht
 
 ## Share Safari Link
 
-[Signed Share Safari Link.lbaction](https://dl.dropboxusercontent.com/u/1094926/lbdist/Share%20Safari%20Link.lbaction)
+[Download signed Share Safari Link.lbaction](https://dl.dropboxusercontent.com/u/1094926/lbdist/Share%20Safari%20Link.lbaction)
 
 Action that gets the Title and URL of the currently selected tab in Safari and returns it back to LaunchBar for further sendTo processing. Making it easy to send a link to the current Safari page via email for example, or by using the Copy to iPhone action.
 
@@ -50,7 +50,7 @@ Action that gets the Title and URL of the currently selected tab in Safari and r
 
 ## Timer
 
-[Signed Timer.lbaction](https://dl.dropboxusercontent.com/u/1094926/lbdist/Timer.lbaction)
+[Download signed Timer.lbaction](https://dl.dropboxusercontent.com/u/1094926/lbdist/Timer.lbaction)
 
 Action that takes an input like "Turn off oven 15m" and creates a timer in 
 LaunchBar. After the delay time has passed LaunchBar will show you your reminder
@@ -62,7 +62,7 @@ message in a large type window with an accompanying sound.
 
 ## Ack Code Search
 
-[Signed Ack.lbaction](https://dl.dropboxusercontent.com/u/1094926/lbdist/Ack.lbaction)
+[Download signed Ack.lbaction](https://dl.dropboxusercontent.com/u/1094926/lbdist/Ack.lbaction)
 
 Action that takes a text search pattern and uses [Ack](http://beyondgrep.com) to search code files for that pattern and return the results back to LaunchBar.
 Make sure you have Ack [installed](http://beyondgrep.com/install/index.html)
@@ -98,7 +98,7 @@ For example, my action preferences file looks like:
 
 ## Read News FeedWrangler
 
-[Signed Feedwrangler.lbaction](https://dl.dropboxusercontent.com/u/1094926/lbdist/Feedwrangler.lbaction)
+[Download signed Feedwrangler.lbaction](https://dl.dropboxusercontent.com/u/1094926/lbdist/Feedwrangler.lbaction)
 
 Action that lets you easily read unread items from [FeedWrangler](http://feedwrangler.net) and either View, Star, Read Later, or Mark as Read. Additionally a "Mark All Read" function is available. Download and install the action. Then run the first time and it will inform you that you need to update the action preferences. Edit the preferences file `~/Library/Application Support/LaunchBar/Action Support/com.renaghan.launchbar.FeedWrangler/Preferences.plist` and set the email, password, and clientKey elements. Get a FeedWrangler client key from [here](https://feedwrangler.net/developers/clients). Re-run the action, it will
 authorize with FeedWrangler getting an access token, then it will blank out your
@@ -110,7 +110,7 @@ password in the preferences file.
 
 ## Generate Password
 
-[Signed Generate Password.lbaction](https://dl.dropboxusercontent.com/u/1094926/lbdist/Generate%20Password.lbaction)
+[Download signed Generate Password.lbaction](https://dl.dropboxusercontent.com/u/1094926/lbdist/Generate%20Password.lbaction)
 
 Action that generates a random 12 character password with at least one number and one special character and avoids numbers/letters that look similar to the eye.
 
@@ -118,7 +118,7 @@ Action that generates a random 12 character password with at least one number an
 
 ## Expand URL
 
-[Signed Expand URL.lbaction](https://dl.dropboxusercontent.com/u/1094926/lbdist/Expand%20URL.lbaction)
+[Download signed Expand URL.lbaction](https://dl.dropboxusercontent.com/u/1094926/lbdist/Expand%20URL.lbaction)
 
 Action that takes a string URL as input and expands it by resolving all redirects and returning the final result URL back to LaunchBar. Useful for 
 resolving t.co and bit.ly ... type "short" URLs into real URLs.
@@ -129,7 +129,7 @@ resolving t.co and bit.ly ... type "short" URLs into real URLs.
 
 ## Screenshot
 
-[Signed Screenshot.lbaction](https://dl.dropboxusercontent.com/u/1094926/lbdist/Screenshot.lbaction)
+[Download signed Screenshot.lbaction](https://dl.dropboxusercontent.com/u/1094926/lbdist/Screenshot.lbaction)
 
 Capture a screenshot by initiating selection capture, save to ~/Downloads, 
 optimize using [ImageAlpha](http://pngmini.com) if present (saving original
@@ -138,7 +138,7 @@ be used in further action chains.
 
 ## Caffeinate
 
-[Signed Caffeinate.lbaction](https://dl.dropboxusercontent.com/u/1094926/lbdist/Caffeinate.lbaction)
+[Download signed Caffeinate.lbaction](https://dl.dropboxusercontent.com/u/1094926/lbdist/Caffeinate.lbaction)
 
 Keep your system awake using built-in `/usr/bin/caffeinate`. Give the action a string argument in the form of "2h" or "45m" or simply "2" (default in hours) to set the caffeinate/awake duration. Type enter without an argument on the action to see current caffeinate status and the option to stop the current caffeintation.
 
@@ -148,7 +148,7 @@ Keep your system awake using built-in `/usr/bin/caffeinate`. Give the action a s
 
 ## Forecast
 
-[Signed Forecast.lbaction](https://dl.dropboxusercontent.com/u/1094926/lbdist/Forecast.lbaction)
+[Download signed Forecast.lbaction](https://dl.dropboxusercontent.com/u/1094926/lbdist/Forecast.lbaction)
 
 Custom action that displays weather forecast for a location using forecast data from [forecast.io](http://forecast.io)
 * Weather warnings/watches alerts
