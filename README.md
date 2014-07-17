@@ -174,6 +174,11 @@ to find and use your current location
   * Forecast Units
   * Forecast Language
   * Location Search Country
+  * Check if Action is up to date
+  * Check if LaunchBar is up to date
+  * Enable debug mode
+  * Set API Key
+  * Send feedback
 
 
 ![Forecast Action](img/f1.png)
