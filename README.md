@@ -172,14 +172,14 @@ Mac App Store
   * ␣ Space to open the location search and enter a search query then ↩
   * → on the location search result to save the location and see its forecast
 * Now that you have a location saved, the next time you invoke the action just hit ↩ and the action will default to showing you the forecast for that location
-* Manage locations:
+* Manage Locations:
   * → on the Locations item to manage your saved locations
   * Rename a location
   * Remove a location
   * Set a Home, Airplane, or custom icon for a location
-  * Make a saved location the default
-* Action Settings:
-  * → on the Settings items under Locations to manage action preferences like
+  * Make a saved location the default (the one that appears when you ↩ on the action)
+* Settings:
+  * → on the Locations item then → on the Settings item
   * Forecast Units
   * Forecast Language
   * Location Search Country
