@@ -167,24 +167,27 @@ __Installation:__
 * Install free [Location Helper for Applescript](http://www.mousedown.net/mouseware/LocationHelper.html) app from
 Mac App Store
 * Install the action by double clicking on the `Forecast.lbaction` file you downloaded
-* Run the action by typing `Forecast` in LaunchBar, then hit space to
-enter a location search query, or hit enter and → the Locations item
-to find and use your current location
-  * From a location search result, → to save the location and see its forecast
+* First Run:
+  * Find the action by typing `Forecast` in LaunchBar
+  * ␣ Space to open the location search and enter a search query then ↩
+  * → on the location search result to save the location and see its forecast
+* Now that you have a location saved, the next time you invoke the action just hit ↩ and the action will default to showing you the forecast for that location
+* Manage locations:
   * → on the Locations item to manage your saved locations
-    * Rename a location
-    * Remove a location
-    * Set a Home, Airplane, or custom icon for a location
-    * Make a saved location the default
+  * Rename a location
+  * Remove a location
+  * Set a Home, Airplane, or custom icon for a location
+  * Make a saved location the default
+* Action Settings:
   * → on the Settings items under Locations to manage action preferences like
-    * Forecast Units
-    * Forecast Language
-    * Location Search Country
-    * Check if Action is up to date
-    * Check if LaunchBar is up to date
-    * Enable debug mode
-    * Set API Key
-    * Send feedback
+  * Forecast Units
+  * Forecast Language
+  * Location Search Country
+  * Check if Action is up to date
+  * Check if LaunchBar is up to date
+  * Enable debug mode
+  * Set API Key
+  * Send feedback
 
 
 ![Forecast Action](img/f1.png)
