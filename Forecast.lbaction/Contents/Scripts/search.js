@@ -43,8 +43,8 @@ function locationSearch(query) {
           ,'longitude':r.lon
           ,'ico':DEFAULT_ICON
           ,'icon':DEFAULT_ICON
-          ,'actionRunsInBackground':true
-          ,'action':'actionSelect'
+          ,'actionReturnsItems':true
+          ,'action':'actionSelectAndForecast'
         });
       }
     }
@@ -59,4 +59,9 @@ function locationSearch(query) {
     items.push({'title':'Search API call','url':url});
   }
   return items;
+}
+
+function actionSelectAndForecast(item) {
+  actionSelect(item);
+  return actionForecast(item);
 }
