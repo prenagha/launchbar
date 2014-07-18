@@ -163,22 +163,28 @@ Custom action that displays weather forecast for a location using forecast data 
 
 __Installation:__
 
-* Signup for a free [forecast.io developer account](https://developer.forecast.io) and have your API ready
+* Signup for a free [forecast.io developer account](https://developer.forecast.io) and have your API key ready
 * Install free [Location Helper for Applescript](http://www.mousedown.net/mouseware/LocationHelper.html) app from
 Mac App Store
-* Install the action by double clicking on the `Forecast.lbaction` file
+* Install the action by double clicking on the `Forecast.lbaction` file you downloaded
 * Run the action by typing `Forecast` in LaunchBar, then hit space to
-enter a location search query, or hit enter and follow the Locations item
+enter a location search query, or hit enter and → the Locations item
 to find and use your current location
-* Navigate to Locations -- Settings within the action to set
-  * Forecast Units
-  * Forecast Language
-  * Location Search Country
-  * Check if Action is up to date
-  * Check if LaunchBar is up to date
-  * Enable debug mode
-  * Set API Key
-  * Send feedback
+  * From a location search result, → to save the location and see its forecast
+  * → on the Locations item to manage your saved locations
+    * Rename a location
+    * Remove a location
+    * Set a Home, Airplane, or custom icon for a location
+    * Make a saved location the default
+  * → on the Settings items under Locations to manage action preferences like
+    * Forecast Units
+    * Forecast Language
+    * Location Search Country
+    * Check if Action is up to date
+    * Check if LaunchBar is up to date
+    * Enable debug mode
+    * Set API Key
+    * Send feedback
 
 
 ![Forecast Action](img/f1.png)
