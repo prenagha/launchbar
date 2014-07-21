@@ -1,1 +1,1 @@
-[LaunchBar Actions web site](http://prenagha.github.io/launchbar/)
+[LaunchBar Actions web site, documentation, screenshots](http://prenagha.github.io/launchbar/)
