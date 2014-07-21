@@ -20,7 +20,7 @@ function getNameForGeo(latitude, longitude) {
     LaunchBar.log('Error getNameForGeo ' + exception);
     LaunchBar.alert('Error getNameForGeo', exception);
   }
-  return null;
+  return 'Location name not available';
 }
 
 function locationSearch(query) {
@@ -53,7 +53,7 @@ function locationSearch(query) {
     LaunchBar.alert('Error locationSearch', exception);
   }
   if (items.length == 0) {
-    items.push({'title':'No location matches found','icon':'NotFound.icns'});
+    items.push({'title':'No locations found','icon':'NotFound.icns'});
   }
   if (isDebug()) {
     items.push({'title':'Search API call','url':url});
