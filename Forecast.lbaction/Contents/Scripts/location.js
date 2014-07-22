@@ -243,25 +243,3 @@ function writeLocations(locations) {
   }
   return loc;
 }
-
-function getCurrentLocation() {
-  if (File.exists(LOC_APP)) {
-    try {
-      var rslt = LaunchBar.execute('/usr/bin/osascript', 'current.applescript');
-      // return object containing latitude and longitude properties
-      var geo = JSON.parse(rslt);
-      var name = getNameForGeo(geo.latitude, geo.longitude);
-      if (name == null)
-        return null;
-      return {'name':name,'latitude':geo.latitude,'longitude':geo.longitude,'icon':DEFAULT_ICON};
-    } catch (exception) {
-      LaunchBar.log('Error getCurrentLocation ' + exception);
-      LaunchBar.alert('Error getCurrentLocation', exception);
-    }
-  } else {
-    LaunchBar.alert('To get your current location, install the Location Helper App');
-    LaunchBar.openURL('http://www.mousedown.net/mouseware/LocationHelper.html');
-  }
-  return null;
-}
-
