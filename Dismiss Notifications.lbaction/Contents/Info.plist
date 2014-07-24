@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleIdentifier</key>
+	<string>com.renaghan.launchbar.Dismiss</string>
+	<key>CFBundleName</key>
+	<string>Dismiss Notifications</string>
+	<key>CFBundleVersion</key>
+	<string>1.0</string>
+	<key>CFBundleIconFile</key>
+	<string>/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/Notifications.icns</string>
+	<key>LBDebugLogEnabled</key>
+	<false/>
+	<key>LBScripts</key>
+	<dict>
+		<key>LBDefaultScript</key>
+		<dict>
+			<key>LBScriptName</key>
+			<string>dismiss.applescript</string>
+			<key>LBRunInBackground</key>
+			<true/>
+			<key>LBRequiresArgument</key>
+			<false/>
+			<key>LBReturnsResult</key>
+			<false/>
+		</dict>
+	</dict>
+	<key>LBDescription</key>
+	<dict>
+		<key>LBSummary</key>
+		<string>Dismiss all notifications from Notification Center. Will "Snooze" calendar items, "Close" on all others.</string>
+		<key>LBAuthor</key>
+		<string>Padraic Renaghan</string>
+		<key>LBEmail</key>
+		<string>prenagha@renaghan.com</string>
+		<key>LBWebsite</key>
+		<string>https://github.com/prenagha/launchbar</string>
+		<key>LBTwitter</key>
+		<string>@prenagha</string>
+	</dict>
+</dict>
+</plist>
