@@ -7,13 +7,13 @@
 	<key>CFBundleName</key>
 	<string>Set a Timer</string>
 	<key>CFBundleVersion</key>
-	<string>2.0</string>
+	<string>2.1</string>
 	<key>CFBundleIconFile</key>
 	<string>clock.pdf</string>
 	<key>LBDebugLogEnabled</key>
 	<true/>
 	<key>LBTextInputTitle</key>
-	<string>Reminder</string>
+	<string>Reminder [when]</string>
 	<key>LBScripts</key>
 	<dict>
 		<key>LBDefaultScript</key>
@@ -21,7 +21,7 @@
 			<key>LBScriptName</key>
 			<string>default.js</string>
 			<key>LBRunInBackground</key>
-			<true/>
+			<false/>
 			<key>LBRequiresArgument</key>
 			<true/>
 			<key>LBAcceptedArgumentTypes</key>
@@ -29,7 +29,7 @@
 			  <string>string</string>
 			</array>
 			<key>LBReturnsResult</key>
-			<false/>
+			<true/>
 		</dict>
 	</dict>
 	<key>LBDescription</key>

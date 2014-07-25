@@ -5,6 +5,9 @@ function getCurrentLocation() {
       var rslt = LaunchBar.execute('/usr/bin/osascript', 'current.applescript');
       // return object containing latitude, longitude, and name properties
       var geo = JSON.parse(rslt);
+      /* if (geo && geo.place && geo.place == 'Name not available') {
+        geo.place = getNameForGeo(geo.latitude, geo.longitude);
+      } */
       return {'name':geo.place
         ,'latitude':geo.latitude
         ,'longitude':geo.longitude
@@ -18,6 +21,30 @@ function getCurrentLocation() {
     LaunchBar.openURL('http://www.mousedown.net/mouseware/LocationHelper.html');
   }
   return null;
+}
+
+function getNameForGeo(latitude, longitude) {
+  var url = 'https://nominatim.openstreetmap.org/reverse?format=json&zoom=12&addressdetails=1&lat='
+    + latitude + '&lon=' + longitude;
+  try {
+    var result = HTTP.getJSON(url, TIMEOUT);
+    if (result && result.data && result.data.address ) {
+      if (result.data.address.village)
+        return result.data.address.village + ', ' + result.data.address.state;
+      if (result.data.address.neighbourhood)
+        return result.data.address.neighbourhood + ', ' + result.data.address.state;
+      if (result.data.address.city)
+        return result.data.address.city + ', ' + result.data.address.state;
+    }
+    if (result && result.data && result.data.display_name)
+      return result.data.display_name;
+    LaunchBar.log('Cannot find name for geo ' + latitude + ' , ' + longitude 
+      + '  ' + url + '  ' + JSON.stringify(result));
+  } catch (exception) {
+    LaunchBar.log('Error getNameForGeo ' + exception);
+    LaunchBar.alert('Error getNameForGeo', exception);
+  }
+  return 'Name not available';
 }
 
 function locationSearch(query) {

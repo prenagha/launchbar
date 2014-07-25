@@ -9,7 +9,7 @@ function runWithItem(item) {
 
 function go(str) {
   if (!str || str == undefined || str.length == 0) {
-    LaunchBar.alert('Empty input');
+    return {'title':'Reminder is empty','icon':'NotFound.icns'};
   }
   try {  
   
@@ -22,9 +22,12 @@ function go(str) {
       'sound' : 'Tink',
       'delay': delay
     });
+    
+    return {'title': 'Reminder in ' + delay
+      ,'subtitle': remind
+      ,'icon':'clock.pdf'};
   
   } catch (exception) {
-    LaunchBar.log('Timer Error ' + exception);
-    LaunchBar.alert('Timer Error', exception);
+    return {'title': 'Timer Error ' + exception};
   }
 }
