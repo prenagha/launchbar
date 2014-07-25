@@ -1,6 +1,11 @@
 --
 -- Dismiss all active notifications
 --
+on dlog(myObj)
+	set txt to quoted form of (myObj as string)
+	log txt
+	do shell script "logger -t 'LaunchBar.Dismiss' " & txt
+end dlog
 
 on checkGUIScriptingEnabled()
 	-- code snippet from UI Browser http://pfiddlesoft.com/uibrowser/index.html
@@ -40,21 +45,34 @@ on run
 			set stopAfter to (count windows) * 2
 			set iters to 1
 			repeat while (count windows) > 0 and iters ≤ stopAfter
-				set snoozed to false
+				set done to false
 				-- prefer Snoozing if a calendar notification is for a conference call that is upcoming
-				if exists menu button "Snooze" of window 1 and (exists static text 2 of scroll area 1 and (exists static text 3 of scroll area 1 of window 1)) then
+				if (exists menu button "Snooze" of window 1) and (exists static text 2 of scroll area 1 of window 1) and (exists static text 3 of scroll area 1 of window 1) then
 					set when to value of static text 2 of scroll area 1 of window 1
 					set loc to value of static text 3 of scroll area 1 of window 1
 					set nbrs to my countNbr(loc)
 					-- conference calls have at least 14 numbers in the location field
 					if when is not "now" and nbrs ≥ 14 then
-						set snoozed to true
+						set done to true
 						click menu button "Snooze" of window 1
 					end if
 				end if
-				if not snoozed and (exists button "Close" of window 1) then
+				if not done and (exists button "Close" of window 1) then
 					-- otherwise just close it
 					click button "Close" of window 1
+					set done to true
+				end if
+				if not done and (exists button "OK" of window 1) then
+					-- otherwise just close it
+					click button "OK" of window 1
+					set done to true
+				end if
+				if not done then
+					set n to "notification"
+					if (exists static text 1 of scroll area 1 of window 1) then
+						set n to value of static text 1 of scroll area 1 of window 1
+					end if
+					log "Unable to dismiss " & n
 				end if
 				delay 1
 				set iters to iters + 1
