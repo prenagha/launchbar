@@ -41,16 +41,15 @@ on run
 			set iters to 1
 			repeat while (count windows) > 0 and iters ≤ stopAfter
 				set snoozed to false
-				if exists menu button "Snooze" of window 1 then
-					-- prefer Snoozing if a calendar notification for a conference call
-					if exists static text 3 of scroll area 1 of window 1 then
-						set loc to value of static text 3 of scroll area 1 of window 1
-						set nbrs to my countNbr(loc)
-						-- conference calls have at least 14 numbers in the location field
-						if nbrs ≥ 14 then
-							set snoozed to true
-							click menu button "Snooze" of window 1
-						end if
+				-- prefer Snoozing if a calendar notification is for a conference call that is upcoming
+				if exists menu button "Snooze" of window 1 and (exists static text 2 of scroll area 1 and (exists static text 3 of scroll area 1 of window 1)) then
+					set when to value of static text 2 of scroll area 1 of window 1
+					set loc to value of static text 3 of scroll area 1 of window 1
+					set nbrs to my countNbr(loc)
+					-- conference calls have at least 14 numbers in the location field
+					if when is not "now" and nbrs ≥ 14 then
+						set snoozed to true
+						click menu button "Snooze" of window 1
 					end if
 				end if
 				if not snoozed and (exists button "Close" of window 1) then
