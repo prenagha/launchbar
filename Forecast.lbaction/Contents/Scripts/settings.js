@@ -9,6 +9,7 @@ langs['de'] = 'German';
 langs['es'] = 'Spanish';
 langs['fr'] = 'French';
 langs['nl'] = 'Dutch';
+langs['it'] = 'Italian';
 langs['tet'] = 'Tetum';
 
 if (Action.preferences.units == undefined) {
@@ -124,6 +125,8 @@ function actionSettings() {
     ,'icon':'spain.icns','action':'actionLang'});
   langs.push({'title':'Dutch','lang':'nl'
     ,'icon':'netherlands.icns','action':'actionLang'});
+  langs.push({'title':'Italian','lang':'it'
+    ,'icon':'italy.icns','action':'actionLang'});
   langs.push({'title':'Tetum','lang':'tet'
     ,'icon':'indonesia.icns','action':'actionLang'});
   langs.push({'title':'Other'
