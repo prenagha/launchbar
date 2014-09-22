@@ -200,7 +200,7 @@ function dayDetail(tz, units, d) {
   var details = [];
   details.push({'title': 'Low ' + getTemps(d.temperatureMin,d.apparentTemperatureMin) 
      + ' at ' + moment.unix(d.temperatureMinTime).tz(tz).format('h a')
-    ,'icon':'Temperature-25.png'});
+    ,'icon':'Thermometer-25.png'});
   details.push({'title':'Sunrise ' + moment.unix(d.sunriseTime).tz(tz).format('h:mm a')
     ,'icon':'Sunrise.png'});
   if (d.precipProbability > 0.0) {
@@ -214,7 +214,7 @@ function dayDetail(tz, units, d) {
   }
   details.push({'title': 'High ' + getTemps(d.temperatureMax,d.apparentTemperatureMax) 
      + ' at ' + moment.unix(d.temperatureMaxTime).tz(tz).format('h a')
-    ,'icon':'Temperature-75.png'});                
+    ,'icon':'Thermometer-75.png'});                
   details.push({'title':'Sunset ' + moment.unix(d.sunsetTime).tz(tz).format('h:mm a')
     ,'icon':'Sunset.png'});
   return details;

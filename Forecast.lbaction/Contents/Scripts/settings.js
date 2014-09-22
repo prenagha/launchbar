@@ -111,7 +111,7 @@ function actionSettings() {
   items.push({'title':'Forecast Units - ' + Action.preferences.units.toUpperCase()
     ,'subtitle':'Set units for forecast.io data, see https://developer.forecast.io/docs/v2'
     ,'url':'https://developer.forecast.io/docs/v2'
-    ,'icon':'Temperature-25.png'
+    ,'icon':'Thermometer-25.png'
     ,'children':units});
   
   var langs = [];
@@ -135,7 +135,7 @@ function actionSettings() {
   items.push({'title':'Forecast Language - ' + Action.preferences.lang.toUpperCase()
     ,'subtitle':'Set language for forecast.io data, see https://developer.forecast.io/docs/v2'
     ,'url':'https://developer.forecast.io/docs/v2'
-    ,'icon':'Temperature-25.png'
+    ,'icon':'Thermometer-25.png'
     ,'children':langs});
   
   var cty = [];
@@ -162,7 +162,7 @@ function actionSettings() {
     ,'subtitle':'https://developer.forecast.io'
     ,'url':'https://developer.forecast.io'
     ,'actionRunsInBackground':true
-    ,'icon':'Text.icns','action':'actionKey'});
+    ,'icon':'forecastio.png','action':'actionKey'});
 
   items.push({'title':'Debug Mode - ' + Action.preferences.debug
     ,'subtitle':'Toggle debug mode, adds items that link to API calls'
