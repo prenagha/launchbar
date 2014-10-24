@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleIdentifier</key>
+	<string>com.renaghan.launchbar.SwitchAudio</string>
+	<key>CFBundleName</key>
+	<string>Switch Audio</string>
+	<key>LBAbbreviation</key>
+	<string>sound speaker headphones microphone</string> 
+	<key>CFBundleVersion</key>
+	<string>1.0</string>
+	<key>CFBundleIconFile</key>
+	<string>headphones.icns</string>
+	<key>LBDebugLogEnabled</key>
+	<false/>
+	<key>LBScripts</key>
+	<dict>
+		<key>LBDefaultScript</key>
+		<dict>
+			<key>LBScriptName</key>
+			<string>default.js</string>
+			<key>LBRunInBackground</key>
+			<false/>
+			<key>LBRequiresArgument</key>
+			<false/>
+			<key>LBReturnsResult</key>
+			<true/>
+		</dict>
+	</dict>
+	<key>LBDescription</key>
+	<dict>
+		<key>LBSummary</key>
+		<string>Switch Input and Output Audio devices. Requires switchaudio-osx which is mostly easily installed via homebrew: "brew install switchaudio-osx" (command must be installed to /usr/local/bin/SwitchAudioSource). When invoked it returns items for each output device (headphones) and each input device (microphone). The currently selected item for each is prefixed with *. Select an item and hit enter to switch to that item, the action will respond by refreshing the items and you should note the * by the item you just selected.</string>
+		<key>LBRequirements</key>
+		<string>https://github.com/deweller/switchaudio-osx</string>
+		<key>LBAuthor</key>
+		<string>Padraic Renaghan</string>
+		<key>LBEmail</key>
+		<string>prenagha@renaghan.com</string>
+		<key>LBWebsite</key>
+		<string>https://github.com/prenagha/launchbar</string>
+		<key>LBTwitter</key>
+		<string>@prenagha</string>
+	</dict>
+</dict>
+</plist>
