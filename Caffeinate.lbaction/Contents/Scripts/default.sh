@@ -28,9 +28,14 @@ toSeconds() {
 
 toString() {
   sec=$1
-  hour=$(($sec/3600))
-  min=$((($sec/60)%60))
-  printf "%02d:%02d" $hour $min
+  if [ $sec == 0 ]
+  then
+    echo "ever"
+  else
+    hour=$(($sec/3600))
+    min=$((($sec/60)%60))
+    printf " %02d:%02d" $hour $min
+  fi
 }
 
 # if no argument then show status
@@ -53,17 +58,27 @@ then
       [[ $PROC =~ ([0-9]+):([0-9]+) ]]
       (( elapsed=${BASH_REMATCH[1]}*60 ))
     fi
-    (( remain=$dur - $elapsed ))
+    if [ -z ${dur} ]
+    then
+      remain=0
+    else
+      (( remain=$dur - $elapsed ))
+    fi
     str=`toString $remain`
-    echo "[{\"title\":\"Caffeinated awake for $str\",\"icon\":\"$CLK\"},\
+    echo "[{\"title\":\"Caffeinated awake for${str}\",\"icon\":\"$CLK\"},\
            {\"title\":\"Stop caffeinating\",\"icon\":\"$STP\",\"action\":\"stop.sh\"}]"
   fi
 else
   # if we have an argument then process it as a new caffeinate time
+  secArg=
   sec=`toSeconds $1`
+  if [ $sec > 0 ]
+  then
+    secArg="-t $sec"
+  fi
   str=`toString $sec`
   killall caffeinate 2>/dev/null
-  caffeinate -u -t "$sec" 1>/dev/null 2>&1 &
-  echo "[{\"title\":\"Caffeinated awake for $str\",\"icon\":\"$CLK\"}]"
+  caffeinate -u $secArg 1>/dev/null 2>&1 &
+  echo "[{\"title\":\"Caffeinated awake for${str}\",\"icon\":\"$CLK\"}]"
 fi
 exit 0

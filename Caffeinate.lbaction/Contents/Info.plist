@@ -7,13 +7,13 @@
 	<key>CFBundleName</key>
 	<string>Caffeinate</string>
 	<key>CFBundleVersion</key>
-	<string>2.0</string>
+	<string>2.1</string>
 	<key>CFBundleIconFile</key>
 	<string>Coffee.icns</string>
 	<key>LBDebugLogEnabled</key>
 	<true/>
 	<key>LBTextInputTitle</key>
-	<string>Duration e.g. 10m/2h</string>
+	<string>Duration e.g. 0/10m/2h</string>
 	<key>LBScripts</key>
 	<dict>
 		<key>LBDefaultScript</key>
@@ -45,7 +45,7 @@
 		<key>LBTwitter</key>
 		<string>@prenagha</string>
 		<key>LBArgument</key>
-		<string>Duration to stay awake, e.g. "10m", "2h". Hours by default.</string>
+		<string>Duration to stay awake, e.g. "10m", "2h". Hours by default. Use "0" to caffeinate forever.</string>
 	</dict>
 </dict>
 </plist>
