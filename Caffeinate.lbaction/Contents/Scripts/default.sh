@@ -58,7 +58,7 @@ then
       [[ $PROC =~ ([0-9]+):([0-9]+) ]]
       (( elapsed=${BASH_REMATCH[1]}*60 ))
     fi
-    if [ -z ${dur} ]
+    if [ -z ${dur} -o ${dur} == 0 ]
     then
       remain=0
     else
