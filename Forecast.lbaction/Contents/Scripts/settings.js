@@ -11,6 +11,10 @@ langs['fr'] = 'French';
 langs['nl'] = 'Dutch';
 langs['it'] = 'Italian';
 langs['tet'] = 'Tetum';
+langs['bs'] = 'Bosnian';
+langs['pl'] = 'Polish';
+langs['pt'] = 'Portuguese';
+langs['ru'] = 'Russian';
 
 if (Action.preferences.units == undefined) {
   Action.preferences.units = 'auto';
@@ -129,6 +133,15 @@ function actionSettings() {
     ,'icon':'italy.icns','action':'actionLang'});
   langs.push({'title':'Tetum','lang':'tet'
     ,'icon':'indonesia.icns','action':'actionLang'});
+  langs.push({'title':'Bosnian','lang':'bs'
+    ,'icon':'bosnia.icns','action':'actionLang'});
+  langs.push({'title':'Polish','lang':'pl'
+    ,'icon':'poland.icns','action':'actionLang'});
+  langs.push({'title':'Portuguese','lang':'pt'
+    ,'icon':'portugal.icns','action':'actionLang'});
+  langs.push({'title':'Russian','lang':'ru'
+    ,'icon':'russia.icns','action':'actionLang'});
+    
   langs.push({'title':'Other'
     ,'url':'https://github.com/darkskyapp/forecast-io-translations'
     ,'icon':'forecastio.png'});

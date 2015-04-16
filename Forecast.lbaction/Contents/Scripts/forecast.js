@@ -72,6 +72,7 @@ function getTemps(real, app) {
 }
 
 function forecast(loc) {
+  var url = "unset";
   var name = loc.name;
   var latitude = loc.latitude;
   var longitude = loc.longitude;
@@ -81,9 +82,10 @@ function forecast(loc) {
     if (apiKey.length == 0)
       return;
 
-    var url = 'https://api.forecast.io/forecast/' + apiKey + '/' + latitude + ',' + longitude
+    url = 'https://api.forecast.io/forecast/' + apiKey + '/' + latitude + ',' + longitude
       + '?units=' + Action.preferences.units
       + '&lang=' + Action.preferences.lang;
+    LaunchBar.log('Forecast URL "' + url +'"');
       
     var furl = 'https://forecast.io/' + latitude + ',' + longitude;
     var result = HTTP.getJSON(url, TIMEOUT);
@@ -191,8 +193,8 @@ function forecast(loc) {
     }
     return items;
   } catch (exception) {
-    LaunchBar.log('Error forecast ' + exception);
-    LaunchBar.alert('Error forecast', exception);
+    LaunchBar.log('Error forecast from "' + url + '" ' + exception);
+    LaunchBar.alert('Error getting forecast from "' + url + '"', exception);
   }
 }
 
