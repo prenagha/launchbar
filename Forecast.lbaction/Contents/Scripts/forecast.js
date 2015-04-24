@@ -104,7 +104,7 @@ function forecast(loc) {
           var a = result.data.alerts[i];
           items.push({
              'title':a.title
-            ,'subtitle': 'expires ' + moment.unix(a.expires).tz(result.data.timezone).format('h:mm a')
+            ,'subtitle': 'Expires ' + moment.unix(a.expires).tz(result.data.timezone).calendar()
             ,'icon':ALERT_ICON
             ,'url':a.uri
             ,'text':a.description
