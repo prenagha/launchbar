@@ -11,7 +11,8 @@ on run
 	set spec to {"@", "#", "$", "%", "!", ".", "[", "]", "{", "}", "=", "+", "-", "_"}
 	
 	repeat while not hasNbr or not hasSpec or not hasLowr or not hasUppr
-		set hasChar to false
+		set hasLowr to false
+		set hasUppr to false
 		set hasNbr to false
 		set hasSpec to false
 		set pass to {}
