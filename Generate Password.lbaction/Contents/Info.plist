@@ -7,7 +7,7 @@
 	<key>CFBundleName</key>
 	<string>Generate Password</string>
 	<key>CFBundleVersion</key>
-	<string>2.0</string>
+	<string>3.0</string>
 	<key>CFBundleIconFile</key>
 	<string>Lock.icns</string>
 	<key>LBDebugLogEnabled</key>
