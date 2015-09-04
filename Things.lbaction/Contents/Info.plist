@@ -5,13 +5,13 @@
 	<key>CFBundleIdentifier</key>
 	<string>com.renaghan.launchbar.Things</string>
 	<key>CFBundleName</key>
-	<string>Things</string>
+	<string>Things To Do</string>
 	<key>LBAbbreviation</key>
 	<string>things todo task</string> 
 	<key>CFBundleVersion</key>
-	<string>1.0</string>
+	<string>1.1</string>
 	<key>CFBundleIconFile</key>
-  <string>com.culturedcode.things</string>
+  <string>com.culturedcode.things:checkbox_medium_done-N</string>
   <key>LBAssociatedApplication</key>
   <string>com.culturedcode.things</string>
   <key>LBARequiredApplication</key>
