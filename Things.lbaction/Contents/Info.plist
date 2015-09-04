@@ -17,7 +17,7 @@
   <key>LBARequiredApplication</key>
   <string>com.culturedcode.things</string>
   <key>LBTextInputTitle</key>
-  <string>New Todo</string>
+  <string>New To Do</string>
 	<key>LBDebugLogEnabled</key>
 	<true/>
 	<key>LBMinimumLaunchBarVersion</key>
@@ -45,7 +45,7 @@
 	<key>LBDescription</key>
 	<dict>
 		<key>LBSummary</key>
-		<string>LaunchBar action integration with Things Todo Mac application from Cultured Code</string>
+		<string>LaunchBar action integration with Things To Do Mac application from Cultured Code</string>
 		<key>LBRequirements</key>
 		<string>Things Application http://culturedcode.com/things/</string>
 		<key>LBAuthor</key>
@@ -57,7 +57,7 @@
 		<key>LBTwitter</key>
 		<string>@prenagha</string>
 		<key>LBArgument</key>
-		<string>Text of new todo to create</string>
+		<string>Text of new to do to create</string>
 	</dict>
 </dict>
 </plist>
