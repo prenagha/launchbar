@@ -4,44 +4,24 @@
 -- see https://github.com/chrisfsmith/launchbar/blob/master/incognito/
 --
 property CHROME : "com.google.Chrome"
+property SAFARI : "com.apple.Safari"
+
+on dlog(myObj)
+	set txt to quoted form of (myObj as string)
+	log txt
+	do shell script "logger -t 'LaunchBar.Incognito' " & txt
+end dlog
 
 -- called by launchbar when it has string input
-on handle_string(theURL)
-	if theURL is not "" then
-		log "URL from input " & theURL
-	end if
+on handle_string(input)
+	tell application "LaunchBar" to hide
 	
-	-- figure out what to open with if anything, looks for
-	-- take any input specified as is
-	-- otherwise check clipboard for http
-	-- otherwise take URL of active safari tab
-	-- otherwise whatever is in clipboard
-	set clip to get the clipboard as string
-	if theURL is "" and clip starts with "http" then
-		set theURL to clip
-		log "URL from clipboard " & theURL
-	end if
-	if theURL is "" then
-		tell application "Safari"
-			set theURL to URL of current tab of window 1
-			log "URL from Safari " & theURL
-		end tell
-	end if
-	if theURL is "" then
-		set theURL to clip
-		log "URL from clipboard any " & theURL
-	end if
+	set theURL to makeURL(input)
 	
-	if theURL is not "" and theURL does not start with "http" then
-		set theURL to "https://www.google.com/search?q=" & urlEncode(theURL)
-		log "URL search " & theURL
-	end if
-	
-	-- now look for open Chrome incognito and open there
+	-- look for open Chrome incognito and open there
 	-- otherwise open new Chrome window
 	-- otherwise start the Chrome app in incognito mode
-	if not chrome_running() then
-		log "Open the app"
+	if not app_running(CHROME) then
 		do shell script "open -b " & CHROME & " --new --args -incognito " & theURL
 		return
 	end if
@@ -49,7 +29,6 @@ on handle_string(theURL)
 	tell application "Google Chrome"
 		repeat with win in (windows)
 			if mode of win is "incognito" then
-				log "Open in existing incognito window"
 				set index of win to 1
 				set myTab to make new tab at end of tabs of window 1
 				set URL of myTab to theURL
@@ -60,20 +39,19 @@ on handle_string(theURL)
 	end tell
 	
 	tell application "Google Chrome"
-		log "Open in new window"
 		tell (make new window with properties {mode:"incognito"})
 			set URL of active tab to theURL
 		end tell
 		activate
 	end tell
-	
 end handle_string
 
-on chrome_running()
+-- is application running?
+on app_running(bundleId)
 	tell application "System Events"
-		return (bundle identifier of processes) contains CHROME
+		return (bundle identifier of processes) contains bundleId
 	end tell
-end chrome_running
+end app_running
 
 -- http://applescript.bratis-lover.net/library/url/#urlEncode
 on urlEncode(str)
@@ -103,7 +81,48 @@ on open (thePaths)
 	end repeat
 end open
 
+on makeURL(input)
+	if input is not "" and input does not start with "http" then
+		return "https://www.google.com/search?q=" & urlEncode(input)
+	end if
+	return input
+end makeURL
+
 -- called by launchbar when enter or browse into from top item
 on run
-	handle_string("")
+	set out to {}
+	
+	set theURL to ""
+	if app_running(SAFARI) then
+		tell application "Safari"
+			set theName to name of current tab of window 1
+			set theURL to URL of current tab of window 1
+			set x to {title:theName, icon:SAFARI, subtitle:theURL, |url|:theURL, action:"handle_string", actionArgument:theURL}
+			copy x to end of out
+		end tell
+	end if
+	
+	set clip to get the clipboard as string
+	if clip is not "" and clip is not theURL then
+		if clip starts with "http" then
+			set theURL to clip
+			set x to {title:theURL, icon:"ClipURL.icns", subtitle:theURL, |url|:theURL, action:"handle_string", actionArgument:theURL}
+			copy x to end of out
+		else
+			set theURL to makeURL(clip)
+			set x to {title:"Search '" & clip & "'", subtitle:theURL, icon:"Google.icns", |url|:theURL, action:"handle_string", actionArgument:theURL}
+			copy x to end of out
+		end if
+	end if
+	
+	-- if only one out then do it
+	if (count of out) is less than or equal to 1 then
+		handle_string(theURL)
+	else
+		-- otherwise return items so the user can pick 
+		set x to {title:"Blank", icon:"ClipObject.icns", action:"handle_string", actionArgument:""}
+		copy x to end of out
+		return out
+	end if
+	
 end run

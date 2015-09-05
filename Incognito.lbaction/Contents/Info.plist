@@ -27,9 +27,9 @@
 			<key>LBScriptName</key>
 			<string>main.applescript</string>
       <key>LBKeepWindowActive</key>
-      <false/>
+      <true/>
 			<key>LBRunInBackground</key>
-			<true/>
+			<false/>
 			<key>LBRequiresArgument</key>
 			<false/>
 			<key>LBAcceptedArgumentTypes</key>
@@ -37,13 +37,13 @@
 			  <string>string</string>
 			</array>
 			<key>LBReturnsResult</key>
-			<false/>
+			<true/>
 		</dict>
 	</dict>
 	<key>LBDescription</key>
 	<dict>
 		<key>LBSummary</key>
-		<string>LaunchBar action that opens a Google Chrome browser window/tab in incognito private browsing mode. Opens to blank window/tab or with passed input term in Google search or opens same URL as active Safari tab</string>
+		<string>LaunchBar action that opens a Google Chrome browser window/tab in incognito private browsing mode. Opens to URL from active Safari tab, URL from clipboard, Google Search URL with clipboard term, or blank. If more than one option is available then will show LaunchBar item for each to you can select</string>
 		<key>LBRequirements</key>
 		<string>Google Chrome Browser http://www.google.com/chrome/</string>
 		<key>LBAuthor</key>
