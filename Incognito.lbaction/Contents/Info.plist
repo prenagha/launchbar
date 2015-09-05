@@ -7,7 +7,7 @@
 	<key>CFBundleName</key>
 	<string>Incognito Browser</string>
 	<key>LBAbbreviation</key>
-	<string>incognito private google chrome</string> 
+	<string>incognito private google chrome www safari</string> 
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
 	<key>CFBundleIconFile</key>
@@ -43,7 +43,7 @@
 	<key>LBDescription</key>
 	<dict>
 		<key>LBSummary</key>
-		<string>LaunchBar action that opens a Google Chrome browser window/tab in incognito private browsing mode. Opens to URL from active Safari tab, URL from clipboard, Google Search URL with clipboard term, or blank. If more than one option is available then will show LaunchBar item for each to you can select</string>
+		<string>LaunchBar action that opens a Google Chrome browser window/tab in incognito private browsing mode. Opens to URL from active Safari tab, URL from clipboard, Google Search URL with clipboard term, or blank. If more than one option is available will show LaunchBar items for you to select.</string>
 		<key>LBRequirements</key>
 		<string>Google Chrome Browser http://www.google.com/chrome/</string>
 		<key>LBAuthor</key>
