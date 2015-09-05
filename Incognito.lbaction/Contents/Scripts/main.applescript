@@ -33,7 +33,7 @@ on handle_string(theURL)
 	end if
 	
 	if theURL is not "" and theURL does not start with "http" then
-		set theURL to "https://www.google.com/search?q=" & theURL
+		set theURL to "https://www.google.com/search?q=" & urlEncode(theURL)
 		log "URL search " & theURL
 	end if
 	
@@ -75,6 +75,17 @@ on chrome_running()
 	end tell
 end chrome_running
 
+-- http://applescript.bratis-lover.net/library/url/#urlEncode
+on urlEncode(str)
+	local str
+	try
+		return (do shell script "/bin/echo " & quoted form of str & Â
+			" | perl -MURI::Escape -lne 'print uri_escape($_)'")
+	on error eMsg number eNum
+		error "Can't urlEncode: " & eMsg number eNum
+	end try
+end urlEncode
+
 -- called by launchbar when it has an item input
 on handle_item(item)
 	handle_string(title of item)
@@ -84,6 +95,13 @@ end handle_item
 on handle_URL(theURL, theDetails)
 	handle_string(theURL)
 end handle_URL
+
+-- called by launchbar when files are passed to the action
+on open (thePaths)
+	repeat with thePath in thePaths
+		handle_string(POSIX path of thePath as string)
+	end repeat
+end open
 
 -- called by launchbar when enter or browse into from top item
 on run

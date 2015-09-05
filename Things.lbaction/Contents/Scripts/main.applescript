@@ -28,7 +28,6 @@ on open (thePaths)
 	repeat with thePath in thePaths
 		handle_string("File " & POSIX path of thePath)
 	end repeat
-	return theResult
 end open
 
 -- load all things items 
