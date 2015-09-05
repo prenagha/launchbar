@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleIdentifier</key>
+	<string>com.renaghan.launchbar.Incognito</string>
+	<key>CFBundleName</key>
+	<string>Incognito Browser</string>
+	<key>LBAbbreviation</key>
+	<string>incognito private google chrome</string> 
+	<key>CFBundleVersion</key>
+	<string>1.0</string>
+	<key>CFBundleIconFile</key>
+  <string>incognito.png</string>
+  <key>LBARequiredApplication</key>
+  <string>com.google.Chrome</string>
+  <key>LBTextInputTitle</key>
+  <string>URL</string>
+	<key>LBDebugLogEnabled</key>
+	<true/>
+	<key>LBMinimumLaunchBarVersion</key>
+	<integer>6121</integer>
+	<key>LBScripts</key>
+	<dict>
+		<key>LBDefaultScript</key>
+		<dict>
+			<key>LBScriptName</key>
+			<string>main.applescript</string>
+      <key>LBKeepWindowActive</key>
+      <false/>
+			<key>LBRunInBackground</key>
+			<true/>
+			<key>LBRequiresArgument</key>
+			<false/>
+			<key>LBAcceptedArgumentTypes</key>
+			<array>
+			  <string>string</string>
+			</array>
+			<key>LBReturnsResult</key>
+			<false/>
+		</dict>
+	</dict>
+	<key>LBDescription</key>
+	<dict>
+		<key>LBSummary</key>
+		<string>LaunchBar action that opens a Google Chrome browser window/tab in incognito private browsing mode. Opens to blank window/tab or with passed input term in Google search or opens same URL as active Safari tab</string>
+		<key>LBRequirements</key>
+		<string>Google Chrome Browser http://www.google.com/chrome/</string>
+		<key>LBAuthor</key>
+		<string>Padraic Renaghan</string>
+		<key>LBEmail</key>
+		<string>prenagha@renaghan.com</string>
+		<key>LBWebsite</key>
+		<string>https://github.com/prenagha/launchbar</string>
+		<key>LBTwitter</key>
+		<string>@prenagha</string>
+		<key>LBArgument</key>
+		<string>URL</string>
+	</dict>
+</dict>
+</plist>
