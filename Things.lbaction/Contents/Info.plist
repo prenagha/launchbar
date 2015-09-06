@@ -9,7 +9,7 @@
 	<key>LBAbbreviation</key>
 	<string>things todo task</string> 
 	<key>CFBundleVersion</key>
-	<string>1.1</string>
+	<string>1.2</string>
 	<key>CFBundleIconFile</key>
   <string>com.culturedcode.things:checkbox_medium_done-N</string>
   <key>LBAssociatedApplication</key>

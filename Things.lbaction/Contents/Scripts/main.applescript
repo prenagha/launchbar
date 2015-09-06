@@ -77,10 +77,12 @@ on load_all()
 						copy action to end of actions
 						
 						set icon to TB & ":checkbox_big_flat-P"
+						set subt to notes of todo
 						if due date of todo is not missing value then
 							set icon to TB & ":checkbox_big_red-P"
+							set subt to "Due " & (due date of todo as string) & " " & (notes of todo)
 						end if
-						set todoOut to {title:name of todo, icon:icon, children:actions}
+						set todoOut to {title:name of todo, icon:icon, subtitle:subt, label:tag names of todo, children:actions}
 						copy todoOut to end of todosOut
 					end if
 				end repeat
