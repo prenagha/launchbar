@@ -95,12 +95,12 @@ on run
 	set theURL to ""
 	set appName to "Safari"
 	if app_running(SAFARI) then
-			tell application "Safari"
-				set theName to name of current tab of window 1
-				set theURL to URL of current tab of window 1
-				set x to {title:theName, icon:SAFARI, subtitle:theURL, |url|:theURL, action:"handle_string", actionArgument:theURL}
-				copy x to end of out
-			end tell
+		tell application "Safari"
+			set theName to name of current tab of window 1
+			set theURL to URL of current tab of window 1
+			set x to {title:theName, icon:SAFARI, subtitle:theURL, |url|:theURL, action:"handle_string", actionArgument:theURL}
+			copy x to end of out
+		end tell
 	end if
 	
 	set clip to get the clipboard as string
