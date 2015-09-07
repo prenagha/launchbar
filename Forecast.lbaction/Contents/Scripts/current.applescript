@@ -2,6 +2,10 @@
 -- Location Helper free on Mac App Store
 -- http://www.mousedown.net/mouseware/LocationHelper.html
 --
+-- NOTE: This is the text AppleScript, the LaunchBar action Info.plist refers to
+-- a **COMPILED** .scpt version of this script. You can compile this text AppleScript
+-- into .scpt using command line osacompile or by exporting/save-as within Script Editor
+--
 tell application "Location Helper"
   -- get current location
 	set geo to get location record

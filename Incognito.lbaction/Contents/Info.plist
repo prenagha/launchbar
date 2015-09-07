@@ -9,7 +9,7 @@
 	<key>LBAbbreviation</key>
 	<string>incognito private google chrome www safari</string> 
 	<key>CFBundleVersion</key>
-	<string>1.0</string>
+	<string>1.1</string>
 	<key>CFBundleIconFile</key>
   <string>incognito.png</string>
   <key>LBARequiredApplication</key>
@@ -25,7 +25,7 @@
 		<key>LBDefaultScript</key>
 		<dict>
 			<key>LBScriptName</key>
-			<string>main.applescript</string>
+			<string>main.scpt</string>
       <key>LBKeepWindowActive</key>
       <true/>
 			<key>LBRunInBackground</key>

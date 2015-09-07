@@ -1,6 +1,10 @@
 --
 -- Dismiss all active notifications
 --
+-- NOTE: This is the text AppleScript, the LaunchBar action Info.plist refers to
+-- a **COMPILED** .scpt version of this script. You can compile this text AppleScript
+-- into .scpt using command line osacompile or by exporting/save-as within Script Editor
+--
 on dlog(myObj)
 	set txt to quoted form of (myObj as string)
 	log txt
@@ -27,7 +31,7 @@ on countNbr(input)
 	set nbrs to {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"}
 	set pos to 1
 	set cnt to 0
-	repeat while pos â‰¤ (length of input)
+	repeat while pos ² (length of input)
 		if input's character pos is in nbrs then
 			set cnt to cnt + 1
 		end if
@@ -44,7 +48,7 @@ on run
 			-- otherwise it looses track and skips stuff
 			set stopAfter to (count windows) * 2
 			set iters to 1
-			repeat while (count windows) > 0 and iters â‰¤ stopAfter
+			repeat while (count windows) > 0 and iters ² stopAfter
 				set done to false
 				-- prefer Snoozing if a calendar notification is for a conference call that is upcoming
 				if (exists menu button "Snooze" of window 1) and (exists static text 2 of scroll area 1 of window 1) and (exists static text 3 of scroll area 1 of window 1) then
@@ -52,7 +56,7 @@ on run
 					set loc to value of static text 3 of scroll area 1 of window 1
 					set nbrs to my countNbr(loc)
 					-- conference calls have at least 14 numbers in the location field
-					if when is not "now" and nbrs â‰¥ 14 then
+					if when is not "now" and nbrs ³ 14 then
 						set done to true
 						click menu button "Snooze" of window 1
 					end if

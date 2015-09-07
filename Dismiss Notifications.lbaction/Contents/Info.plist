@@ -7,7 +7,7 @@
 	<key>CFBundleName</key>
 	<string>Dismiss Notifications</string>
 	<key>CFBundleVersion</key>
-	<string>1.3</string>
+	<string>1.4</string>
 	<key>CFBundleIconFile</key>
 	<string>/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/Notifications.icns</string>
 	<key>LBDebugLogEnabled</key>
@@ -17,7 +17,7 @@
 		<key>LBDefaultScript</key>
 		<dict>
 			<key>LBScriptName</key>
-			<string>dismiss.applescript</string>
+			<string>dismiss.scpt</string>
 			<key>LBRunInBackground</key>
 			<true/>
 			<key>LBRequiresArgument</key>

@@ -2,7 +2,7 @@
 function getCurrentLocation() {
   if (File.exists(LOC_APP)) {
     try {
-      var rslt = LaunchBar.execute('/usr/bin/osascript', 'current.applescript');
+      var rslt = LaunchBar.execute('/usr/bin/osascript', 'current.scpt');
       // return object containing latitude, longitude, and name properties
       var geo = JSON.parse(rslt);
       /* if (geo && geo.place && geo.place == 'Name not available') {

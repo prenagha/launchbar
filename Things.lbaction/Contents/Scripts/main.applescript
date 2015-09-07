@@ -1,6 +1,11 @@
 --
 -- launchbar integration for Things
 --
+-- NOTE: This is the text AppleScript, the LaunchBar action Info.plist refers to
+-- a **COMPILED** .scpt version of this script. You can compile this text AppleScript
+-- into .scpt using command line osacompile or by exporting/save-as within Script Editor
+--
+
 property TB : "com.culturedcode.things"
 
 -- called by launchbar when it has string input

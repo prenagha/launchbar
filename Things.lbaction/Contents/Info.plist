@@ -9,7 +9,7 @@
 	<key>LBAbbreviation</key>
 	<string>things todo task</string> 
 	<key>CFBundleVersion</key>
-	<string>1.2</string>
+	<string>1.3</string>
 	<key>CFBundleIconFile</key>
   <string>com.culturedcode.things:checkbox_medium_done-N</string>
   <key>LBAssociatedApplication</key>
@@ -27,7 +27,7 @@
 		<key>LBDefaultScript</key>
 		<dict>
 			<key>LBScriptName</key>
-			<string>main.applescript</string>
+			<string>main.scpt</string>
       <key>LBKeepWindowActive</key>
       <true/>
 			<key>LBRunInBackground</key>

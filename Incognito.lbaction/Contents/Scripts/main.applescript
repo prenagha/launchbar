@@ -3,6 +3,10 @@
 -- see http://apple.stackexchange.com/a/123909
 -- see https://github.com/chrisfsmith/launchbar/blob/master/incognito/
 --
+-- NOTE: This is the text AppleScript, the LaunchBar action Info.plist refers to
+-- a **COMPILED** .scpt version of this script. You can compile this text AppleScript
+-- into .scpt using command line osacompile or by exporting/save-as within Script Editor
+--
 property CHROME : "com.google.Chrome"
 property SAFARI : "com.apple.Safari"
 
