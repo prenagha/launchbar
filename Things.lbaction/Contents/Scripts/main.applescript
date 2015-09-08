@@ -7,6 +7,21 @@
 --
 
 property TB : "com.culturedcode.things"
+property SAFARI : "com.apple.Safari"
+
+-- debug logging to console
+on dlog(myObj)
+	set txt to quoted form of (myObj as string)
+	log txt
+	do shell script "logger -t 'LaunchBar.Things' " & txt
+end dlog
+
+-- is application running?
+on app_running(bundleId)
+	tell application "System Events"
+		return (bundle identifier of processes) contains bundleId
+	end tell
+end app_running
 
 -- called by launchbar when it has string input
 on handle_string(todo)
@@ -17,6 +32,19 @@ on handle_string(todo)
 		did_it(newTodo, "Created")
 	end if
 end handle_string
+
+-- create a new todo from active safari tab is selected
+on safari_add(todo)
+	if subtitle of todo is not "" then
+		tell application "Things"
+			set newTodo to parse quicksilver input (subtitle of todo)
+			if |url| of todo is not "" then
+				set notes of newTodo to "[url=" & (|url| of todo) & "] " & (|url| of todo) & " [/url]"
+			end if
+		end tell
+		did_it(newTodo, "Created from Safari")
+	end if
+end safari_add
 
 -- called by launchbar when it has an item input
 on handle_item(item)
@@ -100,6 +128,16 @@ on load_all()
 			end if
 		end repeat
 	end tell
+	
+	if app_running(SAFARI) then
+		tell application "Safari"
+			set theName to name of current tab of window 1
+			set theURL to URL of current tab of window 1
+			set x to {title:"Add To Do from Safari", icon:SAFARI, subtitle:theName, |url|:theURL, action:"safari_add"}
+			copy x to end of listsOut
+		end tell
+	end if
+	
 	return listsOut
 end load_all
 
@@ -196,6 +234,5 @@ end trashTodo
 
 -- called by launchbar when enter or browse into from top item
 on run
-	--moveSomeday("ZA3F9A5B-22AB-4B9E-ED15-E7FF3112BD43")
 	load_all()
 end run

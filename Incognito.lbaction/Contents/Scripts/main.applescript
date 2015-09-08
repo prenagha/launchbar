@@ -10,6 +10,7 @@
 property CHROME : "com.google.Chrome"
 property SAFARI : "com.apple.Safari"
 
+-- debug logging to console
 on dlog(myObj)
 	set txt to quoted form of (myObj as string)
 	log txt
@@ -97,7 +98,6 @@ on run
 	set out to {}
 	
 	set theURL to ""
-	set appName to "Safari"
 	if app_running(SAFARI) then
 		tell application "Safari"
 			set theName to name of current tab of window 1
