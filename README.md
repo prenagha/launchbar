@@ -8,3 +8,7 @@ The LaunchBar action `Info.plist` refers to a *COMPILED* `.scpt` version of the 
 
 You can compile these text `.applescript` files into `.scpt` files using command line `/usr/bin/osacompile` or by exporting within Script Editor
 
+[My build script to compile `.applescript` to `.scpt`](https://gist.github.com/prenagha/404284fee1b8ff86aec5)
+
+[My build script to sign and package LaunchBar actions](https://gist.github.com/prenagha/2d72121ad7478559e8c3)
+
