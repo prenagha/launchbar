@@ -129,6 +129,7 @@ on load_all()
 		end repeat
 	end tell
 	
+	set theURL to ""
 	if app_running(SAFARI) then
 		tell application "Safari"
 			set theName to name of current tab of window 1
@@ -136,6 +137,12 @@ on load_all()
 			set x to {title:"Add To Do from Safari", icon:SAFARI, subtitle:theName, |url|:theURL, action:"safari_add"}
 			copy x to end of listsOut
 		end tell
+	end if
+	
+	set clip to get the clipboard as string
+	if clip is not "" and clip is not theURL then
+		set x to {title:"Add To Do from Clipboard", subtitle:clip, icon:"ClipObject.icns", action:"handle_string", actionArgument:clip}
+		copy x to end of listsOut
 	end if
 	
 	return listsOut
