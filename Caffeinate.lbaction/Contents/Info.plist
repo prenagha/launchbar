@@ -7,7 +7,7 @@
 	<key>CFBundleName</key>
 	<string>Caffeinate</string>
 	<key>CFBundleVersion</key>
-	<string>2.2</string>
+	<string>2.3</string>
 	<key>CFBundleIconFile</key>
 	<string>Coffee.icns</string>
 	<key>LBDebugLogEnabled</key>

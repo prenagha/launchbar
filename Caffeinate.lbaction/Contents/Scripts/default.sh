@@ -51,20 +51,27 @@ then
     [[ $PROC =~ ([0-9]+)$ ]]
     dur=${BASH_REMATCH[1]}
 
-    if [[ $PROC =~ ([0-9]+):([0-9]+):([0-9]+) ]]
+    if [[ $PROC =~ (-w [0-9]+) ]]
+    then
+      # if caffeinate running while another process is running
+      str=" running PID ${dur}"
+    elif [[ $PROC =~ ([0-9]+):([0-9]+):([0-9]+) ]]
     then
       (( elapsed=${BASH_REMATCH[1]}*60*60 + ${BASH_REMATCH[2]}*60 ))
     else
       [[ $PROC =~ ([0-9]+):([0-9]+) ]]
       (( elapsed=${BASH_REMATCH[1]}*60 ))
     fi
-    if [ -z ${dur} -o ${dur} == 0 ]
+    if [ -z "${str}" ]
     then
-      remain=0
-    else
-      (( remain=$dur - $elapsed ))
+      if [ -z ${dur} -o ${dur} == 0 ]
+      then
+        remain=0
+      else
+        (( remain=$dur - $elapsed ))
+      fi
+      str=`toString $remain`
     fi
-    str=`toString $remain`
     echo "[{\"title\":\"Caffeinated awake for${str}\",\"icon\":\"$CLK\"},\
            {\"title\":\"Stop caffeinating\",\"icon\":\"$STP\",\"action\":\"stop.sh\"}]"
   fi
