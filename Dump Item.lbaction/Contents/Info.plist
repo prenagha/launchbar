@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleIdentifier</key>
+	<string>com.renaghan.launchbar.DumpItem</string>
+	<key>CFBundleName</key>
+	<string>Dump Item</string>
+	<key>LBAbbreviation</key>
+	<string>debug log</string> 
+	<key>CFBundleVersion</key>
+	<string>1.0</string>
+	<key>CFBundleIconFile</key>
+	<string>UnixExecutable.icns</string>
+	<key>LBDebugLogEnabled</key>
+	<true/>
+	<key>LBScripts</key>
+	<dict>
+		<key>LBDefaultScript</key>
+		<dict>
+			<key>LBScriptName</key>
+			<string>dump.js</string>
+			<key>LBRunInBackground</key>
+			<false/>
+			<key>LBRequiresArgument</key>
+			<false/>
+			<key>LBReturnsResult</key>
+			<true/>
+			<key>LBAcceptedArgumentTypes</key>
+			<array>
+			  <string>string</string>
+			  <string>path</string>
+			</array>
+		</dict>
+	</dict>
+	<key>LBDescription</key>
+	<dict>
+		<key>LBSummary</key>
+		<string>Dumps contents of passed in item back as LaunchBar results. Useful for LaunchBar action developers to see the kind and type of  data is being passed around.</string>
+		<key>LBAuthor</key>
+		<string>Padraic Renaghan</string>
+		<key>LBEmail</key>
+		<string>prenagha@renaghan.com</string>
+		<key>LBWebsite</key>
+		<string>https://github.com/prenagha/launchbar</string>
+		<key>LBTwitter</key>
+		<string>@prenagha</string>
+	</dict>
+</dict>
+</plist>

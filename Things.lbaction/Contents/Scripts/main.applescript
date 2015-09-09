@@ -33,27 +33,32 @@ on handle_string(todo)
 	end if
 end handle_string
 
--- create a new todo from active safari tab is selected
-on safari_add(todo)
-	if subtitle of todo is not "" then
+-- adds a URL as a new todo
+on addURL(todo, theURL)
+	if todo is not "" then
 		tell application "Things"
-			set newTodo to parse quicksilver input (subtitle of todo)
-			if |url| of todo is not "" then
-				set notes of newTodo to "[url=" & (|url| of todo) & "] " & (|url| of todo) & " [/url]"
+			set newTodo to parse quicksilver input todo
+			if theURL starts with "http" then
+				set notes of newTodo to "[url=" & theURL & "] " & theURL & " [/url]"
 			end if
 		end tell
-		did_it(newTodo, "Created from Safari")
+		did_it(newTodo, "Created from URL")
 	end if
+end addURL
+
+-- create a new todo from active safari tab is selected
+on safari_add(todo)
+	addURL((subtitle of todo), (|url| of todo))
 end safari_add
 
 -- called by launchbar when it has an item input
-on handle_item(item)
-	handle_string("Item " & title of item)
+on handle_item(todo)
+	addURL((title of todo), (|url| of todo))
 end handle_item
 
 -- called by launchbar when it has URL input
 on handle_URL(theURL, theDetails)
-	handle_string("URL " & theURL)
+	addURL(theURL, theURL)
 end handle_URL
 
 -- called by launchbar when files are passed to the action
