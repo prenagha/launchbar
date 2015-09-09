@@ -30,13 +30,15 @@
 			<array>
 			  <string>string</string>
 			  <string>path</string>
+			  <string>url</string>
+			  <string>item</string>
 			</array>
 		</dict>
 	</dict>
 	<key>LBDescription</key>
 	<dict>
 		<key>LBSummary</key>
-		<string>Dumps contents of passed in item back as LaunchBar results. Useful for LaunchBar action developers to see the kind and type of  data is being passed around.</string>
+		<string>Dumps contents of passed in item back as LaunchBar results. Useful for LaunchBar action developers to see the kind and type of data is being passed around.</string>
 		<key>LBAuthor</key>
 		<string>Padraic Renaghan</string>
 		<key>LBEmail</key>
