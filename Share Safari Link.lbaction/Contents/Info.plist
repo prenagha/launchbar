@@ -7,21 +7,19 @@
 	<key>CFBundleName</key>
 	<string>Share Safari Link</string>
 	<key>CFBundleVersion</key>
-	<string>2.0</string>
+	<string>3.0</string>
 	<key>CFBundleIconFile</key>
 	<string>com.apple.Safari</string>
 	<key>LBDebugLogEnabled</key>
 	<true/>
 	<key>LBRequiredApplication</key>
 	<string>com.apple.Safari</string>
-	<key>LBAssociatedApplication</key>
-	<string>com.apple.Safari</string>
 	<key>LBScripts</key>
 	<dict>
 		<key>LBDefaultScript</key>
 		<dict>
 			<key>LBScriptName</key>
-			<string>default.scpt</string>
+			<string>share.scpt</string>
 			<key>LBRunInBackground</key>
 			<false/>
 			<key>LBRequiresArgument</key>

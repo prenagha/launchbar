@@ -12,7 +12,7 @@ on urlencode(theText)
 		set eachCharNum to ASCII number of eachChar
 		if eachCharNum = 32 or eachCharNum > 127 then
 			set useChar to "%20"
-		else if (eachCharNum ≠ 42) and (eachCharNum ≠ 95) and (eachCharNum < 45 or eachCharNum > 46) and (eachCharNum < 48 or eachCharNum > 57) and (eachCharNum < 65 or eachCharNum > 90) and (eachCharNum < 97 or eachCharNum > 122) then
+		else if (eachCharNum � 42) and (eachCharNum � 95) and (eachCharNum < 45 or eachCharNum > 46) and (eachCharNum < 48 or eachCharNum > 57) and (eachCharNum < 65 or eachCharNum > 90) and (eachCharNum < 97 or eachCharNum > 122) then
 			set firstDig to round (eachCharNum / 16) rounding down
 			set secondDig to eachCharNum mod 16
 			if firstDig > 9 then
@@ -48,7 +48,6 @@ on basename(thePath) -- Requires POSIX path
 end basename
 
 on sendFiles(_files, _emailAddresses)
-	dlog("in sendFiles")
 	try
 		set _mailto to "mailto:?send-now=no" & makeTo(_emailAddresses)
 		set _names to ""
@@ -58,7 +57,6 @@ on sendFiles(_files, _emailAddresses)
 			set _mailto to _mailto & "&attachment-url=file://" & urlencode(_filePath)
 		end repeat
 		set _mailto to _mailto & "&subject=File:" & urlencode(_names) & "&body=" & urlencode("File attached")
-		dlog("sendFiles " & _mailto)
 		tell application "MailMate" to open location _mailto with trust
 		tell application "MailMate" to activate
 	on error error_message number error_number
@@ -69,19 +67,16 @@ on sendFiles(_files, _emailAddresses)
 end sendFiles
 
 on sendText(txt, _emailAddresses)
-	dlog("in sendText")
 	try
-		if txt starts with "➤" then
-			set myName to text 2 thru ((offset of "⬅︎" in txt) - 1) of txt
-			set myURL to text ((offset of "⬅︎" in txt) + 1) thru end of txt
+		if txt contains " http" then
+			set myName to text 1 thru ((offset of " http" in txt) - 5) of txt
+			set myURL to text ((offset of " http" in txt) + 1) thru end of txt
 			set mySubj to "Link: " & myName
-			set myBody to myName & return & myURL & return & return & "Enjoy," & return & "P"
+			set myBody to myName & return & myURL & return & return & "Enjoy"
 			set _mailto to "mailto:?send-now=yes&subject=" & urlencode(mySubj) & makeTo(_emailAddresses) & "&body=" & urlencode(myBody)
-			dlog("sendText link " & _mailto)
 			tell application "MailMate" to open location _mailto with trust
 		else
 			set _mailto to "mailto:?send-now=no&" & makeTo(_emailAddresses) & "&body=" & urlencode(txt)
-			dlog("sendText " & _mailto)
 			tell application "MailMate" to open location _mailto
 			tell application "MailMate" to activate
 		end if
