@@ -7,7 +7,7 @@
 	<key>CFBundleName</key>
 	<string>Set a Timer</string>
 	<key>CFBundleVersion</key>
-	<string>2.1</string>
+	<string>2.2</string>
 	<key>CFBundleIconFile</key>
 	<string>clock.pdf</string>
 	<key>LBDebugLogEnabled</key>
@@ -19,7 +19,7 @@
 		<key>LBDefaultScript</key>
 		<dict>
 			<key>LBScriptName</key>
-			<string>default.js</string>
+			<string>timer.js</string>
 			<key>LBRunInBackground</key>
 			<false/>
 			<key>LBRequiresArgument</key>

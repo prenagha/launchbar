@@ -17,6 +17,14 @@ on dlog(myObj)
 	do shell script "logger -t 'LaunchBar.Incognito' " & txt
 end dlog
 
+-- get the contents of the clipboard (if any) as plain text
+on get_clipboard()
+	if (the clipboard) is not {} then
+		return the clipboard as text
+	end if
+	return ""
+end get_clipboard
+
 -- called by launchbar when it has string input
 on handle_string(input)
 	tell application "LaunchBar" to hide
@@ -107,7 +115,7 @@ on run
 		end tell
 	end if
 	
-	set clip to get the clipboard as string
+	set clip to get_clipboard()
 	if clip is not "" and clip is not theURL then
 		if clip starts with "http" then
 			set theURL to clip

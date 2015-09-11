@@ -1,7 +1,5 @@
 var PREF_FILE = Action.supportPath + '/Preferences.plist';
 var TIMEOUT = 10.0;
-var ACTION_INFO = 'https://raw.githubusercontent.com/prenagha/launchbar/master/Forecast.lbaction/Contents/Info.plist';
-var LB_INFO = 'http://sw-update.obdev.at/update-feeds/launchbar-6.plist';
 
 var langs = {};
 langs['en'] = 'English';
@@ -40,60 +38,6 @@ function getSettings() {
     ,'icon':'com.apple.systempreferences'
     ,'action':'actionSettings'
     ,'actionReturnsItems':true};
-}
-
-function checkVersion() {
-  var items = [];
-  try {
-    var result = HTTP.getPlist(LB_INFO, TIMEOUT);
-    if (result && result.data) {
-      if (result.data[0].BundleVersion > LaunchBar.version) {
-        items.push({'title':'Newer version of LaunchBar is available'
-          ,'subtitle':'Newest is ' + result.data[0].BundleShortVersionString 
-            + ' you have ' + LaunchBar.shortVersion
-          ,'icon':'at.obdev.LaunchBar'
-          ,'url':'http://www.obdev.at/products/launchbar/download.html'});
-      } else {
-        items.push({'title':'LaunchBar is up to date'
-          ,'subtitle':'Newest is ' + result.data[0].BundleShortVersionString 
-            + ' you have ' + LaunchBar.shortVersion
-          ,'icon':'at.obdev.LaunchBar'
-          ,'url':'http://www.obdev.at/products/launchbar/download.html'});
-      }
-    } else if (result && result.error != undefined) {
-      items.push({'title':'Error checking LaunchBar version - ' + result.error
-        ,'subtitle':result.error
-        ,'icon':ALERT_ICON
-        ,'url':LB_INFO});
-    }
-
-    var result = HTTP.getPlist(ACTION_INFO, TIMEOUT);
-    if (result && result.data) {
-      if (result.data.CFBundleVersion > Action.version) {
-        items.push({'title':'Newer version of Forecast action is available'
-          ,'subtitle':'Newest is ' + result.data.CFBundleVersion 
-            + ' you have ' + Action.version
-          ,'icon':'Sun-Low.png'
-          ,'url':'https://github.com/prenagha/launchbar/'});
-      } else {
-        items.push({'title':'Forecast action is up to date'
-          ,'subtitle':'Newest is ' + result.data.CFBundleVersion 
-            + ' you have ' + Action.version
-          ,'icon':'Sun-Low.png'
-          ,'url':'https://github.com/prenagha/launchbar/'});
-      }
-    } else if (result && result.error != undefined) {
-      items.push({'title':'Error checking Forecast action version - ' + result.error
-        ,'subtitle':result.error
-        ,'icon':ALERT_ICON
-        ,'url':ACTION_INFO});
-    }
-  } catch (exception) {
-    LaunchBar.log('Error checkVersion ' + exception);
-    LaunchBar.alert('Error checkVersion', exception);
-  }
-
-  return items;
 }
 
 function actionSettings() {
@@ -180,8 +124,6 @@ function actionSettings() {
   items.push({'title':'Debug Mode - ' + Action.preferences.debug
     ,'subtitle':'Toggle debug mode, adds items that link to API calls'
     ,'icon':'com.apple.systempreferences','action':'actionDebug'});
-
-  items = items.concat(checkVersion());
 
   var body = 'Forecast version: ' + Action.version 
     + '\nLaunchBar version: ' + LaunchBar.shortVersion + ' (' + LaunchBar.version + ')' 

@@ -7,7 +7,7 @@
 	<key>CFBundleName</key>
 	<string>Screenshot</string>
 	<key>CFBundleVersion</key>
-	<string>2.0</string>
+	<string>2.1</string>
 	<key>CFBundleIconFile</key>
 	<string>com.apple.Grab</string>
 	<key>LBDebugLogEnabled</key>
@@ -17,7 +17,7 @@
 		<key>LBDefaultScript</key>
 		<dict>
 			<key>LBScriptName</key>
-			<string>default.js</string>
+			<string>screenshot.js</string>
 			<key>LBRunInBackground</key>
 			<true/>
 			<key>LBRequiresArgument</key>

@@ -7,7 +7,7 @@
 	<key>CFBundleName</key>
 	<string>Copy to iPhone</string>
 	<key>CFBundleVersion</key>
-	<string>2.2</string>
+	<string>2.3</string>
 	<key>CFBundleIconFile</key>
 	<string>it.danilotorrisi.command-c-osx</string>
 	<key>LBDebugLogEnabled</key>
@@ -23,7 +23,7 @@
 		<key>LBDefaultScript</key>
 		<dict>
 			<key>LBScriptName</key>
-			<string>default.js</string>
+			<string>copy-iphone.js</string>
 			<key>LBRunInBackground</key>
 			<true/>
 			<key>LBRequiresArgument</key>

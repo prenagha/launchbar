@@ -144,7 +144,7 @@ on load_all()
 		end tell
 	end if
 	
-	set clip to get the clipboard as string
+	set clip to get_clipboard()
 	if clip is not "" and clip is not theURL then
 		set x to {title:"Add To Do from Clipboard", subtitle:clip, icon:"ClipObject.icns", action:"handle_string", actionArgument:clip}
 		copy x to end of listsOut
@@ -152,6 +152,14 @@ on load_all()
 	
 	return listsOut
 end load_all
+
+-- get the contents of the clipboard (if any) as plain text
+on get_clipboard()
+	if (the clipboard) is not {} then
+		return the clipboard as text
+	end if
+	return ""
+end get_clipboard
 
 -- get a list by id
 on get_list(listId)

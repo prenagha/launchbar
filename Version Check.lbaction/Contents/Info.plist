@@ -3,31 +3,23 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleIdentifier</key>
-	<string>com.renaghan.launchbar.Caffeinate</string>
+	<string>com.renaghan.launchbar.Version</string>
 	<key>CFBundleName</key>
-	<string>Caffeinate</string>
+	<string>Version Check</string>
 	<key>CFBundleVersion</key>
-	<string>2.4</string>
+	<string>1.0</string>
 	<key>CFBundleIconFile</key>
-	<string>Coffee.icns</string>
+	<string>Pref_SoftwareUpdate.icns</string>
 	<key>LBDebugLogEnabled</key>
 	<true/>
-	<key>LBTextInputTitle</key>
-	<string>Duration e.g. 0/10m/2h</string>
 	<key>LBScripts</key>
 	<dict>
 		<key>LBDefaultScript</key>
 		<dict>
 			<key>LBScriptName</key>
-			<string>caffeinate.sh</string>
+			<string>check.js</string>
 			<key>LBRunInBackground</key>
 			<false/>
-			<key>LBRequiresArgument</key>
-			<false/>
-			<key>LBAcceptedArgumentTypes</key>
-			<array>
-			  <string>string</string>
-			</array>
 			<key>LBReturnsResult</key>
 			<true/>
 		</dict>
@@ -35,7 +27,7 @@
 	<key>LBDescription</key>
 	<dict>
 		<key>LBSummary</key>
-		<string>Keep system awake, as caffeine does, for a specified period of time. Uses built in system caffeinate command.</string>
+		<string>Go through non built-in actions and check to see if new version is available. Actions should specify a UpdateURL key in the LBDescription dictionary in the Info.plist of their action pointing at the URL which returns the Info.plist of the latest version of the action. Otherwise will attempt to construct the URL using LBWebsite key.</string>
 		<key>LBAuthor</key>
 		<string>Padraic Renaghan</string>
 		<key>LBEmail</key>
@@ -44,8 +36,8 @@
 		<string>https://github.com/prenagha/launchbar</string>
 		<key>LBTwitter</key>
 		<string>@prenagha</string>
-		<key>LBArgument</key>
-		<string>Duration to stay awake, e.g. "10m", "2h". Hours by default. Use "0" to caffeinate forever.</string>
+		<key>UpdateURL</key>
+		<string>https://raw.githubusercontent.com/prenagha/launchbar/master/Version Check.lbaction/Contents/Info.plist</string>
 	</dict>
 </dict>
 </plist>

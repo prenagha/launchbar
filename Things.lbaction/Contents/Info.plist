@@ -9,7 +9,7 @@
 	<key>LBAbbreviation</key>
 	<string>things todo task</string> 
 	<key>CFBundleVersion</key>
-	<string>1.5</string>
+	<string>1.6</string>
 	<key>CFBundleIconFile</key>
   <string>com.culturedcode.things:checkbox_medium_done-N</string>
   <key>LBAssociatedApplication</key>
@@ -27,7 +27,7 @@
 		<key>LBDefaultScript</key>
 		<dict>
 			<key>LBScriptName</key>
-			<string>main.scpt</string>
+			<string>things.scpt</string>
       <key>LBKeepWindowActive</key>
       <true/>
 			<key>LBRunInBackground</key>
@@ -37,6 +37,7 @@
 			<key>LBAcceptedArgumentTypes</key>
 			<array>
 			  <string>string</string>
+			  <string>path</string>
 			</array>
 			<key>LBReturnsResult</key>
 			<true/>
@@ -58,6 +59,8 @@
 		<string>@prenagha</string>
 		<key>LBArgument</key>
 		<string>Text of new to do to create</string>
+		<key>UpdateURL</key>
+		<string>https://raw.githubusercontent.com/prenagha/launchbar/master/Things.lbaction/Contents/Info.plist</string>
 	</dict>
 </dict>
 </plist>
