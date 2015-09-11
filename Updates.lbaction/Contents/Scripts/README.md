@@ -1,19 +1,13 @@
-# Version Check Action
+# Action Updates Action
 
 Custom Actions are a great part of LaunchBar. But keeping them up to date is difficult. This action helps by trying to check the most current version of each custom action compared to the version you have installed. If they are different it will tell you that a newer version is available.
 
 ## Update URL
-This action relies on a URL pointing to the Info.plist of most current version of the custom action.
+This action relies on a URL specified in the `/LBDescription/LBUpdateInfo` key in `Info.plist` pointing to the `Info.plist` of most current version of the custom action.
+Actions may additionally specify the download URL for the `.lbaction` file package of the latest version of the action using the `/LBDescription/LBUpdateDownload` `Info.plist` key.
 
-A custom action can tell this action that URL by
-* `LBUpdateURL` property in Info.plist
-* `LBDescription/LBUpdateURL` property in Info.plist
-* `LBDescription/UpdateURL` property in Info.plist
-* If the `LBDescription/LBWebsite` property contains `github.com` then this action guesses at what the Info.plist URL is 
-`https://raw.githubusercontent.com/[user]/[repo]/master/[action file]/Contents/Info.plist`
-
-You may specify the Update URL for any action you have installed by setting a preference in this action's local preferences file 
-`~/Library/Application Support/LaunchBar/Action Support/com.renaghan.launchbar.Version/Preferences.plist`
+You may override/specify the Update URL for any action you have installed by setting a preference in this action's local preferences file 
+`~/Library/Application Support/LaunchBar/Action Support/com.renaghan.launchbar.Updates/Preferences.plist`
 
 ## Preferences Example
 
@@ -22,7 +16,7 @@ You may specify the Update URL for any action you have installed by setting a pr
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>UpdateURL</key>
+	<key>LBUpdateInfo</key>
 	<dict>
 		<key>at.mlinzner.LaunchBar.action.KeyboardMaestro</key>
 		<string>https://raw.githubusercontent.com/mlinzner/LaunchBarActions/master/actions/Keyboard%20Maestro/Keyboard%20Maestro%20Macros.lbaction/Contents/Info.plist</string>

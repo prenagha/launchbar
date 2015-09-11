@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleIdentifier</key>
-	<string>com.renaghan.launchbar.Version</string>
+	<string>com.renaghan.launchbar.Updates</string>
 	<key>CFBundleName</key>
-	<string>Version Check</string>
+	<string>Action Updates</string>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
 	<key>CFBundleIconFile</key>
@@ -17,7 +17,7 @@
 		<key>LBDefaultScript</key>
 		<dict>
 			<key>LBScriptName</key>
-			<string>check.js</string>
+			<string>updates.js</string>
 			<key>LBRunInBackground</key>
 			<false/>
 			<key>LBReturnsResult</key>
@@ -27,7 +27,7 @@
 	<key>LBDescription</key>
 	<dict>
 		<key>LBSummary</key>
-		<string>Go through non built-in actions and check to see if new version is available. Actions should specify a UpdateURL key in the LBDescription dictionary in the Info.plist of their action pointing at the URL which returns the Info.plist of the latest version of the action. Otherwise will attempt to construct the URL using LBWebsite key.</string>
+		<string>Checks custom actions to check to see if new version is available. Actions should specify a /LBDescription/LBUpdateInfo key in the Info.plist of their action pointing at the URL which returns the Info.plist of the latest version of the action. Additionally they may specify a /LBDescription/LBUpdateDownload key specifying the URL to download the latest .lbaction package of the action.</string>
 		<key>LBAuthor</key>
 		<string>Padraic Renaghan</string>
 		<key>LBEmail</key>
@@ -36,8 +36,10 @@
 		<string>https://github.com/prenagha/launchbar</string>
 		<key>LBTwitter</key>
 		<string>@prenagha</string>
-		<key>UpdateURL</key>
-		<string>https://raw.githubusercontent.com/prenagha/launchbar/master/Version Check.lbaction/Contents/Info.plist</string>
+	  <key>LBUpdateInfo</key>
+	  <string>https://raw.githubusercontent.com/prenagha/launchbar/master/Updates.lbaction/Contents/Info.plist</string>
+	  <key>LBUpdateDownload</key>
+	  <string>https://dl.dropboxusercontent.com/u/1094926/lbdist/Updates.lbaction</string>
 	</dict>
 </dict>
 </plist>

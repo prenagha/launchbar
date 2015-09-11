@@ -150,28 +150,18 @@ function checkAction(actionsDir, actionPackage) {
 }
 
 function getUpdateURL(actionPackage, plist) {
-  if (Action.preferences.UpdateURL
-   && Action.preferences.UpdateURL[plist.CFBundleIdentifier] 
-   && Action.preferences.UpdateURL[plist.CFBundleIdentifier] == "SKIP")
+  if (Action.preferences.LBUpdateInfo
+   && Action.preferences.LBUpdateInfo[plist.CFBundleIdentifier] 
+   && Action.preferences.LBUpdateInfo[plist.CFBundleIdentifier] == "SKIP")
     return "SKIP";
-  if (Action.preferences.UpdateURL
-   && Action.preferences.UpdateURL[plist.CFBundleIdentifier] 
-   && Action.preferences.UpdateURL[plist.CFBundleIdentifier].startsWith('http'))
-    return Action.preferences.UpdateURL[plist.CFBundleIdentifier];
+  if (Action.preferences.LBUpdateInfo
+   && Action.preferences.LBUpdateInfo[plist.CFBundleIdentifier] 
+   && Action.preferences.LBUpdateInfo[plist.CFBundleIdentifier].startsWith('http'))
+    return Action.preferences.LBUpdateInfo[plist.CFBundleIdentifier];
   if (plist 
-   && plist.LBUpdateURL 
-   && plist.LBUpdateURL.startsWith('http'))
-    return plist.LBUpdateURL;
-  if (plist 
-   && plist.LBDescription 
-   && plist.LBDescription.LBUpdateURL 
-   && plist.LBDescription.LBUpdateURL.startsWith('http'))
-    return plist.LBDescription.LBUpdateURL;
-  if (plist 
-   && plist.LBDescription 
-   && plist.LBDescription.UpdateURL 
-   && plist.LBDescription.UpdateURL.startsWith('http'))
-    return plist.LBDescription.UpdateURL;
+   && plist.LBDescription.LBUpdateInfo 
+   && plist.LBDescription.LBUpdateInfo.startsWith('http'))
+    return plist.LBDescription.LBUpdateInfo;
   if (plist
    && plist.LBDescription 
    && plist.LBDescription.LBWebsite 
