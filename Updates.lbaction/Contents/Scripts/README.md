@@ -10,7 +10,6 @@ You may override/specify the Update URL for any action you have installed by set
 `~/Library/Application Support/LaunchBar/Action Support/com.renaghan.launchbar.Updates/Preferences.plist`
 
 ## Preferences Example
-
 ```
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
@@ -30,6 +29,25 @@ You may override/specify the Update URL for any action you have installed by set
 		<string>https://raw.githubusercontent.com/nbjahan/launchbar-livedic/master/src/Info.plist</string>
 		<key>nbjahan.launchbar.spotlight</key>
 		<string>https://raw.githubusercontent.com/nbjahan/launchbar-spotlight/master/src/Info.plist</string>
+	</dict>
+</dict>
+</plist>
+```
+
+## Action Info.plist Example
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  ...
+	<key>LBDescription</key>
+	<dict>
+	  ...
+	  <key>LBUpdateInfo</key>
+	  <string>https://raw.githubusercontent.com/jsmith/launchbar/master/Checker.lbaction/Contents/Info.plist</string>
+	  <key>LBUpdateDownload</key>
+	  <string>https://dl.dropboxusercontent.com/u/55/lbdist/Checker.lbaction</string>
 	</dict>
 </dict>
 </plist>
