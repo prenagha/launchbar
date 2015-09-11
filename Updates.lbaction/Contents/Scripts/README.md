@@ -2,7 +2,7 @@
 
 Custom Actions are a great part of LaunchBar. But keeping them up to date is difficult. This action helps by trying to check the most current version of each custom action compared to the version you have installed. If they are different it will tell you that a newer version is available.
 
-## Update URL
+## Preferences
 This action relies on a URL specified in the `/LBDescription/LBUpdate` key in `Info.plist` pointing to the `Info.plist` of most current version of the custom action.
 Actions may additionally specify the download URL for the `.lbaction` file package of the latest version of the action using the `/LBDescription/LBDownload` `Info.plist` key.
 
@@ -10,6 +10,10 @@ You may override/specify the Update URL for any action you have installed by set
 `~/Library/Application Support/LaunchBar/Action Support/com.renaghan.launchbar.Updates/Preferences.plist`
 
 You may also tell this action that a custom action should be skipped by setting the LBUpdate URL to `SKIP` in this action's local preferences file.
+
+The action will search for custom actions in `~/Application Support/LaunchBar/Actions`. You may override this by setting a local `ActionsDir` preference.
+
+The action will attempt to download newer actions when possible. It will download to `~/Downloads`. You may override this by setting a local `DownloadDir` preference. Set this preference to `SKIP` to disable downloading entirely.
 
 ## Preferences Example
 ```

@@ -7,7 +7,7 @@
 	<key>CFBundleName</key>
 	<string>Dismiss Notifications</string>
 	<key>CFBundleVersion</key>
-	<string>1.4</string>
+	<string>2.0</string>
 	<key>CFBundleIconFile</key>
 	<string>/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/Notifications.icns</string>
 	<key>LBDebugLogEnabled</key>
@@ -38,6 +38,10 @@
 		<string>https://github.com/prenagha/launchbar</string>
 		<key>LBTwitter</key>
 		<string>@prenagha</string>
+	  <key>LBUpdate</key>
+	  <string>https://raw.githubusercontent.com/prenagha/launchbar/master/Dismiss Notifications.lbaction/Contents/Info.plist</string>
+	  <key>LBDownload</key>
+	  <string>https://dl.dropboxusercontent.com/u/1094926/lbdist/Dismiss Notifications.lbaction</string>
 	</dict>
 </dict>
 </plist>

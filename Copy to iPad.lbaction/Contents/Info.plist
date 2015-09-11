@@ -7,7 +7,7 @@
 	<key>CFBundleName</key>
 	<string>Copy to iPad</string>
 	<key>CFBundleVersion</key>
-	<string>2.3</string>
+	<string>3.0</string>
 	<key>CFBundleIconFile</key>
 	<string>it.danilotorrisi.command-c-osx</string>
 	<key>LBDebugLogEnabled</key>
@@ -53,6 +53,10 @@
 		<string>@prenagha</string>
 		<key>LBArgument</key>
 		<string>Selected text or file in LaunchBar or contents of system clipboard</string>
+	  <key>LBUpdate</key>
+	  <string>https://raw.githubusercontent.com/prenagha/launchbar/master/Copy to iPad.lbaction/Contents/Info.plist</string>
+	  <key>LBDownload</key>
+	  <string>https://dl.dropboxusercontent.com/u/1094926/lbdist/Copy to iPad.lbaction</string>
 	</dict>
 </dict>
 </plist>

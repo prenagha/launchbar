@@ -9,7 +9,7 @@
 	<key>LBAbbreviation</key>
 	<string>things todo task</string> 
 	<key>CFBundleVersion</key>
-	<string>1.6</string>
+	<string>2.0</string>
 	<key>CFBundleIconFile</key>
   <string>com.culturedcode.things:checkbox_medium_done-N</string>
   <key>LBAssociatedApplication</key>
@@ -59,8 +59,10 @@
 		<string>@prenagha</string>
 		<key>LBArgument</key>
 		<string>Text of new to do to create</string>
-		<key>UpdateURL</key>
-		<string>https://raw.githubusercontent.com/prenagha/launchbar/master/Things.lbaction/Contents/Info.plist</string>
+	  <key>LBUpdate</key>
+	  <string>https://raw.githubusercontent.com/prenagha/launchbar/master/Things.lbaction/Contents/Info.plist</string>
+	  <key>LBDownload</key>
+	  <string>https://dl.dropboxusercontent.com/u/1094926/lbdist/Things.lbaction</string>
 	</dict>
 </dict>
 </plist>

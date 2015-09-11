@@ -7,7 +7,7 @@
 	<key>CFBundleName</key>
 	<string>Ack Code Search</string>
 	<key>CFBundleVersion</key>
-	<string>2.1</string>
+	<string>3.0</string>
 	<key>CFBundleIconFile</key>
 	<string>Glass.icns</string>
 	<key>LBDebugLogEnabled</key>
@@ -48,6 +48,10 @@
 		<string>@prenagha</string>
 		<key>LBArgument</key>
 		<string>Pattern to search for</string>
+	  <key>LBUpdate</key>
+	  <string>https://raw.githubusercontent.com/prenagha/launchbar/master/Ack.lbaction/Contents/Info.plist</string>
+	  <key>LBDownload</key>
+	  <string>https://dl.dropboxusercontent.com/u/1094926/lbdist/Ack.lbaction</string>
 	</dict>
 </dict>
 </plist>

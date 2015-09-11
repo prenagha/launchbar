@@ -7,7 +7,7 @@
 	<key>CFBundleName</key>
 	<string>Screenshot</string>
 	<key>CFBundleVersion</key>
-	<string>2.1</string>
+	<string>3.0</string>
 	<key>CFBundleIconFile</key>
 	<string>com.apple.Grab</string>
 	<key>LBDebugLogEnabled</key>
@@ -44,6 +44,10 @@
 		<string>@prenagha</string>
 		<key>LBResult</key>
 		<string>Screenshot file optimized through ImageAlpha</string>
+	  <key>LBUpdate</key>
+	  <string>https://raw.githubusercontent.com/prenagha/launchbar/master/Screenshot.lbaction/Contents/Info.plist</string>
+	  <key>LBDownload</key>
+	  <string>https://dl.dropboxusercontent.com/u/1094926/lbdist/Screenshot.lbaction</string>
 	</dict>
 </dict>
 </plist>

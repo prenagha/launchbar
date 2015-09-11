@@ -9,7 +9,7 @@
 	<key>LBAbbreviation</key>
 	<string>debug log</string> 
 	<key>CFBundleVersion</key>
-	<string>1.0</string>
+	<string>2.0</string>
 	<key>CFBundleIconFile</key>
 	<string>UnixExecutable.icns</string>
 	<key>LBDebugLogEnabled</key>
@@ -47,6 +47,10 @@
 		<string>https://github.com/prenagha/launchbar</string>
 		<key>LBTwitter</key>
 		<string>@prenagha</string>
+	  <key>LBUpdate</key>
+	  <string>https://raw.githubusercontent.com/prenagha/launchbar/master/Dump Item.lbaction/Contents/Info.plist</string>
+	  <key>LBDownload</key>
+	  <string>https://dl.dropboxusercontent.com/u/1094926/lbdist/Dump Item.lbaction</string>
 	</dict>
 </dict>
 </plist>

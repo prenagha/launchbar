@@ -163,15 +163,16 @@ function checkAction(actionsDir, actionPackage, downloadDir) {
      && result.data.LBDescription
      && result.data.LBDescription.LBDownload
      && result.data.LBDescription.LBDownload.startsWith('http')) {
+      LaunchBar.debugLog('Download ' + actionPackage + ' from ' + result.data.LBDescription.LBDownload);
       var d = HTTP.getData(result.data.LBDescription.LBDownload);
-      if (result.response.status == 200 && result.data != undefined) {
+      if (d.response.status == 200 && d.data != undefined) {
         downloadFile = downloadDir + '/' + actionPackage;
         LaunchBar.debugLog("Write download to " + downloadFile);
-        File.writeData(result.data, downloadFile);
-      } else if (result.error != undefined) {
-        downloadMsg = 'Unable to download ' + result.error;
+        File.writeData(d.data, downloadFile);
+      } else if (d.error != undefined) {
+        downloadMsg = 'Unable to download ' + d.error;
       } else {
-        downloadMsg = 'Unable to download ' + result.response.localizedStatus;
+        downloadMsg = 'Unable to download ' + d.response.localizedStatus;
       }
     }
   
@@ -213,17 +214,6 @@ function getUpdateURL(actionPackage, plist) {
    && plist.LBDescription.LBUpdate.startsWith('http'))
     return plist.LBDescription.LBUpdate;
     
-  if (plist.LBDescription 
-   && plist.LBDescription.LBWebsite 
-   && plist.LBDescription.LBWebsite.includes('github.com/')) {
-    var parts = plist.LBDescription.LBWebsite.split('/');
-    return 'https://raw.githubusercontent.com/'
-      + parts[3] + '/' + parts[4]
-      + '/master/'
-      + encodeURIComponent(actionPackage)
-      + '/Contents/Info.plist';
-  }
-
   return "";
 }
 
