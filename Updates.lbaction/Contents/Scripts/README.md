@@ -13,7 +13,7 @@ You may also tell this action that a custom action should be skipped by setting 
 
 The action will search for custom actions in `~/Application Support/LaunchBar/Actions`. You may override this by setting a local `ActionsDir` preference.
 
-The action will attempt to download newer actions when possible. It will download to `~/Downloads`. You may override this by setting a local `DownloadDir` preference. Set this preference to `SKIP` to disable downloading entirely.
+The action will attempt to download newer action versions when possible. It will download to `~/Downloads`. You may override this by setting a local `DownloadDir` preference. Set this preference to `SKIP` to disable downloading entirely.
 
 ## Preferences Example
 ```

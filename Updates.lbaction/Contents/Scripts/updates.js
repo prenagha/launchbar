@@ -113,6 +113,7 @@ function checkAction(actionsDir, actionPackage, downloadDir) {
       ,'url':plist.LBDescription.LBWebsite};
   }
 
+  updateURL = encodeURI(updateURL);
   LaunchBar.debugLog(actionPackage + ' URL ' + updateURL);
 
   var result = {};
@@ -163,16 +164,17 @@ function checkAction(actionsDir, actionPackage, downloadDir) {
      && result.data.LBDescription
      && result.data.LBDescription.LBDownload
      && result.data.LBDescription.LBDownload.startsWith('http')) {
-      LaunchBar.debugLog('Download ' + actionPackage + ' from ' + result.data.LBDescription.LBDownload);
-      var d = HTTP.getData(result.data.LBDescription.LBDownload);
+      var downloadURL = encodeURI(result.data.LBDescription.LBDownload);
+      LaunchBar.debugLog('Download ' + actionPackage + ' from ' + downloadURL);
+      var d = HTTP.getData(downloadURL);
       if (d.response.status == 200 && d.data != undefined) {
         downloadFile = downloadDir + '/' + actionPackage;
         LaunchBar.debugLog("Write download to " + downloadFile);
         File.writeData(d.data, downloadFile);
       } else if (d.error != undefined) {
-        downloadMsg = 'Unable to download ' + d.error;
+        downloadMsg = 'Unable to download ' + d.error + ' -- ' + downloadURL;
       } else {
-        downloadMsg = 'Unable to download ' + d.response.localizedStatus;
+        downloadMsg = 'Unable to download ' + d.response.localizedStatus + ' -- ' + downloadURL;
       }
     }
   
