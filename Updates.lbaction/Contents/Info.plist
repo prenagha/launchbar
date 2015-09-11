@@ -27,7 +27,7 @@
 	<key>LBDescription</key>
 	<dict>
 		<key>LBSummary</key>
-		<string>Checks custom actions to check to see if new version is available. Actions should specify a /LBDescription/LBUpdateInfo key in the Info.plist of their action pointing at the URL which returns the Info.plist of the latest version of the action. Additionally they may specify a /LBDescription/LBUpdateDownload key specifying the URL to download the latest .lbaction package of the action.</string>
+		<string>Checks custom actions to check to see if new version is available. Actions should specify a /LBDescription/LBUpdate key in the Info.plist of their action pointing at the URL which returns the Info.plist of the latest version of the action. Additionally they may specify a /LBDescription/LBDownload key specifying the URL to download the latest .lbaction package of the action.</string>
 		<key>LBAuthor</key>
 		<string>Padraic Renaghan</string>
 		<key>LBEmail</key>
@@ -36,9 +36,9 @@
 		<string>https://github.com/prenagha/launchbar</string>
 		<key>LBTwitter</key>
 		<string>@prenagha</string>
-	  <key>LBUpdateInfo</key>
+	  <key>LBUpdate</key>
 	  <string>https://raw.githubusercontent.com/prenagha/launchbar/master/Updates.lbaction/Contents/Info.plist</string>
-	  <key>LBUpdateDownload</key>
+	  <key>LBDownload</key>
 	  <string>https://dl.dropboxusercontent.com/u/1094926/lbdist/Updates.lbaction</string>
 	</dict>
 </dict>

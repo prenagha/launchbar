@@ -14,21 +14,44 @@ function run(arg) {
   var error = [];
   loadResult(items, good, bad, error, checkLaunchBar());
 
+  var downloadDir = LaunchBar.homeDirectory + "/Downloads";
+  if (Action.preferences.DownloadDir) {
+    if (Action.preferences.DownloadDir == "SKIP") {
+      downloadDir = "";
+    } else {
+      downloadDir = Action.preferences.DownloadDir;
+    }
+  }
+  if (downloadDir != "") {
+    if (File.exists(downloadDir) 
+     && File.isDirectory(downloadDir) 
+     && File.isWritable(downloadDir)) {
+     LaunchBar.debugLog("Download dir " + downloadDir);
+    } else {
+      error.push({'title': 'Download dir not accessible'
+        ,'subtitle':downloadDir
+        ,'alwaysShowsSubtitle': true
+        ,'icon':ALERT_ICON});
+      downloadDir = "";
+    }
+  }
+    
   var actionsDir = LaunchBar.homeDirectory + "/Library/Application Support/LaunchBar/Actions";  
   if (Action.preferences.ActionsDir)
     actionsDir = Action.preferences.ActionsDir;
 
-  if (File.isDirectory(actionsDir) && File.isReadable(actionsDir)) {
+  if (File.exists(actionsDir)
+   && File.isDirectory(actionsDir) 
+   && File.isReadable(actionsDir)) {
     LaunchBar.debugLog('Checking actions in ' + actionsDir);
     var actions = File.getDirectoryContents(actionsDir);
     actions.forEach(function(actionPackage) {
-      loadResult(items, good, bad, error, checkAction(actionsDir, actionPackage));
+      loadResult(items, good, bad, error, checkAction(actionsDir, actionPackage, downloadDir));
     });
   } else {
     error.push({'title': 'Actions dir not accessible'
       ,'subtitle':actionsDir
       ,'alwaysShowsSubtitle': true
-      ,path:actionsDir
       ,'icon':ALERT_ICON});
   }
 
@@ -56,7 +79,7 @@ function loadResult(items, good, bad, error, item) {
   items.push(item);
 }
 
-function checkAction(actionsDir, actionPackage) {
+function checkAction(actionsDir, actionPackage, downloadDir) {
   if (!actionPackage.endsWith(".lbaction"))
     return;
   var plistFile = actionsDir + "/" + actionPackage + "/Contents/Info.plist";
@@ -133,11 +156,34 @@ function checkAction(actionsDir, actionPackage) {
   }
     
   if (plist.CFBundleVersion != result.data.CFBundleVersion) {
-    return {'title': plist.CFBundleName + ': Newer version available'
+  
+    var downloadMsg = "";
+    var downloadFile = "";
+    if (downloadDir != ""
+     && result.data.LBDescription
+     && result.data.LBDescription.LBDownload
+     && result.data.LBDescription.LBDownload.startsWith('http')) {
+      var d = HTTP.getData(result.data.LBDescription.LBDownload);
+      if (result.response.status == 200 && result.data != undefined) {
+        downloadFile = downloadDir + '/' + actionPackage;
+        LaunchBar.debugLog("Write download to " + downloadFile);
+        File.writeData(result.data, downloadFile);
+      } else if (result.error != undefined) {
+        downloadMsg = 'Unable to download ' + result.error;
+      } else {
+        downloadMsg = 'Unable to download ' + result.response.localizedStatus;
+      }
+    }
+  
+    return {'title': plist.CFBundleName + ': Newer version '
+        + (downloadFile == '' ? 'available' : 'downloaded')
+        + (downloadMsg = '' ? '': ' ' + downloadMsg)
       ,'subtitle': plist.CFBundleVersion + ' ➔ ' + result.data.CFBundleVersion
       ,'alwaysShowsSubtitle': true
       ,'icon':CAUTION
-      ,'url':plist.LBDescription.LBWebsite};
+      ,'path': (downloadFile = '' ? null : downloadFile)
+      ,'url': plist.LBDescription.LBWebsite
+      };
   } else {
     return {'title': plist.CFBundleName + ': up to date'
       ,'subtitle': plist.CFBundleVersion + ' == ' + result.data.CFBundleVersion
@@ -150,20 +196,24 @@ function checkAction(actionsDir, actionPackage) {
 }
 
 function getUpdateURL(actionPackage, plist) {
-  if (Action.preferences.LBUpdateInfo
-   && Action.preferences.LBUpdateInfo[plist.CFBundleIdentifier] 
-   && Action.preferences.LBUpdateInfo[plist.CFBundleIdentifier] == "SKIP")
+  if (Action.preferences
+   && Action.preferences.LBUpdate
+   && Action.preferences.LBUpdate[plist.CFBundleIdentifier] 
+   && Action.preferences.LBUpdate[plist.CFBundleIdentifier] == "SKIP")
     return "SKIP";
-  if (Action.preferences.LBUpdateInfo
-   && Action.preferences.LBUpdateInfo[plist.CFBundleIdentifier] 
-   && Action.preferences.LBUpdateInfo[plist.CFBundleIdentifier].startsWith('http'))
-    return Action.preferences.LBUpdateInfo[plist.CFBundleIdentifier];
-  if (plist 
-   && plist.LBDescription.LBUpdateInfo 
-   && plist.LBDescription.LBUpdateInfo.startsWith('http'))
-    return plist.LBDescription.LBUpdateInfo;
-  if (plist
-   && plist.LBDescription 
+
+  if (Action.preferences
+   && Action.preferences.LBUpdate
+   && Action.preferences.LBUpdate[plist.CFBundleIdentifier] 
+   && Action.preferences.LBUpdate[plist.CFBundleIdentifier].startsWith('http'))
+    return Action.preferences.LBUpdate[plist.CFBundleIdentifier];
+
+  if (plist.LBDescription
+   && plist.LBDescription.LBUpdate
+   && plist.LBDescription.LBUpdate.startsWith('http'))
+    return plist.LBDescription.LBUpdate;
+    
+  if (plist.LBDescription 
    && plist.LBDescription.LBWebsite 
    && plist.LBDescription.LBWebsite.includes('github.com/')) {
     var parts = plist.LBDescription.LBWebsite.split('/');
