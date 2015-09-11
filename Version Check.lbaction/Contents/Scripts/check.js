@@ -28,6 +28,7 @@ function run(arg) {
     error.push({'title': 'Actions dir not accessible'
       ,'subtitle':actionsDir
       ,'alwaysShowsSubtitle': true
+      ,path:actionsDir
       ,'icon':ALERT_ICON});
   }
 
@@ -63,12 +64,14 @@ function checkAction(actionsDir, actionPackage) {
     return {'title': actionPackage + ': Error Info.plist does not exist'
       ,'subtitle':plistFile
       ,'alwaysShowsSubtitle': true
+      ,'path':actionsDir + "/" + actionPackage
       ,'icon':ALERT_ICON};
   }
   if (!File.isReadable(plistFile)) {
     return {'title': actionPackage + ': Error Info.plist not readable'
       ,'subtitle':plistFile
       ,'alwaysShowsSubtitle': true
+      ,'path':actionsDir + "/" + actionPackage
       ,'icon':ALERT_ICON};
   }
     
@@ -76,13 +79,15 @@ function checkAction(actionsDir, actionPackage) {
   var updateURL = getUpdateURL(actionPackage, plist);
   if (updateURL == "SKIP") {
     LaunchBar.debugLog("Skipping " + actionPackage);
-    return;
+    return {};
   }
   if (!updateURL || !updateURL.startsWith('http')) {
     return {'title': plist.CFBundleName + ': Update URL missing'
       ,'subtitle': updateURL
       ,'alwaysShowsSubtitle':true
-      ,'icon':ALERT_ICON};
+      ,'icon':ALERT_ICON
+      ,'path':actionsDir + "/" + actionPackage
+      ,'url':plist.LBDescription.LBWebsite};
   }
 
   LaunchBar.debugLog(actionPackage + ' URL ' + updateURL);
@@ -96,6 +101,7 @@ function checkAction(actionsDir, actionPackage) {
       ,'subtitle':updateURL
       ,'alwaysShowsSubtitle': true
       ,'icon':ALERT_ICON
+      ,'path':actionsDir + "/" + actionPackage
       ,'url':updateURL};
   }
 
@@ -104,6 +110,7 @@ function checkAction(actionsDir, actionPackage) {
       ,'subtitle':updateURL
       ,'alwaysShowsSubtitle': true
       ,'icon':ALERT_ICON
+      ,'path':actionsDir + "/" + actionPackage
       ,'url':updateURL};
   }
   if (result.error) {
@@ -113,6 +120,7 @@ function checkAction(actionsDir, actionPackage) {
         + (result.response && result.response.localizedStatus ? " --  " + result.response.localizedStatus : "")
       ,'alwaysShowsSubtitle': true
       ,'icon':ALERT_ICON
+      ,'path':actionsDir + "/" + actionPackage
       ,'url':updateURL};
   }
   if (!result.data || result.data.length < 1) {
@@ -120,20 +128,19 @@ function checkAction(actionsDir, actionPackage) {
       ,'subtitle': updateURL
       ,'alwaysShowsSubtitle': true
       ,'icon':ALERT_ICON
+      ,'path':actionsDir + "/" + actionPackage
       ,'url':updateURL};
   }
-  
-  var remoteVer = result.data.CFBundleVersion;
-  
-  if (plist.CFBundleVersion != remoteVer) {
+    
+  if (plist.CFBundleVersion != result.data.CFBundleVersion) {
     return {'title': plist.CFBundleName + ': Newer version available'
-      ,'subtitle': plist.CFBundleVersion + ' ➔ ' + remoteVer
+      ,'subtitle': plist.CFBundleVersion + ' ➔ ' + result.data.CFBundleVersion
       ,'alwaysShowsSubtitle': true
       ,'icon':CAUTION
       ,'url':plist.LBDescription.LBWebsite};
   } else {
     return {'title': plist.CFBundleName + ': up to date'
-      ,'subtitle': plist.CFBundleVersion + ' == ' + remoteVer
+      ,'subtitle': plist.CFBundleVersion + ' == ' + result.data.CFBundleVersion
       ,'alwaysShowsSubtitle': true
       ,'icon': CHECK
       ,'url':plist.LBDescription.LBWebsite};
@@ -143,19 +150,28 @@ function checkAction(actionsDir, actionPackage) {
 }
 
 function getUpdateURL(actionPackage, plist) {
-  var actionPrefKey = "UpdateURL" + plist.CFBundleIdentifier.replace(/[^a-zA-Z0-9]/g,'');
-  LaunchBar.debugLog("Preferences update URL override for " + actionPackage + ": " + actionPrefKey);
-  if (Action.preferences[actionPrefKey] && Action.preferences[actionPrefKey] == "SKIP")
+  if (Action.preferences.UpdateURL
+   && Action.preferences.UpdateURL[plist.CFBundleIdentifier] 
+   && Action.preferences.UpdateURL[plist.CFBundleIdentifier] == "SKIP")
     return "SKIP";
-  if (Action.preferences[actionPrefKey] && Action.preferences[actionPrefKey].startsWith('http'))
-    return Action.preferences[actionPrefKey];
-  if (plist && plist.LBUpdateURL && plist.LBUpdateURL.startsWith('http'))
+  if (Action.preferences.UpdateURL
+   && Action.preferences.UpdateURL[plist.CFBundleIdentifier] 
+   && Action.preferences.UpdateURL[plist.CFBundleIdentifier].startsWith('http'))
+    return Action.preferences.UpdateURL[plist.CFBundleIdentifier];
+  if (plist 
+   && plist.LBUpdateURL 
+   && plist.LBUpdateURL.startsWith('http'))
     return plist.LBUpdateURL;
-  if (plist && plist.LBDescription && plist.LBDescription.LBUpdateURL && plist.LBDescription.LBUpdateURL.startsWith('http'))
+  if (plist 
+   && plist.LBDescription 
+   && plist.LBDescription.LBUpdateURL 
+   && plist.LBDescription.LBUpdateURL.startsWith('http'))
     return plist.LBDescription.LBUpdateURL;
-  if (plist && plist.LBDescription && plist.LBDescription.UpdateURL && plist.LBDescription.UpdateURL.startsWith('http'))
+  if (plist 
+   && plist.LBDescription 
+   && plist.LBDescription.UpdateURL 
+   && plist.LBDescription.UpdateURL.startsWith('http'))
     return plist.LBDescription.UpdateURL;
-
   if (plist
    && plist.LBDescription 
    && plist.LBDescription.LBWebsite 
