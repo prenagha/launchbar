@@ -2,7 +2,8 @@
 
 `~/Library/Application Support/LaunchBar/Action Support/com.renaghan.launchbar.Version/Preferences.plist`
 
-`<?xml version="1.0" encoding="UTF-8"?>
+```
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
@@ -22,4 +23,5 @@
 		<string>https://raw.githubusercontent.com/nbjahan/launchbar-spotlight/master/src/Info.plist</string>
 	</dict>
 </dict>
-</plist>'
+</plist>
+```
