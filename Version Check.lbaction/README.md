@@ -3,14 +3,14 @@
 Custom Actions are a great part of LaunchBar. But keeping them up to date is difficult. This action helps by trying to check the most current version of each custom action compared to the version you have installed. If they are different it will tell you that a newer version is available.
 
 ## Update URL
-The action relies on a URL to the most current version's Info.plist file.
+This action relies on a URL pointing to the Info.plist of most current version of the custom action.
 
-An action can specify the URL via
-* `LBUpdateURL` property in Info.plis
+A custom action can tell this action that URL by
+* `LBUpdateURL` property in Info.plist
 * `LBDescription/LBUpdateURL` property in Info.plist
 * `LBDescription/UpdateURL` property in Info.plist
 * If the `LBDescription/LBWebsite` property contains `github.com` then this action guesses at what the Info.plist URL is 
-`https://raw.githubusercontent.com/[user]/[repo]//master/[action file]/Contents/Info.plist`
+`https://raw.githubusercontent.com/[user]/[repo]/master/[action file]/Contents/Info.plist`
 
 You may specify the Update URL for any action you have installed by setting a preference in this action's local preferences file 
 `~/Library/Application Support/LaunchBar/Action Support/com.renaghan.launchbar.Version/Preferences.plist`
