@@ -21,16 +21,16 @@ The action will attempt to download newer action versions when possible. It will
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>ActionsDir</key>
+	<string>/Users/jsmith/Library/Application Support/LaunchBar/Actions</string>
+	<key>DownloadDir</key>
+	<string>/Users/jsmith/Downloads</string>
 	<key>LBUpdate</key>
 	<dict>
-		<key>at.mlinzner.LaunchBar.action.KeyboardMaestro</key>
-		<string>https://raw.githubusercontent.com/mlinzner/LaunchBarActions/master/actions/Keyboard%20Maestro/Keyboard%20Maestro%20Macros.lbaction/Contents/Info.plist</string>
-		<key>at.obdev.LaunchBar.action.TweetbotSearch</key>
-		<string>https://raw.githubusercontent.com/mlinzner/LaunchBarActions/master/actions/Tweetbot%20Search/Tweetbot%20Search.lbaction/Contents/Info.plist</string>
-		<key>eu.weiel.BatteryDetails</key>
-		<string>SKIP</string>
-		<key>eu.weiel.action.SafariTabs</key>
-		<string>SKIP</string>
+		<key>com.example.action1</key>
+		<string>https://example.com/action1.lbaction</string>
+		<key>com.example.action2</key>
+		<string>SKIP</key>
 	</dict>
 </dict>
 </plist>
