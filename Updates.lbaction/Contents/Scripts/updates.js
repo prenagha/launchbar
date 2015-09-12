@@ -7,21 +7,28 @@ var ALERT_ICON = '/System/Library/CoreServices/CoreTypes.bundle/Contents/Resourc
 var CAUTION = 'Caution.icns';
 var CHECK = "GreenCheckmark.tiff";
 
+function setup() {
+  if (Action.preferences.DownloadDir)
+    return;
+  // load up an initial preferences object with defaults if first time run
+  Action.preferences.ActionsDir = LaunchBar.homeDirectory + "/Library/Application Support/LaunchBar/Actions";
+  Action.preferences.DownloadDir = LaunchBar.homeDirectory + "/Downloads";
+  var urls = {"com.example.action1": "https://example.com/action1.lbaction"
+    , "com.example.action2": "SKIP" };
+  Action.preferences.LBUpdate = urls;
+}
+
 function run(arg) {
+  setup();
+  var actionsDir = Action.preferences.ActionsDir;
+  var downloadDir = Action.preferences.DownloadDir == "SKIP" ? "" : Action.preferences.DownloadDir;
+  
   var items = [];
   var good = [];
   var bad = [];
   var error = [];
   loadResult(items, good, bad, error, checkLaunchBar());
 
-  var downloadDir = LaunchBar.homeDirectory + "/Downloads";
-  if (Action.preferences.DownloadDir) {
-    if (Action.preferences.DownloadDir == "SKIP") {
-      downloadDir = "";
-    } else {
-      downloadDir = Action.preferences.DownloadDir;
-    }
-  }
   if (downloadDir != "") {
     if (File.exists(downloadDir) 
      && File.isDirectory(downloadDir) 
@@ -36,10 +43,6 @@ function run(arg) {
     }
   }
     
-  var actionsDir = LaunchBar.homeDirectory + "/Library/Application Support/LaunchBar/Actions";  
-  if (Action.preferences.ActionsDir)
-    actionsDir = Action.preferences.ActionsDir;
-
   if (File.exists(actionsDir)
    && File.isDirectory(actionsDir) 
    && File.isReadable(actionsDir)) {
@@ -58,7 +61,27 @@ function run(arg) {
   items.push({'title': 'Error', badge: ""+error.length, icon:ALERT_ICON, children: error});
   items.push({'title': 'Newer versions available', badge: ""+bad.length, icon:CAUTION, children: bad});
   items.push({'title': 'Up to date', badge: ""+good.length, icon:CHECK, children: good});
+  
+  if (downloadDir == "") {
+    items.push({'title': 'Enable auto download', icon: "Pref_SoftwareUpdate.icns", 
+      actionArgument: LaunchBar.homeDirectory + "/Downloads", action: "setDownload"});
+  } else {
+    items.push({'title': 'Disable auto download', icon: "DisabledRule.icns", 
+      actionArgument: "SKIP", action: "setDownload"});
+  }
+
+  items.push({'title': 'Edit Preferences', icon: "Pref_Advanced.icns", 
+    action: "editPref"});
+
   return items;
+}
+
+function editPref() {
+  LaunchBar.openURL('file://' + encodeURI(Action.supportPath + '/Preferences.plist'));
+}
+
+function setDownload(path) {
+  Action.preferences.DownloadDir = path;
 }
 
 function loadResult(items, good, bad, error, item) {
