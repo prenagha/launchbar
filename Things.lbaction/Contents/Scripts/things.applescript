@@ -26,16 +26,19 @@ end app_running
 -- called by launchbar when it has string input
 on handle_string(todo)
 	if todo is not "" then
+		set newTodo to {}
 		tell application "Things"
 			set newTodo to parse quicksilver input todo
 		end tell
 		did_it(newTodo, "Created")
+		return new_todo_items(newTodo)
 	end if
 end handle_string
 
 -- adds a URL as a new todo
 on addURL(todo, theURL)
 	if todo is not "" then
+		set newTodo to {}
 		tell application "Things"
 			set newTodo to parse quicksilver input todo
 			if theURL starts with "http" then
@@ -43,6 +46,7 @@ on addURL(todo, theURL)
 			end if
 		end tell
 		did_it(newTodo, "Created from URL")
+		return new_todo_items(newTodo)
 	end if
 end addURL
 
@@ -67,6 +71,22 @@ on open (thePaths)
 		handle_string("File " & POSIX path of thePath)
 	end repeat
 end open
+
+on new_todo_items(todo)
+	set actions to {}
+	set action to {title:"Today", action:"moveToday", actionArgument:id of todo, icon:TB & ":TodayMark"}
+	copy action to end of actions
+	
+	set action to {title:"Next", action:"moveNext", actionArgument:id of todo, icon:TB & ":TodayMarkDone"}
+	copy action to end of actions
+	
+	set action to {title:"Someday", action:"moveSomeday", actionArgument:id of todo, icon:TB & ":FocusMaybe-20"}
+	copy action to end of actions
+	
+	set action to {title:"View", action:"viewTodo", actionArgument:id of todo, icon:TB}
+	copy action to end of actions
+	return actions
+end new_todo_items
 
 -- load all things items 
 on load_all()
@@ -254,5 +274,6 @@ end trashTodo
 
 -- called by launchbar when enter or browse into from top item
 on run
+	--handle_string("test to do 1 2 3")
 	load_all()
 end run
