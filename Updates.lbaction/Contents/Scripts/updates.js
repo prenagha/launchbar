@@ -104,7 +104,9 @@ function loadResult(items, good, bad, error, item) {
 
 function checkAction(actionsDir, actionPackage, downloadDir) {
   LaunchBar.debugLog("Checking action " + actionPackage);
-  if (!actionPackage || !actionPackage.endsWith(".lbaction"))
+  if (!actionPackage 
+   || typeof(actionPackage) != "string"
+   || !actionPackage.endsWith(".lbaction"))
     return;
   var plistFile = actionsDir + "/" + actionPackage + "/Contents/Info.plist";
   if (!File.exists(plistFile)) {
