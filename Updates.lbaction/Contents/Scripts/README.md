@@ -4,7 +4,7 @@ Custom Actions are a great part of LaunchBar. But keeping them up to date is dif
 
 ## Preferences
 This action relies on a URL specified in the `/LBDescription/LBUpdate` key in `Info.plist` pointing to the `Info.plist` of most current version of the custom action.
-Actions may additionally specify the download URL for the `.lbaction` file package of the latest version of the action using the `/LBDescription/LBDownload` `Info.plist` key.
+Actions may *optionally* specify the download URL for the package of the latest version of the action using the `/LBDescription/LBDownload` `Info.plist` key.
 
 You may override/specify the Update URL for any action you have installed by setting a preference in this action's local preferences file 
 `~/Library/Application Support/LaunchBar/Action Support/com.renaghan.launchbar.Updates/Preferences.plist`

@@ -50,7 +50,7 @@
 		<string>Pattern to search for</string>
 	  <key>LBUpdate</key>
 	  <string>https://raw.githubusercontent.com/prenagha/launchbar/master/Ack.lbaction/Contents/Info.plist</string>
-	  <key>LBDownloadzzzzz</key>
+	  <key>LBDownload</key>
 	  <string>https://dl.dropboxusercontent.com/u/1094926/lbdist/Ack.lbaction</string>
 	</dict>
 </dict>

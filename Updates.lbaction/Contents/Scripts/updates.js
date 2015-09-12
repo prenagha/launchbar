@@ -43,7 +43,7 @@ function run(arg) {
   if (File.exists(actionsDir)
    && File.isDirectory(actionsDir) 
    && File.isReadable(actionsDir)) {
-    LaunchBar.debugLog('Checking actions in ' + actionsDir);
+    LaunchBar.debugLog('Actions dir ' + actionsDir);
     var actions = File.getDirectoryContents(actionsDir);
     actions.forEach(function(actionPackage) {
       loadResult(items, good, bad, error, checkAction(actionsDir, actionPackage, downloadDir));
@@ -80,7 +80,8 @@ function loadResult(items, good, bad, error, item) {
 }
 
 function checkAction(actionsDir, actionPackage, downloadDir) {
-  if (!actionPackage.endsWith(".lbaction"))
+  LaunchBar.debugLog("Checking action " + actionPackage);
+  if (!actionPackage || !actionPackage.endsWith(".lbaction"))
     return;
   var plistFile = actionsDir + "/" + actionPackage + "/Contents/Info.plist";
   if (!File.exists(plistFile)) {
@@ -168,7 +169,10 @@ function checkAction(actionsDir, actionPackage, downloadDir) {
       LaunchBar.debugLog('Download ' + actionPackage + ' from ' + downloadURL);
       var d = HTTP.getData(downloadURL);
       if (d.response.status == 200 && d.data != undefined) {
-        downloadFile = downloadDir + '/' + actionPackage;
+        var ver = result.data.CFBundleVersion.replace(/[^a-zA-Z0-9]/g,'_');
+        var parts = downloadURL.split('/');
+        var last = parts[parts.length-1].replace(/\?.*$/,'');
+        downloadFile = downloadDir + '/' + ver + '_' + last;
         LaunchBar.debugLog("Write download to " + downloadFile);
         File.writeData(d.data, downloadFile);
       } else if (d.error != undefined) {
@@ -181,16 +185,14 @@ function checkAction(actionsDir, actionPackage, downloadDir) {
     return {'title': plist.CFBundleName + ': Newer version '
         + (downloadFile == '' ? 'available' : 'downloaded')
         + (downloadMsg = '' ? '': ' ' + downloadMsg)
-      ,'subtitle': plist.CFBundleVersion + ' ➔ ' + result.data.CFBundleVersion
-      ,'alwaysShowsSubtitle': true
+        +  '   ' + plist.CFBundleVersion + ' ➔ ' + result.data.CFBundleVersion
       ,'icon':CAUTION
       ,'path': (downloadFile = '' ? null : downloadFile)
       ,'url': plist.LBDescription.LBWebsite
       };
   } else {
     return {'title': plist.CFBundleName + ': up to date'
-      ,'subtitle': plist.CFBundleVersion + ' == ' + result.data.CFBundleVersion
-      ,'alwaysShowsSubtitle': true
+      ,'badge' : plist.CFBundleVersion
       ,'icon': CHECK
       ,'url':plist.LBDescription.LBWebsite};
   }
@@ -247,16 +249,14 @@ function checkLaunchBar() {
         ,'url':LB_INFO};
     }
     if (result.data[0].BundleVersion && result.data[0].BundleVersion != LaunchBar.version) {
-      return {'title':'LaunchBar: Newer version available'
-        ,'subtitle': result.data[0].BundleShortVersionString + ' ➔ ' + LaunchBar.shortVersion
-        ,'alwaysShowsSubtitle': true
+      return {'title':'LaunchBar: Newer version available   ' 
+          + LaunchBar.shortVersion + ' ➔ ' + result.data[0].BundleShortVersionString
         ,'quickLookURL':LB_DOWNLOAD
         ,'icon':CAUTION
         ,'url':LB_DOWNLOAD};
     } else {
       return {'title':'LaunchBar: up to date'
-        ,'subtitle': LaunchBar.shortVersion + ' == ' + result.data[0].BundleShortVersionString
-        ,'alwaysShowsSubtitle': true
+        ,'badge': LaunchBar.shortVersion
         ,'quickLookURL':LB_DOWNLOAD
         ,'icon':CHECK
         ,'url':LB_DOWNLOAD};
