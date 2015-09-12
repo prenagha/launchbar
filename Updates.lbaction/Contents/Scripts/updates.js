@@ -85,16 +85,12 @@ function checkAction(actionsDir, actionPackage, downloadDir) {
     return;
   var plistFile = actionsDir + "/" + actionPackage + "/Contents/Info.plist";
   if (!File.exists(plistFile)) {
-    return {'title': actionPackage + ': Error Info.plist does not exist'
-      ,'subtitle':plistFile
-      ,'alwaysShowsSubtitle': true
+    return {'title': actionPackage + ': Error Info.plist does not exist ' + plistFile
       ,'path':actionsDir + "/" + actionPackage
       ,'icon':ALERT_ICON};
   }
   if (!File.isReadable(plistFile)) {
-    return {'title': actionPackage + ': Error Info.plist not readable'
-      ,'subtitle':plistFile
-      ,'alwaysShowsSubtitle': true
+    return {'title': actionPackage + ': Error Info.plist not readable ' + plistFile
       ,'path':actionsDir + "/" + actionPackage
       ,'icon':ALERT_ICON};
   }
@@ -106,9 +102,7 @@ function checkAction(actionsDir, actionPackage, downloadDir) {
     return {};
   }
   if (!updateURL || !updateURL.startsWith('http')) {
-    return {'title': plist.CFBundleName + ': Update URL missing'
-      ,'subtitle': updateURL
-      ,'alwaysShowsSubtitle':true
+    return {'title': plist.CFBundleName + ': Update URL missing ' + updateURL
       ,'icon':ALERT_ICON
       ,'path':actionsDir + "/" + actionPackage
       ,'url':plist.LBDescription.LBWebsite};
@@ -122,36 +116,28 @@ function checkAction(actionsDir, actionPackage, downloadDir) {
     result = HTTP.getPlist(updateURL, TIMEOUT);
   } catch (exception) {
     LaunchBar.log('Error ' + actionPackage + ' -- ' + exception);
-    return {'title':plist.CFBundleName + ': HTTP Error remote plist ' + exception
-      ,'subtitle':updateURL
-      ,'alwaysShowsSubtitle': true
+    return {'title':plist.CFBundleName + ': HTTP Error remote plist ' + exception + ' -- ' + updateURL
       ,'icon':ALERT_ICON
       ,'path':actionsDir + "/" + actionPackage
       ,'url':updateURL};
   }
 
   if (!result) {
-    return {'title': plist.CFBundleName + ': Error remote plist empty result'
-      ,'subtitle':updateURL
-      ,'alwaysShowsSubtitle': true
+    return {'title': plist.CFBundleName + ': Error remote plist empty result -- ' + updateURL
       ,'icon':ALERT_ICON
       ,'path':actionsDir + "/" + actionPackage
       ,'url':updateURL};
   }
   if (result.error) {
     return {'title': plist.CFBundleName + ': Error result remote plist ' + result.error
-      ,'subtitle': result.error 
         + (result.response && result.response.status ? " -- " + result.response.status : "")
         + (result.response && result.response.localizedStatus ? " --  " + result.response.localizedStatus : "")
-      ,'alwaysShowsSubtitle': true
       ,'icon':ALERT_ICON
       ,'path':actionsDir + "/" + actionPackage
       ,'url':updateURL};
   }
   if (!result.data || result.data.length < 1) {
-    return {'title': plist.CFBundleName + ': Error remote plist empty data'
-      ,'subtitle': updateURL
-      ,'alwaysShowsSubtitle': true
+    return {'title': plist.CFBundleName + ': Error remote plist empty data ' + updateURL
       ,'icon':ALERT_ICON
       ,'path':actionsDir + "/" + actionPackage
       ,'url':updateURL};
@@ -270,36 +256,4 @@ function checkLaunchBar() {
       ,'url':LB_INFO};
   }
   return {};
-}
-
-function getUpdatePlist(updateURL) {
-  var items = [];
-  try {
-    var result = HTTP.getPlist(updateURL, TIMEOUT);
-    if (result && result.data) {
-      if (result.data.CFBundleVersion > Action.version) {
-        items.push({'title':'Newer version of Forecast action is available'
-          ,'subtitle':'Newest is ' + result.data.CFBundleVersion 
-            + ' you have ' + Action.version
-          ,'icon':'Sun-Low.png'
-          ,'url':'https://github.com/prenagha/launchbar/'});
-      } else {
-        items.push({'title':'Forecast action is up to date'
-          ,'subtitle':'Newest is ' + result.data.CFBundleVersion 
-            + ' you have ' + Action.version
-          ,'icon':'Sun-Low.png'
-          ,'url':'https://github.com/prenagha/launchbar/'});
-      }
-    } else if (result && result.error != undefined) {
-      items.push({'title':'Error checking Forecast action version - ' + result.error
-        ,'subtitle':result.error
-        ,'icon':ALERT_ICON
-        ,'url':ACTION_INFO});
-    }
-  } catch (exception) {
-    LaunchBar.log('Error checkVersion ' + exception);
-    LaunchBar.alert('Error checkVersion', exception);
-  }
-
-  return items;
 }
