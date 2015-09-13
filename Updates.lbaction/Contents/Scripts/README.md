@@ -1,19 +1,25 @@
 # Action Updates Action
 
-Custom Actions are a great part of LaunchBar. But keeping them up to date is difficult. This action helps by trying to check the most current version of each custom action compared to the version you have installed. If they are different it will tell you that a newer version is available.
+Custom actions are great, but painful to keep up to date. Rather than all of us individually build updating mechanisms, and clutter our actions with update related UI and pinging.
+
+This action checks each custom action a user has installed and figures out if a newer version exists. It reports on results and provides options for user
+* visit `/LBDescription/LBWebsite`
+* see `/LBDescription/LBChangelog`
+* download `/LBDescription/LBDownload` (trigger browser open URL)
+
+The trick is for all custom actions to include the `/LBDescription/LBUpdate` key in their `Info.plist` as a string URL reference to a remote server of the `Info.plist` of most recent version
+
+*Optional* keys to enable changelog and download link features:
+* `/LBDescription/LBChangelog` - string changelog text to display to user
+* `/LBDescription/LBDownload` - string URL reference to remote server where most recent action package can be downloaded
 
 ## Preferences
-This action relies on a URL specified in the `/LBDescription/LBUpdate` key in `Info.plist` pointing to the `Info.plist` of most current version of the custom action.
-Actions may *optionally* specify the download URL for the package of the latest version of the action using the `/LBDescription/LBDownload` `Info.plist` key.
-
 You may override/specify the Update URL for any action you have installed by setting a preference in this action's local preferences file 
 `~/Library/Application Support/LaunchBar/Action Support/com.renaghan.launchbar.Updates/Preferences.plist`
 
 You may also tell this action that a custom action should be skipped by setting the LBUpdate URL to `SKIP` in this action's local preferences file.
 
 The action will search for custom actions in `~/Application Support/LaunchBar/Actions`. You may override this by setting a local `ActionsDir` preference.
-
-The action will attempt to download newer action versions when possible. It will download to `~/Downloads`. You may override this by setting a local `DownloadDir` preference. Set this preference to `SKIP` to disable downloading entirely.
 
 ## Preferences Example
 ```
@@ -23,8 +29,6 @@ The action will attempt to download newer action versions when possible. It will
 <dict>
 	<key>ActionsDir</key>
 	<string>/Users/jsmith/Library/Application Support/LaunchBar/Actions</string>
-	<key>DownloadDir</key>
-	<string>/Users/jsmith/Downloads</string>
 	<key>LBUpdate</key>
 	<dict>
 		<key>com.example.action1</key>
@@ -50,6 +54,10 @@ The action will attempt to download newer action versions when possible. It will
 	  <string>https://raw.githubusercontent.com/jsmith/launchbar/master/Checker.lbaction/Contents/Info.plist</string>
 	  <key>LBDownload</key>
 	  <string>https://dl.dropboxusercontent.com/u/55/lbdist/Checker.lbaction</string>
+	  <key>LBChangelog</key>
+	  <string>
+	    Fixed bug when user option clicked on 2nd item.
+	  </string>
 	</dict>
 </dict>
 </plist>

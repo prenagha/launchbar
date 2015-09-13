@@ -8,11 +8,10 @@ var CAUTION = 'Caution.icns';
 var CHECK = "GreenCheckmark.tiff";
 
 function setup() {
-  if (Action.preferences.DownloadDir)
+  if (Action.preferences.ActionsDir)
     return;
   // load up an initial preferences object with defaults if first time run
   Action.preferences.ActionsDir = LaunchBar.homeDirectory + "/Library/Application Support/LaunchBar/Actions";
-  Action.preferences.DownloadDir = LaunchBar.homeDirectory + "/Downloads";
   var urls = {"com.example.action1": "https://example.com/action1.lbaction"
     , "com.example.action2": "SKIP" };
   Action.preferences.LBUpdate = urls;
@@ -21,27 +20,12 @@ function setup() {
 function run(arg) {
   setup();
   var actionsDir = Action.preferences.ActionsDir;
-  var downloadDir = Action.preferences.DownloadDir;
   
   var items = [];
   var good = [];
   var bad = [];
   var error = [];
   loadResult(items, good, bad, error, checkLaunchBar());
-
-  if (downloadDir != "") {
-    if (File.exists(downloadDir) 
-     && File.isDirectory(downloadDir) 
-     && File.isWritable(downloadDir)) {
-     LaunchBar.debugLog("Download dir " + downloadDir);
-    } else {
-      error.push({'title': 'Download dir not accessible'
-        ,'subtitle':downloadDir
-        ,'alwaysShowsSubtitle': true
-        ,'icon':ALERT_ICON});
-      downloadDir = "";
-    }
-  }
     
   if (File.exists(actionsDir)
    && File.isDirectory(actionsDir) 
@@ -49,7 +33,7 @@ function run(arg) {
     LaunchBar.debugLog('Actions dir ' + actionsDir);
     var actions = File.getDirectoryContents(actionsDir);
     actions.forEach(function(actionPackage) {
-      loadResult(items, good, bad, error, checkAction(actionsDir, actionPackage, downloadDir));
+      loadResult(items, good, bad, error, checkAction(actionsDir, actionPackage));
     });
   } else {
     error.push({'title': 'Actions dir not accessible'
@@ -88,7 +72,7 @@ function loadResult(items, good, bad, error, item) {
   items.push(item);
 }
 
-function checkAction(actionsDir, actionPackage, downloadDir) {
+function checkAction(actionsDir, actionPackage) {
   LaunchBar.debugLog("Checking action " + actionPackage);
   var actionFile = actionsDir + "/" + actionPackage;
   if (!actionPackage 
@@ -232,7 +216,6 @@ function checkLaunchBar() {
         ,'subtitle':'Empty Plist result from ' + LB_INFO
         ,'alwaysShowsSubtitle': true
         ,'icon':ALERT_ICON
-        ,'quickLookURL':LB_INFO
         ,'url':LB_INFO};
     }
     if (result.error) {
@@ -240,7 +223,6 @@ function checkLaunchBar() {
         ,'subtitle':result.error
         ,'alwaysShowsSubtitle': true
         ,'icon':ALERT_ICON
-        ,'quickLookURL':LB_INFO
         ,'url':LB_INFO};
     }
     if (!result.data || result.data.length < 1) {
@@ -248,19 +230,16 @@ function checkLaunchBar() {
         ,'subtitle':'Empty Plist result data from ' + LB_INFO
         ,'alwaysShowsSubtitle': true
         ,'icon':ALERT_ICON
-        ,'quickLookURL':LB_INFO
         ,'url':LB_INFO};
     }
     if (result.data[0].BundleVersion && result.data[0].BundleVersion != LaunchBar.version) {
       return {'title':'LaunchBar: Newer version available   ' 
           + LaunchBar.shortVersion + ' ➔ ' + result.data[0].BundleShortVersionString
-        ,'quickLookURL':LB_DOWNLOAD
         ,'icon':CAUTION
         ,'url':LB_DOWNLOAD};
     } else {
       return {'title':'LaunchBar: up to date'
         ,'badge': LaunchBar.shortVersion
-        ,'quickLookURL':LB_DOWNLOAD
         ,'icon':CHECK
         ,'url':LB_DOWNLOAD};
     }
