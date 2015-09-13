@@ -7,7 +7,7 @@
 	<key>CFBundleName</key>
 	<string>Action Updates</string>
 	<key>CFBundleVersion</key>
-	<string>1.3</string>
+	<string>1.5</string>
 	<key>CFBundleIconFile</key>
 	<string>Pref_SoftwareUpdate.icns</string>
 	<key>LBDebugLogEnabled</key>
@@ -33,13 +33,18 @@
 		<key>LBEmail</key>
 		<string>prenagha@renaghan.com</string>
 		<key>LBWebsite</key>
-		<string>https://github.com/prenagha/launchbar</string>
+		<string>https://prenagha.github.io/launchbar/updates.html</string>
 		<key>LBTwitter</key>
 		<string>@prenagha</string>
 	  <key>LBUpdate</key>
 	  <string>https://raw.githubusercontent.com/prenagha/launchbar/master/Updates.lbaction/Contents/Info.plist</string>
 	  <key>LBDownload</key>
 	  <string>https://dl.dropboxusercontent.com/u/1094926/lbdist/Updates.lbaction</string>
+	  <key>LBChangelog</key>
+	  <string>
+	    Support for LBChangelog key.
+	    Download via explicitly selecting LB items.
+	  </string>
 	</dict>
 </dict>
 </plist>

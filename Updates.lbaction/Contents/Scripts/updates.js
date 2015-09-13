@@ -21,7 +21,7 @@ function setup() {
 function run(arg) {
   setup();
   var actionsDir = Action.preferences.ActionsDir;
-  var downloadDir = Action.preferences.DownloadDir == "SKIP" ? "" : Action.preferences.DownloadDir;
+  var downloadDir = Action.preferences.DownloadDir;
   
   var items = [];
   var good = [];
@@ -58,30 +58,16 @@ function run(arg) {
       ,'icon':ALERT_ICON});
   }
 
-  items.push({'title': 'Error', badge: ""+error.length, icon:ALERT_ICON, children: error});
+  error.push({'title': 'Edit Preferences', icon: "Pref_Advanced.icns", action: "editPref"});
+  items.push({'title': 'Error', badge: ""+(error.length-1), icon:ALERT_ICON, children: error});
   items.push({'title': 'Newer versions available', badge: ""+bad.length, icon:CAUTION, children: bad});
   items.push({'title': 'Up to date', badge: ""+good.length, icon:CHECK, children: good});
   
-  if (downloadDir == "") {
-    items.push({'title': 'Enable auto download', icon: "Pref_SoftwareUpdate.icns", 
-      actionArgument: LaunchBar.homeDirectory + "/Downloads", action: "setDownload"});
-  } else {
-    items.push({'title': 'Disable auto download', icon: "DisabledRule.icns", 
-      actionArgument: "SKIP", action: "setDownload"});
-  }
-
-  items.push({'title': 'Edit Preferences', icon: "Pref_Advanced.icns", 
-    action: "editPref"});
-
   return items;
 }
 
 function editPref() {
   LaunchBar.openURL('file://' + encodeURI(Action.supportPath + '/Preferences.plist'));
-}
-
-function setDownload(path) {
-  Action.preferences.DownloadDir = path;
 }
 
 function loadResult(items, good, bad, error, item) {
@@ -104,19 +90,20 @@ function loadResult(items, good, bad, error, item) {
 
 function checkAction(actionsDir, actionPackage, downloadDir) {
   LaunchBar.debugLog("Checking action " + actionPackage);
+  var actionFile = actionsDir + "/" + actionPackage;
   if (!actionPackage 
    || typeof(actionPackage) != "string"
    || !actionPackage.endsWith(".lbaction"))
     return;
   var plistFile = actionsDir + "/" + actionPackage + "/Contents/Info.plist";
   if (!File.exists(plistFile)) {
-    return {'title': actionPackage + ': Error Info.plist does not exist ' + plistFile
-      ,'path':actionsDir + "/" + actionPackage
+    return {'title': actionPackage + ': Error local Info.plist does not exist ' + plistFile
+      ,'path':actionFile
       ,'icon':ALERT_ICON};
   }
   if (!File.isReadable(plistFile)) {
-    return {'title': actionPackage + ': Error Info.plist not readable ' + plistFile
-      ,'path':actionsDir + "/" + actionPackage
+    return {'title': actionPackage + ': Error local Info.plist not readable ' + plistFile
+      ,'path':actionFile
       ,'icon':ALERT_ICON};
   }
     
@@ -129,7 +116,7 @@ function checkAction(actionsDir, actionPackage, downloadDir) {
   if (!updateURL || !updateURL.startsWith('http')) {
     return {'title': plist.CFBundleName + ': Update URL missing ' + updateURL
       ,'icon':ALERT_ICON
-      ,'path':actionsDir + "/" + actionPackage
+      ,'path':actionFile
       ,'url':plist.LBDescription.LBWebsite};
   }
 
@@ -143,14 +130,14 @@ function checkAction(actionsDir, actionPackage, downloadDir) {
     LaunchBar.log('Error ' + actionPackage + ' -- ' + exception);
     return {'title':plist.CFBundleName + ': HTTP Error remote plist ' + exception + ' -- ' + updateURL
       ,'icon':ALERT_ICON
-      ,'path':actionsDir + "/" + actionPackage
+      ,'path':actionFile
       ,'url':updateURL};
   }
 
   if (!result) {
     return {'title': plist.CFBundleName + ': Error remote plist empty result -- ' + updateURL
       ,'icon':ALERT_ICON
-      ,'path':actionsDir + "/" + actionPackage
+      ,'path':actionFile
       ,'url':updateURL};
   }
   if (result.error) {
@@ -158,58 +145,63 @@ function checkAction(actionsDir, actionPackage, downloadDir) {
         + (result.response && result.response.status ? " -- " + result.response.status : "")
         + (result.response && result.response.localizedStatus ? " --  " + result.response.localizedStatus : "")
       ,'icon':ALERT_ICON
-      ,'path':actionsDir + "/" + actionPackage
+      ,'path':actionFile
       ,'url':updateURL};
   }
   if (!result.data || result.data.length < 1) {
     return {'title': plist.CFBundleName + ': Error remote plist empty data ' + updateURL
       ,'icon':ALERT_ICON
-      ,'path':actionsDir + "/" + actionPackage
+      ,'path':actionFile
       ,'url':updateURL};
   }
     
   if (plist.CFBundleVersion != result.data.CFBundleVersion) {
-  
-    var downloadMsg = "";
-    var downloadFile = "";
-    if (downloadDir != ""
-     && result.data.LBDescription
-     && result.data.LBDescription.LBDownload
-     && result.data.LBDescription.LBDownload.startsWith('http')) {
-      var downloadURL = encodeURI(result.data.LBDescription.LBDownload);
-      LaunchBar.debugLog('Download ' + actionPackage + ' from ' + downloadURL);
-      var d = HTTP.getData(downloadURL);
-      if (d.response.status == 200 && d.data != undefined) {
-        var ver = result.data.CFBundleVersion.replace(/[^a-zA-Z0-9]/g,'_');
-        var parts = downloadURL.split('/');
-        var last = parts[parts.length-1].replace(/\?.*$/,'');
-        downloadFile = downloadDir + '/' + ver + '_' + last;
-        LaunchBar.debugLog("Write download to " + downloadFile);
-        File.writeData(d.data, downloadFile);
-      } else if (d.error != undefined) {
-        downloadMsg = 'Unable to download ' + d.error + ' -- ' + downloadURL;
-      } else {
-        downloadMsg = 'Unable to download ' + d.response.localizedStatus + ' -- ' + downloadURL;
-      }
-    }
-  
-    return {'title': plist.CFBundleName + ': Newer version '
-        + (downloadFile == '' ? 'available' : 'downloaded')
-        + (downloadMsg = '' ? '': ' ' + downloadMsg)
+    return {'title': plist.CFBundleName + ': Newer version available'
         +  '   ' + plist.CFBundleVersion + ' ➔ ' + result.data.CFBundleVersion
       ,'icon':CAUTION
-      ,'path': (downloadFile = '' ? null : downloadFile)
-      ,'url': plist.LBDescription.LBWebsite
-      };
+      ,children: getActionChildren(actionFile, plist, result.data)};
   } else {
     return {'title': plist.CFBundleName + ': up to date'
       ,'badge' : plist.CFBundleVersion
       ,'icon': CHECK
-      ,'url':plist.LBDescription.LBWebsite};
+      ,children: getActionChildren(actionFile, plist, result.data)};
   }
   
   return [];
 }
+
+function getActionChildren(actionFile, currPlist, plist) {
+  var items = [];
+  if (plist.LBDescription && plist.LBDescription.LBWebsite) {
+    items.push({'title': 'Open ' + plist.CFBundleName + ' web site'
+      ,'subtitle':plist.LBDescription.LBWebsite
+      ,'icon':'com.apple.Safari'
+      ,'url': plist.LBDescription.LBWebsite});
+  }
+  if (plist.LBDescription && plist.LBDescription.LBChangelog && plist.LBDescription.LBChangelog.startsWith('http')) {
+    items.push({'title': 'Open version ' + plist.CFBundleVersion + ' change log'
+      ,'subtitle':plist.LBDescription.LBChangelog
+      ,'icon':'Text.icns'
+      ,'url': plist.LBDescription.LBChangelog});
+  }
+  if (plist.LBDescription && plist.LBDescription.LBChangelog && !plist.LBDescription.LBChangelog.startsWith('http')) {
+    var changes = [{title: plist.LBDescription.LBChangelog, icon:'Text.icns'}];
+    items.push({'title': 'Version ' + plist.CFBundleVersion + ' change log'
+      ,'icon':'Text.icns'
+      ,'children': changes});
+  }
+  if (plist.LBDescription && plist.LBDescription.LBDownload) {
+    items.push({'title': 'Download version ' + plist.CFBundleVersion
+      ,'subtitle':plist.LBDescription.LBDownload
+      ,'icon':'Pref_SoftwareUpdate.icns'
+      ,'url': plist.LBDescription.LBDownload});
+  }
+  items.push({'title': 'Installed version ' + currPlist.CFBundleVersion
+    ,'subtitle':actionFile
+    ,'path': actionFile});
+  return items;
+}
+
 
 function getUpdateURL(actionPackage, plist) {
   if (Action.preferences
