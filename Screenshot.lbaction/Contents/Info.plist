@@ -39,7 +39,7 @@
 		<key>LBEmail</key>
 		<string>prenagha@renaghan.com</string>
 		<key>LBWebsite</key>
-		<string>https://github.com/prenagha/launchbar</string>
+		<string>https://prenagha.github.io/launchbar/screenshot.html</string>
 		<key>LBTwitter</key>
 		<string>@prenagha</string>
 		<key>LBResult</key>
@@ -48,6 +48,10 @@
 	  <string>https://raw.githubusercontent.com/prenagha/launchbar/master/Screenshot.lbaction/Contents/Info.plist</string>
 	  <key>LBDownload</key>
 	  <string>https://dl.dropboxusercontent.com/u/1094926/lbdist/Screenshot.lbaction</string>
+	  <key>LBChangelog</key>
+	  <string>
+	    Support action updates
+	  </string>
 	</dict>
 </dict>
 </plist>

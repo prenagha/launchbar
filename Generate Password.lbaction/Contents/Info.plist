@@ -35,13 +35,17 @@
 		<key>LBEmail</key>
 		<string>prenagha@renaghan.com</string>
 		<key>LBWebsite</key>
-		<string>https://github.com/prenagha/launchbar</string>
+		<string>https://prenagha.github.io/launchbar/generate.html</string>
 		<key>LBTwitter</key>
 		<string>@prenagha</string>
 	  <key>LBUpdate</key>
 	  <string>https://raw.githubusercontent.com/prenagha/launchbar/master/Generate Password.lbaction/Contents/Info.plist</string>
 	  <key>LBDownload</key>
 	  <string>https://dl.dropboxusercontent.com/u/1094926/lbdist/Generate Password.lbaction</string>
+	  <key>LBChangelog</key>
+	  <string>
+	    Support action updates
+	  </string>
 	</dict>
 </dict>
 </plist>

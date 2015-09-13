@@ -49,7 +49,7 @@
 		<key>LBEmail</key>
 		<string>prenagha@renaghan.com</string>
 		<key>LBWebsite</key>
-		<string>https://github.com/prenagha/launchbar</string>
+		<string>https://prenagha.github.io/launchbar/forecast.html</string>
 		<key>LBTwitter</key>
 		<string>@prenagha</string>
 		<key>LBArgument</key>
@@ -58,6 +58,10 @@
 	  <string>https://raw.githubusercontent.com/prenagha/launchbar/master/Forecast.lbaction/Contents/Info.plist</string>
 	  <key>LBDownload</key>
 	  <string>https://dl.dropboxusercontent.com/u/1094926/lbdist/Forecast.lbaction</string>
+	  <key>LBChangelog</key>
+	  <string>
+	    Support action updates
+	  </string>
 	</dict>
 </dict>
 </plist>
