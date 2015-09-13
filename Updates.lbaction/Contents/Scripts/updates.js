@@ -82,12 +82,12 @@ function checkAction(actionsDir, actionPackage) {
   var plistFile = actionsDir + "/" + actionPackage + "/Contents/Info.plist";
   if (!File.exists(plistFile)) {
     return {'title': actionPackage + ': Error local Info.plist does not exist ' + plistFile
-      ,'path':actionFile
+      ,children: getActionChildren(actionFile, null, null)
       ,'icon':ALERT_ICON};
   }
   if (!File.isReadable(plistFile)) {
     return {'title': actionPackage + ': Error local Info.plist not readable ' + plistFile
-      ,'path':actionFile
+      ,children: getActionChildren(actionFile, null, null)
       ,'icon':ALERT_ICON};
   }
     
@@ -100,8 +100,7 @@ function checkAction(actionsDir, actionPackage) {
   if (!updateURL || !updateURL.startsWith('http')) {
     return {'title': plist.CFBundleName + ': Update URL missing ' + updateURL
       ,'icon':ALERT_ICON
-      ,'path':actionFile
-      ,'url':plist.LBDescription.LBWebsite};
+      ,children: getActionChildren(actionFile, plist, null)};
   }
 
   updateURL = encodeURI(updateURL);
@@ -114,29 +113,25 @@ function checkAction(actionsDir, actionPackage) {
     LaunchBar.log('Error ' + actionPackage + ' -- ' + exception);
     return {'title':plist.CFBundleName + ': HTTP Error remote plist ' + exception + ' -- ' + updateURL
       ,'icon':ALERT_ICON
-      ,'path':actionFile
-      ,'url':updateURL};
+      ,children: getActionChildren(actionFile, plist, null)};
   }
 
   if (!result) {
     return {'title': plist.CFBundleName + ': Error remote plist empty result -- ' + updateURL
       ,'icon':ALERT_ICON
-      ,'path':actionFile
-      ,'url':updateURL};
+      ,children: getActionChildren(actionFile, plist, null)};
   }
   if (result.error) {
     return {'title': plist.CFBundleName + ': Error result remote plist ' + result.error
         + (result.response && result.response.status ? " -- " + result.response.status : "")
         + (result.response && result.response.localizedStatus ? " --  " + result.response.localizedStatus : "")
       ,'icon':ALERT_ICON
-      ,'path':actionFile
-      ,'url':updateURL};
+      ,children: getActionChildren(actionFile, plist, null)};
   }
   if (!result.data || result.data.length < 1) {
     return {'title': plist.CFBundleName + ': Error remote plist empty data ' + updateURL
       ,'icon':ALERT_ICON
-      ,'path':actionFile
-      ,'url':updateURL};
+      ,children: getActionChildren(actionFile, plist, null)};
   }
     
   if (plist.CFBundleVersion != result.data.CFBundleVersion) {
@@ -156,31 +151,37 @@ function checkAction(actionsDir, actionPackage) {
 
 function getActionChildren(actionFile, currPlist, plist) {
   var items = [];
-  if (plist.LBDescription && plist.LBDescription.LBWebsite) {
+  if (plist && plist.LBDescription && plist.LBDescription.LBWebsite) {
     items.push({'title': 'Open ' + plist.CFBundleName + ' web site'
       ,'subtitle':plist.LBDescription.LBWebsite
-      ,'icon':'com.apple.Safari'
+      ,'icon':'URL.icns'
       ,'url': plist.LBDescription.LBWebsite});
   }
-  if (plist.LBDescription && plist.LBDescription.LBChangelog && plist.LBDescription.LBChangelog.startsWith('http')) {
+  if (plist && plist.LBDescription && plist.LBDescription.LBChangelog && plist.LBDescription.LBChangelog.startsWith('http')) {
     items.push({'title': 'Open version ' + plist.CFBundleVersion + ' change log'
       ,'subtitle':plist.LBDescription.LBChangelog
       ,'icon':'Text.icns'
       ,'url': plist.LBDescription.LBChangelog});
   }
-  if (plist.LBDescription && plist.LBDescription.LBChangelog && !plist.LBDescription.LBChangelog.startsWith('http')) {
+  if (plist && plist.LBDescription && plist.LBDescription.LBChangelog && !plist.LBDescription.LBChangelog.startsWith('http')) {
     var changes = [{title: plist.LBDescription.LBChangelog, icon:'Text.icns'}];
     items.push({'title': 'Version ' + plist.CFBundleVersion + ' change log'
       ,'icon':'Text.icns'
       ,'children': changes});
   }
-  if (plist.LBDescription && plist.LBDescription.LBDownload) {
+  if (plist && plist.LBDescription && plist.LBDescription.LBDownload) {
     items.push({'title': 'Download version ' + plist.CFBundleVersion
       ,'subtitle':plist.LBDescription.LBDownload
       ,'icon':'Pref_SoftwareUpdate.icns'
       ,'url': plist.LBDescription.LBDownload});
   }
-  items.push({'title': 'Installed version ' + currPlist.CFBundleVersion
+  if (currPlist && currPlist.LBDescription && currPlist.LBDescription.LBUpdate) {
+    items.push({'title': 'Open remote Info.plist'
+      ,'subtitle':currPlist.LBDescription.LBUpdate
+      ,'icon':'URL.icns'
+      ,'url': currPlist.LBDescription.LBUpdate});
+  }
+  items.push({'title': 'Installed action version ' + (currPlist ? currPlist.CFBundleVersion : "")
     ,'subtitle':actionFile
     ,'path': actionFile});
   return items;
