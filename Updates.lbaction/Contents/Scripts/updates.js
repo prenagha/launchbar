@@ -151,11 +151,11 @@ function checkAction(actionsDir, actionPackage) {
 
 function getActionChildren(actionFile, currPlist, plist) {
   var items = [];
-  if (plist && plist.LBDescription && plist.LBDescription.LBWebsite) {
-    items.push({'title': 'Open ' + plist.CFBundleName + ' web site'
-      ,'subtitle':plist.LBDescription.LBWebsite
+  if (currPlist && currPlist.LBDescription && currPlist.LBDescription.LBWebsite) {
+    items.push({'title': 'Open ' + currPlist.CFBundleName + ' web site'
+      ,'subtitle':currPlist.LBDescription.LBWebsite
       ,'icon':'URL.icns'
-      ,'url': plist.LBDescription.LBWebsite});
+      ,'url': currPlist.LBDescription.LBWebsite});
   }
   if (plist && plist.LBDescription && plist.LBDescription.LBChangelog && plist.LBDescription.LBChangelog.startsWith('http')) {
     items.push({'title': 'Open version ' + plist.CFBundleVersion + ' change log'
