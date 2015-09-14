@@ -7,7 +7,7 @@
 	<key>CFBundleName</key>
 	<string>Action Updates</string>
 	<key>CFBundleVersion</key>
-	<string>1.6</string>
+	<string>1.7</string>
 	<key>CFBundleIconFile</key>
 	<string>Pref_SoftwareUpdate.icns</string>
 	<key>LBDebugLogEnabled</key>
@@ -42,6 +42,7 @@
 	  <string>https://dl.dropboxusercontent.com/u/1094926/lbdist/Updates.lbaction</string>
 	  <key>LBChangelog</key>
 	  <string>
+	    1.7: Moved skipped items to own group.
 	    1.6: Standardized error handling.
 	    1.5: Support for LBChangelog key.
 	    1.5: Download via explicitly selecting LB items.

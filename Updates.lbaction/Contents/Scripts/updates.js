@@ -6,6 +6,7 @@ var LB_DOWNLOAD = 'http://www.obdev.at/products/launchbar/download.html';
 var ALERT_ICON = '/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/AlertStopIcon.icns';
 var CAUTION = 'Caution.icns';
 var CHECK = "GreenCheckmark.tiff";
+var SKIP = "DisabledRule.icns";
 
 function setup() {
   if (Action.preferences.ActionsDir)
@@ -24,8 +25,9 @@ function run(arg) {
   var items = [];
   var good = [];
   var bad = [];
+  var skip = [];
   var error = [];
-  loadResult(items, good, bad, error, checkLaunchBar());
+  loadResult(items, good, bad, skip, error, checkLaunchBar());
     
   if (File.exists(actionsDir)
    && File.isDirectory(actionsDir) 
@@ -33,7 +35,7 @@ function run(arg) {
     LaunchBar.debugLog('Actions dir ' + actionsDir);
     var actions = File.getDirectoryContents(actionsDir);
     actions.forEach(function(actionPackage) {
-      loadResult(items, good, bad, error, checkAction(actionsDir, actionPackage));
+      loadResult(items, good, bad, skip, error, checkAction(actionsDir, actionPackage));
     });
   } else {
     error.push({'title': 'Actions dir not accessible'
@@ -42,10 +44,12 @@ function run(arg) {
       ,'icon':ALERT_ICON});
   }
 
-  error.push({'title': 'Edit Preferences', icon: "Pref_Advanced.icns", action: "editPref"});
-  items.push({'title': 'Error', badge: ""+(error.length-1), icon:ALERT_ICON, children: error});
+  skip.push({'title': 'Edit Preferences', icon: "Pref_Advanced.icns", action: "editPref"});
+  
+  items.push({'title': 'Error', badge: ""+error.length, icon:ALERT_ICON, children: error});
   items.push({'title': 'Newer versions available', badge: ""+bad.length, icon:CAUTION, children: bad});
   items.push({'title': 'Up to date', badge: ""+good.length, icon:CHECK, children: good});
+  items.push({'title': 'Skipped', badge: ""+skip.length, icon:SKIP, children: skip});
   
   return items;
 }
@@ -54,7 +58,7 @@ function editPref() {
   LaunchBar.openURL('file://' + encodeURI(Action.supportPath + '/Preferences.plist'));
 }
 
-function loadResult(items, good, bad, error, item) {
+function loadResult(items, good, bad, skip, error, item) {
   if (!item || !item.title)
     return;
   if (item.icon && item.icon == CHECK) {
@@ -67,6 +71,10 @@ function loadResult(items, good, bad, error, item) {
   }
   if (item.icon && item.icon == ALERT_ICON) {
     error.push(item);
+    return;
+  }
+  if (item.icon && item.icon == SKIP) {
+    skip.push(item);
     return;
   }
   items.push(item);
@@ -94,12 +102,15 @@ function checkAction(actionsDir, actionPackage) {
   var plist = File.readPlist(plistFile);
   var updateURL = getUpdateURL(actionPackage, plist);
   if (updateURL == "SKIP") {
-    LaunchBar.debugLog("Skipping " + actionPackage);
-    return {};
+    return {'title': plist.CFBundleName + ': skipped'
+      ,'icon':SKIP
+      ,subtitle: 'Skipped via user preferences'
+      ,children: getActionChildren(actionFile, plist, null)};
   }
   if (!updateURL || !updateURL.startsWith('http')) {
-    return {'title': plist.CFBundleName + ': Update URL missing ' + updateURL
-      ,'icon':ALERT_ICON
+    return {'title': plist.CFBundleName + ': updates not supported'
+      ,subtitle: 'Missing LBDescription/LBUpdate Info.plist key'
+      ,'icon':SKIP
       ,children: getActionChildren(actionFile, plist, null)};
   }
 
