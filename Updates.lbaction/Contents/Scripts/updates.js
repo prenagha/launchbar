@@ -47,10 +47,14 @@ function run(arg) {
       ,'icon':ALERT_ICON});
   }
   
-  items.push({'title': 'Error', badge: ""+error.length, icon:ALERT_ICON, children: error});
+  if (error.length > 0)
+    items.push({'title': 'Error', badge: ""+error.length, icon:ALERT_ICON, children: error});
+  
   items.push({'title': 'Newer versions available', badge: ""+bad.length, icon:CAUTION, children: bad});
   items.push({'title': 'Up to date', badge: ""+good.length, icon:CHECK, children: good});
-  items.push({'title': 'Skipped', badge: ""+(skip.length-1), icon:SKIP, children: skip});
+  
+  if (skip.length > 1)
+    items.push({'title': 'Skipped', badge: ""+(skip.length-1), icon:SKIP, children: skip});
   
   return items;
 }
