@@ -27,6 +27,9 @@ function run(arg) {
   var bad = [];
   var skip = [];
   var error = [];
+
+  skip.push({'title': 'Edit Preferences', icon: "Pref_Advanced.icns", action: "editPref"});
+
   loadResult(items, good, bad, skip, error, checkLaunchBar());
     
   if (File.exists(actionsDir)
@@ -43,13 +46,11 @@ function run(arg) {
       ,'alwaysShowsSubtitle': true
       ,'icon':ALERT_ICON});
   }
-
-  skip.push({'title': 'Edit Preferences', icon: "Pref_Advanced.icns", action: "editPref"});
   
   items.push({'title': 'Error', badge: ""+error.length, icon:ALERT_ICON, children: error});
   items.push({'title': 'Newer versions available', badge: ""+bad.length, icon:CAUTION, children: bad});
   items.push({'title': 'Up to date', badge: ""+good.length, icon:CHECK, children: good});
-  items.push({'title': 'Skipped', badge: ""+skip.length, icon:SKIP, children: skip});
+  items.push({'title': 'Skipped', badge: ""+(skip.length-1), icon:SKIP, children: skip});
   
   return items;
 }
@@ -109,7 +110,7 @@ function checkAction(actionsDir, actionPackage) {
   }
   if (!updateURL || !updateURL.startsWith('http')) {
     return {'title': plist.CFBundleName + ': updates not supported'
-      ,subtitle: 'Missing LBDescription/LBUpdate Info.plist key'
+      ,subtitle: 'Missing LBUpdate key'
       ,'icon':SKIP
       ,children: getActionChildren(actionFile, plist, null)};
   }

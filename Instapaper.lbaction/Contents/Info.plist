@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleIdentifier</key>
+	<string>com.renaghan.launchbar.Instapaper</string>
+	<key>CFBundleName</key>
+	<string>Add to Instapaper</string>
+	<key>CFBundleVersion</key>
+	<string>1.0</string>
+	<key>CFBundleIconFile</key>
+	<string>instapaper.png</string>
+	<key>LBDebugLogEnabled</key>
+	<true/>
+	<key>LBTextInputTitle</key>
+	<string>URL</string>
+	<key>LBScripts</key>
+	<dict>
+		<key>LBDefaultScript</key>
+		<dict>
+			<key>LBScriptName</key>
+			<string>instapaper.js</string>
+			<key>LBRequiresArgument</key>
+			<true/>
+			<key>LBAcceptedArgumentTypes</key>
+			<array>
+			  <string>string</string>
+			</array>
+			<key>LBRunInBackground</key>
+			<false/>
+			<key>LBReturnsResult</key>
+			<true/>
+		</dict>
+	</dict>
+	<key>LBDescription</key>
+	<dict>
+		<key>LBSummary</key>
+		<string>Adds input string (assumed to be URL), or passed in LaunchBar item to Instapaper. Returns the created item from Instapaper for further action chaining or opening.</string>
+		<key>LBAuthor</key>
+		<string>Padraic Renaghan</string>
+		<key>LBEmail</key>
+		<string>prenagha@renaghan.com</string>
+		<key>LBWebsite</key>
+		<string>https://prenagha.github.io/launchbar/instapaper.html</string>
+		<key>LBTwitter</key>
+		<string>@prenagha</string>
+	  <key>LBUpdate</key>
+	  <string>https://raw.githubusercontent.com/prenagha/launchbar/master/Instapaper.lbaction/Contents/Info.plist</string>
+	  <key>LBDownload</key>
+	  <string>https://dl.dropboxusercontent.com/u/1094926/lbdist/Instapaper.lbaction</string>
+	  <key>LBChangelog</key>
+	  <string>
+	    1.0: First release
+	  </string>
+	</dict>
+</dict>
+</plist>
