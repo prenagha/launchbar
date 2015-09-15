@@ -90,7 +90,7 @@ function checkAction(actionsDir, actionPackage) {
   var actionFile = actionsDir + "/" + actionPackage;
   if (!actionPackage 
    || typeof(actionPackage) != "string"
-   || !actionPackage.endsWith(".lbaction"))
+   || actionPackage.indexOf(".lbaction") < 0)
     return;
   var plistFile = actionsDir + "/" + actionPackage + "/Contents/Info.plist";
   if (!File.exists(plistFile)) {
@@ -112,7 +112,7 @@ function checkAction(actionsDir, actionPackage) {
       ,subtitle: 'Skipped via user preferences'
       ,children: getActionChildren(actionFile, plist, null)};
   }
-  if (!updateURL || !updateURL.startsWith('http')) {
+  if (!updateURL || updateURL.indexOf('http') != 0) {
     return {'title': plist.CFBundleName + ': updates not supported'
       ,subtitle: 'Missing LBUpdateURL key'
       ,'icon':SKIP
@@ -174,13 +174,13 @@ function getActionChildren(actionFile, currPlist, plist) {
       ,'icon':'URL.icns'
       ,'url': w});
   }
-  if (plist && plist.LBDescription && plist.LBDescription.LBChangelog && plist.LBDescription.LBChangelog.startsWith('http')) {
+  if (plist && plist.LBDescription && plist.LBDescription.LBChangelog && plist.LBDescription.LBChangelog.indexOf('http') == 0) {
     items.push({'title': 'Open version ' + plist.CFBundleVersion + ' change log'
       ,'subtitle':plist.LBDescription.LBChangelog
       ,'icon':'Text.icns'
       ,'url': plist.LBDescription.LBChangelog});
   }
-  if (plist && plist.LBDescription && plist.LBDescription.LBChangelog && !plist.LBDescription.LBChangelog.startsWith('http')) {
+  if (plist && plist.LBDescription && plist.LBDescription.LBChangelog && plist.LBDescription.LBChangelog.indexOf('http') != 0) {
     var changes = [{title: plist.LBDescription.LBChangelog, icon:'Text.icns'}];
     items.push({'title': 'Version ' + plist.CFBundleVersion + ' change log'
       ,'icon':'Text.icns'
@@ -227,17 +227,17 @@ function getUpdateURL(actionPackage, plist) {
   if (Action.preferences
    && Action.preferences.LBUpdateURL
    && Action.preferences.LBUpdateURL[plist.CFBundleIdentifier] 
-   && Action.preferences.LBUpdateURL[plist.CFBundleIdentifier].startsWith('http'))
+   && Action.preferences.LBUpdateURL[plist.CFBundleIdentifier].indexOf('http') == 0)
     return Action.preferences.LBUpdateURL[plist.CFBundleIdentifier];
 
   if (plist.LBDescription
    && plist.LBDescription.LBUpdateURL
-   && plist.LBDescription.LBUpdateURL.startsWith('http'))
+   && plist.LBDescription.LBUpdateURL.indexOf('http') == 0)
     return plist.LBDescription.LBUpdateURL;
     
   if (plist.LBDescription
    && plist.LBDescription.LBUpdate
-   && plist.LBDescription.LBUpdate.startsWith('http'))
+   && plist.LBDescription.LBUpdate.indexOf('http') == 0)
     return plist.LBDescription.LBUpdate;
     
   return "";
