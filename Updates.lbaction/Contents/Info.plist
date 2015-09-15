@@ -7,7 +7,7 @@
 	<key>CFBundleName</key>
 	<string>Action Updates</string>
 	<key>CFBundleVersion</key>
-	<string>1.7</string>
+	<string>2.0</string>
 	<key>CFBundleIconFile</key>
 	<string>Pref_SoftwareUpdate.icns</string>
 	<key>LBDebugLogEnabled</key>
@@ -36,12 +36,13 @@
 		<string>https://prenagha.github.io/launchbar/updates.html</string>
 		<key>LBTwitter</key>
 		<string>@prenagha</string>
-	  <key>LBUpdate</key>
+	  <key>LBUpdateURL</key>
 	  <string>https://raw.githubusercontent.com/prenagha/launchbar/master/Updates.lbaction/Contents/Info.plist</string>
-	  <key>LBDownload</key>
+	  <key>LBDownloadURL</key>
 	  <string>https://dl.dropboxusercontent.com/u/1094926/lbdist/Updates.lbaction</string>
 	  <key>LBChangelog</key>
 	  <string>
+	    2.0: Changed LBUpdateURL, LBWebsiteURL, LBDownloadURL keys per Objective Dev standard
 	    1.7: Moved skipped items to own group.
 	    1.6: Standardized error handling.
 	    1.5: Support for LBChangelog key.

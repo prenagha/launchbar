@@ -1,17 +1,21 @@
+
+
 # Action Updates Action
 
-Custom actions are great, but painful to keep up to date. Rather than all of us individually build updating mechanisms, and clutter our actions with update related UI and pinging.
+Custom actions are great, but difficult to keep up to date. Rather than all of us individually build updating mechanisms, and clutter our actions with update related UI and pinging.
+
+[Action Updates User Information](https://github.com/prenagha/launchbar/blob/master/Updates.lbaction/Contents/Scripts/README.md)
 
 This action checks each custom action a user has installed and figures out if a newer version exists. It reports on results and provides options for user
-* visit `/LBDescription/LBWebsite`
+* visit `/LBDescription/LBWebsiteURL`
 * see `/LBDescription/LBChangelog`
-* download `/LBDescription/LBDownload` (trigger browser open URL)
+* download `/LBDescription/LBDownloadURL` (trigger browser open URL)
 
-The trick is for all custom actions to include the `/LBDescription/LBUpdate` key in their `Info.plist` as a string URL reference to a remote server of the `Info.plist` of most recent version
+The trick is for all custom actions to include the `/LBDescription/LBUpdateURL` key in their `Info.plist` as a string URL reference to a remote server of the `Info.plist` of most recent version
 
 *Optional* keys to enable changelog and download link features:
 * `/LBDescription/LBChangelog` - string changelog text to display to user
-* `/LBDescription/LBDownload` - string URL reference to remote server where most recent action package can be downloaded
+* `/LBDescription/LBDownloadURL` - string URL reference to remote server where most recent action package can be downloaded
 
 ## Preferences
 You may override/specify the Update URL for any action you have installed by setting a preference in this action's local preferences file 
@@ -29,7 +33,7 @@ The action will search for custom actions in `~/Application Support/LaunchBar/Ac
 <dict>
 	<key>ActionsDir</key>
 	<string>/Users/jsmith/Library/Application Support/LaunchBar/Actions</string>
-	<key>LBUpdate</key>
+	<key>LBUpdateURL</key>
 	<dict>
 		<key>com.example.action1</key>
 		<string>https://example.com/action1.lbaction</string>
@@ -50,13 +54,13 @@ The action will search for custom actions in `~/Application Support/LaunchBar/Ac
 	<key>LBDescription</key>
 	<dict>
 	  ...
-	  <key>LBUpdate</key>
+	  <key>LBUpdateURL</key>
 	  <string>https://raw.githubusercontent.com/jsmith/launchbar/master/Checker.lbaction/Contents/Info.plist</string>
-	  <key>LBDownload</key>
+	  <key>LBDownloadURL</key>
 	  <string>https://dl.dropboxusercontent.com/u/55/lbdist/Checker.lbaction</string>
 	  <key>LBChangelog</key>
 	  <string>
-	    Fixed bug when user option clicked on 2nd item.
+	    1.2: Fixed bug when user option clicked on 2nd item.
 	  </string>
 	</dict>
 </dict>

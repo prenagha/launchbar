@@ -15,7 +15,7 @@ function setup() {
   Action.preferences.ActionsDir = LaunchBar.homeDirectory + "/Library/Application Support/LaunchBar/Actions";
   var urls = {"com.example.action1": "https://example.com/action1.lbaction"
     , "com.example.action2": "SKIP" };
-  Action.preferences.LBUpdate = urls;
+  Action.preferences.LBUpdateURL = urls;
 }
 
 function run(arg) {
@@ -114,7 +114,7 @@ function checkAction(actionsDir, actionPackage) {
   }
   if (!updateURL || !updateURL.startsWith('http')) {
     return {'title': plist.CFBundleName + ': updates not supported'
-      ,subtitle: 'Missing LBUpdate key'
+      ,subtitle: 'Missing LBUpdateURL key'
       ,'icon':SKIP
       ,children: getActionChildren(actionFile, plist, null)};
   }
@@ -167,11 +167,12 @@ function checkAction(actionsDir, actionPackage) {
 
 function getActionChildren(actionFile, currPlist, plist) {
   var items = [];
-  if (currPlist && currPlist.LBDescription && currPlist.LBDescription.LBWebsite) {
+  var w = getWebsite(currPlist);
+  if (w) {
     items.push({'title': 'Open ' + currPlist.CFBundleName + ' web site'
-      ,'subtitle':currPlist.LBDescription.LBWebsite
+      ,'subtitle': w
       ,'icon':'URL.icns'
-      ,'url': currPlist.LBDescription.LBWebsite});
+      ,'url': w});
   }
   if (plist && plist.LBDescription && plist.LBDescription.LBChangelog && plist.LBDescription.LBChangelog.startsWith('http')) {
     items.push({'title': 'Open version ' + plist.CFBundleVersion + ' change log'
@@ -185,17 +186,17 @@ function getActionChildren(actionFile, currPlist, plist) {
       ,'icon':'Text.icns'
       ,'children': changes});
   }
-  if (plist && plist.LBDescription && plist.LBDescription.LBDownload) {
+  if (plist && plist.LBDescription && plist.LBDescription.LBDownloadURL) {
     items.push({'title': 'Download version ' + plist.CFBundleVersion
-      ,'subtitle':plist.LBDescription.LBDownload
+      ,'subtitle':plist.LBDescription.LBDownloadURL
       ,'icon':'Pref_SoftwareUpdate.icns'
-      ,'url': plist.LBDescription.LBDownload});
+      ,'url': plist.LBDescription.LBDownloadURL});
   }
-  if (currPlist && currPlist.LBDescription && currPlist.LBDescription.LBUpdate) {
+  if (currPlist && currPlist.LBDescription && currPlist.LBDescription.LBUpdateURL) {
     items.push({'title': 'Open remote Info.plist'
-      ,'subtitle':currPlist.LBDescription.LBUpdate
+      ,'subtitle':currPlist.LBDescription.LBUpdateURL
       ,'icon':'URL.icns'
-      ,'url': currPlist.LBDescription.LBUpdate});
+      ,'url': currPlist.LBDescription.LBUpdateURL});
   }
   items.push({'title': 'Installed action version ' + (currPlist ? currPlist.CFBundleVersion : "")
     ,'subtitle':actionFile
@@ -206,23 +207,33 @@ function getActionChildren(actionFile, currPlist, plist) {
 
 function getUpdateURL(actionPackage, plist) {
   if (Action.preferences
-   && Action.preferences.LBUpdate
-   && Action.preferences.LBUpdate[plist.CFBundleIdentifier] 
-   && Action.preferences.LBUpdate[plist.CFBundleIdentifier] == "SKIP")
+   && Action.preferences.LBUpdateURL
+   && Action.preferences.LBUpdateURL[plist.CFBundleIdentifier] 
+   && Action.preferences.LBUpdateURL[plist.CFBundleIdentifier] == "SKIP")
     return "SKIP";
 
   if (Action.preferences
-   && Action.preferences.LBUpdate
-   && Action.preferences.LBUpdate[plist.CFBundleIdentifier] 
-   && Action.preferences.LBUpdate[plist.CFBundleIdentifier].startsWith('http'))
-    return Action.preferences.LBUpdate[plist.CFBundleIdentifier];
+   && Action.preferences.LBUpdateURL
+   && Action.preferences.LBUpdateURL[plist.CFBundleIdentifier] 
+   && Action.preferences.LBUpdateURL[plist.CFBundleIdentifier].startsWith('http'))
+    return Action.preferences.LBUpdateURL[plist.CFBundleIdentifier];
 
   if (plist.LBDescription
-   && plist.LBDescription.LBUpdate
-   && plist.LBDescription.LBUpdate.startsWith('http'))
-    return plist.LBDescription.LBUpdate;
+   && plist.LBDescription.LBUpdateURL
+   && plist.LBDescription.LBUpdateURL.startsWith('http'))
+    return plist.LBDescription.LBUpdateURL;
     
   return "";
+}
+
+function getWebsite(plist) {
+  if (!plist || !plist.LBDescription)
+    return null;
+  if (plist.LBDescription.LBWebsiteURL)
+    return plist.LBDescription.LBWebsiteURL;
+  if (plist.LBDescription.LBWebsite)
+    return plist.LBDescription.LBWebsite;
+  return null;    
 }
 
 function checkLaunchBar() {
