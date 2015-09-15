@@ -4,7 +4,7 @@
 
 Custom actions are great, but difficult to keep up to date. Rather than all of us individually build updating mechanisms, and clutter our actions with update related UI and pinging.
 
-[Action Updates User Information](https://prenagha.github.io/launchbar/updates.html)
+[Action Updates User Information and Download](https://prenagha.github.io/launchbar/updates.html)
 
 This action checks each custom action a user has installed and figures out if a newer version exists. It reports on results and provides options for user
 * visit `/LBDescription/LBWebsiteURL`
