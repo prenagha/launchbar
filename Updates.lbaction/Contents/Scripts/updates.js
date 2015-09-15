@@ -192,11 +192,23 @@ function getActionChildren(actionFile, currPlist, plist) {
       ,'icon':'Pref_SoftwareUpdate.icns'
       ,'url': plist.LBDescription.LBDownloadURL});
   }
+  if (plist && plist.LBDescription && plist.LBDescription.LBDownload) {
+    items.push({'title': 'Download version ' + plist.CFBundleVersion
+      ,'subtitle':plist.LBDescription.LBDownload
+      ,'icon':'Pref_SoftwareUpdate.icns'
+      ,'url': plist.LBDescription.LBDownload});
+  }
   if (currPlist && currPlist.LBDescription && currPlist.LBDescription.LBUpdateURL) {
     items.push({'title': 'Open remote Info.plist'
       ,'subtitle':currPlist.LBDescription.LBUpdateURL
       ,'icon':'URL.icns'
       ,'url': currPlist.LBDescription.LBUpdateURL});
+  }
+  if (currPlist && currPlist.LBDescription && currPlist.LBDescription.LBUpdate) {
+    items.push({'title': 'Open remote Info.plist'
+      ,'subtitle':currPlist.LBDescription.LBUpdate
+      ,'icon':'URL.icns'
+      ,'url': currPlist.LBDescription.LBUpdate});
   }
   items.push({'title': 'Installed action version ' + (currPlist ? currPlist.CFBundleVersion : "")
     ,'subtitle':actionFile
@@ -222,6 +234,11 @@ function getUpdateURL(actionPackage, plist) {
    && plist.LBDescription.LBUpdateURL
    && plist.LBDescription.LBUpdateURL.startsWith('http'))
     return plist.LBDescription.LBUpdateURL;
+    
+  if (plist.LBDescription
+   && plist.LBDescription.LBUpdate
+   && plist.LBDescription.LBUpdate.startsWith('http'))
+    return plist.LBDescription.LBUpdate;
     
   return "";
 }
