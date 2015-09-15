@@ -7,7 +7,7 @@
 	<key>CFBundleName</key>
 	<string>Add to Instapaper</string>
 	<key>CFBundleVersion</key>
-	<string>1.1</string>
+	<string>1.2</string>
 	<key>CFBundleIconFile</key>
 	<string>instapaper.png</string>
 	<key>LBDebugLogEnabled</key>
@@ -50,6 +50,7 @@
 	  <string>https://dl.dropboxusercontent.com/u/1094926/lbdist/Instapaper.lbaction</string>
 	  <key>LBChangelog</key>
 	  <string>
+      1.2: Better javascript support
 	    1.0: First release
 	  </string>
 	</dict>

@@ -19,19 +19,17 @@ function add(url) {
   if (s && s.length > 0)
     return s;
     
-  var u = null;
-  if (url && url.includes('http')) {
-    var s = url.indexOf('http');
-    if (s >= 0) {
-      var e = url.indexOf(' ', s);
-      if (e > s) {
-        u = url.slice(s, e);
-      } else {
-        u = url.substring(s);
-      }
+  var u = "";
+  var s = url ? url.indexOf('http') : -1;
+  if (s >= 0) {
+    var e = url.indexOf(' ', s);
+    if (e > s) {
+      u = url.slice(s, e);
+    } else {
+      u = url.substring(s);
     }
   }
-  if (!u || !u.includes('http'))
+  if (u.indexOf('http') < 0)
     return [{title: 'URL not found', icon: ALERT_ICON}];
     
   // add the url to instapaper
