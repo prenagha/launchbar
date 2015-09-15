@@ -35,7 +35,7 @@
 	<key>LBDescription</key>
 	<dict>
 		<key>LBSummary</key>
-		<string>Adds input string (assumed to be URL), or passed in LaunchBar item to Instapaper. Returns the created item from Instapaper for further action chaining or opening.</string>
+		<string>Adds input string URL, or passed in LaunchBar item to Instapaper. Returns the created item from Instapaper for further action chaining or opening.</string>
 		<key>LBAuthor</key>
 		<string>Padraic Renaghan</string>
 		<key>LBEmail</key>
