@@ -106,6 +106,12 @@ on load_all()
 						set action to {title:"Complete " & name of todo, subtitle:notes of todo, label:tag names of todo, action:"completeTodo", actionArgument:id of todo, icon:TB & ":checkbox_big_done-P"}
 						copy action to end of actions
 						
+						set u to stringBetween(notes of todo, "[url=", "]") of me
+						if u is not "" then
+							set action to {title:"View " & u, |url|:u}
+							copy action to end of actions
+						end if
+						
 						if listId is not "FocusToday" then
 							set action to {title:"Today", action:"moveToday", actionArgument:id of todo, icon:TB & ":TodayMark"}
 							copy action to end of actions
@@ -272,8 +278,39 @@ on trashTodo(todoId)
 	did_it(todo, "Deleted")
 end trashTodo
 
+-- http://applescript.bratis-lover.net/library/string/#explode
+on explode(delimiter, input)
+	local delimiter, input, ASTID
+	set ASTID to AppleScript's text item delimiters
+	try
+		set AppleScript's text item delimiters to delimiter
+		set input to text items of input
+		set AppleScript's text item delimiters to ASTID
+		return input --> list
+	on error eMsg number eNum
+		set AppleScript's text item delimiters to ASTID
+		error "Error in explode: " & eMsg number eNum
+	end try
+end explode
+
+-- http://applescript.bratis-lover.net/library/string/#explode
+on stringBetween(str, head, tail)
+	local str, head, tail
+	try
+		if str is {} then return ""
+		if str is "" then return ""
+		if str does not contain head then return ""
+		if str does not contain tail then return ""
+		set str to item 2 of my explode(head, str)
+		set str to item 1 of my explode(tail, str)
+		return str
+	on error eMsg number eNum
+		error "Error in stringBetween: " & eMsg number eNum
+	end try
+end stringBetween
+
+
 -- called by launchbar when enter or browse into from top item
 on run
-	--handle_string("test to do 1 2 3")
 	load_all()
 end run

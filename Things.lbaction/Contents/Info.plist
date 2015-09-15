@@ -9,7 +9,7 @@
 	<key>LBAbbreviation</key>
 	<string>things todo task</string> 
 	<key>CFBundleVersion</key>
-	<string>2.1</string>
+	<string>2.2</string>
 	<key>CFBundleIconFile</key>
   <string>com.culturedcode.things:checkbox_medium_done-N</string>
   <key>LBAssociatedApplication</key>
@@ -65,7 +65,8 @@
 	  <string>https://dl.dropboxusercontent.com/u/1094926/lbdist/Things.lbaction</string>
 	  <key>LBChangelog</key>
 	  <string>
-	    Support action updates
+	    2.2: View URL for URL in notes of todo
+	    2.1: Support action updates
 	  </string>
 	</dict>
 </dict>
