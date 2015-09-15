@@ -7,7 +7,7 @@
 	<key>CFBundleName</key>
 	<string>Generate Password</string>
 	<key>CFBundleVersion</key>
-	<string>4.0</string>
+	<string>4.1</string>
 	<key>CFBundleIconFile</key>
 	<string>Lock.icns</string>
 	<key>LBDebugLogEnabled</key>
@@ -34,13 +34,13 @@
 		<string>Padraic Renaghan</string>
 		<key>LBEmail</key>
 		<string>prenagha@renaghan.com</string>
-		<key>LBWebsite</key>
+		<key>LBWebsiteURL</key>
 		<string>https://prenagha.github.io/launchbar/generate.html</string>
 		<key>LBTwitter</key>
 		<string>@prenagha</string>
-	  <key>LBUpdate</key>
+	  <key>LBUpdateURL</key>
 	  <string>https://raw.githubusercontent.com/prenagha/launchbar/master/Generate Password.lbaction/Contents/Info.plist</string>
-	  <key>LBDownload</key>
+	  <key>LBDownloadURL</key>
 	  <string>https://dl.dropboxusercontent.com/u/1094926/lbdist/Generate Password.lbaction</string>
 	  <key>LBChangelog</key>
 	  <string>

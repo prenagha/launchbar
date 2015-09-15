@@ -7,7 +7,7 @@
 	<key>CFBundleName</key>
 	<string>Set a Timer</string>
 	<key>CFBundleVersion</key>
-	<string>3.0</string>
+	<string>3.1</string>
 	<key>CFBundleIconFile</key>
 	<string>clock.pdf</string>
 	<key>LBDebugLogEnabled</key>
@@ -40,15 +40,15 @@
 		<string>Padraic Renaghan</string>
 		<key>LBEmail</key>
 		<string>prenagha@renaghan.com</string>
-		<key>LBWebsite</key>
+		<key>LBWebsiteURL</key>
 		<string>https://prenagha.github.io/launchbar/timer.html</string>
 		<key>LBTwitter</key>
 		<string>@prenagha</string>
 		<key>LBArgument</key>
 		<string>Reminder text in the form of "[reminder message] [delay]". Delay a string like 1m, 2m30s, 4h...</string>
-	  <key>LBUpdate</key>
+	  <key>LBUpdateURL</key>
 	  <string>https://raw.githubusercontent.com/prenagha/launchbar/master/Timer.lbaction/Contents/Info.plist</string>
-	  <key>LBDownload</key>
+	  <key>LBDownloadURL</key>
 	  <string>https://dl.dropboxusercontent.com/u/1094926/lbdist/Timer.lbaction</string>
 	  <key>LBChangelog</key>
 	  <string>

@@ -7,7 +7,7 @@
 	<key>CFBundleName</key>
 	<string>Add to Instapaper</string>
 	<key>CFBundleVersion</key>
-	<string>1.0</string>
+	<string>1.1</string>
 	<key>CFBundleIconFile</key>
 	<string>instapaper.png</string>
 	<key>LBDebugLogEnabled</key>
@@ -40,13 +40,13 @@
 		<string>Padraic Renaghan</string>
 		<key>LBEmail</key>
 		<string>prenagha@renaghan.com</string>
-		<key>LBWebsite</key>
+		<key>LBWebsiteURL</key>
 		<string>https://prenagha.github.io/launchbar/instapaper.html</string>
 		<key>LBTwitter</key>
 		<string>@prenagha</string>
-	  <key>LBUpdate</key>
+	  <key>LBUpdateURL</key>
 	  <string>https://raw.githubusercontent.com/prenagha/launchbar/master/Instapaper.lbaction/Contents/Info.plist</string>
-	  <key>LBDownload</key>
+	  <key>LBDownloadURL</key>
 	  <string>https://dl.dropboxusercontent.com/u/1094926/lbdist/Instapaper.lbaction</string>
 	  <key>LBChangelog</key>
 	  <string>

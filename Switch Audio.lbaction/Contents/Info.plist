@@ -9,7 +9,7 @@
 	<key>LBAbbreviation</key>
 	<string>sound speaker headphones microphone</string> 
 	<key>CFBundleVersion</key>
-	<string>2.0</string>
+	<string>2.1</string>
 	<key>CFBundleIconFile</key>
 	<string>headphones.icns</string>
 	<key>LBDebugLogEnabled</key>
@@ -38,13 +38,13 @@
 		<string>Padraic Renaghan</string>
 		<key>LBEmail</key>
 		<string>prenagha@renaghan.com</string>
-		<key>LBWebsite</key>
+		<key>LBWebsiteURL</key>
 		<string>https://prenagha.github.io/launchbar/audio.html</string>
 		<key>LBTwitter</key>
 		<string>@prenagha</string>
-	  <key>LBUpdate</key>
+	  <key>LBUpdateURL</key>
 	  <string>https://raw.githubusercontent.com/prenagha/launchbar/master/Switch Audio.lbaction/Contents/Info.plist</string>
-	  <key>LBDownload</key>
+	  <key>LBDownloadURL</key>
 	  <string>https://dl.dropboxusercontent.com/u/1094926/lbdist/Switch Audio.lbaction</string>
 	  <key>LBChangelog</key>
 	  <string>

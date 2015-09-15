@@ -9,7 +9,7 @@
 	<key>LBAbbreviation</key>
 	<string>incognito private google chrome www safari</string> 
 	<key>CFBundleVersion</key>
-	<string>2.0</string>
+	<string>2.1</string>
 	<key>CFBundleIconFile</key>
   <string>incognito.png</string>
   <key>LBARequiredApplication</key>
@@ -50,15 +50,15 @@
 		<string>Padraic Renaghan</string>
 		<key>LBEmail</key>
 		<string>prenagha@renaghan.com</string>
-		<key>LBWebsite</key>
+		<key>LBWebsiteURL</key>
 		<string>https://prenagha.github.io/launchbar/incognito.html</string>
 		<key>LBTwitter</key>
 		<string>@prenagha</string>
 		<key>LBArgument</key>
 		<string>URL</string>
-	  <key>LBUpdate</key>
+	  <key>LBUpdateURL</key>
 	  <string>https://raw.githubusercontent.com/prenagha/launchbar/master/Incognito.lbaction/Contents/Info.plist</string>
-	  <key>LBDownload</key>
+	  <key>LBDownloadURL</key>
 	  <string>https://dl.dropboxusercontent.com/u/1094926/lbdist/Incognito.lbaction</string>
 	  <key>LBChangelog</key>
 	  <string>

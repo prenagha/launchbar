@@ -7,7 +7,7 @@
 	<key>CFBundleName</key>
 	<string>Share Safari Link</string>
 	<key>CFBundleVersion</key>
-	<string>3.1</string>
+	<string>3.2</string>
 	<key>CFBundleIconFile</key>
 	<string>com.apple.Safari</string>
 	<key>LBDebugLogEnabled</key>
@@ -36,15 +36,15 @@
 		<string>Padraic Renaghan</string>
 		<key>LBEmail</key>
 		<string>prenagha@renaghan.com</string>
-		<key>LBWebsite</key>
+		<key>LBWebsiteURL</key>
 		<string>https://prenagha.github.io/launchbar/share-link.html</string>
 		<key>LBTwitter</key>
 		<string>@prenagha</string>
 		<key>LBResult</key>
 		<string>URL and Title of selected tab in Safari</string>
-	  <key>LBUpdate</key>
+	  <key>LBUpdateURL</key>
 	  <string>https://raw.githubusercontent.com/prenagha/launchbar/master/Share Safari Link.lbaction/Contents/Info.plist</string>
-	  <key>LBDownload</key>
+	  <key>LBDownloadURL</key>
 	  <string>https://dl.dropboxusercontent.com/u/1094926/lbdist/Share Safari Link.lbaction</string>
 	  <key>LBChangelog</key>
 	  <string>

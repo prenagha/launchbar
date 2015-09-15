@@ -7,7 +7,7 @@
 	<key>CFBundleName</key>
 	<string>Expand URL</string>
 	<key>CFBundleVersion</key>
-	<string>3.0</string>
+	<string>3.1</string>
 	<key>CFBundleIconFile</key>
 	<string>URL.icns</string>
 	<key>LBDebugLogEnabled</key>
@@ -42,15 +42,15 @@
 		<string>Padraic Renaghan</string>
 		<key>LBEmail</key>
 		<string>prenagha@renaghan.com</string>
-		<key>LBWebsite</key>
+		<key>LBWebsiteURL</key>
 		<string>https://prenagha.github.io/launchbar/expand.html</string>
 		<key>LBTwitter</key>
 		<string>@prenagha</string>
 		<key>LBArgument</key>
 		<string>URL to expand</string>
-	  <key>LBUpdate</key>
+	  <key>LBUpdateURL</key>
 	  <string>https://raw.githubusercontent.com/prenagha/launchbar/master/Expand URL.lbaction/Contents/Info.plist</string>
-	  <key>LBDownload</key>
+	  <key>LBDownloadURL</key>
 	  <string>https://dl.dropboxusercontent.com/u/1094926/lbdist/Expand URL.lbaction</string>
 	  <key>LBChangelog</key>
 	  <string>

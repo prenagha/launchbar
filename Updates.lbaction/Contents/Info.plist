@@ -32,7 +32,7 @@
 		<string>Padraic Renaghan</string>
 		<key>LBEmail</key>
 		<string>prenagha@renaghan.com</string>
-		<key>LBWebsite</key>
+		<key>LBWebsiteURL</key>
 		<string>https://prenagha.github.io/launchbar/updates.html</string>
 		<key>LBTwitter</key>
 		<string>@prenagha</string>
