@@ -119,7 +119,8 @@ function checkAction(actionsDir, actionPackage) {
       ,children: getActionChildren(actionFile, plist, null)};
   }
 
-  updateURL = encodeURI(updateURL);
+  if (updateURL.indexOf(" ") > 0)
+    updateURL = encodeURI(updateURL);
   LaunchBar.debugLog(actionPackage + ' URL ' + updateURL);
 
   var result = {};
