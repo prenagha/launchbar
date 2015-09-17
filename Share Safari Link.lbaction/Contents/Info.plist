@@ -43,9 +43,9 @@
 		<key>LBResult</key>
 		<string>URL and Title of selected tab in Safari</string>
 	  <key>LBUpdateURL</key>
-	  <string>https://raw.githubusercontent.com/prenagha/launchbar/master/Share Safari Link.lbaction/Contents/Info.plist</string>
+	  <string>https://raw.githubusercontent.com/prenagha/launchbar/master/Share%20Safari%20Link.lbaction/Contents/Info.plist</string>
 	  <key>LBDownloadURL</key>
-	  <string>https://dl.dropboxusercontent.com/u/1094926/lbdist/Share Safari Link.lbaction</string>
+	  <string>https://dl.dropboxusercontent.com/u/1094926/lbdist/Share%20Safari%20Link.lbaction</string>
 	  <key>LBChangelog</key>
 	  <string>
 	    Support action updates

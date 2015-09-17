@@ -54,9 +54,9 @@
 		<key>LBArgument</key>
 		<string>Selected text or file in LaunchBar or contents of system clipboard</string>
 	  <key>LBUpdateURL</key>
-	  <string>https://raw.githubusercontent.com/prenagha/launchbar/master/Copy to iPhone.lbaction/Contents/Info.plist</string>
+	  <string>https://raw.githubusercontent.com/prenagha/launchbar/master/Copy%20to%20iPhone.lbaction/Contents/Info.plist</string>
 	  <key>LBDownloadURL</key>
-	  <string>https://dl.dropboxusercontent.com/u/1094926/lbdist/Copy to iPhone.lbaction</string>
+	  <string>https://dl.dropboxusercontent.com/u/1094926/lbdist/Copy%20to%20iPhone.lbaction</string>
 	  <key>LBChangelog</key>
 	  <string>
 	    Support action updates

@@ -43,9 +43,9 @@
 		<key>LBTwitter</key>
 		<string>@prenagha</string>
 	  <key>LBUpdateURL</key>
-	  <string>https://raw.githubusercontent.com/prenagha/launchbar/master/Switch Audio.lbaction/Contents/Info.plist</string>
+	  <string>https://raw.githubusercontent.com/prenagha/launchbar/master/Switch%20Audio.lbaction/Contents/Info.plist</string>
 	  <key>LBDownloadURL</key>
-	  <string>https://dl.dropboxusercontent.com/u/1094926/lbdist/Switch Audio.lbaction</string>
+	  <string>https://dl.dropboxusercontent.com/u/1094926/lbdist/Switch%20Audio.lbaction</string>
 	  <key>LBChangelog</key>
 	  <string>
 	    Support action updates
