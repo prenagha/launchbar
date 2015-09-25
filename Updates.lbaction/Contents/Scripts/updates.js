@@ -278,7 +278,7 @@ function checkLaunchBar() {
         ,'icon':ALERT_ICON
         ,'url':LB_INFO};
     }
-    if (result.data[0].BundleVersion && result.data[0].BundleVersion != LaunchBar.version) {
+    if (result.data[0].BundleVersion && result.data[0].BundleVersion > LaunchBar.version) {
       return {'title':'LaunchBar: Newer version available   ' 
           + LaunchBar.shortVersion + ' ➔ ' + result.data[0].BundleShortVersionString
         ,'icon':CAUTION
