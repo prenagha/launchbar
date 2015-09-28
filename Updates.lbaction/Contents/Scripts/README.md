@@ -13,6 +13,8 @@ This action checks each custom action a user has installed and figures out if a 
 
 The trick is for all custom actions to include the `/LBDescription/LBUpdateURL` key in their `Info.plist` as a string URL reference to a remote server of the `Info.plist` of most recent version
 
+Also make sure the `CFBundleVersion` key is specified and uses standard version numbering convention `major[.minor][.patch]` where all 3 are integers.
+
 *Optional* keys to enable changelog and download link features:
 * `/LBDescription/LBChangelog` - string changelog text to display to user
 * `/LBDescription/LBDownloadURL` - string URL reference to remote server where most recent action package can be downloaded

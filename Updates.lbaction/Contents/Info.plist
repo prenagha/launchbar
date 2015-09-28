@@ -7,7 +7,7 @@
 	<key>CFBundleName</key>
 	<string>Action Updates</string>
 	<key>CFBundleVersion</key>
-	<string>2.3</string>
+	<string>2.4</string>
 	<key>CFBundleIconFile</key>
 	<string>Pref_SoftwareUpdate.icns</string>
 	<key>LBDebugLogEnabled</key>
@@ -42,6 +42,7 @@
 	  <string>https://dl.dropboxusercontent.com/u/1094926/lbdist/Updates.lbaction</string>
 	  <key>LBChangelog</key>
 	  <string>
+	    2.4: Proper version compare assuming major[.minor][.patch] format
 	    2.3: Fix if URLs are already encoded
 	    2.2: replace startsWith and endsWith for better javascript support
 	    2.1: Support new and old keys
