@@ -318,8 +318,8 @@ function upToDate(local, remote) {
         while (rparts.length < 3)
             rparts.push("0");
         for (var i=0; i<3; i++) {
-            var l = parseInt(lparts[i]);
-            var r = parseInt(rparts[i]);
+            var l = parseInt(lparts[i], 10);
+            var r = parseInt(rparts[i], 10);
             if (l === r)
                 continue;
             return l > r;
