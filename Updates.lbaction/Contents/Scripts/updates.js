@@ -306,7 +306,7 @@ function checkLaunchBar() {
 var VPAT = /^\d+(\.\d+){0,2}$/;
 
 function upToDate(local, remote) {
-    if (!local || !remote || local.length == 0 || remote.length == 0)
+    if (!local || !remote || local.length === 0 || remote.length === 0)
         return false;
     if (local == remote)
         return true;
