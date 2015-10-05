@@ -214,9 +214,35 @@ function getActionChildren(actionFile, currPlist, plist) {
   items.push({'title': 'Installed action version ' + (currPlist ? currPlist.CFBundleVersion : "")
     ,'subtitle':actionFile
     ,'path': actionFile});
+
+  if (Action.preferences
+   && Action.preferences.LBUpdateURL
+   && Action.preferences.LBUpdateURL[currPlist.CFBundleIdentifier] 
+   && Action.preferences.LBUpdateURL[currPlist.CFBundleIdentifier] == "SKIP") {   
+    items.push({'title': 'Resume checking this action for updates'
+      ,'subtitle':currPlist.CFBundleIdentifier
+      ,'icon':SKIP
+      ,'action':'unskipper'
+      ,'actionRunsInBackground':true
+      ,'actionArgument': currPlist.CFBundleIdentifier});
+  } else {
+    items.push({'title': 'Skip checking this action for updates'
+      ,'subtitle':currPlist.CFBundleIdentifier
+      ,'icon':SKIP
+      ,'action':'skipper'
+      ,'actionRunsInBackground':true
+      ,'actionArgument': currPlist.CFBundleIdentifier});
+  }
   return items;
 }
 
+function skipper(bundleId) {
+  Action.preferences.LBUpdateURL[bundleId] = "SKIP";
+}
+
+function unskipper(bundleId) {
+  Action.preferences.LBUpdateURL[bundleId] = "";
+}
 
 function getUpdateURL(actionPackage, plist) {
   if (Action.preferences
