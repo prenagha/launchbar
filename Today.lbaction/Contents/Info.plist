@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleIdentifier</key>
+	<string>com.renaghan.launchbar.Today</string>
+	<key>CFBundleName</key>
+	<string>Today</string>
+	<key>LBAbbreviation</key>
+	<string>calendar ical event appointment meeting</string> 
+	<key>CFBundleVersion</key>
+	<string>0.9</string>
+	<key>CFBundleIconFile</key>
+	<string>com.apple.iCal:App-empty.icns</string>
+	<key>LBDebugLogEnabled</key>
+	<true/>
+	<key>LBScripts</key>
+	<dict>
+		<key>LBDefaultScript</key>
+		<dict>
+			<key>LBScriptName</key>
+			<string>today.js</string>
+			<key>LBRunInBackground</key>
+			<false/>
+			<key>LBRequiresArgument</key>
+			<false/>
+			<key>LBReturnsResult</key>
+			<true/>
+		</dict>
+	</dict>
+	<key>LBDescription</key>
+	<dict>
+		<key>LBSummary</key>
+		<string>Today view (and optionally beyond) of calendar events. Requires icalBuddy be installed on your system. http://hasseg.org/icalBuddy/. See man page of icalBuddy and customize this actions parameters to it via this action's preferences file.</string>
+		<key>LBRequiredApplication</key>
+		<string>com.apple.iCal</string>
+		<key>LBRequirements</key>
+		<string>http://hasseg.org/icalBuddy/</string>
+		<key>LBAuthor</key>
+		<string>Padraic Renaghan</string>
+		<key>LBEmail</key>
+		<string>prenagha@renaghan.com</string>
+		<key>LBWebsiteURL</key>
+		<string>https://prenagha.github.io/launchbar/today.html</string>
+		<key>LBTwitter</key>
+		<string>@prenagha</string>
+	  <key>LBUpdateURL</key>
+	  <string>https://raw.githubusercontent.com/prenagha/launchbar/master/Today.lbaction/Contents/Info.plist</string>
+	  <key>LBDownloadURL</key>
+	  <string>https://dl.dropboxusercontent.com/u/1094926/lbdist/Today.lbaction</string>
+	  <key>LBChangelog</key>
+	  <string>
+	    1.0: Initial release
+	  </string>
+	</dict>
+</dict>
+</plist>
