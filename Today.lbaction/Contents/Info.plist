@@ -9,7 +9,7 @@
 	<key>LBAbbreviation</key>
 	<string>calendar ical event appointment meeting</string> 
 	<key>CFBundleVersion</key>
-	<string>0.9</string>
+	<string>1.0</string>
 	<key>CFBundleIconFile</key>
 	<string>com.apple.iCal:App-empty.icns</string>
 	<key>LBDebugLogEnabled</key>

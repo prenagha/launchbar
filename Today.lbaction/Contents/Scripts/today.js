@@ -27,7 +27,7 @@ function setupPreferences() {
       ,"--propertyOrder", "title,datetime,location,url,notes"
       ,"--propertySeparators", "a" + Action.preferences.icalBuddyPropertySeparator + "a"
       ,"--bullet", ""
-      ,"--includeCals", "Personal,Work,Family,Renaghan,CSC,KOA,Travel,School"
+      //,"--includeCals", "Personal,Work"
       ,"--includeEventProps", "title,datetime,location,url,notes"
       ,"--notesNewlineReplacement" , " "
     ];
@@ -78,7 +78,7 @@ function run() {
   try {
     setupPreferences();
     var err = checkBuddy();
-    if (err.length > 4)
+    if (err.length > 3)
       return err;
     
     moment.locale(LaunchBar.currentLocale);
