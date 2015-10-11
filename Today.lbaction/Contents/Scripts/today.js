@@ -34,6 +34,13 @@ function setupPreferences() {
     Action.preferences.icalBuddyOptions = opts;
     Action.preferences.pluginFile = "";
   }
+  if (!Action.preferences.momentJsFormatToday)
+    Action.preferences.momentJsFormatToday = "h:mm a";
+  if (!Action.preferences.momentJsFormat)
+    Action.preferences.momentJsFormat = "ddd h:mm a";
+  if (!Action.preferences.momentJsFormatAllDay)
+    Action.preferences.momentJsFormatAllDay = "ddd";
+    
   if (Action.preferences.pluginFile && Action.preferences.pluginFile.length > 5) {
     LaunchBar.log("Loading plugin from " + Action.preferences.pluginFile);
     include(Action.preferences.pluginFile);
@@ -46,6 +53,7 @@ function updatePreferences() {
     {title: 'Edit Preferences', icon: "Pref_Advanced.icns", action: "editPreferences"}
    ,{title: 'iCalBuddy Website', url: 'http://hasseg.org/icalBuddy/', icon:'icalb.png'}
    ,{title: 'iCalBuddy Calendar List', action: 'calendarList', icon:'icalb.png'}
+   ,{title: 'MomentJs Date Time Formats', url: 'http://momentjs.com/docs/#/displaying/format/'}   
   ];
 }
 
@@ -78,7 +86,7 @@ function run() {
   try {
     setupPreferences();
     var err = checkBuddy();
-    if (err.length > 3)
+    if (err.length > 4)
       return err;
     
     moment.locale(LaunchBar.currentLocale);
@@ -93,7 +101,7 @@ function run() {
     var output = LaunchBar.execute.apply(LaunchBar, args);
     LaunchBar.debugLog('Output ' + output);
     var lines = output.split("\n");
-    var event = {name:"",location:"",url:"",notes:"",start:"",end:"",phone:""};
+    var event = {name:"",location:"",url:"",notes:"",start:"",end:"",phone:"",allDay:false};
     for (var i = 0; i < lines.length; i++) {
       var fields = lines[i].split(Action.preferences.icalBuddyPropertySeparator);
       // extra lines are continuations of the location field
@@ -113,17 +121,23 @@ function run() {
         });
       }
       
-      event = {name:"",location:"",url:"",notes:"",start:"",end:"",phone:""};
+      event = {name:"",location:"",url:"",notes:"",start:"",end:"",phone:"",allDay:false};
       for (var f=0; f<fields.length; f++) {
         if (f === 0) {
           event.name = fields[f].trim();
           continue;
         } else if (f === 1) {
           var dt = fields[f].substring(0,10);
-          var st = fields[f].substring(13,28);
-          var en = fields[f].substring(29,45);
-          event.start = moment(dt + " " + st, "YYYY-MM-DD HH:mm:ss Z");
-          event.end = moment(dt + " " + en, "YYYY-MM-DD HH:mm:ss Z");
+          if (fields[f].length <=10) {
+            event.allDay = true;
+            event.start = moment(dt, "YYYY-MM-DD");
+            event.end = event.start;
+          } else {
+            var st = fields[f].substring(13,28);
+            var en = fields[f].substring(29,45);
+            event.start = moment(dt + " " + st, "YYYY-MM-DD HH:mm:ss Z");
+            event.end = moment(dt + " " + en, "YYYY-MM-DD HH:mm:ss Z");
+          }
           continue;
         }
         
@@ -145,11 +159,13 @@ function run() {
       if (!event || event == {} || !event.name || event.name.length == 0)
         continue;
 
-      var t = "";      
-      if (now.isSame(event.start,'day')) {
-        t =  event.start.format("LT");
+      var t = "";     
+      if (event.allDay) {
+        t = event.start.format(Action.preferences.momentJsFormatAllDay);
+      } else if (now.isSame(event.start,'day')) {
+        t =  event.start.format(Action.preferences.momentJsFormatToday);
       } else {
-        t = event.start.calendar();
+        t = event.start.format(Action.preferences.momentJsFormat);
       }
       t += " " + event.name;
     }

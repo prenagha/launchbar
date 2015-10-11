@@ -9,7 +9,7 @@
 	<key>LBAbbreviation</key>
 	<string>calendar ical event appointment meeting</string> 
 	<key>CFBundleVersion</key>
-	<string>1.0</string>
+	<string>1.1</string>
 	<key>CFBundleIconFile</key>
 	<string>com.apple.iCal:App-empty.icns</string>
 	<key>LBDebugLogEnabled</key>
@@ -50,6 +50,7 @@
 	  <string>https://dl.dropboxusercontent.com/u/1094926/lbdist/Today.lbaction</string>
 	  <key>LBChangelog</key>
 	  <string>
+	    1.1: Ability to set time format as preference
 	    1.0: Initial release
 	  </string>
 	</dict>
