@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleIdentifier</key>
+	<string>com.renaghan.launchbar.Parallels</string>
+	<key>CFBundleName</key>
+	<string>Parallels</string>
+	<key>LBAbbreviation</key>
+	<string>parallels vm virtual machine guest</string> 
+	<key>CFBundleVersion</key>
+	<string>0.9</string>
+	<key>LBAssociatedApplication</key>
+	<string>com.parallels.desktop.console</string>
+	<key>CFBundleIconFile</key>
+	<string>com.parallels.desktop.console</string>
+	<key>LBDebugLogEnabled</key>
+	<true/>
+	<key>LBScripts</key>
+	<dict>
+		<key>LBDefaultScript</key>
+		<dict>
+			<key>LBScriptName</key>
+			<string>parallels.js</string>
+			<key>LBRunInBackground</key>
+			<false/>
+			<key>LBRequiresArgument</key>
+			<false/>
+			<key>LBReturnsResult</key>
+			<true/>
+		</dict>
+	</dict>
+	<key>LBDescription</key>
+	<dict>
+		<key>LBSummary</key>
+		<string>Today view (and optionally beyond) of calendar events. Requires icalBuddy be installed on your system. http://hasseg.org/icalBuddy/. See man page of icalBuddy and customize this actions parameters to it via this action's preferences file.</string>
+		<key>LBRequiredApplication</key>
+		<string>Parallels</string>
+		<key>LBRequirements</key>
+		<string>http://parallels.com</string>
+		<key>LBAuthor</key>
+		<string>Padraic Renaghan</string>
+		<key>LBEmail</key>
+		<string>prenagha@renaghan.com</string>
+		<key>LBWebsiteURL</key>
+		<string>https://prenagha.github.io/launchbar/parallels.html</string>
+		<key>LBTwitter</key>
+		<string>@prenagha</string>
+	  <key>LBUpdateURL</key>
+	  <string>https://raw.githubusercontent.com/prenagha/launchbar/master/Parallels.lbaction/Contents/Info.plist</string>
+	  <key>LBDownloadURL</key>
+	  <string>https://dl.dropboxusercontent.com/u/1094926/lbdist/Parallels.lbaction</string>
+	  <key>LBChangelog</key>
+	  <string>
+	    1.0: Initial release
+	  </string>
+	</dict>
+</dict>
+</plist>
