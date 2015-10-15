@@ -33,7 +33,7 @@
 	<key>LBDescription</key>
 	<dict>
 		<key>LBSummary</key>
-		<string>Today view (and optionally beyond) of calendar events. Requires icalBuddy be installed on your system. http://hasseg.org/icalBuddy/. See man page of icalBuddy and customize this actions parameters to it via this action's preferences file.</string>
+		<string>Interact with Parallels virtual machines. See status. Take action: start, stop, suspend, resume, pause.</string>
 		<key>LBRequiredApplication</key>
 		<string>Parallels</string>
 		<key>LBRequirements</key>
