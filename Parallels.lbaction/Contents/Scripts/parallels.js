@@ -8,6 +8,8 @@ var LIST = /^\s*([^\s]+)\s+([^\s]+)\s+([^\s]+)\s+(.*)$/;
 function setupPreferences() {
   if (!Action.preferences.prlctlPath)
     Action.preferences.prlctlPath = '/usr/local/bin/prlctl';
+  if (!Action.preferences.capturePath)
+    Action.preferences.capturePath = '/Desktop/';
     
   if (Action.preferences.pluginFile && Action.preferences.pluginFile.length > 5) {
     LaunchBar.log("Loading plugin from " + Action.preferences.pluginFile);
@@ -36,6 +38,7 @@ function run() {
         LaunchBar.alert('Unrecognized line ' + lines[i]);
         continue;
       }
+      
       var vm = {};
       vm.uuid = match[1];
       vm.status = match[2].substring(0,1).toUpperCase() + match[2].substring(1);
@@ -48,7 +51,8 @@ function run() {
       if (vm && vm.name && vm.name.length > 1) {                
         items.push({
            title: vm.name
-          ,subtitle: "Status: " + vm.status
+          ,subtitle: vm.status
+          ,alwaysShowsSubtitle: true
           ,icon: vm.icon
           ,children: vm.children
         });      
@@ -70,17 +74,19 @@ function run() {
 
 function parse(vm) {
   if (vm.status === 'Running') {
-    vm.children.push({title:'Pause ' + vm.name,icon:'pause.pdf'
+    vm.children.push({title:'Pause ' + vm.name,icon:'pauseTemplate.pdf',actionRunsInBackground:true
       ,action:'vmCommand',uuid:vm.uuid,cmd:'pause'});
-    vm.children.push({title:'Suspend ' + vm.name,icon:'suspend.pdf'
+    vm.children.push({title:'Suspend ' + vm.name,icon:'suspendTemplate.pdf',actionRunsInBackground:true
       ,action:'vmCommand',uuid:vm.uuid,cmd:'suspend'});
-    vm.children.push({title:'Stop ' + vm.name,icon:ALERT_ICON
+    vm.children.push({title:'Stop ' + vm.name,icon:ALERT_ICON,actionRunsInBackground:true
       ,action:'vmCommand',uuid:vm.uuid,cmd:'stop'});
+    vm.children.push({title:'Capture Screen ' + vm.name,icon:'PhotoAlbum.icns'
+      ,action:'capture',uuid:vm.uuid});
   } else if (vm.status === 'Suspended' || vm.status === 'Paused') {
-    vm.children.push({title:'Resume ' + vm.name,icon:'play.pdf'
+    vm.children.push({title:'Resume ' + vm.name,icon:'playTemplate.pdf',actionRunsInBackground:true
       ,action:'vmCommand',uuid:vm.uuid,cmd:'resume'});
   } else if (vm.status === 'Stopped') {
-    vm.children.push({title:'Start ' + vm.name,icon:'play.pdf'
+    vm.children.push({title:'Start ' + vm.name,icon:'playTemplate.pdf',actionRunsInBackground:true
       ,action:'vmCommand',uuid:vm.uuid,cmd:'start'});
   }
   
@@ -88,6 +94,20 @@ function parse(vm) {
     return pluginParse(vm);
     
   return vm;
+}
+
+function capture(item) {
+  try {
+    var dt = LaunchBar.execute('/bin/date', '+%Y%m%d_%H%M%S');
+    var file = 'capture_' + dt + '.png';
+    var path = LaunchBar.homeDirectory + Action.preferences.capturePath + file;
+    LaunchBar.debugLog('Capture ' + path);
+    LaunchBar.execute(Action.preferences.prlctlPath, 'capture', item.uuid, '--file', path);
+    return {title:file,path:path,icon:item.icon}
+  } catch (exception) {
+    LaunchBar.log('Error VM Capture ' + path + ' ' + exception);
+    LaunchBar.alert('Error VM Capture ' + path, exception);
+  }
 }
 
 function vmCommand(item) {

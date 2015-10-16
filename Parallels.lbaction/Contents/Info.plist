@@ -9,7 +9,7 @@
 	<key>LBAbbreviation</key>
 	<string>parallels vm virtual machine guest</string> 
 	<key>CFBundleVersion</key>
-	<string>0.9</string>
+	<string>1.0</string>
 	<key>LBAssociatedApplication</key>
 	<string>com.parallels.desktop.console</string>
 	<key>CFBundleIconFile</key>
