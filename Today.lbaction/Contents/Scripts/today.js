@@ -13,6 +13,9 @@ var NOT_NBR = /\D/g;
 
 
 function setupPreferences() {
+  if (!Action.preferences.clickCall)
+    Action.preferences.clickCall = "true";
+    
   if (PREFS_RESET || !Action.preferences.icalBuddyPath) {
     Action.preferences.icalBuddyPath = "/usr/local/bin/icalBuddy";
     Action.preferences.icalBuddyCommand = "eventsToday+1";
@@ -268,6 +271,8 @@ function maps(str) {
 function dial(str) {
   LaunchBar.performAction("Call With iPhone", str);
   big(str);
+  if (Action.preferences.clickCall === "true")
+    LaunchBar.executeAppleScriptFile("./call.scpt");
 }
 
 function big(str) {
