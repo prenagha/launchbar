@@ -7,7 +7,7 @@
 	<key>CFBundleName</key>
 	<string>Dismiss Notifications</string>
 	<key>CFBundleVersion</key>
-	<string>2.1</string>
+	<string>2.2</string>
 	<key>CFBundleIconFile</key>
 	<string>/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/Notifications.icns</string>
 	<key>LBDebugLogEnabled</key>
@@ -29,7 +29,7 @@
 	<key>LBDescription</key>
 	<dict>
 		<key>LBSummary</key>
-		<string>Dismiss all notifications from Notification Center. Will "Snooze" calendar items, "Close" on all others.</string>
+		<string>Dismiss all notifications from Notification Center. Will &quot;Snooze&quot; calendar items, &quot;Close&quot; on all others.</string>
 		<key>LBAuthor</key>
 		<string>Padraic Renaghan</string>
 		<key>LBEmail</key>
@@ -38,14 +38,12 @@
 		<string>https://prenagha.github.io/launchbar/dismiss.html</string>
 		<key>LBTwitter</key>
 		<string>@prenagha</string>
-	  <key>LBUpdateURL</key>
-	  <string>https://raw.githubusercontent.com/prenagha/launchbar/master/Dismiss%20Notifications.lbaction/Contents/Info.plist</string>
-	  <key>LBDownloadURL</key>
-	  <string>https://dl.dropboxusercontent.com/u/1094926/lbdist/Dismiss%20Notifications.lbaction</string>
-	  <key>LBChangelog</key>
-	  <string>
-	    Support action updates
-	  </string>
+		<key>LBUpdateURL</key>
+		<string>https://raw.githubusercontent.com/prenagha/launchbar/master/Dismiss%20Notifications.lbaction/Contents/Info.plist</string>
+		<key>LBDownloadURL</key>
+		<string>https://dl.dropboxusercontent.com/u/1094926/lbdist/Dismiss%20Notifications.lbaction</string>
+		<key>LBChangelog</key>
+		<string>Added support for french system	  </string>
 	</dict>
 </dict>
 </plist>

@@ -5,6 +5,7 @@
 -- a **COMPILED** .scpt version of this script. You can compile this text AppleScript
 -- into .scpt using command line osacompile or by exporting/save-as within Script Editor
 --
+
 on dlog(myObj)
 	set txt to quoted form of (myObj as string)
 	log txt
@@ -40,35 +41,54 @@ on countNbr(input)
 	return cnt
 end countNbr
 
+on s(pos)
+	global localization
+	return item pos of localization
+end s
+
+on setLocalization()
+	global localization
+	set user_locale to user locale of (get system info)
+	set localization to {"Snooze", "now", 14, "Close", "OK"}
+	
+	if user_locale is "fr_FR" then
+		set localization to {"Rappel", "maintenant", 10, "Fermer", "OK"}
+	end if
+	return localization
+end setLocalization
+
 on run
 	checkGUIScriptingEnabled()
+	setLocalization()
+	
 	tell application "System Events"
 		tell process "NotificationCenter"
 			-- re-get the list of windows after each dimiss
 			-- otherwise it looses track and skips stuff
 			set stopAfter to (count windows) * 2
 			set iters to 1
+			
 			repeat while (count windows) > 0 and iters ² stopAfter
 				set done to false
 				-- prefer Snoozing if a calendar notification is for a conference call that is upcoming
-				if (exists menu button "Snooze" of window 1) and (exists static text 2 of scroll area 1 of window 1) and (exists static text 3 of scroll area 1 of window 1) then
+				if ((exists menu button (my s(1)) of window 1) or (exists menu button "Snooze" of window 1)) and (exists static text 2 of scroll area 1 of window 1) and (exists static text 3 of scroll area 1 of window 1) then
 					set when to value of static text 2 of scroll area 1 of window 1
 					set loc to value of static text 3 of scroll area 1 of window 1
 					set nbrs to my countNbr(loc)
 					-- conference calls have at least 14 numbers in the location field
-					if when is not "now" and nbrs ³ 14 then
+					if when is not (my s(2)) and nbrs ³ (my s(3)) then
 						set done to true
-						click menu button "Snooze" of window 1
+						click menu button (my s(1)) of window 1
 					end if
 				end if
-				if not done and (exists button "Close" of window 1) then
-					-- otherwise just close it
-					click button "Close" of window 1
+				if not done and (exists button (my s(4)) of window 1) then
+					-- otherwise just close it (Close)
+					click button (my s(4)) of window 1
 					set done to true
 				end if
-				if not done and (exists button "OK" of window 1) then
-					-- otherwise just close it
-					click button "OK" of window 1
+				if not done and (exists button (my s(5)) of window 1) then
+					-- otherwise just close it (OK)
+					click button (my s(5)) of window 1
 					set done to true
 				end if
 				if not done then
