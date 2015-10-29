@@ -60,7 +60,7 @@ on run (args)
 			repeat while (count windows) > 0 and iters ² stopAfter
 				set done to false
 				-- prefer Snoozing if a calendar notification is for a conference call that is upcoming
-				if (exists menu button snoozeButtonName of window 1) and (exists static text 2 of scroll area 1 of window 1) and (exists static text 3 of scroll area 1 of window 1) then
+				if ((exists menu button snoozeButtonName of window 1) or (exists menu button "Snooze" of window 1)) and (exists static text 2 of scroll area 1 of window 1) and (exists static text 3 of scroll area 1 of window 1) then
 					set when to value of static text 2 of scroll area 1 of window 1
 					set loc to value of static text 3 of scroll area 1 of window 1
 					set nbrs to my countNbr(loc)

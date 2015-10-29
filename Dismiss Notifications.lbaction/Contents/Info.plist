@@ -7,7 +7,7 @@
 	<key>CFBundleName</key>
 	<string>Dismiss Notifications</string>
 	<key>CFBundleVersion</key>
-	<string>2.2</string>
+	<string>2.3</string>
 	<key>CFBundleIconFile</key>
 	<string>/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/Notifications.icns</string>
 	<key>LBDebugLogEnabled</key>
@@ -44,7 +44,7 @@
 	  <string>https://dl.dropboxusercontent.com/u/1094926/lbdist/Dismiss%20Notifications.lbaction</string>
 	  <key>LBChangelog</key>
 	  <string>
-	    2.2: Support other languages via preferences
+	    2.3: Support other languages via preferences
 	  </string>
 	</dict>
 </dict>
