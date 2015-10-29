@@ -40,7 +40,16 @@ on countNbr(input)
 	return cnt
 end countNbr
 
-on run
+on run (args)
+	-- arguments here are passed in from the dismiss.js javascript file which
+	-- gets them from the action preferences file. Override settings in the preferences
+	-- file to adjust these to match your language
+	set snoozeButtonName to item 1 of args
+	set whenIsNowText to item 2 of args
+	set closeButtonName to item 3 of args
+	set okButtonName to item 4 of args
+	set numbersInConferenceCall to item 5 of args
+	
 	checkGUIScriptingEnabled()
 	tell application "System Events"
 		tell process "NotificationCenter"
@@ -51,24 +60,24 @@ on run
 			repeat while (count windows) > 0 and iters ² stopAfter
 				set done to false
 				-- prefer Snoozing if a calendar notification is for a conference call that is upcoming
-				if (exists menu button "Snooze" of window 1) and (exists static text 2 of scroll area 1 of window 1) and (exists static text 3 of scroll area 1 of window 1) then
+				if (exists menu button snoozeButtonName of window 1) and (exists static text 2 of scroll area 1 of window 1) and (exists static text 3 of scroll area 1 of window 1) then
 					set when to value of static text 2 of scroll area 1 of window 1
 					set loc to value of static text 3 of scroll area 1 of window 1
 					set nbrs to my countNbr(loc)
 					-- conference calls have at least 14 numbers in the location field
-					if when is not "now" and nbrs ³ 14 then
+					if when is not whenIsNowText and nbrs ³ numbersInConferenceCall then
 						set done to true
-						click menu button "Snooze" of window 1
+						click menu button snoozeButtonName of window 1
 					end if
 				end if
-				if not done and (exists button "Close" of window 1) then
+				if not done and (exists button closeButtonName of window 1) then
 					-- otherwise just close it
-					click button "Close" of window 1
+					click button closeButtonName of window 1
 					set done to true
 				end if
-				if not done and (exists button "OK" of window 1) then
-					-- otherwise just close it
-					click button "OK" of window 1
+				if not done and (exists button okButtonName of window 1) then
+					-- otherwise just ok it
+					click button okButtonName of window 1
 					set done to true
 				end if
 				if not done then
@@ -76,7 +85,7 @@ on run
 					if (exists static text 1 of scroll area 1 of window 1) then
 						set n to value of static text 1 of scroll area 1 of window 1
 					end if
-					log "Unable to dismiss " & n
+					dlog("Unable to dismiss " & n)
 				end if
 				delay 1
 				set iters to iters + 1
