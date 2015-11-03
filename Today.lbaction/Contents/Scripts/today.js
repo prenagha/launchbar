@@ -89,7 +89,7 @@ function run() {
   try {
     setupPreferences();
     var err = checkBuddy();
-    if (err.length > 4)
+    if (err.length > 4 || LaunchBar.options.commandKey)
       return err;
     
     moment.locale(LaunchBar.currentLocale);
@@ -272,7 +272,7 @@ function dial(str) {
   LaunchBar.performAction("Call With iPhone", str);
   big(str);
   if (Action.preferences.clickCall === "true")
-    LaunchBar.executeAppleScriptFile("./call.scpt");
+    LaunchBar.executeAppleScriptFile("call.scpt");
 }
 
 function big(str) {
