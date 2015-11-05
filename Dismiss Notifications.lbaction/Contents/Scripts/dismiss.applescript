@@ -44,11 +44,18 @@ on run (args)
 	-- arguments here are passed in from the dismiss.js javascript file which
 	-- gets them from the action preferences file. Override settings in the preferences
 	-- file to adjust these to match your language
-	set snoozeButtonName to item 1 of args
-	set whenIsNowText to item 2 of args
-	set closeButtonName to item 3 of args
-	set okButtonName to item 4 of args
-	set numbersInConferenceCall to item 5 of args
+	set snoozeButtonName to "Snooze"
+	set whenIsNowText to "now"
+	set closeButtonName to "Close"
+	set okButtonName to "OK"
+	set numbersInConferenceCall to 12
+	if args is not {} and (count of args) is 5 then
+		set snoozeButtonName to item 1 of args
+		set whenIsNowText to item 2 of args
+		set closeButtonName to item 3 of args
+		set okButtonName to item 4 of args
+		set numbersInConferenceCall to item 5 of args
+	end if
 	
 	checkGUIScriptingEnabled()
 	tell application "System Events"
