@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleIdentifier</key>
+	<string>com.renaghan.launchbar.JIRA</string>
+	<key>CFBundleName</key>
+	<string>JIRA Search</string>
+	<key>CFBundleVersion</key>
+	<string>1.0</string>
+	<key>CFBundleIconFile</key>
+	<string>jira.png</string>
+	<key>LBDebugLogEnabled</key>
+	<false/>
+	<key>LBTextInputTitle</key>
+	<string>Term</string>
+	<key>LBScripts</key>
+	<dict>
+		<key>LBDefaultScript</key>
+		<dict>
+			<key>LBScriptName</key>
+			<string>jira.js</string>
+			<key>LBRequiresArgument</key>
+			<true/>
+			<key>LBAcceptedArgumentTypes</key>
+			<array>
+			  <string>string</string>
+			</array>
+			<key>LBRunInBackground</key>
+			<true/>
+			<key>LBReturnsResult</key>
+			<false/>
+		</dict>
+	</dict>
+	<key>LBDescription</key>
+	<dict>
+		<key>LBSummary</key>
+		<string>Open JIRA search</string>
+		<key>LBAuthor</key>
+		<string>Padraic Renaghan</string>
+		<key>LBEmail</key>
+		<string>prenagha@renaghan.com</string>
+		<key>LBTwitter</key>
+		<string>@prenagha</string>
+	  <key>LBUpdateURL</key>
+	  <string>https://raw.githubusercontent.com/prenagha/launchbar/master/JIRA.lbaction/Contents/Info.plist</string>
+	  <key>LBDownloadURL</key>
+	  <string>https://dl.dropboxusercontent.com/u/1094926/lbdist/JIRA.lbaction</string>
+	  <key>LBChangelog</key>
+	  <string>
+	    1.0: First release
+	  </string>
+	</dict>
+</dict>
+</plist>
