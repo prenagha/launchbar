@@ -7,7 +7,7 @@
 	<key>CFBundleName</key>
 	<string>Screenshot</string>
 	<key>CFBundleVersion</key>
-	<string>3.1</string>
+	<string>3.2</string>
 	<key>CFBundleIconFile</key>
 	<string>com.apple.Grab</string>
 	<key>LBDebugLogEnabled</key>
@@ -50,6 +50,7 @@
 	  <string>https://dl.dropboxusercontent.com/u/1094926/lbdist/Screenshot.lbaction</string>
 	  <key>LBChangelog</key>
 	  <string>
+	    3.2: Automatically copy image to clipboard
 	    Support action updates
 	  </string>
 	</dict>

@@ -6,7 +6,7 @@ function run() {
         + "_" + d.getHours() + d.getMinutes() + d.getSeconds()
         + "_" + d.getMilliseconds();
     var path = LaunchBar.homeDirectory + '/Downloads/sc_' + df + '.png';
-    var opt = '/Applications/ImageAlpha.app/Contents/Resources/pngquant';
+    var opt = '/Applications/ImageAlpha.app/Contents/MacOS/pngquant';
     try {
         LaunchBar.execute('/usr/sbin/screencapture', '-i', path);
         if (!File.exists(path)) {
@@ -18,6 +18,7 @@ function run() {
             LaunchBar.execute('/bin/cp', '-p', path, orig);
             LaunchBar.execute(opt, '--force', '--ext', '.png', path);
         }
+        LaunchBar.execute(Action.path + '/Contents/Scripts/imgcopy', path);
     } catch (exception) {
         LaunchBar.log('Screenshot Error ' + exception);
         LaunchBar.alert('Screenshot Error', exception);
