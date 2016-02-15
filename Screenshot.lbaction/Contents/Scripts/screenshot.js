@@ -10,7 +10,7 @@ function run() {
     try {
         LaunchBar.execute('/usr/sbin/screencapture', '-i', path);
         if (!File.exists(path)) {
-            throw "File doesn't exist!";
+            throw "File doesn't exist! " + path;
         }
         if (File.exists(opt)) {
             var orig = LaunchBar.homeDirectory 
@@ -20,7 +20,7 @@ function run() {
         }
         LaunchBar.execute(Action.path + '/Contents/Scripts/imgcopy', path);
     } catch (exception) {
-        LaunchBar.log('Screenshot Error ' + exception);
+        LaunchBar.log('Screenshot Error ' + exception + ' -- ' + path);
         LaunchBar.alert('Screenshot Error', exception);
         return;
     }
