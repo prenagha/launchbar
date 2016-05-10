@@ -7,7 +7,7 @@
 	<key>CFBundleName</key>
 	<string>Copy to iPad</string>
 	<key>CFBundleVersion</key>
-	<string>3.1</string>
+	<string>3.2</string>
 	<key>CFBundleIconFile</key>
 	<string>it.danilotorrisi.command-c-osx</string>
 	<key>LBDebugLogEnabled</key>
@@ -42,7 +42,7 @@
 		<key>LBSummary</key>
 		<string>Copy selected text, file, or clipboard to iPad via Command-C application.</string>
 		<key>LBRequirements</key>
-		<string>Command-C application running on this Mac as well as your iPad. http://danilo.to/command-c</string>
+		<string>Command-C application running on this Mac as well as your iPad. http://danilo.to</string>
 		<key>LBAuthor</key>
 		<string>Padraic Renaghan</string>
 		<key>LBEmail</key>
@@ -59,7 +59,7 @@
 	  <string>https://dl.dropboxusercontent.com/u/1094926/lbdist/Copy%20to%20iPad.lbaction</string>
 	  <key>LBChangelog</key>
 	  <string>
-	    Support action updates
+	    3.2: Support new Command-C URL
 	  </string>
 	</dict>
 </dict>

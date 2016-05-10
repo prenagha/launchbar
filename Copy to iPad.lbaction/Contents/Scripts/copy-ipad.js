@@ -40,12 +40,14 @@ function go(text) {
   try {
     // The Action.preferences object is persistent across runs of the action. 
     // ~/Library/Application Support/LaunchBar/Action Support/<actionBundleID>/Preferences.plist
-    if (Action.preferences.device == undefined) {
-      // The device wasn't set in the action's preferences, fall back to default
-      Action.preferences.device = 'iPad';
+    if (Action.preferences.device == undefined || Action.preferences.device.length == 0) {
+      Action.preferences.device = '';
+      LaunchBar.log('Error, device not set in preferences file');
+      LaunchBar.alert('You must set the device preference in the action preference file');
+      return;
     }
 
-    var url = 'command-c://x-callback-url/copyText?deviceName=' + encodeURIComponent(Action.preferences.device) + '&text=' + encodeURIComponent(text);
+    var url = 'command-c://x-callback-url/copyText?deviceUUID=' + encodeURIComponent(Action.preferences.device) + '&text=' + encodeURIComponent(text);
     LaunchBar.debugLog('URL=' + url);
     LaunchBar.openURL(url);
   } catch (exception) {
