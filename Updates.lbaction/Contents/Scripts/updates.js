@@ -103,8 +103,17 @@ function checkAction(actionsDir, actionPackage) {
       ,children: getActionChildren(actionFile, null, null)
       ,'icon':ALERT_ICON};
   }
-    
-  var plist = File.readPlist(plistFile);
+  
+  var plist;  
+  try {
+    plist = File.readPlist(plistFile);
+  } catch (exception) {
+    LaunchBar.log('Error ' + actionPackage + ' reading plist -- ' + exception);
+    return {'title': actionPackage + ': Error reading plist ' + plistFile
+      ,children: getActionChildren(actionFile, null, null)
+      ,'icon':ALERT_ICON};
+  }
+  
   var updateURL = getUpdateURL(actionPackage, plist);
   if (updateURL == "SKIP") {
     return {'title': plist.CFBundleName + ': skipped'
@@ -215,23 +224,25 @@ function getActionChildren(actionFile, currPlist, plist) {
     ,'subtitle':actionFile
     ,'path': actionFile});
 
-  if (Action.preferences
-   && Action.preferences.LBUpdateURL
-   && Action.preferences.LBUpdateURL[currPlist.CFBundleIdentifier] 
-   && Action.preferences.LBUpdateURL[currPlist.CFBundleIdentifier] == "SKIP") {   
-    items.push({'title': 'Resume checking this action for updates'
-      ,'subtitle':currPlist.CFBundleIdentifier
-      ,'icon':SKIP
-      ,'action':'unskipper'
-      ,'actionRunsInBackground':true
-      ,'actionArgument': currPlist.CFBundleIdentifier});
-  } else {
-    items.push({'title': 'Skip checking this action for updates'
-      ,'subtitle':currPlist.CFBundleIdentifier
-      ,'icon':SKIP
-      ,'action':'skipper'
-      ,'actionRunsInBackground':true
-      ,'actionArgument': currPlist.CFBundleIdentifier});
+  if (currPlist) {
+    if (Action.preferences
+     && Action.preferences.LBUpdateURL
+     && Action.preferences.LBUpdateURL[currPlist.CFBundleIdentifier] 
+     && Action.preferences.LBUpdateURL[currPlist.CFBundleIdentifier] == "SKIP") {   
+      items.push({'title': 'Resume checking this action for updates'
+        ,'subtitle':currPlist.CFBundleIdentifier
+        ,'icon':SKIP
+        ,'action':'unskipper'
+        ,'actionRunsInBackground':true
+        ,'actionArgument': currPlist.CFBundleIdentifier});
+    } else {
+      items.push({'title': 'Skip checking this action for updates'
+        ,'subtitle':currPlist.CFBundleIdentifier
+        ,'icon':SKIP
+        ,'action':'skipper'
+        ,'actionRunsInBackground':true
+        ,'actionArgument': currPlist.CFBundleIdentifier});
+    }
   }
   return items;
 }
