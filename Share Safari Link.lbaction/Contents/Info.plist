@@ -45,7 +45,7 @@
 	  <key>LBUpdateURL</key>
 	  <string>https://raw.githubusercontent.com/prenagha/launchbar/master/Share%20Safari%20Link.lbaction/Contents/Info.plist</string>
 	  <key>LBDownloadURL</key>
-	  <string>https://dl.dropboxusercontent.com/u/1094926/lbdist/Share%20Safari%20Link.lbaction</string>
+	  <string>https://s3.amazonaws.com/renaghan/lbdist/Share%20Safari%20Link.lbaction</string>
 	  <key>LBChangelog</key>
 	  <string>
 	    Support action updates

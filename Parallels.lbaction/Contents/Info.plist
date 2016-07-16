@@ -49,7 +49,7 @@
 	  <key>LBUpdateURL</key>
 	  <string>https://raw.githubusercontent.com/prenagha/launchbar/master/Parallels.lbaction/Contents/Info.plist</string>
 	  <key>LBDownloadURL</key>
-	  <string>https://dl.dropboxusercontent.com/u/1094926/lbdist/Parallels.lbaction</string>
+	  <string>https://s3.amazonaws.com/renaghan/lbdist/Parallels.lbaction</string>
 	  <key>LBChangelog</key>
 	  <string>
 	    1.0: Initial release

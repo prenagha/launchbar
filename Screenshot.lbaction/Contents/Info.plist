@@ -47,7 +47,7 @@
 	  <key>LBUpdateURL</key>
 	  <string>https://raw.githubusercontent.com/prenagha/launchbar/master/Screenshot.lbaction/Contents/Info.plist</string>
 	  <key>LBDownloadURL</key>
-	  <string>https://dl.dropboxusercontent.com/u/1094926/lbdist/Screenshot.lbaction</string>
+	  <string>https://s3.amazonaws.com/renaghan/lbdist/Screenshot.lbaction</string>
 	  <key>LBChangelog</key>
 	  <string>
 	    3.3: Changed image copy to swift

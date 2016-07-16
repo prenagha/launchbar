@@ -59,7 +59,7 @@ The action will search for custom actions in `~/Application Support/LaunchBar/Ac
 	  <key>LBUpdateURL</key>
 	  <string>https://raw.githubusercontent.com/jsmith/launchbar/master/Checker.lbaction/Contents/Info.plist</string>
 	  <key>LBDownloadURL</key>
-	  <string>https://dl.dropboxusercontent.com/u/55/lbdist/Checker.lbaction</string>
+	  <string>https://download.com/lbdist/Checker.lbaction</string>
 	  <key>LBChangelog</key>
 	  <string>
 	    1.2: Fixed bug when user option clicked on 2nd item.

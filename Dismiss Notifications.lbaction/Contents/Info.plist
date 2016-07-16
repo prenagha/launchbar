@@ -41,7 +41,7 @@
 	  <key>LBUpdateURL</key>
 	  <string>https://raw.githubusercontent.com/prenagha/launchbar/master/Dismiss%20Notifications.lbaction/Contents/Info.plist</string>
 	  <key>LBDownloadURL</key>
-	  <string>https://dl.dropboxusercontent.com/u/1094926/lbdist/Dismiss%20Notifications.lbaction</string>
+	  <string>https://s3.amazonaws.com/renaghan/lbdist/Dismiss%20Notifications.lbaction</string>
 	  <key>LBChangelog</key>
 	  <string>
 	    2.3: Support other languages via preferences
