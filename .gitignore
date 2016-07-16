@@ -1,3 +1,4 @@
 _CodeSignature
 *.scpt
 *.dSYM
+bin
