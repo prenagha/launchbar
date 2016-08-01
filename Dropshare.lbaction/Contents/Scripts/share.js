@@ -34,6 +34,8 @@ function go(file) {
   }
   
   var clipboardBefore = LaunchBar.getClipboardString();
+  if (!clipboardBefore)
+    clipboardBefore = '';
   
   try {
     var fileURL = File.fileURLForPath(file);
@@ -51,17 +53,25 @@ function go(file) {
     Action.preferences.match = 'amazonaws';
   }
   
-  for (var x=1; x<=5; x++) {
+  for (var x=1; x<=8; x++) {
     var shareURL = LaunchBar.getClipboardString();
     LaunchBar.debugLog('Clipboard check ' + x + ' -- ' + shareURL);
-    if (shareURL.indexOf(Action.preferences.match) > 0 
+    if (shareURL 
+     && shareURL.length > 0
+     && shareURL.indexOf(Action.preferences.match) > 0 
      && shareURL != clipboardBefore) {
       LaunchBar.log('Shared ' + file + ' as ' + shareURL);
+      activateLaunchBar();
       return [{url: shareURL}];
     }
     LaunchBar.execute('/bin/sleep', '1');
   }    
+  activateLaunchBar();
   return err('Timeout waiting for Dropshare', file);
+}
+
+function activateLaunchBar() {
+  LaunchBar.executeAppleScript('tell application "LaunchBar" to activate');
 }
 
 function err(msg, file) {
