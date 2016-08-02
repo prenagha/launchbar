@@ -11,7 +11,7 @@
 	<key>CFBundleVersion</key>
 	<string>2.1</string>
 	<key>CFBundleIconFile</key>
-  <string>incognito.png</string>
+  <string>font-awesome:user-secret</string>
   <key>LBARequiredApplication</key>
   <string>com.google.Chrome</string>
   <key>LBTextInputTitle</key>

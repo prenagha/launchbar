@@ -9,7 +9,7 @@
 	<key>CFBundleVersion</key>
 	<string>2.6</string>
 	<key>CFBundleIconFile</key>
-	<string>Pref_SoftwareUpdate.icns</string>
+	<string>font-awesome:fa-spinner</string>
 	<key>LBDebugLogEnabled</key>
 	<true/>
 	<key>LBScripts</key>

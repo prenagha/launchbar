@@ -11,7 +11,7 @@
 	<key>CFBundleVersion</key>
 	<string>1.3</string>
 	<key>CFBundleIconFile</key>
-	<string>com.apple.iCal:App-empty.icns</string>
+	<string>font-awesome:fa-calendar</string>
 	<key>LBDebugLogEnabled</key>
 	<true/>
 	<key>LBScripts</key>

@@ -9,7 +9,7 @@
 	<key>CFBundleVersion</key>
 	<string>3.4</string>
 	<key>CFBundleIconFile</key>
-	<string>com.apple.Grab</string>
+	<string>font-awesome:fa-camera</string>
 	<key>LBDebugLogEnabled</key>
 	<true/>
 	<key>LBScripts</key>

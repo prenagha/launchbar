@@ -9,7 +9,7 @@
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
 	<key>CFBundleIconFile</key>
-	<string>net.mkswap.Dropshare4</string>
+	<string>font-awesome:fa-share</string>
 	<key>LBDebugLogEnabled</key>
 	<true/>
 	<key>LBRequiredApplication</key>

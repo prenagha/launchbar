@@ -9,7 +9,7 @@
 	<key>CFBundleVersion</key>
 	<string>3.1</string>
 	<key>CFBundleIconFile</key>
-	<string>Coffee.icns</string>
+	<string>font-awesome:fa-coffee</string>
 	<key>LBDebugLogEnabled</key>
 	<true/>
 	<key>LBTextInputTitle</key>

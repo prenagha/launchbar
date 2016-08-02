@@ -9,7 +9,7 @@
 	<key>CFBundleVersion</key>
 	<string>3.1</string>
 	<key>CFBundleIconFile</key>
-	<string>clock.pdf</string>
+	<string>font-awesome:fa-clock-o</string>
 	<key>LBDebugLogEnabled</key>
 	<true/>
 	<key>LBTextInputTitle</key>
