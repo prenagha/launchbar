@@ -7,7 +7,7 @@
 	<key>CFBundleName</key>
 	<string>Screenshot</string>
 	<key>CFBundleVersion</key>
-	<string>3.3</string>
+	<string>3.4</string>
 	<key>CFBundleIconFile</key>
 	<string>com.apple.Grab</string>
 	<key>LBDebugLogEnabled</key>
@@ -50,6 +50,7 @@
 	  <string>https://s3.amazonaws.com/renaghan/lbdist/Screenshot.lbaction</string>
 	  <key>LBChangelog</key>
 	  <string>
+	    3.4: No error on missing screenshot, original moved to trash
 	    3.3: Changed image copy to swift
 	    3.2: Automatically copy image to clipboard
 	    Support action updates

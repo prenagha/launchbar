@@ -9,9 +9,8 @@ function run() {
     var opt = '/Applications/ImageAlpha.app/Contents/MacOS/pngquant';
     try {
         LaunchBar.execute('/usr/sbin/screencapture', '-i', path);
-        if (!File.exists(path)) {
-            throw "File doesn't exist! " + path;
-        }
+        if (!File.exists(path))
+          return;
         if (File.exists(opt)) {
             var orig = LaunchBar.homeDirectory 
                 + '/Downloads/sc_' + df + '_orig.png';
@@ -19,6 +18,7 @@ function run() {
             LaunchBar.execute(opt, '--force', '--ext', '.png', path);
         }
         LaunchBar.execute(Action.path + '/Contents/Scripts/imgcopy', path);
+        LaunchBar.execute(Action.path + '/Contents/Scripts/trash', orig);
     } catch (exception) {
         LaunchBar.log('Screenshot Error ' + exception + ' -- ' + path);
         LaunchBar.alert('Screenshot Error', exception);
