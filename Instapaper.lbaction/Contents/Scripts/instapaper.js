@@ -1,5 +1,5 @@
 
-var ALERT_ICON = '/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/AlertStopIcon.icns';
+var ALERT_ICON = 'font-awesome:fa-exclamation-triangle';
 
 function setup() {
   if (Action.preferences.Username)
@@ -19,18 +19,24 @@ function add(url) {
   if (s && s.length > 0)
     return s;
     
+  if (url && url.length > 4) {
+    // ok
+  } else {
+    // get the URL from the current tab of safari
+    url = LaunchBar.executeAppleScript('tell application "Safari" to return URL of current tab of window 1');
+  }
+    
   var u = "";
   var s = url ? url.indexOf('http') : -1;
   if (s >= 0) {
-    var e = url.indexOf(' ', s);
-    if (e > s) {
-      u = url.slice(s, e);
-    } else {
-      u = url.substring(s);
+    u = url.substring(s);
+    var e = u.indexOf(' ');
+    if (e > 0) {
+      u = url.slice(0, e);
     }
   }
-  if (u.indexOf('http') < 0)
-    return [{title: 'URL not found', icon: ALERT_ICON}];
+  if (u.indexOf('http') != 0)
+    return [{title: 'URL input not found', icon: ALERT_ICON}];
     
   // add the url to instapaper
   var iURL = 'https://www.instapaper.com/api/add?'
@@ -39,6 +45,10 @@ function add(url) {
     + '&url=' + encodeURIComponent(u);
   var result = HTTP.get(iURL, {timeout: 20.0});
   if (result && result.response && result.response.status == 201) {
+    if (LaunchBar.options.commandKey) {
+      LaunchBar.log('Added to Instapaper successfully, command key quick mode');
+      return [];
+    }
     return [{
        title: result.response.headerFields['X-Instapaper-Title']
       ,icon: 'instapaper.png'
@@ -47,7 +57,7 @@ function add(url) {
   } else if (result && result.response && result.response.status && result.response.status == 403) {
     return [{title: 'Authorization error from Instapaper: ' + result.response.status + ' ' + result.response.localizedStatus
       ,path: Action.supportPath + '/Preferences.plist'
-      ,icon: ALERT_ICON}];
+      ,icon: 'font-awesome:fa-key'}];
   } else if (result && result.error) {
     return [{title: 'Error from Instapaper: ' + result.error 
       + ' (' + result.response.status + ' ' + result.response.localizedStatus + ')'
@@ -63,7 +73,7 @@ function run(arg) {
 }
 
 function runWithItem(item) {
-  return typeof(item) == 'string' ? add(item) : add(item.url);
+  return add(item.url);
 }
 
 function runWithString(str) {

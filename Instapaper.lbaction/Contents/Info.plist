@@ -7,7 +7,7 @@
 	<key>CFBundleName</key>
 	<string>Add to Instapaper</string>
 	<key>CFBundleVersion</key>
-	<string>1.2</string>
+	<string>2.0</string>
 	<key>CFBundleIconFile</key>
 	<string>instapaper.png</string>
 	<key>LBDebugLogEnabled</key>
@@ -21,11 +21,13 @@
 			<key>LBScriptName</key>
 			<string>instapaper.js</string>
 			<key>LBRequiresArgument</key>
-			<true/>
+			<false/>
 			<key>LBAcceptedArgumentTypes</key>
 			<array>
 			  <string>string</string>
 			</array>
+			<key>LBAllowsInstantReuseOfLastTextInputString</key>
+			<true/>
 			<key>LBRunInBackground</key>
 			<false/>
 			<key>LBReturnsResult</key>
@@ -35,7 +37,7 @@
 	<key>LBDescription</key>
 	<dict>
 		<key>LBSummary</key>
-		<string>Adds input string URL, or passed in LaunchBar item to Instapaper. Returns the created item from Instapaper for further action chaining or opening.</string>
+		<string>Adds input string URL, or passed in LaunchBar item, or URL from current tab in Safari to Instapaper. Returns the created item from Instapaper for further action chaining or opening. Execute with command-key (quick mode) to add to Instapaper and not return the URL item</string>
 		<key>LBAuthor</key>
 		<string>Padraic Renaghan</string>
 		<key>LBEmail</key>
@@ -50,6 +52,7 @@
 	  <string>https://s3.amazonaws.com/renaghan/lbdist/Instapaper.lbaction</string>
 	  <key>LBChangelog</key>
 	  <string>
+	    2.0: Default from current tab in Safari
       1.2: Better javascript support
 	    1.0: First release
 	  </string>

@@ -1,5 +1,5 @@
 
-var ALERT_ICON = '/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/AlertStopIcon.icns';
+var ALERT_ICON = 'font-awesome:fa-exclamation-triangle';
 
 function runWithString(string) {
   return go(string);
@@ -17,7 +17,7 @@ function runWithURL(url, details) {
   return go(url);
 }
 
-function run() {
+function run(arg) {
   return go(LaunchBar.getClipboardString());
 }
 
