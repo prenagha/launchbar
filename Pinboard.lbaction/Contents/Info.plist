@@ -3,15 +3,15 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleIdentifier</key>
-	<string>com.renaghan.launchbar.ExpandURL</string>
+	<string>com.renaghan.launchbar.Pinboard</string>
 	<key>CFBundleName</key>
-	<string>Expand URL</string>
+	<string>Add to Pinboard</string>
 	<key>CFBundleVersion</key>
-	<string>3.2</string>
+	<string>1.0</string>
 	<key>CFBundleIconFile</key>
-	<string>URL.icns</string>
+	<string>font-awesome:thumb-tack</string>
 	<key>LBDebugLogEnabled</key>
-	<false/>
+	<true/>
 	<key>LBTextInputTitle</key>
 	<string>URL</string>
 	<key>LBScripts</key>
@@ -19,42 +19,40 @@
 		<key>LBDefaultScript</key>
 		<dict>
 			<key>LBScriptName</key>
-			<string>expand.js</string>
-			<key>LBRunInBackground</key>
-			<false/>
+			<string>pinboard.js</string>
 			<key>LBRequiresArgument</key>
 			<false/>
 			<key>LBAcceptedArgumentTypes</key>
 			<array>
 			  <string>string</string>
 			</array>
-			<key>LBReturnsResult</key>
+			<key>LBAllowsInstantReuseOfLastTextInputString</key>
 			<true/>
+			<key>LBRunInBackground</key>
+			<true/>
+			<key>LBReturnsResult</key>
+			<false/>
 		</dict>
 	</dict>
 	<key>LBDescription</key>
 	<dict>
 		<key>LBSummary</key>
-		<string>Expand a short URL. Follows the URL and returns the last Location HTTP header which will point to the real URL. Returns URL back to LaunchBar.</string>
-		<key>LBRequirements</key>
-		<string>curl</string>
+		<string>Expands and adds input string URL, or passed in LaunchBar item, or URL from current tab in Safari to Pinboard.in</string>
 		<key>LBAuthor</key>
 		<string>Padraic Renaghan</string>
 		<key>LBEmail</key>
 		<string>prenagha@renaghan.com</string>
 		<key>LBWebsiteURL</key>
-		<string>https://prenagha.github.io/launchbar/expand.html</string>
+		<string>https://prenagha.github.io/launchbar/pinboard.html</string>
 		<key>LBTwitter</key>
 		<string>@prenagha</string>
-		<key>LBArgument</key>
-		<string>URL to expand</string>
 	  <key>LBUpdateURL</key>
-	  <string>https://raw.githubusercontent.com/prenagha/launchbar/master/Expand%20URL.lbaction/Contents/Info.plist</string>
+	  <string>https://raw.githubusercontent.com/prenagha/launchbar/master/Pinboard.lbaction/Contents/Info.plist</string>
 	  <key>LBDownloadURL</key>
-	  <string>https://s3.amazonaws.com/renaghan/lbdist/Expand%20URL.lbaction</string>
+	  <string>https://s3.amazonaws.com/renaghan/lbdist/Pinboard.lbaction</string>
 	  <key>LBChangelog</key>
 	  <string>
-	    Support action updates
+	    1.0: First release
 	  </string>
 	</dict>
 </dict>
