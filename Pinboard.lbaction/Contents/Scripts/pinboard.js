@@ -32,7 +32,7 @@ function expand(url) {
 
 function isSafari() {
   var app = LaunchBar.executeAppleScript('tell application "System Events" to return name of first application process whose frontmost is true');
-  return app && app == "Safari";
+  return app && 'Safari' === app.trim();
 }
 
 function add(url, name) {
@@ -56,7 +56,7 @@ function add(url, name) {
     + '&shared=' + Action.preferences.Shared
     + '&toread=' + Action.preferences.ToRead
     + '&url=' + encodeURIComponent(url)
-    + '&description=' + encodeURIComponent(name);
+    + '&description=' + encodeURIComponent(name.substring(0,1000));
   LaunchBar.debugLog('Add URL: ' + pURL);
 
   var result = HTTP.getJSON(pURL, {timeout: 20.0});
@@ -84,6 +84,7 @@ function run(url) {
   // otherwise if active app was safari then use active URL in safari
   } else if (isSafari()) {
     url = LaunchBar.executeAppleScript('tell application "Safari" to return URL of current tab of window 1 as string');
+    LaunchBar.debugLog('safari url is ' + url);
     var name = LaunchBar.executeAppleScript('tell application "Safari" to return name of current tab of window 1 as string');
     add(url, name);
   // otherwise use whatever is in clipboard
