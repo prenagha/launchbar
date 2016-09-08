@@ -2,3 +2,5 @@ _CodeSignature
 *.scpt
 *.dSYM
 bin
+.DS_Store
+.localized
