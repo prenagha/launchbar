@@ -57,8 +57,8 @@ function actionSettings() {
   units.push({'title':'Automatic based on location','units':'auto'
     ,'icon':FOLLOW_ICON,'action':'actionUnits'});
   items.push({'title':'Forecast Units - ' + Action.preferences.units.toUpperCase()
-    ,'subtitle':'Set units for forecast.io data, see https://developer.forecast.io/docs/v2'
-    ,'url':'https://developer.forecast.io/docs/v2'
+    ,'subtitle':'Set units for Dark Sky data, see https://darksky.net/dev/docs'
+    ,'url':'https://darksky.net/dev/docs'
     ,'icon':'Thermometer-25.png'
     ,'children':units});
   
@@ -90,8 +90,8 @@ function actionSettings() {
     ,'url':'https://github.com/darkskyapp/forecast-io-translations'
     ,'icon':'forecastio.png'});
   items.push({'title':'Forecast Language - ' + Action.preferences.lang.toUpperCase()
-    ,'subtitle':'Set language for forecast.io data, see https://developer.forecast.io/docs/v2'
-    ,'url':'https://developer.forecast.io/docs/v2'
+    ,'subtitle':'Set language for Dark Sky data, see https://darksky.net/dev/docs'
+    ,'url':'https://darksky.net/dev/docs'
     ,'icon':'Thermometer-25.png'
     ,'children':langs});
   
@@ -115,9 +115,9 @@ function actionSettings() {
     ,'icon':FOLLOW_ICON
     ,'children':cty});
 
-  items.push({'title':'forecast.io API Key'
-    ,'subtitle':'https://developer.forecast.io'
-    ,'url':'https://developer.forecast.io'
+  items.push({'title':'Dark Sky API Key'
+    ,'subtitle':'https://darksky.net/dev/'
+    ,'url':'https://darksky.net/dev/'
     ,'actionRunsInBackground':true
     ,'icon':'forecastio.png','action':'actionKey'});
 
@@ -176,7 +176,7 @@ function actionCountryOther(item) {
 
 function actionKey(item) {
   var k = LaunchBar.executeAppleScript(
-    'return text returned of (display dialog "forecast.io API Key:" default answer "' 
+    'return text returned of (display dialog "Dark Sky API Key:" default answer "' 
     + Action.preferences.apiKey + '" giving up after 15 with icon note)');
   if (k && k.length > 0) {
     Action.preferences.apiKey = k.trim();

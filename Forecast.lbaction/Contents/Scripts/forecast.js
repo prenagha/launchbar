@@ -27,9 +27,9 @@ function getAPIKey() {
   }
   if (Action.preferences.apiKey.length == 0) {
     LaunchBar.alert('addKey'.localize());
-    LaunchBar.openURL('https://developer.forecast.io');
+    LaunchBar.openURL('https://darksky.net/dev/');
     var key = LaunchBar.executeAppleScript(
-      'return text returned of (display dialog "forecast.io API Key:" default answer "" giving up after 120 with icon note)');
+      'return text returned of (display dialog "Dark Sky API Key:" default answer "" giving up after 120 with icon note)');
     Action.preferences.apiKey = key && key != undefined ? key.trim() : '';
   }
   return Action.preferences.apiKey;
@@ -82,12 +82,12 @@ function forecast(loc) {
     if (apiKey.length == 0)
       return;
 
-    url = 'https://api.forecast.io/forecast/' + apiKey + '/' + latitude + ',' + longitude
+    url = 'https://api.darksky.net/forecast/' + apiKey + '/' + latitude + ',' + longitude
       + '?units=' + Action.preferences.units
       + '&lang=' + Action.preferences.lang;
     LaunchBar.log('Forecast URL "' + url +'"');
       
-    var furl = 'https://forecast.io/' + latitude + ',' + longitude;
+    var furl = 'https://darksky.net/' + latitude + ',' + longitude;
     var result = HTTP.getJSON(url, TIMEOUT);
     if (result && result.data && result.data.error)
       items.push({'title':'Forecast Error: ' + result.data.error
@@ -189,7 +189,7 @@ function forecast(loc) {
     if (items.length == 0)
       items.push({'title':'Forecast not available','icon':'NotFound.icns','url':url});
     if (isDebug()) {
-      items.push({'title':'forecast.io API call','url':url,'icon':'forecastio.png'});
+      items.push({'title':'Dark Sky API call','url':url,'icon':'forecastio.png'});
     }
     return items;
   } catch (exception) {

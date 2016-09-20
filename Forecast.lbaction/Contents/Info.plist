@@ -7,7 +7,7 @@
 	<key>CFBundleName</key>
 	<string>Forecast</string>
 	<key>CFBundleVersion</key>
-	<string>4.1</string>
+	<string>4.2</string>
 	<key>CFBundleIconFile</key>
 	<string>Sun-Low.png</string>
 	<key>LBAbbreviation</key>
@@ -60,7 +60,7 @@
 	  <string>https://s3.amazonaws.com/renaghan/lbdist/Forecast.lbaction</string>
 	  <key>LBChangelog</key>
 	  <string>
-	    Support action updates
+	    4.2: Forecast.io branding change to Dark Sky
 	  </string>
 	</dict>
 </dict>
