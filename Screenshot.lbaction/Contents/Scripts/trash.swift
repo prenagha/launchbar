@@ -2,14 +2,14 @@
 // idea from https://github.com/reklis/recycle
 import Cocoa
 
-let argCount = Process.arguments.count
+let argCount = CommandLine.arguments.count
 if argCount > 1 {
-  var workspace = NSWorkspace.sharedWorkspace()
-  var manager = NSFileManager.defaultManager()
-  for path in Process.arguments[1..<argCount] {
+  var workspace = NSWorkspace.shared()
+  var manager = FileManager.default
+  for path in CommandLine.arguments[1..<argCount] {
     let url = NSURL(fileURLWithPath: path);
     do {
-      try manager.trashItemAtURL(url, resultingItemURL: nil)
+      try manager.trashItem(at: url as URL, resultingItemURL: nil)
     } catch {
       print("Cannot trash file", path)
       exit(1)
