@@ -7,7 +7,7 @@
 	<key>CFBundleName</key>
 	<string>Micropub</string>
 	<key>CFBundleVersion</key>
-	<string>0.9</string>
+	<string>0.1</string>
 	<key>CFBundleIconFile</key>
 	<string>font-awesome:fa-rss</string>
 	<key>LBDebugLogEnabled</key>
@@ -44,7 +44,7 @@
 	  <string>https://s3.amazonaws.com/renaghan/lbdist/Micropub.lbaction</string>
 	  <key>LBChangelog</key>
 	  <string>
-	    1.0: Initial release
+	    0.1: Alpha
 	  </string>
 	</dict>
 </dict>
