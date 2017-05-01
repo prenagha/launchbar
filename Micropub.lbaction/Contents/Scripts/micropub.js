@@ -65,17 +65,12 @@ function go(name, url) {
   
   if (!confirm || confirm == null || confirm.length < 5) {
     return [{'title': 'Post cancelled', 
-    'icon': 'font-awesome:fa-exclamation-triangle'}];
+    'icon': 'font-awesome:fa-ban'}];
   }
   
   var result = HTTP.post(Action.preferences.MicropubURL, {
-      headerFields: {
-          'Authorization': 'Bearer ' + Action.preferences.MicropubToken
-      },
-      body: {
-          'h': 'entry',
-          'content': content,
-      }
+      headerFields: {'Authorization': 'Bearer ' + Action.preferences.MicropubToken},
+      body: {'h': 'entry', 'content': content}
   });
   
   //LaunchBar.debugLog(JSON.stringify(result));
