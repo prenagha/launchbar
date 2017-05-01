@@ -1,4 +1,6 @@
 
+var LINK = '🔗';
+var DELIM = LINK + 'microblog' + LINK;
 
 function runWithString(string) {
   go(null, string);
@@ -43,13 +45,13 @@ function go(name, url) {
     LaunchBar.debugLog('From Input=' + url);
   } else {
     // get from safari
-    var data = LaunchBar.executeAppleScript('tell application "Safari" to return URL of current tab of window 1 as string & "🔗prenagha🔗" & name of current tab of window 1 as string');
-    var idx = data ? data.indexOf('🔗prenagha🔗') : -1;
+    var data = LaunchBar.executeAppleScript('tell application "Safari" to return URL of current tab of window 1 as string & "' + DELIM + '" & name of current tab of window 1 as string');
+    var idx = data ? data.indexOf(DELIM) : -1;
     if (idx < 0)
       return err('Link from Safari not found');
       
     url = data.substring(0, idx).trim();
-    name = data.substring(idx + 12).trim();
+    name = data.substring(idx + DELIM.length).trim();
 
     LaunchBar.debugLog('From Safari=' + data);
   }
@@ -58,7 +60,13 @@ function go(name, url) {
     return err('URL is required ' + url);
   }
 
-  var content = '🔗 ' + (name && name.length > 0 ? name + ' — ' : '') + url;
+  var content = LINK + ' ' + (name && name.length > 0 ? name + ' — ' : '') + url;
+  var confirm = LaunchBar.executeAppleScript('return text returned of (display dialog "Confirm Post" default answer "' + content + '" with icon caution)');
+  
+  if (!confirm || confirm == null || confirm.length < 5) {
+    return [{'title': 'Post cancelled', 
+    'icon': 'font-awesome:fa-exclamation-triangle'}];
+  }
   
   var result = HTTP.post(Action.preferences.MicropubURL, {
       headerFields: {
@@ -92,4 +100,3 @@ function err(msg, file) {
     path: file, 
     subtitle: file}];
 }
- 
