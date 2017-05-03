@@ -70,14 +70,14 @@ function go(name, url) {
   
   var result = HTTP.post(Action.preferences.MicropubURL, {
       headerFields: {'Authorization': 'Bearer ' + Action.preferences.MicropubToken},
-      body: {'h': 'entry', 'content': content}
+      body: {'h': 'entry', 'content': confirm}
   });
   
   //LaunchBar.debugLog(JSON.stringify(result));
   
   if (result.response.status == 202 && result.data != undefined) {
     // return item with 
-    return [{'title': '✅ ' + content, 
+    return [{'title': '✅ ' + confirm, 
       'icon': 'font-awesome:fa-rss',
       url: result.response.headerFields.Location}];
   } else if (result.error != undefined) {
