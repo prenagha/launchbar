@@ -61,7 +61,7 @@ function go(name, url) {
   }
 
   var content = LINK + ' ' + (name && name.length > 0 ? name + ' — ' : '') + url;
-  var confirm = LaunchBar.executeAppleScript('return text returned of (display dialog "Confirm Post" default answer "' + content + '" with icon caution)');
+  var confirm = LaunchBar.executeAppleScript('return text returned of (display dialog "Confirm Post (' + content.length + ')" default answer "' + content + '" with icon caution)');
   
   if (!confirm || confirm == null || confirm.length < 5) {
     return [{'title': 'Post cancelled', 
@@ -73,15 +73,12 @@ function go(name, url) {
       body: {'h': 'entry', 'content': confirm}
   });
   
-  //LaunchBar.debugLog(JSON.stringify(result));
-  
   if (result.response.status == 202 && result.data != undefined) {
-    // return item with 
     return [{'title': '✅ ' + confirm, 
       'icon': 'font-awesome:fa-rss',
       url: result.response.headerFields.Location}];
   } else if (result.error != undefined) {
-    return err('Unable to post entry: ' + result.error);
+    return err('Error posting entry: ' + result.error);
   } else {
     return err('Unable to post entry: ' + result.response.localizedStatus);
   }
