@@ -169,7 +169,7 @@ on load_all()
           else if listId is "TMCalendarListSource" then
             set icon to "font-awesome:fa-calendar"
           else
-            set icon to "font-awesome:fa-list-ul"
+            set icon to "font-awesome:fa-inbox"
           end if
           set listOut to {title:name of lst, icon:icon, badge:(count of todosOut) as string, children:todosOut}
           copy listOut to end of listsOut
