@@ -9,7 +9,7 @@
 	<key>LBAbbreviation</key>
 	<string>things todo task</string> 
 	<key>CFBundleVersion</key>
-	<string>2.3</string>
+	<string>3.0</string>
 	<key>CFBundleIconFile</key>
   <string>font-awesome:fa-list-ul</string>
   <key>LBAssociatedApplication</key>
@@ -65,6 +65,7 @@
 	  <string>https://s3.amazonaws.com/renaghan/lbdist/Things.lbaction</string>
 	  <key>LBChangelog</key>
 	  <string>
+	    3.0: Update for Things 3
 	    2.2: View URL for URL in notes of todo
 	    2.1: Support action updates
 	  </string>

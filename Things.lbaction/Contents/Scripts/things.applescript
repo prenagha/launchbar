@@ -6,7 +6,6 @@
 -- into .scpt using command line osacompile or by exporting/save-as within Script Editor
 --
 
-property TB : "com.culturedcode.things"
 property SAFARI : "com.apple.Safari"
 
 -- debug logging to console
@@ -27,7 +26,7 @@ end app_running
 on handle_string(todo)
 	if todo is not "" then
 		set newTodo to {}
-		tell application "Things"
+		tell application "Things3"
 			set newTodo to parse quicksilver input todo
 		end tell
 		did_it(newTodo, "Created")
@@ -39,7 +38,7 @@ end handle_string
 on addURL(todo, theURL)
 	if todo is not "" then
 		set newTodo to {}
-		tell application "Things"
+		tell application "Things3"
 			set newTodo to parse quicksilver input todo
 			if theURL starts with "http" then
 				set notes of newTodo to "[url=" & theURL & "] " & theURL & " [/url]"
@@ -74,89 +73,108 @@ end open
 
 on new_todo_items(todo)
 	set actions to {}
-	set action to {title:"Today", action:"moveToday", actionArgument:id of todo, icon:TB & ":TodayMark"}
+	set action to {title:"Today", action:"moveToday", actionArgument:id of todo, icon:"font-awesome:fa-star"}
 	copy action to end of actions
 	
-	set action to {title:"Next", action:"moveNext", actionArgument:id of todo, icon:TB & ":TodayMarkDone"}
+	set action to {title:"Next", action:"moveNext", actionArgument:id of todo, icon:"font-awesome:fa-thumb-tack"}
 	copy action to end of actions
 	
-	set action to {title:"Someday", action:"moveSomeday", actionArgument:id of todo, icon:TB & ":FocusMaybe-20"}
+	set action to {title:"Someday", action:"moveSomeday", actionArgument:id of todo, icon:"font-awesome:fa-archive"}
 	copy action to end of actions
 	
-	set action to {title:"View", action:"viewTodo", actionArgument:id of todo, icon:TB}
+	set action to {title:"View", action:"viewTodo", actionArgument:id of todo, icon:"font-awesome:fa-list-ul"}
 	copy action to end of actions
 	return actions
 end new_todo_items
 
 -- load all things items 
 on load_all()
-	tell application "Things"
+	tell application "Things3"
 		set listsOut to {}
 		repeat with lst in lists
 			set listId to id of lst
-			if listId is in {"FocusInbox", "FocusToday", "FocusNextActions", "FocusMaybe"} then
+			if listId is in {"TMInboxListSource", "TMTodayListSource", "TMNextListSource", "TMSomedayListSource", "TMCalendarListSource"} then
 				set todosOut to {}
 				
 				set todos to to dos in lst
 				repeat with todo in todos
-					set sts to status of todo
-					if sts is open then
-						set actions to {}
-						
-						set action to {title:"Complete " & name of todo, subtitle:notes of todo, label:tag names of todo, action:"completeTodo", actionArgument:id of todo, icon:TB & ":checkbox_big_done-P"}
-						copy action to end of actions
-						
-						set u to stringBetween(notes of todo, "[url=", "]") of me
-						if u is not "" then
-							set action to {title:"View " & u, |url|:u}
-							copy action to end of actions
-						end if
-						
-						if listId is not "FocusToday" then
-							set action to {title:"Today", action:"moveToday", actionArgument:id of todo, icon:TB & ":TodayMark"}
-							copy action to end of actions
-						end if
-						
-						if listId is not "FocusNextActions" then
-							set title to "Next"
-							if listId is "FocusToday" then
-								set title to "Not Today"
-							end if
-							set action to {title:title, action:"moveNext", actionArgument:id of todo, icon:TB & ":TodayMarkDone"}
-							copy action to end of actions
-						end if
-						
-						if listId is not "FocusMaybe" then
-							set action to {title:"Someday", action:"moveSomeday", actionArgument:id of todo, icon:TB & ":FocusMaybe-20"}
-							copy action to end of actions
-						end if
-						
-						set action to {title:"View", action:"viewTodo", actionArgument:id of todo, icon:TB}
-						copy action to end of actions
-						
-						set action to {title:"Cancel", action:"cancelTodo", actionArgument:id of todo, icon:TB & ":checkbox_big_canceled-P"}
-						copy action to end of actions
-						
-						set action to {title:"Trash", action:"trashTodo", actionArgument:id of todo, icon:TB & ":FocusTrashFull-20"}
-						copy action to end of actions
-						
-						set icon to TB & ":checkbox_big_flat-P"
-						set subt to notes of todo
-						if due date of todo is not missing value then
-							set icon to TB & ":checkbox_big_red-P"
-							set subt to "Due " & (due date of todo as string) & " " & (notes of todo)
-						end if
-						set todoOut to {title:name of todo, icon:icon, subtitle:subt, label:tag names of todo, children:actions}
-						copy todoOut to end of todosOut
-					end if
-				end repeat
-				
-				set listOut to {title:name of lst, icon:TB & ":" & listId & "-20", children:todosOut}
-				if (count of todosOut) is greater than 0 then
-					set listOut to {title:name of lst, icon:TB & ":" & listId & "-20", badge:(count of todosOut) as string, children:todosOut}
-				end if
-				copy listOut to end of listsOut
-			end if
+				  try
+            set sts to status of todo
+            if sts is open then
+              set actions to {}
+            
+              if listId is not "TMCalendarSource" then
+                set action to {title:"Complete " & name of todo, subtitle:notes of todo, label:tag names of todo, action:"completeTodo", actionArgument:id of todo, icon:"font-awesome:fa-check-square"}
+                copy action to end of actions
+              end if
+            
+              set u to stringBetween(notes of todo, "[url=", "]") of me
+              if u is not "" then
+                set action to {title:"View " & u, |url|:u}
+                copy action to end of actions
+              end if
+            
+              if listId is not "TMTodayListSource" and listId is not "TMCalendarListSource" then
+                set action to {title:"Today", action:"moveToday", actionArgument:id of todo, icon:"font-awesome:fa-star"}
+                copy action to end of actions
+              end if
+            
+              if listId is not "TMNextListSource" and listId is not "TMCalendarListSource" then
+                set title to "Next"
+                if listId is "TMTodayListSource" then
+                  set title to "Not Today"
+                end if
+                set action to {title:title, action:"moveNext", actionArgument:id of todo, icon:"font-awesome:fa-thumb-tack"}
+                copy action to end of actions
+              end if
+            
+              if listId is not "TMSomedayListSource" and listId is not "TMCalendarListSource" then
+                set action to {title:"Someday", action:"moveSomeday", actionArgument:id of todo, icon:"font-awesome:fa-archive"}
+                copy action to end of actions
+              end if
+            
+              set action to {title:"View", action:"viewTodo", actionArgument:id of todo, icon:"font-awesome:fa-list-ul"}
+              copy action to end of actions
+             
+              if listId is not "TMCalendarListSource" then
+                set action to {title:"Cancel", action:"cancelTodo", actionArgument:id of todo, icon:"font-awesome:fa-cancel"}
+                copy action to end of actions
+              end if
+            
+              set action to {title:"Trash", action:"trashTodo", actionArgument:id of todo, icon:"font-awesome:fa-trash"}
+              copy action to end of actions
+            
+              set icon to "font-awesome:fa-square-o"
+              if listId is "TMCalendarListSource" then
+                set icon to "font-awesome:fa-calendar"
+              end if
+              set subt to notes of todo
+              if due date of todo is not missing value then
+                set icon to "font-awesome:fa-calendar"
+                set subt to (due date of todo as string) & " " & (notes of todo)
+              end if
+              set todoOut to {title:name of todo, icon:icon, subtitle:subt, label:tag names of todo, children:actions}
+              copy todoOut to end of todosOut
+            end if
+          end try
+        end repeat
+        
+        if (count of todosOut) is greater than 0 then
+          if listId is "TMTodayListSource" then
+            set icon to "font-awesome:fa-star"
+          else if listId is "TMNextListSource" then
+            set icon to "font-awesome:fa-thumb-tack"
+          else if listId is "TMSomedayListSource" then
+            set icon to "font-awesome:fa-archive"
+          else if listId is "TMCalendarListSource" then
+            set icon to "font-awesome:fa-calendar"
+          else
+            set icon to "font-awesome:fa-list-ul"
+          end if
+          set listOut to {title:name of lst, icon:icon, badge:(count of todosOut) as string, children:todosOut}
+          copy listOut to end of listsOut
+        end if
+      end if
 		end repeat
 	end tell
 	
@@ -189,7 +207,7 @@ end get_clipboard
 
 -- get a list by id
 on get_list(listId)
-	tell application "Things"
+	tell application "Things3"
 		repeat with lst in lists
 			if id of lst is listId then
 				return lst
@@ -201,7 +219,7 @@ end get_list
 
 -- get a todo by id
 on get_todo(todoId)
-	tell application "Things"
+	tell application "Things3"
 		repeat with lst in lists
 			set todos to to dos in lst
 			repeat with todo in todos
@@ -217,38 +235,38 @@ end get_todo
 -- handle complete todo action
 on completeTodo(todoId)
 	set todo to get_todo(todoId)
-	tell application "Things" to set status of todo to completed
+	tell application "Things3" to set status of todo to completed
 	did_it(todo, "Completed")
 end completeTodo
 
 -- handle cancel todo action
 on cancelTodo(todoId)
 	set todo to get_todo(todoId)
-	tell application "Things" to set status of todo to canceled
+	tell application "Things3" to set status of todo to canceled
 	did_it(todo, "Canceled")
 end cancelTodo
 
 -- handle move to today action
 on moveToday(todoId)
 	set todo to get_todo(todoId)
-	set lst to get_list("FocusToday")
-	tell application "Things" to move todo to lst
+	set lst to get_list("TMTodayListSource")
+	tell application "Things3" to move todo to lst
 	did_it(todo, "Moved to Today")
 end moveToday
 
 -- handle move to next action
 on moveNext(todoId)
 	set todo to get_todo(todoId)
-	set lst to get_list("FocusNextActions")
-	tell application "Things" to move todo to lst
+	set lst to get_list("TMNextListSource")
+	tell application "Things3" to move todo to lst
 	did_it(todo, "Moved to Next")
 end moveNext
 
 -- handle move to someday action
 on moveSomeday(todoId)
 	set todo to get_todo(todoId)
-	set lst to get_list("FocusMaybe")
-	tell application "Things" to move todo to lst
+	set lst to get_list("TMSomedayListSource")
+	tell application "Things3" to move todo to lst
 	did_it(todo, "Moved to Someday")
 end moveSomeday
 
@@ -265,7 +283,7 @@ end did_it
 on viewTodo(todoId)
 	set todo to get_todo(todoId)
 	tell application "LaunchBar" to hide
-	tell application "Things"
+	tell application "Things3"
 		activate
 		show todo
 	end tell
@@ -274,7 +292,7 @@ end viewTodo
 -- handle trash todo action
 on trashTodo(todoId)
 	set todo to get_todo(todoId)
-	tell application "Things" to delete todo
+	tell application "Things3" to delete todo
 	did_it(todo, "Deleted")
 end trashTodo
 
