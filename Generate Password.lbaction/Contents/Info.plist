@@ -7,7 +7,7 @@
 	<key>CFBundleName</key>
 	<string>Generate Password</string>
 	<key>CFBundleVersion</key>
-	<string>4.1</string>
+	<string>5.0</string>
 	<key>CFBundleIconFile</key>
 	<string>font-awesome:fa-key</string>
 	<key>LBDebugLogEnabled</key>
@@ -17,7 +17,7 @@
 		<key>LBDefaultScript</key>
 		<dict>
 			<key>LBScriptName</key>
-			<string>generate.scpt</string>
+			<string>generate.js</string>
 			<key>LBRunInBackground</key>
 			<false/>
 			<key>LBRequiresArgument</key>
@@ -44,7 +44,7 @@
 	  <string>https://s3.amazonaws.com/renaghan/lbdist/Generate%20Password.lbaction</string>
 	  <key>LBChangelog</key>
 	  <string>
-	    Support action updates
+	    5.0 Rewritten in Javascript. Now supports preferences.
 	  </string>
 	</dict>
 </dict>
