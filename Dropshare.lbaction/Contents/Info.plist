@@ -7,7 +7,7 @@
 	<key>CFBundleName</key>
 	<string>Share with Dropshare</string>
 	<key>CFBundleVersion</key>
-	<string>1.0</string>
+	<string>1.1</string>
 	<key>CFBundleIconFile</key>
 	<string>font-awesome:fa-share</string>
 	<key>LBDebugLogEnabled</key>
@@ -57,7 +57,7 @@
 	  <string>https://s3.amazonaws.com/renaghan/lbdist/Dropshare.lbaction</string>
 	  <key>LBChangelog</key>
 	  <string>
-	    1.0: Initial release
+	    1.1: Zip if multiple files
 	  </string>
 	</dict>
 </dict>

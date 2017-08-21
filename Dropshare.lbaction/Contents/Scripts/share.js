@@ -6,7 +6,16 @@ function runWithString(string) {
 }
 
 function runWithPaths(paths) {
-  return go(paths[0]);
+  if (paths.length == 1)
+    return go(paths[0]);
+    
+  // zip up the paths and dropshare the zipped file
+  var tzip = LaunchBar.execute('/bin/bash', 'zip.sh', ...paths);  
+  LaunchBar.debugLog('Temp zip file ' + tzip);
+  tzip = chomp(tzip);
+  var rtn = go(tzip);
+  LaunchBar.execute('/bin/rm', tzip);
+  return rtn;
 }
 
 function runWithItem(item) {
@@ -21,11 +30,15 @@ function run(arg) {
   return go(LaunchBar.getClipboardString());
 }
 
+function chomp(inp) {
+  return inp.replace(/(\n|\r)+$/, '');
+}
+
 function go(file) {
   if (!file || file == undefined || file.length == 0) {
     return err('Missing file to share', '');
   }
-  LaunchBar.debugLog('Input File=' + file);
+  LaunchBar.debugLog("Input File='" + file + "'");
   if (!File.exists(file)) {
     return err('File does not exist', file);
   }
@@ -53,7 +66,7 @@ function go(file) {
     Action.preferences.match = 'amazonaws';
   }
   
-  for (var x=1; x<=8; x++) {
+  for (var x=1; x<=10; x++) {
     var shareURL = LaunchBar.getClipboardString();
     LaunchBar.debugLog('Clipboard check ' + x + ' -- ' + shareURL);
     if (shareURL 
