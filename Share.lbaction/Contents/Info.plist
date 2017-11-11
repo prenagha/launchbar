@@ -3,29 +3,23 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleIdentifier</key>
-	<string>com.renaghan.launchbar.CopyToIPad</string>
+	<string>com.renaghan.launchbar.Share</string>
 	<key>CFBundleName</key>
-	<string>Copy to iPad</string>
+	<string>Share File</string>
 	<key>CFBundleVersion</key>
-	<string>3.2</string>
+	<string>1.0</string>
 	<key>CFBundleIconFile</key>
-	<string>it.danilotorrisi.command-c-osx</string>
+	<string>font-awesome:fa-share</string>
 	<key>LBDebugLogEnabled</key>
-	<false/>
-	<key>LBRequiredApplication</key>
-	<string>it.danilotorrisi.command-c-osx</string>
-	<key>LBAssociatedApplication</key>
-	<string>it.danilotorrisi.command-c-osx</string>
-	<key>LBTextInputTitle</key>
-	<string>iPad</string>
+	<true/>
 	<key>LBScripts</key>
 	<dict>
 		<key>LBDefaultScript</key>
 		<dict>
 			<key>LBScriptName</key>
-			<string>copy-ipad.js</string>
+			<string>share.js</string>
 			<key>LBRunInBackground</key>
-			<true/>
+			<false/>
 			<key>LBRequiresArgument</key>
 			<false/>
 			<key>LBAcceptedArgumentTypes</key>
@@ -33,33 +27,35 @@
 			  <string>string</string>
 			  <string>path</string>
 			</array>
+			<key>LBAllowsInstantReuseOfLastTextInputString</key>
+			<true/>
 			<key>LBReturnsResult</key>
-			<false/>
+			<true/>
 		</dict>
 	</dict>
 	<key>LBDescription</key>
 	<dict>
 		<key>LBSummary</key>
-		<string>Copy selected text, file, or clipboard to iPad via Command-C application.</string>
+		<string>Share a file via Amazon AWS S3 bucket</string>
 		<key>LBRequirements</key>
-		<string>Command-C application running on this Mac as well as your iPad. http://danilo.to</string>
+		<string>Amazon AWS S3 bucket, properly configured, Amazon AWS command line interface (CLI)</string>
 		<key>LBAuthor</key>
 		<string>Padraic Renaghan</string>
 		<key>LBEmail</key>
 		<string>prenagha@renaghan.com</string>
 		<key>LBWebsiteURL</key>
-		<string>https://prenagha.github.io/launchbar/copy-ipad.html</string>
+		<string>https://prenagha.github.io/launchbar/share.html</string>
 		<key>LBTwitter</key>
 		<string>@prenagha</string>
 		<key>LBArgument</key>
-		<string>Selected text or file in LaunchBar or contents of system clipboard</string>
+		<string>Selected file in LaunchBar</string>
 	  <key>LBUpdateURL</key>
-	  <string>https://raw.githubusercontent.com/prenagha/launchbar/master/Copy%20to%20iPad.lbaction/Contents/Info.plist</string>
+	  <string>https://raw.githubusercontent.com/prenagha/launchbar/master/Share.lbaction/Contents/Info.plist</string>
 	  <key>LBDownloadURL</key>
-	  <string>https://s3.amazonaws.com/renaghan/lbdist/Copy%20to%20iPad.lbaction</string>
+	  <string>https://s3.amazonaws.com/renaghan/lbdist/Share.lbaction</string>
 	  <key>LBChangelog</key>
 	  <string>
-	    3.2: Support new Command-C URL
+	    1.0: initial
 	  </string>
 	</dict>
 </dict>
