@@ -44,8 +44,9 @@ function go(name, url) {
   }
 
   var tweet = '🔗 ' + (name && name.length > 0 ? name + ' — ' : '') + url;
-
-  LaunchBar.performAction('Post on Twitter', tweet);
+  
+  LaunchBar.openURL("tweetbot:///post?text="
+    + encodeURIComponent(tweet));
   return null;  
 }
 
