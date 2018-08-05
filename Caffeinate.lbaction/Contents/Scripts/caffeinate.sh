@@ -41,21 +41,21 @@ toString() {
 # if no argument then show status
 if [ -z "$1" ]
 then
-  PROC=`ps -eo etime,args | grep caffeinate | grep -v grep | head -n 1`
+  PROC=`ps -eo etime,args | grep caffeinate | grep -v grep | grep -v caffeinate.sh | head -n 1`
   if [ -z "$PROC" ]
   then
     echo "[{\"title\":\"Not caffeinated\",\"icon\":\"NotFound.icns\"}]"
   else
     # 03:26 caffeinate -u -t 1200
     # 01:03:26 caffeinate -u -t 1200
-    [[ $PROC =~ ([0-9]+)$ ]]
+    [[ "$PROC" =~ ([0-9]+)$ ]]
     dur=${BASH_REMATCH[1]}
 
-    if [[ $PROC =~ (-w [0-9]+) ]]
+    if [[ "$PROC" =~ (-w [0-9]+) ]]
     then
       # if caffeinate running while another process is running
       str=" running PID ${dur}"
-    elif [[ $PROC =~ ([0-9]+):([0-9]+):([0-9]+) ]]
+    elif [[ "$PROC" =~ ([0-9]+):([0-9]+):([0-9]+) ]]
     then
       (( elapsed=${BASH_REMATCH[1]}*60*60 + ${BASH_REMATCH[2]}*60 ))
     else
@@ -64,7 +64,7 @@ then
     fi
     if [ -z "${str}" ]
     then
-      if [ -z ${dur} -o ${dur} == 0 ]
+      if [ -z "${dur}" -o "${dur}" == 0 ]
       then
         remain=0
       else

@@ -7,7 +7,7 @@
 	<key>CFBundleName</key>
 	<string>Caffeinate</string>
 	<key>CFBundleVersion</key>
-	<string>3.1</string>
+	<string>3.2</string>
 	<key>CFBundleIconFile</key>
 	<string>font-awesome:fa-coffee</string>
 	<key>LBDebugLogEnabled</key>
@@ -52,7 +52,7 @@
 	  <string>https://s3.amazonaws.com/renaghan/lbdist/Caffeinate.lbaction</string>
 	  <key>LBChangelog</key>
 	  <string>
-	    Support action updates
+	    3.2: Fix search for existing caffeinate
 	  </string>
 	</dict>
 </dict>
