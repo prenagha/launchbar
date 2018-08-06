@@ -7,7 +7,7 @@ end dlog
 dlog("ascript start")
 try
 	
-	tell application "SizeUp" to do action Right
+	tell application "SizeUp" to do action Left
 	
 on error errorMessage number errorNumber
 	dlog("Error: " & errorMessage & ", ErrorNumber: " & errorNumber)
