@@ -7,9 +7,9 @@
 	<key>CFBundleName</key>
 	<string>Generate Password</string>
 	<key>CFBundleVersion</key>
-	<string>5.0</string>
+	<string>6.0</string>
 	<key>CFBundleIconFile</key>
-	<string>font-awesome:fa-key</string>
+	<string>font-awesome:fa-lock</string>
 	<key>LBDebugLogEnabled</key>
 	<true/>
 	<key>LBScripts</key>
@@ -23,13 +23,13 @@
 			<key>LBRequiresArgument</key>
 			<false/>
 			<key>LBReturnsResult</key>
-			<false/>
+			<true/>
 		</dict>
 	</dict>
 	<key>LBDescription</key>
 	<dict>
 		<key>LBSummary</key>
-		<string>Generate a strong password and copy it to the clipboard</string>
+		<string>Generate passwords, return results, and copy first to the clipboard. Uses https://github.com/bbusschots/hsxkpasswd for word passwords.</string>
 		<key>LBAuthor</key>
 		<string>Padraic Renaghan</string>
 		<key>LBEmail</key>
@@ -44,6 +44,7 @@
 	  <string>https://s3.amazonaws.com/renaghan/lbdist/Generate%20Password.lbaction</string>
 	  <key>LBChangelog</key>
 	  <string>
+	    6.0 Returns multiple results, defaults to hsxkpasswd word based password
 	    5.0 Rewritten in Javascript. Now supports preferences.
 	  </string>
 	</dict>

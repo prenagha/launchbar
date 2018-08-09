@@ -1,4 +1,6 @@
-
+var ALERT_ICON = 'font-awesome:fa-exclamation-triangle';
+var WORD_ICON = 'font-awesome:fa-lock';
+var RANDOM_ICON = 'font-awesome:fa-random';
 var TYPES = "LUNS";
 
 function setup() {
@@ -12,19 +14,21 @@ function setup() {
   if (!Action.preferences.numbers)
     Action.preferences.numbers = '23456789';
   if (!Action.preferences.symbols)
-    Action.preferences.symbols = '@#$%!.[]{}=+-_';
+    Action.preferences.symbols = '@#$%!.=+-_';
   if (!Action.preferences.minLength)
     Action.preferences.minLength = 15;
   if (!Action.preferences.lowercaseMin)
-    Action.preferences.lowercaseMin = 2;
+    Action.preferences.lowercaseMin = 1;
   if (!Action.preferences.uppercaseMin)
-    Action.preferences.uppercaseMin = 2;
+    Action.preferences.uppercaseMin = 1;
   if (!Action.preferences.numberMin)
-    Action.preferences.numberMin = 2;
+    Action.preferences.numberMin = 1;
   if (!Action.preferences.symbolMin)
     Action.preferences.symbolMin = 1;
-  if (!Action.preferences.showAlert)
-    Action.preferences.showAlert = 'yes';
+  if (!Action.preferences.hsxkpasswdPath)
+    Action.preferences.hsxkpasswdPath="/usr/local/bin/hsxkpasswd";
+  if (!Action.preferences.hsxkpasswdConfig)
+    Action.preferences.hsxkpasswdConfig="hsxkpasswd-config.json";
 }
 
 // return a random from the possible values
@@ -32,9 +36,7 @@ function rand(possible) {
   return possible.charAt(Math.floor(Math.random() * possible.length))
 }
 
-function run() {
-
-  setup();
+function randomPass() {
   var lowercaseMin = 0;
   var uppercaseMin = 0;
   var numberMin = 0;
@@ -64,7 +66,51 @@ function run() {
       symbolMin++;
     }    
   }
-  LaunchBar.setClipboardString(pwd);
-  if (Action.preferences.showAlert === 'yes')
-    LaunchBar.alert("Generated Password Copied to Clipboard", pwd);
+  return pwd;
+}
+
+function run() {
+  setup();
+  var output = [];
+  var firstPass = "";
+
+  if (Action.preferences.hsxkpasswdPath.length > 0) {
+    if (File.isExecutable(Action.preferences.hsxkpasswdPath)) {
+      var pwds = LaunchBar.execute(
+        Action.preferences.hsxkpasswdPath
+        , '--config-file'
+        ,  Action.preferences.hsxkpasswdConfig
+        , '--warn'
+        , 'NONE'
+        , '4');
+      pwds = pwds.split('\n');
+      for (i=0; i<pwds.length; i++) {
+        if (i==0) {
+          firstPass = pwds[i].trim();
+          output.push({title: pwds[i].trim()
+            , badge: 'on clipboard'
+            , icon: WORD_ICON});
+        } else {
+          output.push({title: pwds[i].trim(), icon: WORD_ICON});
+        }
+      }
+    } else {
+      output.push({title: "hsxkpasswd not found at " + Action.preferences.hsxkpasswdPath
+        , file: Action.preferences.hsxkpasswdPath
+        , badge: 'ERROR'
+        , icon: ALERT_ICON
+      });
+      output.push({title: "hsxkpasswd on Github"
+        , badge: 'NEXT STEP'
+        , url: "https://github.com/bbusschots/hsxkpasswd"});
+    }
+  }
+
+  var randPass = randomPass();
+  output.push({title: randPass, icon: RANDOM_ICON});
+  if (firstPass.length == 0)
+    firstPass = randPass;
+    
+  LaunchBar.setClipboardString(firstPass);
+  return output;
 }
