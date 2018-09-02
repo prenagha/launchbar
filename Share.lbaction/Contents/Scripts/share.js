@@ -73,8 +73,7 @@ function go(file) {
   try {
     var sharedURL = LaunchBar.execute('/bin/bash', 'share.sh', Action.preferences.bucket, Action.preferences.dir, Action.preferences.profilePut, Action.preferences.profileGet, file);  
     LaunchBar.debugLog("Shared URL='" + sharedURL + "'");
-    // use pbcopy so it gets in LaunchBar Clipboard History
-    LaunchBar.execute('/bin/echo' , sharedURL, '| /usr/bin/pbcopy');
+
     return [{
        title: 'Share URL'
       ,subtitle: sharedURL
