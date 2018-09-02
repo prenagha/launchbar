@@ -58,17 +58,29 @@ function go(file) {
   }
   LaunchBar.debugLog("Pref dir='" + Action.preferences.dir + "'");
 
-  if (Action.preferences.profile == undefined 
-   || Action.preferences.profile.length == 0) {
-    Action.preferences.profile = 'share-file';
+  if (Action.preferences.profilePut == undefined 
+   || Action.preferences.profilePut.length == 0) {
+    Action.preferences.profilePut = 'share-file-put';
   }
-  LaunchBar.debugLog("Pref profile='" + Action.preferences.profile + "'");
+  LaunchBar.debugLog("Pref profilePut='" + Action.preferences.profilePut + "'");
+
+  if (Action.preferences.profileGet == undefined 
+   || Action.preferences.profileGet.length == 0) {
+    Action.preferences.profileGet = 'share-file-get';
+  }
+  LaunchBar.debugLog("Pref profileGet='" + Action.preferences.profileGet + "'");
   
   try {
-    var sharedURL = LaunchBar.execute('/bin/bash', 'share.sh', Action.preferences.bucket, Action.preferences.dir, Action.preferences.profile, file);  
+    var sharedURL = LaunchBar.execute('/bin/bash', 'share.sh', Action.preferences.bucket, Action.preferences.dir, Action.preferences.profilePut, Action.preferences.profileGet, file);  
     LaunchBar.debugLog("Shared URL='" + sharedURL + "'");
-    LaunchBar.setClipboardString(sharedURL);
-    return [{url: sharedURL}];
+    // use pbcopy so it gets in LaunchBar Clipboard History
+    LaunchBar.execute('/bin/echo' , sharedURL, '| /usr/bin/pbcopy');
+    return [{
+       title: 'Share URL'
+      ,subtitle: sharedURL
+      ,badge: 'on clipboard'
+      ,url: sharedURL
+    }];
 
   } catch (exception) {
     return err('Error sharing: ' + exception, file);

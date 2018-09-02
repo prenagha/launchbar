@@ -7,7 +7,7 @@
 	<key>CFBundleName</key>
 	<string>Share File</string>
 	<key>CFBundleVersion</key>
-	<string>1.0</string>
+	<string>2.0</string>
 	<key>CFBundleIconFile</key>
 	<string>font-awesome:fa-share</string>
 	<key>LBDebugLogEnabled</key>
@@ -55,7 +55,7 @@
 	  <string>https://s3.amazonaws.com/renaghan/lbdist/Share.lbaction</string>
 	  <key>LBChangelog</key>
 	  <string>
-	    1.0: initial
+	    2.0: Use AWS S3 pre-signed URL
 	  </string>
 	</dict>
 </dict>
