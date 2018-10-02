@@ -7,9 +7,9 @@
 	<key>CFBundleName</key>
 	<string>Incognito Browser</string>
 	<key>LBAbbreviation</key>
-	<string>incognito private google chrome www safari</string> 
+	<string>incognito private chrome www safari</string> 
 	<key>CFBundleVersion</key>
-	<string>2.1</string>
+	<string>3.0</string>
 	<key>CFBundleIconFile</key>
   <string>font-awesome:user-secret</string>
   <key>LBARequiredApplication</key>
@@ -43,9 +43,9 @@
 	<key>LBDescription</key>
 	<dict>
 		<key>LBSummary</key>
-		<string>LaunchBar action that opens a Google Chrome browser window/tab in incognito private browsing mode. Opens to URL from active Safari tab, URL from clipboard, Google Search URL with clipboard term, or blank. If more than one option is available will show LaunchBar items for you to select.</string>
+		<string>LaunchBar action that opens a Chromium browser window/tab in incognito private browsing mode. Opens to URL from active Safari tab, URL from clipboard, DuckDuckGo Search URL with clipboard term, or blank. If more than one option is available will show LaunchBar items for you to select.</string>
 		<key>LBRequirements</key>
-		<string>Google Chrome Browser http://www.google.com/chrome/</string>
+		<string>Chromium Browser https://github.com/Eloston/ungoogled-chromium</string>
 		<key>LBAuthor</key>
 		<string>Padraic Renaghan</string>
 		<key>LBEmail</key>
@@ -62,7 +62,7 @@
 	  <string>https://s3.amazonaws.com/renaghan/lbdist/Incognito.lbaction</string>
 	  <key>LBChangelog</key>
 	  <string>
-	    Support action updates
+	    3.0: Change to Chromium browser
 	  </string>
 	</dict>
 </dict>

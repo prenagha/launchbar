@@ -1,5 +1,5 @@
 --
--- launchbar integration for Incognito Google Chrome
+-- launchbar integration for Incognito Chromium
 -- see http://apple.stackexchange.com/a/123909
 -- see https://github.com/chrisfsmith/launchbar/blob/master/incognito/
 --
@@ -7,7 +7,7 @@
 -- a **COMPILED** .scpt version of this script. You can compile this text AppleScript
 -- into .scpt using command line osacompile or by exporting/save-as within Script Editor
 --
-property CHROME : "com.google.Chrome"
+property CHROME : "org.chromium.Chromium"
 property SAFARI : "com.apple.Safari"
 
 -- debug logging to console
@@ -39,7 +39,7 @@ on handle_string(input)
 		return
 	end if
 	
-	tell application "Google Chrome"
+	tell application "Chromium"
 		repeat with win in (windows)
 			if mode of win is "incognito" then
 				set index of win to 1
@@ -51,7 +51,7 @@ on handle_string(input)
 		end repeat
 	end tell
 	
-	tell application "Google Chrome"
+	tell application "Chromium"
 		tell (make new window with properties {mode:"incognito"})
 			set URL of active tab to theURL
 		end tell
@@ -96,7 +96,7 @@ end open
 
 on makeURL(input)
 	if input is not "" and input does not start with "http" then
-		return "https://www.google.com/search?q=" & urlEncode(input)
+		return "https://duckduckgo.com/?q=" & urlEncode(input)
 	end if
 	return input
 end makeURL
@@ -123,7 +123,7 @@ on run
 			copy x to end of out
 		else
 			set theURL to makeURL(clip)
-			set x to {title:"Search '" & clip & "'", subtitle:theURL, icon:"Google.icns", |url|:theURL, action:"handle_string", actionArgument:theURL}
+			set x to {title:"Search '" & clip & "'", subtitle:theURL, |url|:theURL, action:"handle_string", actionArgument:theURL}
 			copy x to end of out
 		end if
 	end if

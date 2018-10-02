@@ -17,8 +17,13 @@ function run() {
             LaunchBar.execute('/bin/cp', '-p', path, orig);
             LaunchBar.execute(opt, '--force', '--ext', '.png', path);
         }
-        LaunchBar.execute(Action.path + '/Contents/Scripts/imgcopy', path);
+        
+        // copy the optimized image to the clipboard
+        LaunchBar.executeAppleScript('tell app "Finder" to set the clipboard to POSIX file "' + path + '"');
+        
+        // move original image to Trash
         LaunchBar.execute(Action.path + '/Contents/Scripts/trash', orig);
+        
     } catch (exception) {
         LaunchBar.log('Screenshot Error ' + exception + ' -- ' + path);
         LaunchBar.alert('Screenshot Error', exception);

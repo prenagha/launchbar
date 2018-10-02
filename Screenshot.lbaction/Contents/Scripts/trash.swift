@@ -4,8 +4,7 @@ import Cocoa
 
 let argCount = CommandLine.arguments.count
 if argCount > 1 {
-  var workspace = NSWorkspace.shared()
-  var manager = FileManager.default
+  let manager = FileManager.default
   for path in CommandLine.arguments[1..<argCount] {
     let url = NSURL(fileURLWithPath: path);
     do {
