@@ -7,7 +7,7 @@
 	<key>CFBundleName</key>
 	<string>Caffeinate</string>
 	<key>CFBundleVersion</key>
-	<string>3.2</string>
+	<string>4.0</string>
 	<key>CFBundleIconFile</key>
 	<string>font-awesome:fa-coffee</string>
 	<key>LBDebugLogEnabled</key>
@@ -52,6 +52,7 @@
 	  <string>https://s3.amazonaws.com/renaghan/lbdist/Caffeinate.lbaction</string>
 	  <key>LBChangelog</key>
 	  <string>
+	    4.0: More aggressive use of caffeinate, changed -u to -dimsu
 	    3.2: Fix search for existing caffeinate
 	  </string>
 	</dict>

@@ -85,7 +85,7 @@ else
   fi
   str=`toString $sec`
   killall caffeinate 2>/dev/null
-  caffeinate -u $secArg 1>/dev/null 2>&1 &
+  caffeinate -dimsu $secArg 1>/dev/null 2>&1 &
   echo "[{\"title\":\"Caffeinated awake for${str}\",\"icon\":\"$CLK\"}]"
 fi
 exit 0
