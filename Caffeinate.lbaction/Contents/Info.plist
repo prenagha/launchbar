@@ -7,7 +7,7 @@
 	<key>CFBundleName</key>
 	<string>Caffeinate</string>
 	<key>CFBundleVersion</key>
-	<string>4.0</string>
+	<string>4.1</string>
 	<key>CFBundleIconFile</key>
 	<string>font-awesome:fa-coffee</string>
 	<key>LBDebugLogEnabled</key>
@@ -49,7 +49,7 @@
 	  <key>LBUpdateURL</key>
 	  <string>https://raw.githubusercontent.com/prenagha/launchbar/master/Caffeinate.lbaction/Contents/Info.plist</string>
 	  <key>LBDownloadURL</key>
-	  <string>https://s3.amazonaws.com/renaghan/lbdist/Caffeinate.lbaction</string>
+	  <string>https://s3.amazonaws.com/public-launchbar-download/Caffeinate.lbaction</string>
 	  <key>LBChangelog</key>
 	  <string>
 	    4.0: More aggressive use of caffeinate, changed -u to -dimsu

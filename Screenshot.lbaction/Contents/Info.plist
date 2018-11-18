@@ -7,7 +7,7 @@
 	<key>CFBundleName</key>
 	<string>Screenshot</string>
 	<key>CFBundleVersion</key>
-	<string>3.5</string>
+	<string>3.6</string>
 	<key>CFBundleIconFile</key>
 	<string>font-awesome:fa-camera</string>
 	<key>LBDebugLogEnabled</key>
@@ -47,7 +47,7 @@
 	  <key>LBUpdateURL</key>
 	  <string>https://raw.githubusercontent.com/prenagha/launchbar/master/Screenshot.lbaction/Contents/Info.plist</string>
 	  <key>LBDownloadURL</key>
-	  <string>https://s3.amazonaws.com/renaghan/lbdist/Screenshot.lbaction</string>
+	  <string>https://s3.amazonaws.com/public-launchbar-download/Screenshot.lbaction</string>
 	  <key>LBChangelog</key>
 	  <string>
 	    3.5: Fix trash and img copy code

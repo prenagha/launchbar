@@ -7,7 +7,7 @@
 	<key>CFBundleName</key>
 	<string>Dismiss Notifications</string>
 	<key>CFBundleVersion</key>
-	<string>2.3</string>
+	<string>2.4</string>
 	<key>CFBundleIconFile</key>
 	<string>/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/Notifications.icns</string>
 	<key>LBDebugLogEnabled</key>
@@ -41,7 +41,7 @@
 	  <key>LBUpdateURL</key>
 	  <string>https://raw.githubusercontent.com/prenagha/launchbar/master/Dismiss%20Notifications.lbaction/Contents/Info.plist</string>
 	  <key>LBDownloadURL</key>
-	  <string>https://s3.amazonaws.com/renaghan/lbdist/Dismiss%20Notifications.lbaction</string>
+	  <string>https://s3.amazonaws.com/public-launchbar-download/Dismiss%20Notifications.lbaction</string>
 	  <key>LBChangelog</key>
 	  <string>
 	    2.3: Support other languages via preferences

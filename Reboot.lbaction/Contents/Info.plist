@@ -7,7 +7,7 @@
 	<key>CFBundleName</key>
 	<string>Reboot</string>
 	<key>CFBundleVersion</key>
-	<string>1.0</string>
+	<string>1.1</string>
 	<key>CFBundleIconFile</key>
 	<string>font-awesome:fa-power-off</string>
 	<key>LBAbbreviation</key>
@@ -39,7 +39,7 @@
 	  <key>LBUpdateURL</key>
 	  <string>https://raw.githubusercontent.com/prenagha/launchbar/master/Reboot.lbaction/Contents/Info.plist</string>
 	  <key>LBDownloadURL</key>
-	  <string>https://s3.amazonaws.com/renaghan/lbdist/Reboot.lbaction</string>
+	  <string>https://s3.amazonaws.com/public-launchbar-download/Reboot.lbaction</string>
 	  <key>LBChangelog</key>
 	  <string>
 	    1.0: Initial release

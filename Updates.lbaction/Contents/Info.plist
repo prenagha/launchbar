@@ -7,7 +7,7 @@
 	<key>CFBundleName</key>
 	<string>Action Updates</string>
 	<key>CFBundleVersion</key>
-	<string>2.6</string>
+	<string>2.7</string>
 	<key>CFBundleIconFile</key>
 	<string>font-awesome:fa-spinner</string>
 	<key>LBDebugLogEnabled</key>
@@ -39,7 +39,7 @@
 	  <key>LBUpdateURL</key>
 	  <string>https://raw.githubusercontent.com/prenagha/launchbar/master/Updates.lbaction/Contents/Info.plist</string>
 	  <key>LBDownloadURL</key>
-	  <string>https://s3.amazonaws.com/renaghan/lbdist/Updates.lbaction</string>
+	  <string>https://s3.amazonaws.com/public-launchbar-download/Updates.lbaction</string>
 	  <key>LBChangelog</key>
 	  <string>
 	    2.6: Additional error handling

@@ -7,7 +7,7 @@
 	<key>CFBundleName</key>
 	<string>Generate Password</string>
 	<key>CFBundleVersion</key>
-	<string>6.0</string>
+	<string>6.1</string>
 	<key>CFBundleIconFile</key>
 	<string>font-awesome:fa-lock</string>
 	<key>LBDebugLogEnabled</key>
@@ -41,7 +41,7 @@
 	  <key>LBUpdateURL</key>
 	  <string>https://raw.githubusercontent.com/prenagha/launchbar/master/Generate%20Password.lbaction/Contents/Info.plist</string>
 	  <key>LBDownloadURL</key>
-	  <string>https://s3.amazonaws.com/renaghan/lbdist/Generate%20Password.lbaction</string>
+	  <string>https://s3.amazonaws.com/public-launchbar-download/Generate%20Password.lbaction</string>
 	  <key>LBChangelog</key>
 	  <string>
 	    6.0 Returns multiple results, defaults to hsxkpasswd word based password

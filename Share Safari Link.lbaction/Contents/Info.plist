@@ -7,7 +7,7 @@
 	<key>CFBundleName</key>
 	<string>Share Safari Link</string>
 	<key>CFBundleVersion</key>
-	<string>3.2</string>
+	<string>3.3</string>
 	<key>CFBundleIconFile</key>
 	<string>com.apple.Safari</string>
 	<key>LBDebugLogEnabled</key>
@@ -45,7 +45,7 @@
 	  <key>LBUpdateURL</key>
 	  <string>https://raw.githubusercontent.com/prenagha/launchbar/master/Share%20Safari%20Link.lbaction/Contents/Info.plist</string>
 	  <key>LBDownloadURL</key>
-	  <string>https://s3.amazonaws.com/renaghan/lbdist/Share%20Safari%20Link.lbaction</string>
+	  <string>https://s3.amazonaws.com/public-launchbar-download/Share%20Safari%20Link.lbaction</string>
 	  <key>LBChangelog</key>
 	  <string>
 	    Support action updates

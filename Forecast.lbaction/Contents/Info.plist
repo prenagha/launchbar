@@ -7,7 +7,7 @@
 	<key>CFBundleName</key>
 	<string>Forecast</string>
 	<key>CFBundleVersion</key>
-	<string>4.2</string>
+	<string>4.3</string>
 	<key>CFBundleIconFile</key>
 	<string>Sun-Low.png</string>
 	<key>LBAbbreviation</key>
@@ -57,7 +57,7 @@
 	  <key>LBUpdateURL</key>
 	  <string>https://raw.githubusercontent.com/prenagha/launchbar/master/Forecast.lbaction/Contents/Info.plist</string>
 	  <key>LBDownloadURL</key>
-	  <string>https://s3.amazonaws.com/renaghan/lbdist/Forecast.lbaction</string>
+	  <string>https://s3.amazonaws.com/public-launchbar-download/Forecast.lbaction</string>
 	  <key>LBChangelog</key>
 	  <string>
 	    4.2: Forecast.io branding change to Dark Sky
