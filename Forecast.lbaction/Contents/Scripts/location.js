@@ -7,7 +7,6 @@ var FOLLOW_ICON = '/System/Library/CoreServices/CoreTypes.bundle/Contents/Resour
 var FOLLOW_NAME = 'Follow-Me';
 var FOLLOW_SUB = 'Dynamic location that follows your current whereabouts';
 var PLANE_ICON = 'airplane.png';
-var LOC_APP = '/Applications/Location Helper.app';
 
 function getLocations() {
   var kids = [];
@@ -60,38 +59,32 @@ function getLocations() {
       ,'children':admin});
   }  
   
-  if (File.exists(LOC_APP)) {
-    if (!followMe) {
-      kids.push({'title':'Add Follow-Me Current Location'
-        ,'subtitle':FOLLOW_SUB
-        ,'name':FOLLOW_NAME,'latitude':FOLLOW_NBR,'longitude':FOLLOW_NBR,'ico':FOLLOW_ICON
-        ,'icon':FOLLOW_ICON
-        ,'actionRunsInBackground':true
-        ,'action':'actionSelect'});
-    }
-    var curr = getCurrentLocation();
-    if (curr == null) {
-      kids.push({'title':'Current Location not available','icon':'NotFound.icns'});
-    } else {
-      var f = [];
-      f.push({'title':'Forecast'
-        ,'name':curr.name,'latitude':curr.latitude,'longitude':curr.longitude,'ico':curr.icon
-        ,'icon':'Sun-Low.png'
-        ,'actionReturnsItems':true
-        ,'action':'actionForecast'});
+	if (!followMe) {
+		kids.push({'title':'Add Follow-Me Current Location'
+			,'subtitle':FOLLOW_SUB
+			,'name':FOLLOW_NAME,'latitude':FOLLOW_NBR,'longitude':FOLLOW_NBR,'ico':FOLLOW_ICON
+			,'icon':FOLLOW_ICON
+			,'actionRunsInBackground':true
+			,'action':'actionSelect'});
+	}
+	var curr = getCurrentLocation();
+	if (curr == null) {
+		kids.push({'title':'Current Location not available','icon':'NotFound.icns'});
+	} else {
+		var f = [];
+		f.push({'title':'Forecast'
+			,'name':curr.name,'latitude':curr.latitude,'longitude':curr.longitude,'ico':curr.icon
+			,'icon':'Sun-Low.png'
+			,'actionReturnsItems':true
+			,'action':'actionForecast'});
 
-      kids.push({'title':'Add ' + curr.name + ' Location'
-        ,'name':curr.name,'latitude':curr.latitude,'longitude':curr.longitude,'ico':curr.icon
-        ,'icon':DEFAULT_ICON
-        ,'actionRunsInBackground':true
-        ,'children':f
-        ,'action':'actionSelect'});
-    }
-  } else {
-    kids.push({'title':'Location Helper App required for current location features'
-      ,'subtitle':'Run to open app web page'
-      ,'url':'http://www.mousedown.net/mouseware/LocationHelper.html'});
-  }
+		kids.push({'title':'Add ' + curr.name + ' Location'
+			,'name':curr.name,'latitude':curr.latitude,'longitude':curr.longitude,'ico':curr.icon
+			,'icon':DEFAULT_ICON
+			,'actionRunsInBackground':true
+			,'children':f
+			,'action':'actionSelect'});
+	}
 
   if (isDebug()) {
     kids.push({'title':'Edit locations.json'

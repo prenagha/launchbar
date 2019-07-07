@@ -1,24 +1,21 @@
+var GEOLOCATE = "http://ip-api.com/json/";
 
 function getCurrentLocation() {
-  if (File.exists(LOC_APP)) {
-    try {
-      var rslt = LaunchBar.execute('/usr/bin/osascript', 'current.scpt');
-      // return object containing latitude, longitude, and name properties
-      var geo = JSON.parse(rslt);
-      /* if (geo && geo.place && geo.place == 'Name not available') {
-        geo.place = getNameForGeo(geo.latitude, geo.longitude);
-      } */
-      return {'name':geo.place
-        ,'latitude':geo.latitude
-        ,'longitude':geo.longitude
+  try {
+    var result = HTTP.getJSON(GEOLOCATE, TIMEOUT);
+    if (result && result.data 
+      && result.data.city && result.data.regionName && result.data.country) {
+      var place = result.data.city 
+        + ', ' + result.data.regionName 
+        + ', ' + result.data.country;
+      return {'name': place
+        ,'latitude': result.data.lat
+        ,'longitude': result.data.lon
         ,'icon':DEFAULT_ICON};
-    } catch (exception) {
-      LaunchBar.log('Error getCurrentLocation ' + exception);
-      LaunchBar.alert('Error getCurrentLocation', exception);
     }
-  } else {
-    LaunchBar.alert('To get your current location, install the Location Helper App');
-    LaunchBar.openURL('http://www.mousedown.net/mouseware/LocationHelper.html');
+  } catch (exception) {
+    LaunchBar.log('Error getCurrentLocation ' + exception);
+    LaunchBar.alert('Error getCurrentLocation', exception);
   }
   return null;
 }
