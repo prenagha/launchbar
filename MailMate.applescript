@@ -12,7 +12,7 @@ on urlencode(theText)
 		set eachCharNum to ASCII number of eachChar
 		if eachCharNum = 32 or eachCharNum > 127 then
 			set useChar to "%20"
-		else if (eachCharNum ≠ 42) and (eachCharNum ≠ 95) and (eachCharNum < 45 or eachCharNum > 46) and (eachCharNum < 48 or eachCharNum > 57) and (eachCharNum < 65 or eachCharNum > 90) and (eachCharNum < 97 or eachCharNum > 122) then
+		else if (eachCharNum is not equal to 42) and (eachCharNum is not equal to 95) and (eachCharNum < 45 or eachCharNum > 46) and (eachCharNum < 48 or eachCharNum > 57) and (eachCharNum < 65 or eachCharNum > 90) and (eachCharNum < 97 or eachCharNum > 122) then
 			set firstDig to round (eachCharNum / 16) rounding down
 			set secondDig to eachCharNum mod 16
 			if firstDig > 9 then
