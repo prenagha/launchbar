@@ -16,6 +16,7 @@ fi
 CINPUT=`$CMD -c -t input`
 COUTPUT=`$CMD -c -t output`
 
+IFS=''
 while read -r INPUT
 do
   if [ ! -z "${INS}" ]
