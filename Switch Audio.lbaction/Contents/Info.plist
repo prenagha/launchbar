@@ -9,7 +9,7 @@
 	<key>LBAbbreviation</key>
 	<string>sound speaker headphones microphone</string> 
 	<key>CFBundleVersion</key>
-	<string>2.2</string>
+	<string>2.3</string>
 	<key>CFBundleIconFile</key>
 	<string>font-awesome:fa-headphones</string>
 	<key>LBDebugLogEnabled</key>
@@ -48,7 +48,7 @@
 	  <string>https://s3.amazonaws.com/public-launchbar-download/Switch%20Audio.lbaction</string>
 	  <key>LBChangelog</key>
 	  <string>
-	    Support action updates
+	    2.3: Support space in device names
 	  </string>
 	</dict>
 </dict>
