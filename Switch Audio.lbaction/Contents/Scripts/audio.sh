@@ -1,5 +1,9 @@
 #!/bin/bash
-CMD=/usr/local/bin/SwitchAudioSource
+if [[ `uname -m` == 'arm64' ]]; then
+  CMD=/opt/homebrew/bin/SwitchAudioSource
+else
+  CMD=/usr/local/bin/SwitchAudioSource
+fi
 
 if [ ! -f "$CMD" ]
 then
