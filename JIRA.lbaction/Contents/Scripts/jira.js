@@ -9,9 +9,8 @@ function run(arg) {
     Action.preferences.crucibleBase = "https://crucible.example.com";
     
   var url = "";
-  if (arg.match(/^\d+$/)) {
-    url = Action.preferences.jiraBase + "/browse/ER-" + arg;
-  } else if (arg.match(/^ER-\d+$/i)) {
+
+  if (arg.match(/[A-Z]{2,}-\d+/i)) {
     url = Action.preferences.jiraBase + "/browse/" + arg;
   } else if (arg.match(/^CR-\d+$/i)) {
     url = Action.preferences.crucibleBase + "/cru/" + arg;
