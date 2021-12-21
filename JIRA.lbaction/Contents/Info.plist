@@ -7,7 +7,7 @@
 	<key>CFBundleName</key>
 	<string>JIRA Search</string>
 	<key>CFBundleVersion</key>
-	<string>1.1</string>
+	<string>2.0</string>
 	<key>CFBundleIconFile</key>
 	<string>jira.png</string>
 	<key>LBDebugLogEnabled</key>
@@ -48,6 +48,7 @@
 	  <string>https://s3.amazonaws.com/public-launchbar-download/JIRA.lbaction</string>
 	  <key>LBChangelog</key>
 	  <string>
+	    2.0: Configurable default project, query. Removed Crucible. Thanks @alloydwhitlock
 	    1.0: First release
 	  </string>
 	</dict>
