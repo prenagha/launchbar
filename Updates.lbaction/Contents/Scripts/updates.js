@@ -315,7 +315,7 @@ function checkLaunchBar() {
         ,'icon':ALERT_ICON
         ,'url':LB_INFO};
     }
-    if (upToDate(result.data[0].BundleVersion, LaunchBar.version)) {
+    if (upToDate(LaunchBar.version, result.data[0].BundleVersion)) {
       return {'title':'LaunchBar: up to date'
         ,'badge': LaunchBar.shortVersion
         ,'icon':CHECK
