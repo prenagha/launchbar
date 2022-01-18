@@ -1,12 +1,12 @@
 
 var TIMEOUT = {timeout: 10.0};
-var ACTION_INFO = 'https://raw.githubusercontent.com/prenagha/launchbar/master/Forecast.lbaction/Contents/Info.plist';
+var ACTION_INFO = 'https://raw.githubusercontent.com/prenagha/launchbar/main/Updates.lbaction/Contents/Info.plist';
 var LB_INFO = 'http://sw-update.obdev.at/update-feeds/launchbar-6.plist';
 var LB_DOWNLOAD = 'http://www.obdev.at/products/launchbar/download.html';
-var ALERT_ICON = '/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/AlertStopIcon.icns';
-var CAUTION = 'Caution.icns';
-var CHECK = "GreenCheckmark.tiff";
-var SKIP = "DisabledRule.icns";
+var ALERT_ICON = 'alertTemplate';
+var CAUTION = 'cautionTemplate';
+var CHECK = "checkTemplate";
+var SKIP = "skipTemplate";
 
 function setup() {
   if (Action.preferences.ActionsDir)
@@ -28,7 +28,7 @@ function run(arg) {
   var skip = [];
   var error = [];
 
-  skip.push({'title': 'Edit Preferences', icon: "Pref_Advanced.icns", action: "editPref"});
+  skip.push({'title': 'Edit Preferences', icon: "prefTemplate", action: "editPref"});
 
   loadResult(items, good, bad, skip, error, checkLaunchBar());
     
@@ -181,43 +181,43 @@ function getActionChildren(actionFile, currPlist, plist) {
   if (w) {
     items.push({'title': 'Open ' + currPlist.CFBundleName + ' web site'
       ,'subtitle': w
-      ,'icon':'URL.icns'
+      ,'icon':'urlTemplate'
       ,'url': w});
   }
   if (plist && plist.LBDescription && plist.LBDescription.LBChangelog && plist.LBDescription.LBChangelog.indexOf('http') == 0) {
     items.push({'title': 'Open version ' + plist.CFBundleVersion + ' change log'
       ,'subtitle':plist.LBDescription.LBChangelog
-      ,'icon':'Text.icns'
+      ,'icon':'logTemplate'
       ,'url': plist.LBDescription.LBChangelog});
   }
   if (plist && plist.LBDescription && plist.LBDescription.LBChangelog && plist.LBDescription.LBChangelog.indexOf('http') != 0) {
     var changes = [{title: plist.LBDescription.LBChangelog, icon:'Text.icns'}];
     items.push({'title': 'Version ' + plist.CFBundleVersion + ' change log'
-      ,'icon':'Text.icns'
+      ,'icon':'logTemplate'
       ,'children': changes});
   }
   if (plist && plist.LBDescription && plist.LBDescription.LBDownloadURL) {
     items.push({'title': 'Download version ' + plist.CFBundleVersion
       ,'subtitle':plist.LBDescription.LBDownloadURL
-      ,'icon':'Pref_SoftwareUpdate.icns'
+      ,'icon':'prefTemplate'
       ,'url': plist.LBDescription.LBDownloadURL});
   }
   if (plist && plist.LBDescription && plist.LBDescription.LBDownload) {
     items.push({'title': 'Download version ' + plist.CFBundleVersion
       ,'subtitle':plist.LBDescription.LBDownload
-      ,'icon':'Pref_SoftwareUpdate.icns'
+      ,'icon':'prefTemplate'
       ,'url': plist.LBDescription.LBDownload});
   }
   if (currPlist && currPlist.LBDescription && currPlist.LBDescription.LBUpdateURL) {
     items.push({'title': 'Open remote Info.plist'
       ,'subtitle':currPlist.LBDescription.LBUpdateURL
-      ,'icon':'URL.icns'
+      ,'icon':'urlTemplate'
       ,'url': currPlist.LBDescription.LBUpdateURL});
   }
   if (currPlist && currPlist.LBDescription && currPlist.LBDescription.LBUpdate) {
     items.push({'title': 'Open remote Info.plist'
       ,'subtitle':currPlist.LBDescription.LBUpdate
-      ,'icon':'URL.icns'
+      ,'icon':'urlTemplate'
       ,'url': currPlist.LBDescription.LBUpdate});
   }
   items.push({'title': 'Installed action version ' + (currPlist ? currPlist.CFBundleVersion : "")

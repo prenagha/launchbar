@@ -42,7 +42,8 @@
 	  <string>https://s3.amazonaws.com/public-launchbar-download/Updates.lbaction</string>
 	  <key>LBChangelog</key>
 	  <string>
-	    2.8: Fix LaunchBar version check
+	    2.8.1: New icons
+			2.8: Fix LaunchBar version check
 	    2.6: Additional error handling
 	    2.5: Added ability to select an action and set it to skip in the preferences file
 	    2.4: Proper version compare assuming major[.minor][.patch] format
