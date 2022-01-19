@@ -199,13 +199,13 @@ function getActionChildren(actionFile, currPlist, plist) {
   if (plist && plist.LBDescription && plist.LBDescription.LBDownloadURL) {
     items.push({'title': 'Download version ' + plist.CFBundleVersion
       ,'subtitle':plist.LBDescription.LBDownloadURL
-      ,'icon':'prefTemplate'
+      ,'icon':'downloadTemplate'
       ,'url': plist.LBDescription.LBDownloadURL});
   }
   if (plist && plist.LBDescription && plist.LBDescription.LBDownload) {
     items.push({'title': 'Download version ' + plist.CFBundleVersion
       ,'subtitle':plist.LBDescription.LBDownload
-      ,'icon':'prefTemplate'
+      ,'icon':'downloadTemplate'
       ,'url': plist.LBDescription.LBDownload});
   }
   if (currPlist && currPlist.LBDescription && currPlist.LBDescription.LBUpdateURL) {
@@ -222,6 +222,7 @@ function getActionChildren(actionFile, currPlist, plist) {
   }
   items.push({'title': 'Installed action version ' + (currPlist ? currPlist.CFBundleVersion : "")
     ,'subtitle':actionFile
+    ,'icon': 'actionTemplate'
     ,'path': actionFile});
 
   if (currPlist) {
