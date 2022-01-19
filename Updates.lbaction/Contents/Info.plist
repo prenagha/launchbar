@@ -7,7 +7,7 @@
 	<key>CFBundleName</key>
 	<string>Action Updates</string>
 	<key>CFBundleVersion</key>
-	<string>2.9</string>
+	<string>2.10</string>
 	<key>CFBundleIconFile</key>
 	<string>font-awesome:fa-spinner</string>
 	<key>LBDebugLogEnabled</key>
@@ -42,7 +42,8 @@
 	  <string>https://s3.amazonaws.com/public-launchbar-download/Updates.lbaction</string>
 	  <key>LBChangelog</key>
 	  <string>
-	    2.9: New icons @Ptujec
+	    2.10: Fix for new icons @Ptujec
+			2.9: New icons @Ptujec
 			2.8: Fix LaunchBar version check
 	    2.6: Additional error handling
 	    2.5: Added ability to select an action and set it to skip in the preferences file
