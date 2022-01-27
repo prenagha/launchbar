@@ -51,7 +51,7 @@
 	  <key>LBUpdateURL</key>
 	  <string>https://raw.githubusercontent.com/prenagha/launchbar/master/Expand%20URL.lbaction/Contents/Info.plist</string>
 	  <key>LBDownloadURL</key>
-	  <string>https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/prenagha/launchbar/tree/main/Expand%20URL.lbaction</string>
+	  <string>https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/prenagha/launchbar/tree/main/Expand%20URL.lbaction&fileName=Expand-URL&rootDirectory=Expand-URL.lbaction</string>
 	  <key>LBChangelog</key>
 	  <string>
 	    3.4: Fix download URL

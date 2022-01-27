@@ -45,7 +45,7 @@
 	  <key>LBUpdateURL</key>
 	  <string>https://raw.githubusercontent.com/prenagha/launchbar/master/Switch%20Audio.lbaction/Contents/Info.plist</string>
 	  <key>LBDownloadURL</key>
-	  <string>https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/prenagha/launchbar/tree/main/Switch%20Audio.lbaction</string>
+	  <string>https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/prenagha/launchbar/tree/main/Switch%20Audio.lbaction&fileName=Switch-Audio&rootDirectory=Switch-Audio.lbaction</string>
 	  <key>LBChangelog</key>
 	  <string>
 	    2.5: Fix download URL
