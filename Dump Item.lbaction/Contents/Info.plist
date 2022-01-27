@@ -50,7 +50,7 @@
 	  <key>LBUpdateURL</key>
 	  <string>https://raw.githubusercontent.com/prenagha/launchbar/master/Dump%20Item.lbaction/Contents/Info.plist</string>
 	  <key>LBDownloadURL</key>
-	  <string>https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/prenagha/launchbar/tree/main/Dump%20Item.lbaction&fileName=Dump-Item&rootDirectory=Dump-Item.lbaction</string>
+	  <string>https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/prenagha/launchbar/tree/main/Dump%20Item.lbaction&amp;fileName=Dump-Item&amp;rootDirectory=Dump-Item.lbaction</string>
 	  <key>LBChangelog</key>
 	  <string>
 	    2.3: Fix download URL
