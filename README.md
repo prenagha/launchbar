@@ -10,5 +10,3 @@ You can compile these text `.applescript` files into `.scpt` files using command
 
 [My build script to compile `.applescript` to `.scpt`](https://gist.github.com/prenagha/404284fee1b8ff86aec5)
 
-[My build script to sign and package LaunchBar actions](https://gist.github.com/prenagha/2d72121ad7478559e8c3)
-
