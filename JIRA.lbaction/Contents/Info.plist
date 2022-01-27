@@ -40,6 +40,8 @@
 		<string>Padraic Renaghan</string>
 		<key>LBEmail</key>
 		<string>prenagha@renaghan.com</string>
+		<key>LBWebsiteURL</key>
+		<string>https://renaghan.com/launchbar/jira/</string>
 		<key>LBTwitter</key>
 		<string>@prenagha</string>
 	  <key>LBUpdateURL</key>

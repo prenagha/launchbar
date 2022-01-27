@@ -1,4 +1,4 @@
-[LaunchBar Actions web site, documentation, screenshots](http://prenagha.github.io/launchbar/)
+[LaunchBar Actions web site, documentation, screenshots](https://renaghan.com/launchbar/)
 
 ###NOTE on `.applescript` files
 
