@@ -9,7 +9,7 @@
 	<key>LBAbbreviation</key>
 	<string>debug log</string> 
 	<key>CFBundleVersion</key>
-	<string>2.2</string>
+	<string>2.3</string>
 	<key>CFBundleIconFile</key>
 	<string>UnixExecutable.icns</string>
 	<key>LBDebugLogEnabled</key>
@@ -50,9 +50,10 @@
 	  <key>LBUpdateURL</key>
 	  <string>https://raw.githubusercontent.com/prenagha/launchbar/master/Dump%20Item.lbaction/Contents/Info.plist</string>
 	  <key>LBDownloadURL</key>
-	  <string>https://s3.amazonaws.com/public-launchbar-download/Dump%20Item.lbaction</string>
+	  <string>https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/prenagha/launchbar/tree/main/Dump%20Item.lbaction</string>
 	  <key>LBChangelog</key>
 	  <string>
+	    2.3: Fix download URL
 	    Support action updates
 	  </string>
 	</dict>

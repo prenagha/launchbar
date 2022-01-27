@@ -9,7 +9,7 @@
 	<key>LBAbbreviation</key>
 	<string>calendar ical event appointment meeting</string> 
 	<key>CFBundleVersion</key>
-	<string>1.4</string>
+	<string>1.5</string>
 	<key>CFBundleIconFile</key>
 	<string>font-awesome:fa-calendar</string>
 	<key>LBDebugLogEnabled</key>
@@ -47,9 +47,10 @@
 	  <key>LBUpdateURL</key>
 	  <string>https://raw.githubusercontent.com/prenagha/launchbar/master/Today.lbaction/Contents/Info.plist</string>
 	  <key>LBDownloadURL</key>
-	  <string>https://s3.amazonaws.com/public-launchbar-download/Today.lbaction</string>
+	  <string>https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/prenagha/launchbar/tree/main/Today.lbaction</string>
 	  <key>LBChangelog</key>
 	  <string>
+	    1.5: Fix download URL
 	    1.3: Improved timing of click to call attempts
 	    1.2: Ability to click the "Call" confirmation from FaceTime when dialing via phone
 	    1.1: Ability to set time format as preference

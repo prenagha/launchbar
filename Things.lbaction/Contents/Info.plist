@@ -9,7 +9,7 @@
 	<key>LBAbbreviation</key>
 	<string>things todo task</string> 
 	<key>CFBundleVersion</key>
-	<string>3.1</string>
+	<string>3.2</string>
 	<key>CFBundleIconFile</key>
   <string>font-awesome:fa-inbox</string>
   <key>LBAssociatedApplication</key>
@@ -62,9 +62,10 @@
 	  <key>LBUpdateURL</key>
 	  <string>https://raw.githubusercontent.com/prenagha/launchbar/master/Things.lbaction/Contents/Info.plist</string>
 	  <key>LBDownloadURL</key>
-	  <string>https://s3.amazonaws.com/public-launchbar-download/Things.lbaction</string>
+	  <string>https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/prenagha/launchbar/tree/main/Things.lbaction</string>
 	  <key>LBChangelog</key>
 	  <string>
+	    3.2: Fix download URL
 	    3.0: Update for Things 3
 	    2.2: View URL for URL in notes of todo
 	    2.1: Support action updates

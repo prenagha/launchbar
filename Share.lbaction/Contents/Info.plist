@@ -7,7 +7,7 @@
 	<key>CFBundleName</key>
 	<string>Share File</string>
 	<key>CFBundleVersion</key>
-	<string>2.1</string>
+	<string>2.2</string>
 	<key>CFBundleIconFile</key>
 	<string>font-awesome:fa-share</string>
 	<key>LBDebugLogEnabled</key>
@@ -52,9 +52,10 @@
 	  <key>LBUpdateURL</key>
 	  <string>https://raw.githubusercontent.com/prenagha/launchbar/master/Share.lbaction/Contents/Info.plist</string>
 	  <key>LBDownloadURL</key>
-	  <string>https://s3.amazonaws.com/public-launchbar-download/Share.lbaction</string>
+	  <string>https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/prenagha/launchbar/tree/main/Share.lbaction</string>
 	  <key>LBChangelog</key>
 	  <string>
+	    2.2: Fix download URL
 	    2.0: Use AWS S3 pre-signed URL
 	  </string>
 	</dict>

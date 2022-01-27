@@ -7,7 +7,7 @@
 	<key>CFBundleName</key>
 	<string>Forecast</string>
 	<key>CFBundleVersion</key>
-	<string>4.4</string>
+	<string>4.5</string>
 	<key>CFBundleIconFile</key>
 	<string>Sun-Low.png</string>
 	<key>LBAbbreviation</key>
@@ -57,9 +57,10 @@
 	  <key>LBUpdateURL</key>
 	  <string>https://raw.githubusercontent.com/prenagha/launchbar/master/Forecast.lbaction/Contents/Info.plist</string>
 	  <key>LBDownloadURL</key>
-	  <string>https://s3.amazonaws.com/public-launchbar-download/Forecast.lbaction</string>
+	  <string>https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/prenagha/launchbar/tree/main/Forecast.lbaction</string>
 	  <key>LBChangelog</key>
 	  <string>
+	    4.5: Fix download URL
 	    4.4: Removed use of Location Helper since Google now requires API key, now using ip-api.com for current location
 	    4.2: Forecast.io branding change to Dark Sky
 	  </string>

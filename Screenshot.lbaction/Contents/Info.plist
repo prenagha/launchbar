@@ -7,7 +7,7 @@
 	<key>CFBundleName</key>
 	<string>Screenshot</string>
 	<key>CFBundleVersion</key>
-	<string>3.6</string>
+	<string>3.7</string>
 	<key>CFBundleIconFile</key>
 	<string>font-awesome:fa-camera</string>
 	<key>LBDebugLogEnabled</key>
@@ -47,9 +47,10 @@
 	  <key>LBUpdateURL</key>
 	  <string>https://raw.githubusercontent.com/prenagha/launchbar/master/Screenshot.lbaction/Contents/Info.plist</string>
 	  <key>LBDownloadURL</key>
-	  <string>https://s3.amazonaws.com/public-launchbar-download/Screenshot.lbaction</string>
+	  <string>https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/prenagha/launchbar/tree/main/Screenshot.lbaction</string>
 	  <key>LBChangelog</key>
 	  <string>
+	    3.7: Fix download URL
 	    3.5: Fix trash and img copy code
 	    3.4: No error on missing screenshot, original moved to trash
 	    3.3: Changed image copy to swift

@@ -7,7 +7,7 @@
 	<key>CFBundleName</key>
 	<string>Recent Files</string>
 	<key>CFBundleVersion</key>
-	<string>1.1</string>
+	<string>1.2</string>
 	<key>CFBundleIconFile</key>
   <string>font-awesome:fa-clock-o</string>
 	<key>LBDebugLogEnabled</key>
@@ -45,9 +45,10 @@
 	  <key>LBUpdateURL</key>
 	  <string>https://raw.githubusercontent.com/prenagha/launchbar/master/Recents.lbaction/Contents/Info.plist</string>
 	  <key>LBDownloadURL</key>
-	  <string>https://s3.amazonaws.com/public-launchbar-download/Recents.lbaction</string>
+	  <string>https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/prenagha/launchbar/tree/main/Recents.lbaction</string>
 	  <key>LBChangelog</key>
 	  <string>
+	    1.2: Fix download URL
 	    1.0: Initial Build
 	  </string>
 	</dict>

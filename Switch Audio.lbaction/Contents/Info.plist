@@ -9,7 +9,7 @@
 	<key>LBAbbreviation</key>
 	<string>sound speaker headphones microphone</string> 
 	<key>CFBundleVersion</key>
-	<string>2.4</string>
+	<string>2.5</string>
 	<key>CFBundleIconFile</key>
 	<string>font-awesome:fa-headphones</string>
 	<key>LBDebugLogEnabled</key>
@@ -45,9 +45,10 @@
 	  <key>LBUpdateURL</key>
 	  <string>https://raw.githubusercontent.com/prenagha/launchbar/master/Switch%20Audio.lbaction/Contents/Info.plist</string>
 	  <key>LBDownloadURL</key>
-	  <string>https://s3.amazonaws.com/public-launchbar-download/Switch%20Audio.lbaction</string>
+	  <string>https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/prenagha/launchbar/tree/main/Switch%20Audio.lbaction</string>
 	  <key>LBChangelog</key>
 	  <string>
+	    2.5: Fix download URL
 	    2.4: Adjust homebrew path for Apple Silicon
 	    2.3: Support space in device names
 	  </string>

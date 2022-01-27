@@ -9,7 +9,7 @@
 	<key>LBAbbreviation</key>
 	<string>incognito private chrome www safari</string> 
 	<key>CFBundleVersion</key>
-	<string>3.1</string>
+	<string>3.2</string>
 	<key>CFBundleIconFile</key>
   <string>font-awesome:user-secret</string>
   <key>LBARequiredApplication</key>
@@ -59,9 +59,10 @@
 	  <key>LBUpdateURL</key>
 	  <string>https://raw.githubusercontent.com/prenagha/launchbar/master/Incognito.lbaction/Contents/Info.plist</string>
 	  <key>LBDownloadURL</key>
-	  <string>https://s3.amazonaws.com/public-launchbar-download/Incognito.lbaction</string>
+	  <string>https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/prenagha/launchbar/tree/main/Incognito.lbaction</string>
 	  <key>LBChangelog</key>
 	  <string>
+	    3.2: Fix download URL
 	    3.0: Change to Chromium browser
 	  </string>
 	</dict>
