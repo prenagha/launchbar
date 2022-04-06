@@ -1,15 +1,7 @@
 #!/bin/bash
-if [[ `uname -m` == 'arm64' ]]; then
-  CMD=/opt/homebrew/bin/SwitchAudioSource
-else
-  CMD=/usr/local/bin/SwitchAudioSource
-fi
 
-if [ ! -f "$CMD" ]
-then
-  echo "$CMD not found"
-  exit 1
-fi
+PATH="${PATH}:/opt/homebrew/bin:/usr/local/bin"
+CMD=SwitchAudioSource
 
 if [ ! -z "$1" ]
 then
@@ -19,8 +11,10 @@ fi
 
 CINPUT=`$CMD -c -t input`
 COUTPUT=`$CMD -c -t output`
+INS=
+OUTS=
 
-IFS=''
+IFS=
 while read -r INPUT
 do
   if [ ! -z "${INS}" ]
@@ -28,7 +22,7 @@ do
     INS="${INS}, "
   fi
   INS="${INS}\"${INPUT}\""
-done <<< "`$CMD -a -t input | sed 's/ (input)$//'`"
+done <<< `$CMD -a -t input | sed 's/ (input)$//' | tr -d '"'`
 
 while read -r OUTPUT
 do
@@ -37,7 +31,7 @@ do
     OUTS="${OUTS}, "
   fi
   OUTS="${OUTS}\"${OUTPUT}\""
-done <<< "`$CMD -a -t output | sed 's/ (output)$//'`"
+done <<< "`$CMD -a -t output | sed 's/ (output)$//' | tr -d '"'`"
 
 cat << EOF
 {
