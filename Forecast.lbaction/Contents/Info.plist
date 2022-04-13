@@ -7,7 +7,7 @@
 	<key>CFBundleName</key>
 	<string>Forecast</string>
 	<key>CFBundleVersion</key>
-	<string>4.5</string>
+	<string>4.6</string>
 	<key>CFBundleIconFile</key>
 	<string>Sun-Low.png</string>
 	<key>LBAbbreviation</key>
@@ -60,6 +60,7 @@
 	  <string>https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/prenagha/launchbar/tree/main/Forecast.lbaction</string>
 	  <key>LBChangelog</key>
 	  <string>
+	    4.6: moment.js updates
 	    4.5: Fix download URL
 	    4.4: Removed use of Location Helper since Google now requires API key, now using ip-api.com for current location
 	    4.2: Forecast.io branding change to Dark Sky
