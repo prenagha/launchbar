@@ -1,6 +1,6 @@
 [LaunchBar Actions web site, documentation, screenshots](https://renaghan.com/launchbar/)
 
-###NOTE on `.applescript` files
+### NOTE on `.applescript` files
 
 Text `.applescript` Apple scripts are used here for ease of integration with version control systems, diff tools...
 
