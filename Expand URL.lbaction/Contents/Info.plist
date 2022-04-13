@@ -7,7 +7,7 @@
 	<key>CFBundleName</key>
 	<string>Expand URL</string>
 	<key>CFBundleVersion</key>
-	<string>3.4</string>
+	<string>3.5</string>
 	<key>CFBundleIconFile</key>
 	<string>URL.icns</string>
 	<key>LBDebugLogEnabled</key>
@@ -54,6 +54,7 @@
 	  <string>https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/prenagha/launchbar/tree/main/Expand%20URL.lbaction&amp;fileName=Expand-URL&amp;rootDirectory=Expand-URL.lbaction</string>
 	  <key>LBChangelog</key>
 	  <string>
+	    3.5: Improved curl command, thanks Keith Bolland
 	    3.4: Fix download URL
 	         Support action updates
 	  </string>
