@@ -9,8 +9,8 @@ then
   exit $?
 fi
 
-CINPUT=`$CMD -c -t input`
-COUTPUT=`$CMD -c -t output`
+CINPUT=`$CMD -c -t input | tr '\n"' ' '`
+COUTPUT=`$CMD -c -t output | tr '\n"' ' '`
 INS=
 OUTS=
 
