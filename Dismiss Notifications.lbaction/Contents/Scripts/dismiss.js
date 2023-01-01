@@ -12,7 +12,15 @@ function run(arg) {
     if (!Action.preferences.numbersInConferenceCall)
       Action.preferences.numbersInConferenceCall = 14;
       
-    LaunchBar.executeAppleScriptFile('./dismiss.scpt',
+    let ascript = Action.path + '/Contents/Scripts/dismiss.scpt';
+    if (!File.exists(ascript)) {
+      ascript = Action.path + '/Contents/Scripts/dismiss.applescript';
+    }
+    if (!File.exists(ascript)) {
+      LaunchBar.alert('Error', 'Applescript not found ' + ascript);
+    }
+    
+    LaunchBar.executeAppleScriptFile(ascript,
        Action.preferences.snoozeButtonName
       ,Action.preferences.whenIsNowText
       ,Action.preferences.closeButtonName
