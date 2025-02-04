@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleIdentifier</key>
+	<string>com.renaghan.launchbar.ReadLater</string>
+	<key>CFBundleName</key>
+	<string>Read Later</string>
+	<key>CFBundleVersion</key>
+	<string>1.0</string>
+	<key>CFBundleIconFile</key>
+	<string>font-awesome:fa-link</string>
+	<key>LBDebugLogEnabled</key>
+	<true/>
+	<key>LBScripts</key>
+	<dict>
+		<key>LBDefaultScript</key>
+		<dict>
+			<key>LBScriptName</key>
+			<string>readlater.js</string>
+			<key>LBRunInBackground</key>
+			<false/>
+			<key>LBRequiresArgument</key>
+			<false/>
+			<key>LBAcceptedArgumentTypes</key>
+			<array>
+			  <string>string</string>
+			  <string>path</string>
+			</array>
+			<key>LBAllowsInstantReuseOfLastTextInputString</key>
+			<true/>
+			<key>LBReturnsResult</key>
+			<true/>
+		</dict>
+	</dict>
+	<key>LBDescription</key>
+	<dict>
+		<key>LBSummary</key>
+		<string>Read Later links</string>
+		<key>LBRequirements</key>
+		<string></string>
+		<key>LBAuthor</key>
+		<string>Padraic Renaghan</string>
+		<key>LBEmail</key>
+		<string>padraic@renaghan.com</string>
+		<key>LBWebsiteURL</key>
+		<string>https://renaghan.com/launchbar/read-later/</string>
+	  <key>LBUpdateURL</key>
+	  <string>https://raw.githubusercontent.com/prenagha/launchbar/master/ReadLater.lbaction/Contents/Info.plist</string>
+	  <key>LBDownloadURL</key>
+	  <string>https://github.com/prenagha/launchbar/tree/main/ReadLater.lbaction</string>
+	  <key>LBChangelog</key>
+	  <string>
+	    1.0: Initial
+	  </string>
+	</dict>
+</dict>
+</plist>
