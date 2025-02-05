@@ -1,25 +1,4 @@
 
-function runWithString(string) {
-  return capture(string);
-}
-
-function runWithURL(url, details) {
-  return capture(url);
-}
-
-function capture(url) {
-  LaunchBar.log("Capturing " + url);
-  if (url && url.length > 10 && url.startsWith('https://')) {
-  //TODO
-  } else {
-    return [err('Capture failed, invalid input', url)];
-  }
-}
-
-function chomp(inp) {
-  return inp.replace(/(\n|\r)+$/, '');
-}
-
 function run(arg) {
   links = load();
   output = [];
@@ -41,30 +20,89 @@ function run(arg) {
 		  action: 'peekAll',
 		  actionRunsInBackground: true
     });
-    output.push(...links);
+		for (let i = 0; i < links.length; i++) {
+			link = links[i];
+			if (link && link.url && !link.linkduplicate)
+			  output.push(link);
+		}
+    output.push({
+		  title: 'Remove',
+		  icon: 'font-awesome:file-o',
+		  action: 'removeList',
+		  actionReturnsItems: true
+    });
+    output.push({
+		  title: 'Remove All 👋🏼',
+		  icon: 'font-awesome:files-o',
+		  action: 'removeAll',
+		  actionRunsInBackground: true
+    });
   }
+  LaunchBar.openURL('swiftbar://refreshplugin?name=links');
   return output;
 }
 
 function readAll() {
   links = load();
-  for (let i = 0; i < links.length; i++) {
-    link = links[i];
-    if (link && link.url && link.url.length > 10) {
-      LaunchBar.openURL(link.url);
-      if (link.linkfile && link.linkfile.length > 5)
-        removeFile(link.linkfile);
-    }
-  }  
+  openAll(links);
+  deleteAll(links);
+  refreshCounter();
 }
 
 function peekAll() {
   links = load();
+  openAll(links);
+}
+
+function openAll(links) {
   for (let i = 0; i < links.length; i++) {
     link = links[i];
-    if (link && link.url && link.url.length > 10)
-      LaunchBar.openURL(link.url);
+    if (link && link.url && !link.linkduplicate)
+      LaunchBar.execute('/usr/bin/open', '--url', link.url);
   }  
+}
+
+function deleteAll(links) {
+  for (let i = 0; i < links.length; i++) {
+    link = links[i];
+    if (link && link.linkfile)
+      removeFile(link.linkfile);
+  }
+}
+
+function removeAll() {
+  links = load();
+  deleteAll(links);
+  refreshCounter();
+}
+
+function removeList() {
+  output = []
+  links = load();
+  for (let i = 0; i < links.length; i++) {
+    link = links[i];
+    if (link && link.linkfile && !link.linkduplicate) {
+      link.icon = 'font-awesome:fa-trash';
+      link.action = 'removeOne';
+      link.actionArgument = link.url;
+      output.push(link);
+    }
+  }
+  return output;
+}
+
+function removeOne(url) {
+  links = load();
+  for (let i = 0; i < links.length; i++) {
+    link = links[i];
+    if (url && link && link.url && url === link.url)
+      removeFile(link.linkfile);
+  }
+  refreshCounter();
+}
+
+function refreshCounter() {
+  LaunchBar.openURL('swiftbar://refreshplugin?name=links');
 }
 
 function capDir() {
@@ -91,19 +129,15 @@ function load() {
     lines = File.readText(file).split('\n');
     if (lines && lines.length >= 2) {
       url = lines[0];
-      if (urls.has(url)) {
-        LaunchBar.log('Remove duplicate ' + url + ' ' + file);
-        removeFile(file);
-      } else {
-        urls.add(url);
-        links.push({
-          title: lines[1],
-          subtitle: url,
-          icon: 'font-awesome:fa-globe',
-          url: url,
-          linkfile: file
-        });
-      }
+      links.push({
+        title: lines[1],
+        subtitle: url,
+        icon: 'font-awesome:fa-globe',
+        url: url,
+        linkfile: file,
+        linkduplicate: urls.has(url)
+      });
+      urls.add(url);
     } else {
       links.push(err('Invalid file', file));
     }
@@ -112,18 +146,20 @@ function load() {
 }
 
 function removeFile(file) {
-  LaunchBar.log('Removing ' + file);
-  LaunchBar.execute('/bin/rm', file);
+  if (file) {
+    LaunchBar.log('Removing ' + file);
+    LaunchBar.execute('/bin/rm', file);
+  }
 }
 
 function err(msg, detail) {
   var m = 'ERROR: ' + msg;
   LaunchBar.log(m);
   return {
-    'title': m, 
-    'icon': 'font-awesome:fa-exclamation-triangle',
-    'subtitle' : detail,
-    'alwaysShowSubtitle': true
+    title: m, 
+    icon: 'font-awesome:fa-exclamation-triangle',
+    subtitle : detail,
+    alwaysShowSubtitle: true
   };
 }
  

@@ -22,13 +22,6 @@
 			<false/>
 			<key>LBRequiresArgument</key>
 			<false/>
-			<key>LBAcceptedArgumentTypes</key>
-			<array>
-			  <string>string</string>
-			  <string>path</string>
-			</array>
-			<key>LBAllowsInstantReuseOfLastTextInputString</key>
-			<true/>
 			<key>LBReturnsResult</key>
 			<true/>
 		</dict>
@@ -36,9 +29,7 @@
 	<key>LBDescription</key>
 	<dict>
 		<key>LBSummary</key>
-		<string>Read Later links</string>
-		<key>LBRequirements</key>
-		<string></string>
+		<string>Manage read later links</string>
 		<key>LBAuthor</key>
 		<string>Padraic Renaghan</string>
 		<key>LBEmail</key>
