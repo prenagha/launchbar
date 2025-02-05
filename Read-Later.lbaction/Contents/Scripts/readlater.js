@@ -1,6 +1,7 @@
 
-function run(arg) {
+function run() {
   links = load();
+  refreshCounter();
   output = [];
   if (links.length == 0) {
     output.push({
@@ -8,23 +9,25 @@ function run(arg) {
       'icon': 'font-awesome:fa-circle-o'
     });
   } else {
+    showLinks = [];
+  	for (let i = 0; i < links.length; i++) {
+			link = links[i];
+			if (link && link.url && !link.linkduplicate)
+			  showLinks.push(link);
+		}
     output.push({
-		  title: 'Read All ↗️',
+		  title: 'Read All ' + showLinks.length + ' ↗️',
 		  icon: 'font-awesome:fa-trash',
 		  action: 'readAll',
 		  actionRunsInBackground: true
     });
     output.push({
-		  title: 'Peek All 👀',
+		  title: 'Peek All ' + showLinks.length + ' 👀',
 		  icon: 'font-awesome:fa-eye',
 		  action: 'peekAll',
 		  actionRunsInBackground: true
     });
-		for (let i = 0; i < links.length; i++) {
-			link = links[i];
-			if (link && link.url && !link.linkduplicate)
-			  output.push(link);
-		}
+    output.push(...showLinks);
     output.push({
 		  title: 'Remove',
 		  icon: 'font-awesome:file-o',
@@ -32,13 +35,12 @@ function run(arg) {
 		  actionReturnsItems: true
     });
     output.push({
-		  title: 'Remove All 👋🏼',
+		  title: 'Remove All ' + links.length + ' 👋🏼',
 		  icon: 'font-awesome:files-o',
 		  action: 'removeAll',
 		  actionRunsInBackground: true
     });
   }
-  LaunchBar.openURL('swiftbar://refreshplugin?name=links');
   return output;
 }
 
@@ -102,7 +104,7 @@ function removeOne(url) {
 }
 
 function refreshCounter() {
-  LaunchBar.openURL('swiftbar://refreshplugin?name=links');
+  LaunchBar.execute('/usr/bin/open', '--background', '--url', 'swiftbar://refreshplugin?name=links');
 }
 
 function capDir() {
@@ -142,6 +144,7 @@ function load() {
       links.push(err('Invalid file', file));
     }
   };
+  links.sort((a,b) => a.title.localeCompare(b.title));
   return links;
 }
 
