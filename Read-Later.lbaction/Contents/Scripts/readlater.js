@@ -108,12 +108,21 @@ function refreshCounter() {
 }
 
 function capDir() {
-  captureDir = LaunchBar.homeDirectory + '/Library/Mobile Documents/iCloud~is~workflow~my~workflows/Documents/Read-Later/Capture'
+  captureDir = LaunchBar.homeDirectory + '/Library/Mobile Documents/iCloud~is~workflow~my~workflows/Documents/Read-Later/Capture';
   if (Action.preferences.captureDir == undefined 
    || Action.preferences.captureDir.length == 0) {
-    Action.preferences.captureDir = LaunchBar.homeDirectory + '/Library/Mobile Documents/iCloud~is~workflow~my~workflows/Documents/Read-Later/Capture'
+    Action.preferences.captureDir = captureDir;
   }
   return Action.preferences.captureDir;
+}
+
+function rdDir() {
+  readDir = LaunchBar.homeDirectory + '/Archive/Links/Read'
+  if (Action.preferences.readDir == undefined 
+   || Action.preferences.readDir.length == 0) {
+    Action.preferences.readDir = readDir;
+  }
+  return Action.preferences.readDir;
 }
 
 function load() {
@@ -150,8 +159,12 @@ function load() {
 
 function removeFile(file) {
   if (file) {
-    LaunchBar.log('Removing ' + file);
-    LaunchBar.execute('/bin/rm', file);
+    year = new Date().getFullYear();
+    dir = rdDir() + '/' + year;
+    if (!File.exists(dir))
+      File.createDirectory(dir);
+    LaunchBar.log('Move to read ' + file);
+    LaunchBar.execute('/bin/mv', '-f', file, dir);
   }
 }
 
