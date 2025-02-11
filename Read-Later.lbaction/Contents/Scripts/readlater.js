@@ -159,8 +159,11 @@ function load() {
 
 function removeFile(file) {
   if (file) {
-    year = new Date().getFullYear();
-    dir = rdDir() + '/' + year;
+    dt = new Date();
+    year = dt.getFullYear();
+    month = (dt.getMonth() < 10 ? "0" : "") + (dt.getMonth()+1)
+    day = (dt.getDate() < 10 ? "0" : "") + dt.getDate()
+    dir = rdDir() + '/' + year + '/' + month + '/' + day;
     if (!File.exists(dir))
       File.createDirectory(dir);
     LaunchBar.log('Move to read ' + file);
