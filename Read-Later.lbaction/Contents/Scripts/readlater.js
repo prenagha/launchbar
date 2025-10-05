@@ -9,20 +9,27 @@ function run() {
       'icon': 'font-awesome:fa-circle-o'
     });
   } else {
+    var count = 0;
     showLinks = [];
   	for (let i = 0; i < links.length; i++) {
 			link = links[i];
-			if (link && link.url && !link.linkduplicate)
-			  showLinks.push(link);
+			if (link) {
+        if (link.linkduplicate) {
+          continue;
+        } else {
+          if (link.url) count++;
+          showLinks.push(link);
+        }
+			}
 		}
     output.push({
-		  title: 'Read All ' + showLinks.length + ' ↗️',
+		  title: 'Read All ' + count + ' ↗️',
 		  icon: 'font-awesome:fa-trash',
 		  action: 'readAll',
 		  actionRunsInBackground: true
     });
     output.push({
-		  title: 'Peek All ' + showLinks.length + ' 👀',
+		  title: 'Peek All ' + count + ' 👀',
 		  icon: 'font-awesome:fa-eye',
 		  action: 'peekAll',
 		  actionRunsInBackground: true
@@ -35,7 +42,7 @@ function run() {
 		  actionReturnsItems: true
     });
     output.push({
-		  title: 'Remove All ' + links.length + ' 👋🏼',
+		  title: 'Remove All ' + count + ' 👋🏼',
 		  icon: 'font-awesome:files-o',
 		  action: 'removeAll',
 		  actionRunsInBackground: true
@@ -137,7 +144,13 @@ function load() {
   for (let i = 0; i < files.length; i++) {
     file = captureDir + '/' + files[i];
     LaunchBar.debugLog('Reading ' + file);
-    lines = File.readText(file).split('\n');
+    var lines;
+    try {
+      lines = File.readText(file).split('\n');
+    } catch (error) {
+      links.push(err('Cannot read file: ' + error, file));
+      continue;
+    }
     if (lines && lines.length >= 2) {
       url = lines[0];
       links.push({
@@ -161,8 +174,9 @@ function removeFile(file) {
   if (file) {
     dt = new Date();
     year = dt.getFullYear();
-    month = (dt.getMonth() < 10 ? "0" : "") + (dt.getMonth()+1)
-    day = (dt.getDate() < 10 ? "0" : "") + dt.getDate()
+    var mn = dt.getMonth() + 1;
+    month = (mn < 10 ? "0" : "") + mn;
+    day = (dt.getDate() < 10 ? "0" : "") + dt.getDate();
     dir = rdDir() + '/' + year + '/' + month + '/' + day;
     if (!File.exists(dir))
       File.createDirectory(dir);
