@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>parent</key>
+	<string>at.obdev.LaunchBar.theme.Modest</string>
+	
+	<key>windowBackgroundColor</key>
+	<string>#f1e5ff</string>
+	
+	<key>defaultFontName</key>
+	<string>Concourse 4</string>
+	
+	<key>defaultEmphasizedFontName</key>
+	<string>Concourse 4</string>
+	
+	<key>itemListLabeledExtraDetailsFontName</key>
+	<string>Concourse 4</string>
+	
+	<key>itemListSubtitleFontName</key>
+	<string>Triplicate A Poly</string>
+	
+	<key>itemListTitleFontName</key>
+	<string>Concourse 4</string>
+	
+	<key>itemListTitleFontSize</key>
+	<string>18</string>
+	
+</dict>
+</plist>
