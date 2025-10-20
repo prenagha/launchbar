@@ -1,8 +1,8 @@
 
 function run() {
-  links = load();
+  const links = load();
   refreshCounter();
-  output = [];
+  const output = [];
   if (links.length == 0) {
     output.push({
       'title': 'Zero links', 
@@ -10,9 +10,9 @@ function run() {
     });
   } else {
     var count = 0;
-    showLinks = [];
+    const showLinks = [];
   	for (let i = 0; i < links.length; i++) {
-			link = links[i];
+			const link = links[i];
 			if (link) {
         if (link.linkduplicate) {
           continue;
@@ -52,44 +52,50 @@ function run() {
 }
 
 function readAll() {
-  links = load();
+  const links = load();
   openAll(links);
   deleteAll(links);
   refreshCounter();
+  focusSafari();
 }
 
 function peekAll() {
-  links = load();
+  const links = load();
   openAll(links);
+  focusSafari();
+}
+
+function focusSafari() {
+  LaunchBar.openURL('kmtrigger://macro=Focus%20Safari');  
 }
 
 function openAll(links) {
   for (let i = 0; i < links.length; i++) {
-    link = links[i];
+    const link = links[i];
     if (link && link.url && !link.linkduplicate)
-      LaunchBar.execute('/usr/bin/open', '--url', link.url);
+      LaunchBar.execute('/usr/bin/open', '--background', '--url', link.url);
   }  
 }
 
 function deleteAll(links) {
   for (let i = 0; i < links.length; i++) {
-    link = links[i];
+    const link = links[i];
     if (link && link.linkfile)
       removeFile(link.linkfile);
   }
 }
 
 function removeAll() {
-  links = load();
+  const links = load();
   deleteAll(links);
   refreshCounter();
 }
 
 function removeList() {
-  output = []
-  links = load();
+  const output = []
+  const links = load();
   for (let i = 0; i < links.length; i++) {
-    link = links[i];
+    const link = links[i];
     if (link && link.linkfile && !link.linkduplicate) {
       link.icon = 'font-awesome:fa-trash';
       link.action = 'removeOne';
@@ -101,9 +107,9 @@ function removeList() {
 }
 
 function removeOne(url) {
-  links = load();
+  const links = load();
   for (let i = 0; i < links.length; i++) {
-    link = links[i];
+    const link = links[i];
     if (url && link && link.url && url === link.url)
       removeFile(link.linkfile);
   }
@@ -115,34 +121,33 @@ function refreshCounter() {
 }
 
 function capDir() {
-  captureDir = LaunchBar.homeDirectory + '/Library/Mobile Documents/iCloud~is~workflow~my~workflows/Documents/Read-Later/Capture';
   if (Action.preferences.captureDir == undefined 
    || Action.preferences.captureDir.length == 0) {
-    Action.preferences.captureDir = captureDir;
+    Action.preferences.captureDir = 
+      LaunchBar.homeDirectory + '/Library/Mobile Documents/iCloud~is~workflow~my~workflows/Documents/Read-Later/Capture';
   }
   return Action.preferences.captureDir;
 }
 
 function rdDir() {
-  readDir = LaunchBar.homeDirectory + '/Archive/Links/Read'
   if (Action.preferences.readDir == undefined 
    || Action.preferences.readDir.length == 0) {
-    Action.preferences.readDir = readDir;
+    Action.preferences.readDir = LaunchBar.homeDirectory + '/Archive/Links/Read';
   }
   return Action.preferences.readDir;
 }
 
 function load() {
-  var captureDir = capDir();
+  const captureDir = capDir();
   LaunchBar.debugLog("captureDir " + Action.preferences.captureDir);
   if (!File.exists(captureDir) || !File.isDirectory(captureDir))
     return [err('Capture dir invalid', captureDir)];
 
-  var urls = new Set();
-  var files = File.getDirectoryContents(Action.preferences.captureDir);
-  var links = [];
+  const urls = new Set();
+  const files = File.getDirectoryContents(Action.preferences.captureDir);
+  const links = [];
   for (let i = 0; i < files.length; i++) {
-    file = captureDir + '/' + files[i];
+    const file = captureDir + '/' + files[i];
     LaunchBar.debugLog('Reading ' + file);
     var lines;
     try {
@@ -152,7 +157,7 @@ function load() {
       continue;
     }
     if (lines && lines.length >= 2) {
-      url = lines[0];
+      const url = lines[0];
       links.push({
         title: lines[1],
         subtitle: url,
@@ -172,12 +177,12 @@ function load() {
 
 function removeFile(file) {
   if (file) {
-    dt = new Date();
-    year = dt.getFullYear();
-    var mn = dt.getMonth() + 1;
-    month = (mn < 10 ? "0" : "") + mn;
-    day = (dt.getDate() < 10 ? "0" : "") + dt.getDate();
-    dir = rdDir() + '/' + year + '/' + month + '/' + day;
+    const dt = new Date();
+    const year = dt.getFullYear();
+    const mn = dt.getMonth() + 1;
+    const month = (mn < 10 ? "0" : "") + mn;
+    const day = (dt.getDate() < 10 ? "0" : "") + dt.getDate();
+    const dir = rdDir() + '/' + year + '/' + month + '/' + day;
     if (!File.exists(dir))
       File.createDirectory(dir);
     LaunchBar.log('Move to read ' + file);
@@ -186,7 +191,7 @@ function removeFile(file) {
 }
 
 function err(msg, detail) {
-  var m = 'ERROR: ' + msg;
+  const m = 'ERROR: ' + msg;
   LaunchBar.log(m);
   return {
     title: m, 
