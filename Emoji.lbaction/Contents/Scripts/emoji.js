@@ -11,6 +11,12 @@ function hair() {
   return Action.preferences.hair;
 }
 
+function favorites() {
+  if (Action.preferences.favorites == undefined)
+    Action.preferences.favorites = ""; //😉 ☘️
+  return Action.preferences.favorites;
+}
+
 function getJsonData(result, fileName) {
   const path = Action.path + "/Contents/Data/" + fileName + ".json";
   if (!File.exists(path)) {
@@ -76,7 +82,7 @@ function compareFrequent(a, b) {
   return a.emoji.localeCompare(b.emoji);
 }
 
-function runWithString(query) {
+function runWithString(input) {
   var result = [];
   var emojiKeywords = getJsonData(result, "emoji-en-US");
   var emojiUnicode = getJsonData(result, "data-by-emoji");
@@ -93,14 +99,25 @@ function runWithString(query) {
       "emoji":   emoji
     });
   }
+  
+  const favs = favorites().split(" ");
+  const now = new Date().toISOString();
+  var f = 0;
+  for (const fav of favs) {
+    f++;
+    frequents.push({
+      "counter": Number.MAX_SAFE_INTEGER - f,
+      "last":    now,
+      "emoji":   fav
+    });
+  }
   frequents.sort(compareFrequent);
   
-  query = query == undefined ? "" : query.trim().toLowerCase();
+  const query = input == undefined || !input ? "" : input.trim().toLowerCase();
 
-  for (var i = 0; i < frequents.length; i++) {
-    const emoji = frequents[i].emoji;
-    const keywords = emojiKeywords[emoji];
-    emojiMatchResult(result, query, emojiUnicode, emojiComponents, emoji, keywords); 
+  for (const frequent of frequents) {
+    const keywords = emojiKeywords[frequent.emoji];
+    emojiMatchResult(result, query, emojiUnicode, emojiComponents, frequent.emoji, keywords); 
   }
 
   if (query.length > 0) {
@@ -123,11 +140,12 @@ function emojiMatchResult(result, query, emojiUnicode, emojiComponents, emoji, k
 }
 
 function emojiMatch(query, keywords) {
+  if (!keywords) return null;
   if (query.length === 0) return "";
   for (const keyword of keywords) {
     if (keyword.indexOf(query) >= 0) return keyword;
   }
-  return undefined;
+  return null;
 }
 
 function emojiResult(result, emojiUnicode, emojiComponents, emoji, keyword) {
