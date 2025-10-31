@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleIdentifier</key>
+	<string>com.renaghan.launchbar.Emoji</string>
+	<key>CFBundleName</key>
+	<string>Emoji</string>
+	<key>CFBundleVersion</key>
+	<string>1.0</string>
+	<key>CFBundleIconFile</key>
+	<string>font-awesome:fa-smile-o</string>
+	<key>LBDebugLogEnabled</key>
+	<true/>
+	<key>LBTextInputTitle</key>
+	<string>keyword</string>
+	<key>LBScripts</key>
+	<dict>
+		<key>LBDefaultScript</key>
+		<dict>
+			<key>LBAcceptedArgumentTypes</key>
+			<array>
+				<string>string</string>
+			</array>
+			<key>LBRequiresArgument</key>
+			<true/>
+			<key>LBResultType</key>
+			<string>unknown</string>
+			<key>LBScriptName</key>
+			<string>emoji.js</string>
+			<key>LBLiveFeedbackEnabled</key>
+			<true/>
+		</dict>
+	</dict>
+	<key>LBDescription</key>
+	<dict>
+		<key>LBSummary</key>
+		<string>Search emoji by keyword and paste selection</string>
+		<key>LBAuthor</key>
+		<string>Padraic Renaghan</string>
+		<key>LBEmail</key>
+		<string>padraic@renaghan.com</string>
+		<key>LBWebsiteURL</key>
+		<string>https://renaghan.com/launchbar/emoji/</string>
+		<key>LBTwitter</key>
+		<string>@prenagha</string>
+		<key>LBArgument</key>
+		<string>Emoji search keywords</string>
+	  <key>LBUpdateURL</key>
+	  <string>https://raw.githubusercontent.com/prenagha/launchbar/master/Emoji.lbaction/Contents/Info.plist</string>
+	  <key>LBChangelog</key>
+	  <string>
+	    1.0: Initial release
+	  </string>
+	</dict>
+</dict>
+</plist>
