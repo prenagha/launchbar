@@ -12,6 +12,8 @@ function hair() {
 }
 
 function favorites() {
+  // space separated
+  // use the base emoji not the skin tone or other variation
   if (Action.preferences.favorites == undefined)
     Action.preferences.favorites = ""; //😉 ☘️
   return Action.preferences.favorites;
@@ -179,8 +181,8 @@ function runWithString(input) {
       for (const [emoji, keywords] of Object.entries(emojiKeywords)) {
         // skip if a frequent usage as already processed
         if (usages[emoji]) continue;
-        emojiMatchResult(result, query, emojiUnicode, emojiComponents, emoji,
-          keywords, null);
+        const match = emojiMatchResult(result, query, emojiUnicode, emojiComponents, 
+          emoji, keywords, null);
       }
     }
   }
