@@ -17,6 +17,12 @@ function favorites() {
   return Action.preferences.favorites;
 }
 
+function pruneCount() {
+  if (Action.preferences.pruneCount == undefined)
+    Action.preferences.pruneCount = 1;
+  return Action.preferences.pruneCount;
+}
+
 function getJsonData(result, fileName) {
   const path = Action.path + "/Contents/Data/" + fileName + ".json";
   if (!File.exists(path)) {
@@ -33,8 +39,12 @@ function getJsonData(result, fileName) {
   }
 }
 
+function usagesFile() {
+  return Action.supportPath + "/usage.json";
+}
+
 function readUsages(result) {
-  const path = Action.supportPath + "/usage.json";
+  const path = usagesFile();
   if (!File.exists(path)) return {};
   try {
     return File.readJSON(path);
@@ -45,7 +55,7 @@ function readUsages(result) {
 }
 
 function writeUsages(result, usages) {
-  const path = Action.supportPath + "/usage.json";
+  const path = usagesFile();
   try {
     File.writeJSON(usages, path);
   } catch (error) {
@@ -56,7 +66,7 @@ function writeUsages(result, usages) {
 function inf(msg, detail) {
   LaunchBar.log(msg);
   return {
-    "title":    msg, 
+    "title":    msg,
     "icon":     'font-awesome:fa-check',
     "subtitle": detail ? detail.toString() : "",
     "alwaysShowSubtitle": detail ? true : false
@@ -67,7 +77,7 @@ function err(msg, detail) {
   const m = 'ERROR: ' + msg;
   LaunchBar.log(m);
   return {
-    "title":     m, 
+    "title":     m,
     "icon":      'font-awesome:fa-exclamation-triangle',
     "subtitle" : detail ? detail.toString() : "",
     "alwaysShowSubtitle": detail ? true : false
@@ -84,7 +94,7 @@ function compareFrequent(a, b) {
 
 function runWithString(input) {
   var result = [];
-  
+
   // load the JSON data files
   var emojiKeywords = getJsonData(result, "emoji-en-US");
   var emojiUnicode = getJsonData(result, "data-by-emoji");
@@ -103,7 +113,7 @@ function runWithString(input) {
     });
   }
 
-  // add pref favorites if any to become top usages  
+  // add pref favorites if any to become top usages
   const favs = favorites().split(" ");
   const now = new Date().toISOString();
   var f = 0;
@@ -115,39 +125,70 @@ function runWithString(input) {
       "emoji":   fav
     });
   }
-  
+
   // sort usages by count DESC, newest date last used, emoji
   frequents.sort(compareFrequent);
-  
+
   const query = input == undefined || !input ? "" : input.trim().toLowerCase();
 
-  // find any frequent usages that match
-  // empty query will match all frequent usages
-  for (const frequent of frequents) {
-    const keywords = emojiKeywords[frequent.emoji];
-    emojiMatchResult(result, query, emojiUnicode, emojiComponents, frequent.emoji, keywords); 
-  }
-
-  // if query not empty, check against all other emoji
-  if (query.length > 0) {
-    for (const [emoji, keywords] of Object.entries(emojiKeywords)) {
-      // skip if a frequent usage as already processed
-      if (usages[emoji]) continue;
-      emojiMatchResult(result, query, emojiUnicode, emojiComponents, emoji, keywords);   
+  if (query.indexOf("admin") === 0) {
+    result.push({
+      "title": "Open preferences",
+      "icon": "font-awesome:fa-wrench",
+      "action": "openPreferences"
+    });
+    result.push({
+      "title": "Open usages",
+      "icon": "font-awesome:fa-history",
+      "action": "openUsages"
+    });
+    result.push({
+      "title": "Prune usages",
+      "icon": "font-awesome:fa-eraser",
+      "action": "pruneUsages"
+    });    
+    result.push({
+      "title": "Backup usages",
+      "icon": "font-awesome:fa-clone",
+      "action": "backupUsages"
+    });
+    result.push({
+      "title": "Reset usages",
+      "icon": "font-awesome:fa-trash",
+      "action": "resetUsages"
+    });
+  } else {
+    // find any frequent usages that match
+    // empty query will match all frequent usages
+    for (const frequent of frequents) {
+      const keywords = emojiKeywords[frequent.emoji];
+      const match = emojiMatchResult(result, query, emojiUnicode, emojiComponents,
+        frequent.emoji, keywords, frequent.counter.toString());
+    }
+  
+    // if query not empty, check against all other emoji
+    if (query.length > 0) {
+      for (const [emoji, keywords] of Object.entries(emojiKeywords)) {
+        // skip if a frequent usage as already processed
+        if (usages[emoji]) continue;
+        emojiMatchResult(result, query, emojiUnicode, emojiComponents, emoji,
+          keywords, null);
+      }
     }
   }
-  
+
   if (result.length === 0)
     result.push(inf("---", ""));
-  
+
   return result;
 }
 
 // check if an emoji matches query and if so add as a result
-function emojiMatchResult(result, query, emojiUnicode, emojiComponents, emoji, keywords) {
+function emojiMatchResult(result, query, emojiUnicode, emojiComponents, emoji, keywords, badge) {
   const keyword = emojiMatch(query, keywords);
   if (keyword != undefined)
-    emojiResult(result, emojiUnicode, emojiComponents, emoji, keyword);   
+    return emojiResult(result, emojiUnicode, emojiComponents, emoji, keyword, badge);
+  return null;
 }
 
 // check if query matches emoji keywords
@@ -162,7 +203,7 @@ function emojiMatch(query, keywords) {
 }
 
 // add a matched emoji as a LaunchBar result
-function emojiResult(result, emojiUnicode, emojiComponents, emoji, keyword) {
+function emojiResult(result, emojiUnicode, emojiComponents, emoji, keyword, badge) {
   const info = emojiUnicode[emoji];
   const match = {
     "title":    info.name,
@@ -170,21 +211,24 @@ function emojiResult(result, emojiUnicode, emojiComponents, emoji, keyword) {
     "subtitle": keyword,
     "action":   'selectedEmoji',
     "actionArgument": {
-      "emoji":   emoji
+      "emoji":   emoji,
+      "name":    info.name
     }
   };
+  if (badge) match["badge"] = badge;
   // if emoji supports skin tone and we have a pref skin tone
   // then apply skin tone to emoji
   const skinToneName = skinTone();
   if (skinToneName && skinToneName.length > 0 && info.skin_tone_support) {
     const skinTone = emojiComponents[skinToneName];
     // show original emoji and skin tone as badge
-    match["badge"] = emoji + " " + skinTone;
+    if (!badge) match["badge"] = emoji + " " + skinTone;
     const variation = emoji + skinTone;
-    match["icon"] = variation;          
+    match["icon"] = variation;
     match["actionArgument"]["variation"] = variation;
    }
   result.push(match);
+  return match;
 }
 
 // called after search result is selected
@@ -194,7 +238,7 @@ function selectedEmoji(selection) {
   const result = [];
   const usages = readUsages(result);
   if (result.length > 0) return result;
-    
+
   var usage = usages[selection.emoji]
   if (usage == undefined) {
     usage = {
@@ -204,9 +248,69 @@ function selectedEmoji(selection) {
   }
   usage["counter"] = usage.counter + 1;
   usage["last"] = new Date().toISOString();
+  usage["name"] = selection.name;
 
   writeUsages(result, usages);
   if (result.length > 0) return result;
-  
+
   LaunchBar.paste(selection.variation ? selection.variation : selection.emoji);
+}
+
+function openPreferences() {
+  LaunchBar.openURL("file://" + Action.supportPath + "/Preferences.plist");
+}
+
+function openUsages() {
+  LaunchBar.openURL("file://" + usagesFile());
+}
+
+function backupUsages() {
+  var dt = new Date().toISOString()
+    .replaceAll("-", "")
+    .replaceAll(":", "")
+    .replaceAll("T", "-")
+    .replaceAll(".", "-")
+    .replaceAll("Z", "");
+  const bku = "usage-" + dt + ".json";
+  const bk  = Action.supportPath + "/" + bku;
+  File.writeJSON(readUsages(), bk);
+  LaunchBar.displayNotification({
+    title: "Backup Emoji Usages ✅",
+    string: bku,
+    url:    "file://" + bk
+  });
+}
+
+function pruneUsages() {
+  backupUsages();
+  const usages = readUsages();
+  const pruned = {};
+  var del = 0;
+  const pCount = pruneCount();
+  for (const [emoji, usage] of Object.entries(usages)) {
+    if (usage.counter <= pCount) {
+      del++;
+      continue;
+    }  
+    pruned[emoji] = {
+      "counter": usage.counter,
+      "last":    usage.last
+    };
+  }
+  File.writeJSON(pruned, usagesFile());
+  LaunchBar.displayNotification({
+    title: "Pruned Emoji Usages ✅",
+    string: del + " emoji removed",
+    url:    "file://" + usagesFile()
+  });
+}
+
+function resetUsages() {
+  backupUsages();
+  File.writeJSON({}, usagesFile());
+  LaunchBar.displayNotification({
+    title: "Reset Emoji Usages ✅",
+    string: usagesFile(),
+    url: "file://" + usagesFile()
+  });
 }

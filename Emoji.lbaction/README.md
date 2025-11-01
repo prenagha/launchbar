@@ -11,4 +11,3 @@ Note Data/ is specified in .gitignore so not committed to git.
 
 Thanks [Jason Rudolph](https://github.com/jasonrudolph/launchbar-emoji-lookup) 
 for starting point and ideas.
-

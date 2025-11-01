@@ -9,11 +9,11 @@
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
 	<key>CFBundleIconFile</key>
-	<string>font-awesome:fa-smile-o</string>
+	<string>character:☘️</string>
 	<key>LBDebugLogEnabled</key>
 	<true/>
 	<key>LBTextInputTitle</key>
-	<string>keyword</string>
+	<string>keyword or 'admin'</string>
 	<key>LBScripts</key>
 	<dict>
 		<key>LBDefaultScript</key>
