@@ -17,6 +17,12 @@ function favorites() {
   return Action.preferences.favorites;
 }
 
+function frequentMinimum() {
+  if (Action.preferences.frequentMinimum == undefined)
+    Action.preferences.frequentMinimum = 1;
+  return Action.preferences.frequentMinimum;
+}
+
 function pruneCount() {
   if (Action.preferences.pruneCount == undefined)
     Action.preferences.pruneCount = 1;
@@ -160,7 +166,9 @@ function runWithString(input) {
   } else {
     // find any frequent usages that match
     // empty query will match all frequent usages
+    const freqMin = frequentMinimum();
     for (const frequent of frequents) {
+      if (query.length === 0 && frequent.counter < freqMin) continue;
       const keywords = emojiKeywords[frequent.emoji];
       const match = emojiMatchResult(result, query, emojiUnicode, emojiComponents,
         frequent.emoji, keywords, frequent.counter.toString());
