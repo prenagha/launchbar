@@ -141,6 +141,11 @@ function runWithString(input) {
 
   if (query.indexOf("admin") === 0) {
     result.push({
+      "title": "Open preferences file",
+      "icon": "font-awesome:fa-wrench",
+      "action": "openPreferences"
+    }); 
+    result.push({
       "title": "Open usages file",
       "icon": "font-awesome:fa-history",
       "action": "openUsages"
@@ -154,12 +159,7 @@ function runWithString(input) {
       "title": "Backup usages",
       "icon": "font-awesome:fa-clone",
       "action": "backupUsages"
-    });
-    result.push({
-      "title": "Open preferences file",
-      "icon": "font-awesome:fa-wrench",
-      "action": "openPreferences"
-    });    
+    });   
     result.push({
       "title": "Reset usages",
       "icon": "font-awesome:fa-trash",
