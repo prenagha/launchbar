@@ -212,6 +212,59 @@ function emojiMatch(query, keywords) {
   return null;
 }
 
+// array of code points from string
+function toCodePoints(str) {
+  if (str == undefined || str.length === 0) return [];
+  const points = [];  
+  for (const codePoint of str) {
+    points.push(""+codePoint.codePointAt(0).toString(16));
+  }
+  return points;
+}
+
+// create string from code point array
+function fromCodePoints(points) {
+  if (points == undefined || points.length === 0) return "";
+  const ints = [];
+  for (const codePointHex of points) {
+    ints.push(parseInt(codePointHex, 16));
+  }
+  return String.fromCodePoint(...ints);
+}
+
+// do the arrays have same code points including order
+function arraysEqualPoints(a, b) {
+  if (a === b) return true;
+  if (a == null || b == null) return false;
+  if (a.length !== b.length) return false;
+  for (var i = 0; i < a.length; ++i) {
+    if (parseInt(a[i],16) !== parseInt(b[i],16)) return false;
+  }
+  return true;
+}
+
+// does array end with another array
+function arrayEndsWith(array, endsWith) {
+  if (array == undefined 
+   || endsWith == undefined
+   || array.length < endsWith.length) return false;
+  return arraysEqualPoints(array.slice(-1 * endsWith.length), endsWith);
+}
+
+const JOINER_CODE = ["200d"];
+const MALE_SUFFIX = [];
+MALE_SUFFIX.push(JOINER_CODE);
+MALE_SUFFIX.push(...toCodePoints("♂️"));
+const FEMALE_SUFFIX = [];
+FEMALE_SUFFIX.push(JOINER_CODE);
+FEMALE_SUFFIX.push(...toCodePoints("♀️"));
+
+// does emoji have gender suffix
+function isGendered(emojiCodes) {
+  return arrayEndsWith(emojiCodes, MALE_SUFFIX) 
+      || arrayEndsWith(emojiCodes, FEMALE_SUFFIX);
+}
+
 // add a matched emoji as a LaunchBar result
 function emojiResult(result, emojiUnicode, emojiComponents, emoji, keyword, badge) {
   const info = emojiUnicode[emoji];
@@ -231,9 +284,19 @@ function emojiResult(result, emojiUnicode, emojiComponents, emoji, keyword, badg
   const skinToneName = skinTone();
   if (skinToneName && skinToneName.length > 0 && info.skin_tone_support) {
     const skinTone = emojiComponents[skinToneName];
+    const skinToneCodes = toCodePoints(skinTone);
+    const emojiCodes = toCodePoints(emoji);
     // show original emoji and skin tone as badge
     if (!badge) match["badge"] = emoji + " " + skinTone;
-    const variation = emoji + skinTone;
+    const elen = emojiCodes.length;
+    // if gendered then skin tone goes before gender
+    if (isGendered(emojiCodes)) {
+      emojiCodes.splice(emojiCodes.length - MALE_SUFFIX.length, 0, ...skinToneCodes);
+    } else {
+      emojiCodes.push(skinToneCodes);
+    }
+    const variation = fromCodePoints(emojiCodes);
+    match["subtitle"] = keyword;
     match["icon"] = variation;
     match["actionArgument"]["variation"] = variation;
    }
