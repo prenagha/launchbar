@@ -170,7 +170,7 @@ function runWithString(input) {
     // empty query will match all frequent usages
     const freqMin = frequentMinimum();
     for (const frequent of frequents) {
-      if (query.length === 0 && frequent.counter < freqMin) continue;
+      if (!query && frequent.counter < freqMin) continue;
       const keywords = emojiKeywords[frequent.emoji];
       const match = emojiMatchResult(result, query, emojiUnicode, emojiComponents,
         frequent.emoji, keywords, frequent.counter.toString());
@@ -205,7 +205,7 @@ function emojiMatchResult(result, query, emojiUnicode, emojiComponents, emoji, k
 // return matched query if a match, otherwise null
 function emojiMatch(query, keywords) {
   if (!keywords) return null;
-  if (query.length === 0) return "";
+  if (!query) return " ";
   for (const keyword of keywords) {
     if (keyword.indexOf(query) >= 0) return keyword;
   }
@@ -229,7 +229,7 @@ function fromCodePoints(points) {
 }
 
 // space separated hex string from unicode code point array
-function codePointString(points) {
+function toCodePointString(points) {
   if (!points || points.length === 0) return "";
   var str = "";
   for (const codePoint of points) {
@@ -252,8 +252,10 @@ function arraysEqualPoints(a, b) {
 
 // does array end with another array
 function arrayEndsWith(array, endsWith) {
-  if (!array || !endsWith
-   || array.length < endsWith.length) return false;
+  if (!array 
+   || !endsWith
+   || array.length < endsWith.length)
+   return false;
   return arraysEqualPoints(array.slice(-1 * endsWith.length), endsWith);
 }
 
@@ -300,13 +302,13 @@ function emojiResult(result, emojiUnicode, emojiComponents, emoji, keyword, badg
       emojiCodes.splice(emojiCodes.length - MALE_SUFFIX.length, 0, ...skinToneCodes);
     } else {
       // otherwise just add skin tone at the end
-      emojiCodes.push(skinToneCodes);
+      emojiCodes.push(...skinToneCodes);
     }
     const variation = fromCodePoints(emojiCodes);
-    match["subtitle"] = keyword;
+    match["subtitle"] = keyword /*+ " " + toCodePointString(emojiCodes) */;
     match["icon"] = variation;
     match["actionArgument"]["variation"] = variation;
-   }
+  }
   result.push(match);
   return match;
 }
