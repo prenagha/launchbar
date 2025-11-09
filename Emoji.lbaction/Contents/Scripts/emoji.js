@@ -267,18 +267,29 @@ MALE_SUFFIX.push(...toCodePoints("♂️"));
 const FEMALE_SUFFIX = [];
 FEMALE_SUFFIX.push(JOINER_CODE);
 FEMALE_SUFFIX.push(...toCodePoints("♀️"));
+const GENDERS = [];
+GENDERS.push(MALE_SUFFIX);
+GENDERS.push(FEMALE_SUFFIX);
 
 // does emoji have gender suffix
-function isGendered(emojiCodes) {
-  return arrayEndsWith(emojiCodes, MALE_SUFFIX) 
-      || arrayEndsWith(emojiCodes, FEMALE_SUFFIX);
+function getGender(emojiCodes) {
+  for (var i = 0; i < GENDERS.length; ++i) {
+    const gender = GENDERS[i];
+    if (arrayEndsWith(emojiCodes, gender)) return gender;
+  }
+  return [];
+}
+
+function titleCase(str) {
+  if (!str) return "";
+  return str.toLowerCase().replace(/\b\w/g, s => s.toUpperCase());
 }
 
 // add a matched emoji as a LaunchBar result
 function emojiResult(result, emojiUnicode, emojiComponents, emoji, keyword, badge) {
   const info = emojiUnicode[emoji];
   const match = {
-    "title":    info.name,
+    "title":    titleCase(info.name),
     "icon":     emoji,
     "subtitle": keyword,
     "action":   'selectedEmoji',
@@ -297,9 +308,10 @@ function emojiResult(result, emojiUnicode, emojiComponents, emoji, keyword, badg
     const emojiCodes = toCodePoints(emoji);
     // show original emoji and skin tone as badge
     if (!badge) match["badge"] = emoji + " " + skinTone;
-    // if gendered then skin tone goes before gender
-    if (isGendered(emojiCodes)) {
-      emojiCodes.splice(emojiCodes.length - MALE_SUFFIX.length, 0, ...skinToneCodes);
+    const gender = getGender(emojiCodes);
+    if (gender.length > 0) {
+      // if gendered then skin tone goes before gender
+      emojiCodes.splice(emojiCodes.length - gender.length, 0, ...skinToneCodes);
     } else {
       // otherwise just add skin tone at the end
       emojiCodes.push(...skinToneCodes);
