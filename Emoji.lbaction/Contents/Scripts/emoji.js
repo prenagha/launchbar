@@ -1,12 +1,12 @@
 
 function skinTone() {
-  if (Action.preferences.skinTone == undefined)
+  if (!Action.preferences.skinTone)
     Action.preferences.skinTone = ""; //light_skin_tone
   return Action.preferences.skinTone;
 }
 
 function hair() {
-  if (Action.preferences.hair == undefined)
+  if (!Action.preferences.hair)
     Action.preferences.hair = ""; //white_hair
   return Action.preferences.hair;
 }
@@ -14,19 +14,19 @@ function hair() {
 function favorites() {
   // space separated
   // use the base emoji not the skin tone or other variation
-  if (Action.preferences.favorites == undefined)
+  if (!Action.preferences.favorites)
     Action.preferences.favorites = ""; //😉 ☘️
   return Action.preferences.favorites;
 }
 
 function frequentMinimum() {
-  if (Action.preferences.frequentMinimum == undefined)
+  if (!Action.preferences.frequentMinimum)
     Action.preferences.frequentMinimum = 1;
   return Action.preferences.frequentMinimum;
 }
 
 function pruneCount() {
-  if (Action.preferences.pruneCount == undefined)
+  if (!Action.preferences.pruneCount)
     Action.preferences.pruneCount = 1;
   return Action.preferences.pruneCount;
 }
@@ -137,7 +137,7 @@ function runWithString(input) {
   // sort usages by count DESC, newest date last used, emoji
   frequents.sort(compareFrequent);
 
-  const query = input == undefined || !input ? "" : input.trim().toLowerCase();
+  const query = input ? input.trim().toLowerCase() : "";
 
   if (query.indexOf("admin") === 0) {
     result.push({
@@ -177,7 +177,7 @@ function runWithString(input) {
     }
   
     // if query not empty, check against all other emoji
-    if (query.length > 0) {
+    if (query) {
       for (const [emoji, keywords] of Object.entries(emojiKeywords)) {
         // skip if a frequent usage as already processed
         if (usages[emoji]) continue;
@@ -196,7 +196,7 @@ function runWithString(input) {
 // check if an emoji matches query and if so add as a result
 function emojiMatchResult(result, query, emojiUnicode, emojiComponents, emoji, keywords, badge) {
   const keyword = emojiMatch(query, keywords);
-  if (keyword != undefined)
+  if (keyword)
     return emojiResult(result, emojiUnicode, emojiComponents, emoji, keyword, badge);
   return null;
 }
@@ -212,46 +212,53 @@ function emojiMatch(query, keywords) {
   return null;
 }
 
-// array of code points from string
+// array of code point integers from string
 function toCodePoints(str) {
-  if (str == undefined || str.length === 0) return [];
+  if (!str) return [];
   const points = [];  
   for (const codePoint of str) {
-    points.push(""+codePoint.codePointAt(0).toString(16));
+    points.push(codePoint.codePointAt(0));
   }
   return points;
 }
 
-// create string from code point array
+// create string from code point integer array
 function fromCodePoints(points) {
-  if (points == undefined || points.length === 0) return "";
-  const ints = [];
-  for (const codePointHex of points) {
-    ints.push(parseInt(codePointHex, 16));
+  if (!points || points.length === 0) return "";
+  return String.fromCodePoint(...points);
+}
+
+// space separated hex string from unicode code point array
+function codePointString(points) {
+  if (!points || points.length === 0) return "";
+  var str = "";
+  for (const codePoint of points) {
+    if (str.length > 0) str += " ";
+    str += codePoint.toString(16);
   }
-  return String.fromCodePoint(...ints);
+  return str;
 }
 
 // do the arrays have same code points including order
 function arraysEqualPoints(a, b) {
   if (a === b) return true;
-  if (a == null || b == null) return false;
+  if (!a || !b) return false;
   if (a.length !== b.length) return false;
   for (var i = 0; i < a.length; ++i) {
-    if (parseInt(a[i],16) !== parseInt(b[i],16)) return false;
+    if (a[i] !== b[i]) return false;
   }
   return true;
 }
 
 // does array end with another array
 function arrayEndsWith(array, endsWith) {
-  if (array == undefined 
-   || endsWith == undefined
+  if (!array || !endsWith
    || array.length < endsWith.length) return false;
   return arraysEqualPoints(array.slice(-1 * endsWith.length), endsWith);
 }
 
-const JOINER_CODE = ["200d"];
+// zero width joiner
+const JOINER_CODE = parseInt("200d", 16);
 const MALE_SUFFIX = [];
 MALE_SUFFIX.push(JOINER_CODE);
 MALE_SUFFIX.push(...toCodePoints("♂️"));
@@ -288,11 +295,11 @@ function emojiResult(result, emojiUnicode, emojiComponents, emoji, keyword, badg
     const emojiCodes = toCodePoints(emoji);
     // show original emoji and skin tone as badge
     if (!badge) match["badge"] = emoji + " " + skinTone;
-    const elen = emojiCodes.length;
     // if gendered then skin tone goes before gender
     if (isGendered(emojiCodes)) {
       emojiCodes.splice(emojiCodes.length - MALE_SUFFIX.length, 0, ...skinToneCodes);
     } else {
+      // otherwise just add skin tone at the end
       emojiCodes.push(skinToneCodes);
     }
     const variation = fromCodePoints(emojiCodes);
@@ -313,7 +320,7 @@ function selectedEmoji(selection) {
   if (result.length > 0) return result;
 
   var usage = usages[selection.emoji]
-  if (usage == undefined) {
+  if (!usage) {
     usage = {
       "counter": 0
     };
