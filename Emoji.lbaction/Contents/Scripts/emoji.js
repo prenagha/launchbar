@@ -172,7 +172,7 @@ function runWithString(input) {
     for (const frequent of frequents) {
       if (!query && frequent.counter < freqMin) continue;
       const keywords = emojiKeywords[frequent.emoji];
-      const match = emojiMatchResult(result, query, emojiUnicode, emojiComponents,
+      const matchedResult = emojiMatchResult(result, query, emojiUnicode, emojiComponents,
         frequent.emoji, keywords, frequent.counter.toString());
     }
   
@@ -181,7 +181,7 @@ function runWithString(input) {
       for (const [emoji, keywords] of Object.entries(emojiKeywords)) {
         // skip if a frequent usage as already processed
         if (usages[emoji]) continue;
-        const match = emojiMatchResult(result, query, emojiUnicode, emojiComponents, 
+        const matchedResult = emojiMatchResult(result, query, emojiUnicode, emojiComponents, 
           emoji, keywords, null);
       }
     }
@@ -195,21 +195,22 @@ function runWithString(input) {
 
 // check if an emoji matches query and if so add as a result
 function emojiMatchResult(result, query, emojiUnicode, emojiComponents, emoji, keywords, badge) {
-  const keyword = emojiMatch(query, keywords);
-  if (keyword)
+  const {match, keyword} = emojiMatch(query, keywords);
+  if (match)
     return emojiResult(result, emojiUnicode, emojiComponents, emoji, keyword, badge);
   return null;
 }
 
 // check if query matches emoji keywords
-// return matched query if a match, otherwise null
+// return matched keyword if a match, otherwise null
 function emojiMatch(query, keywords) {
-  if (!keywords) return null;
-  if (!query) return " ";
+  if (!keywords) return {"match": false, "keyword": null};
+  // empty query everything matches
+  if (!query) return {"match": true, "keyword": null};
   for (const keyword of keywords) {
-    if (keyword.indexOf(query) >= 0) return keyword;
+    if (keyword.indexOf(query) >= 0) return {"match": true, "keyword": keyword};
   }
-  return null;
+  return {"match": false, "keyword": null};
 }
 
 // array of code point integers from string
@@ -291,7 +292,7 @@ function emojiResult(result, emojiUnicode, emojiComponents, emoji, keyword, badg
   const match = {
     "title":    titleCase(info.name),
     "icon":     emoji,
-    "subtitle": keyword,
+    "subtitle": (keyword?keyword:""),
     "action":   'selectedEmoji',
     "actionArgument": {
       "emoji":   emoji,
@@ -317,7 +318,7 @@ function emojiResult(result, emojiUnicode, emojiComponents, emoji, keyword, badg
       emojiCodes.push(...skinToneCodes);
     }
     const variation = fromCodePoints(emojiCodes);
-    match["subtitle"] = keyword /*+ " " + toCodePointString(emojiCodes) */;
+    match["subtitle"] = (keyword?keyword:"") /*+ " " + toCodePointString(emojiCodes) */;
     match["icon"] = variation;
     match["actionArgument"]["variation"] = variation;
   }
