@@ -1,4 +1,7 @@
 
+// zero width joiner
+const JOINER_CODE = parseInt("200d", 16);
+
 function skinTone() {
   if (!Action.preferences.skinTone)
     Action.preferences.skinTone = ""; //light_skin_tone
@@ -17,6 +20,18 @@ function favorites() {
   if (!Action.preferences.favorites)
     Action.preferences.favorites = ""; //😉 ☘️
   return Action.preferences.favorites;
+}
+
+function debugPref() {
+  if (!Action.preferences.debug)
+    Action.preferences.debug = false;
+  return Action.preferences.debug;
+}
+function debugOn() {
+  Action.preferences.debug = true;
+}
+function debugOff() {
+  Action.preferences.debug = false;
 }
 
 function frequentMinimum() {
@@ -141,6 +156,16 @@ function runWithString(input) {
 
   if (query.indexOf("admin") === 0) {
     result.push({
+      "title": "Debug ON",
+      "icon": "font-awesome:fa-toggle-on",
+      "action": "debugOn"
+    }); 
+    result.push({
+      "title": "Debug OFF",
+      "icon": "font-awesome:fa-toggle-off",
+      "action": "debugOff"
+    });
+    result.push({
       "title": "Open preferences file",
       "icon": "font-awesome:fa-wrench",
       "action": "openPreferences"
@@ -240,47 +265,6 @@ function toCodePointString(points) {
   return str;
 }
 
-// do the arrays have same code points including order
-function arraysEqualPoints(a, b) {
-  if (a === b) return true;
-  if (!a || !b) return false;
-  if (a.length !== b.length) return false;
-  for (var i = 0; i < a.length; ++i) {
-    if (a[i] !== b[i]) return false;
-  }
-  return true;
-}
-
-// does array end with another array
-function arrayEndsWith(array, endsWith) {
-  if (!array 
-   || !endsWith
-   || array.length < endsWith.length)
-   return false;
-  return arraysEqualPoints(array.slice(-1 * endsWith.length), endsWith);
-}
-
-// zero width joiner
-const JOINER_CODE = parseInt("200d", 16);
-const MALE_SUFFIX = [];
-MALE_SUFFIX.push(JOINER_CODE);
-MALE_SUFFIX.push(...toCodePoints("♂️"));
-const FEMALE_SUFFIX = [];
-FEMALE_SUFFIX.push(JOINER_CODE);
-FEMALE_SUFFIX.push(...toCodePoints("♀️"));
-const GENDERS = [];
-GENDERS.push(MALE_SUFFIX);
-GENDERS.push(FEMALE_SUFFIX);
-
-// does emoji have gender suffix
-function getGender(emojiCodes) {
-  for (var i = 0; i < GENDERS.length; ++i) {
-    const gender = GENDERS[i];
-    if (arrayEndsWith(emojiCodes, gender)) return gender;
-  }
-  return [];
-}
-
 function titleCase(str) {
   if (!str) return "";
   return str.toLowerCase().replace(/\b\w/g, s => s.toUpperCase());
@@ -288,6 +272,8 @@ function titleCase(str) {
 
 // add a matched emoji as a LaunchBar result
 function emojiResult(result, emojiUnicode, emojiComponents, emoji, keyword, badge) {
+  const debug = debugPref();
+  var   log = "";
   const info = emojiUnicode[emoji];
   const match = {
     "title":    titleCase(info.name),
@@ -299,29 +285,36 @@ function emojiResult(result, emojiUnicode, emojiComponents, emoji, keyword, badg
       "name":    info.name
     }
   };
+  if (debug) log += " -- OG " + toCodePointString(toCodePoints(emoji));
   if (badge) match["badge"] = badge;
   // if emoji supports skin tone and we have a pref skin tone
   // then apply skin tone to emoji
   const skinToneName = skinTone();
   if (skinToneName && skinToneName.length > 0 && info.skin_tone_support) {
+    if (debug) log += " | SKIN";
     const skinTone = emojiComponents[skinToneName];
     const skinToneCodes = toCodePoints(skinTone);
     const emojiCodes = toCodePoints(emoji);
     // show original emoji and skin tone as badge
     if (!badge) match["badge"] = emoji + " " + skinTone;
-    const gender = getGender(emojiCodes);
-    if (gender.length > 0) {
-      // if gendered then skin tone goes before gender
-      emojiCodes.splice(emojiCodes.length - gender.length, 0, ...skinToneCodes);
-    } else {
-      // otherwise just add skin tone at the end
-      emojiCodes.push(...skinToneCodes);
+    
+    // add skin tone before each joiner or at end if no joiners
+    var adjusted = [];
+    for (var i = 0; i < emojiCodes.length; ++i) {
+      const emojiCode = emojiCodes[i];
+      if (emojiCode == JOINER_CODE) adjusted.push(...skinToneCodes);
+      adjusted.push(emojiCode);
     }
-    const variation = fromCodePoints(emojiCodes);
-    match["subtitle"] = (keyword?keyword:"") /*+ " " + toCodePointString(emojiCodes) */;
+    if (emojiCodes.length == adjusted.length) adjusted.push(...skinToneCodes);
+    
+    if (debug) log += " | ADJ " + toCodePointString(adjusted);
+    const variation = fromCodePoints(adjusted);
+    if (debug) log += " | VAR " + variation;
+    match["subtitle"] = (keyword?keyword:"");
     match["icon"] = variation;
     match["actionArgument"]["variation"] = variation;
   }
+  match["actionArgument"]["log"] = log;
   result.push(match);
   return match;
 }
@@ -348,7 +341,9 @@ function selectedEmoji(selection) {
   writeUsages(result, usages);
   if (result.length > 0) return result;
 
-  LaunchBar.paste(selection.variation ? selection.variation : selection.emoji);
+  var pst = selection.variation ? selection.variation : selection.emoji;
+  if (selection.log.length > 0) pst += selection.log;
+  LaunchBar.paste(pst);
 }
 
 function openPreferences() {
